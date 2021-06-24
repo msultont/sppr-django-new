@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import Http404
 from .models import Proyek
 from .models import Question
+from .models import Endorsement
 
 
 def index(request):
@@ -67,9 +68,13 @@ def kebdaerah(request, menu):
 
     sub_menu = ""
     judul = cek_kebdaerah(menu)
+    content = {}
 
     if menu in ["longlist", "prioritas"]:
         sub_menu = "list"
+        endorsement_list = Endorsement.objects.all()
+        content["data"] = endorsement_list
+
     elif menu in ["forum"]:
         sub_menu = "ckfp"
     elif menu in ["prakorgub", "rakorgub", "rakortekrenbang", "musrenbangnas"]:
@@ -77,7 +82,9 @@ def kebdaerah(request, menu):
     else:
         sub_menu = "error"
 
-    return render(request, f'kebutuhan_daerah/{sub_menu}.html', {'judul': judul})
+    content["judul"] = judul
+
+    return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
 
 def proyek(request, menu):

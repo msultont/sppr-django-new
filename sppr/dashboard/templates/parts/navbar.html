@@ -1,3 +1,4 @@
+{% load static %}
 <header class="relative bg-white dark:bg-darker">
     <div class="flex items-center justify-between p-2 border-b dark:border-primary-darker">
         <!-- Mobile menu button -->
@@ -93,7 +94,7 @@
                     aria-haspopup="true" :aria-expanded="open ? 'true' : 'false'"
                     class="transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100">
                     <span class="sr-only">User menu</span>
-                    <img class="w-10 h-10 rounded-full" src="build/images/avatar.jpg" alt="Ahmed Kamel" />
+                    <img class="w-10 h-10 rounded-full" src="{% static 'images/man.svg' %}" alt="" />
                 </button>
 
                 <!-- User dropdown menu -->
@@ -193,7 +194,7 @@
                     :aria-expanded="open ? 'true' : 'false'"
                     class="block transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100">
                     <span class="sr-only">User menu</span>
-                    <img class="w-10 h-10 rounded-full" src="build/images/avatar.jpg" alt="Ahmed Kamel" />
+                    <img class="w-10 h-10 rounded-full" src="{% static 'images/man.svg' %}" alt="" />
                 </button>
 
                 <!-- User dropdown menu -->

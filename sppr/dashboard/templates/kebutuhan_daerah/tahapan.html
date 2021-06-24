@@ -10,45 +10,17 @@
     <!-- Content -->
     <div class="mt-2">
 
-
-        <!-- Charts -->
-        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
-            <!-- Map Area -->
-            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Card header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
-                    <div class="flex items-center">
-                        <button class="relative focus:outline-none" x-cloak
-                            @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)">
-                            <div
-                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
-                            </div>
-                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
-                            </div>
-                        </button>
-                    </div>
-                </div>
-                <!-- Chart -->
-                <div class="relative p-4 h-72">
-                    <canvas id="doughnutChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Two grid columns -->
+        <!-- Three grid columns -->
         <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
             <!-- Active users chart -->
             <div class="col-span-1 bg-white rounded-md dark:bg-darker">
                 <!-- Card header -->
                 <div class="p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">API
-                        now</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart</h4>
                 </div>
                 <!-- Chart -->
                 <div class="relative p-4">
-                    <canvas id="activeUsersChart"></canvas>
+                    <canvas id="firstChart"></canvas>
                 </div>
             </div>
 
@@ -56,7 +28,7 @@
             <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Rangkuman Profil Daerah</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart</h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateLineChart()">
@@ -70,15 +42,15 @@
                     </div>
                 </div>
                 <!-- Chart -->
-                <div class="relative p-4 h-72">
-                    <canvas id="lineChart"></canvas>
+                <div class="relative p-4">
+                    <canvas id="secondChart"></canvas>
                 </div>
             </div>
 
             <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">API dari Simrenas & TRPB</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart</h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateLineChart()">
@@ -92,8 +64,8 @@
                     </div>
                 </div>
                 <!-- Chart -->
-                <div class="relative p-4 h-72">
-                    <canvas id="lineChart"></canvas>
+                <div class="relative p-4">
+                    <canvas id="thirdChart"></canvas>
                 </div>
             </div>
         </div>
@@ -126,5 +98,65 @@
 
     </div>
 </main>
+
+<script>
+    var ct1 = document.getElementById('firstChart');
+    var ct2 = document.getElementById('secondChart');
+    var ct3 = document.getElementById('thirdChart');
+
+
+    const data = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    }
+
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+
+    var firstChart = new Chart(ct1, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+
+    var secondChart = new Chart(ct2, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+
+    var thirdChart = new Chart(ct3, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+
+
+</script>
 
 {% endblock %}

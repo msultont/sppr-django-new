@@ -1,4 +1,7 @@
-{% extends 'parts/main.html' %}
+{% extends 'parts/main.html'%}
+
+
+
 
 {% block content %}
 <main>
@@ -79,8 +82,8 @@
                     </div>
                 </div>
                 <!-- Chart -->
-                <div class="relative p-4 h-72">
-                    <canvas id="doughnutChart"></canvas>
+                <div class="relative p-4">
+                    {% include 'parts/map.html' %}
                 </div>
             </div>
         </div>
@@ -149,6 +152,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'bar',

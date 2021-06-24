@@ -13,6 +13,7 @@
     "autoprefixer": "^10.2.6",
     "chart.js": "^3.3.2",
     "clean-css-cli": "^5.3.0",
+    "leaflet": "^1.7.1",
     "tailwindcss": "^2.2.2",
     "vanilla-datatables": "^1.6.16"
   }
