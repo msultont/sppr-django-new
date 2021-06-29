@@ -4,8 +4,15 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.index, name='index'),
-    path('home/', views.index, name='index'),
+    # ex: /landing 
+    path('', views.landing, name='landing'),
+
+    # ex: /halaman login page
+    path('dashboard/login', views.masuk, name='masuk'),
+
+    # ex: /dashboard
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/index', views.dashboard, name='dashboard'),
 
     # ex: /dashboard / 5
     path('<int:question_id>/', views.detail, name='detail'),
@@ -19,8 +26,6 @@ urlpatterns = [
     # Akses untuk ke Menu Kebutuhan Daerah
     path('kebdaerah/<str:menu>', views.kebdaerah, name='kebdaerah'),
 
-    # Akses untuk ke Menu Proyek Mitra KL
-    path('proyek/<str:menu>', views.proyek, name='proyek')
 
 
 

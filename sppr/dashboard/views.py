@@ -1,22 +1,26 @@
 from django.shortcuts import render
 from django.shortcuts import Http404
-from .models import Proyek
-from .models import Question
 from .models import Endorsement
 
+def landing(request):
+    return render(request, 'dashboard/landing.html')
+
+def masuk(request):
+    return render(request, 'dashboard/login.html')
+
+def dashboard(request):
+    return render(request, 'dashboard/index.html')
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'dashboard/index.html', context)
+    return render(request, 'dashboard/index.html')
 
 
-def detail(request, question_id):
+def detail(request):
     try:
-        question = Question.objects.get(pk=question_id)
+        question = Question.objects.get()
     except Question.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'dashboard/index.html', {'question': question})
+    return render(request, 'dashboard/index.html',)
 
 
 def cek_profil(menu):
@@ -87,11 +91,3 @@ def kebdaerah(request, menu):
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
 
-def proyek(request, menu):
-
-    if menu == "batam":
-        judul = "BP Batam"
-    elif menu == "sabang":
-        judul = "BPK Sabang"
-
-    return render(request, 'proyek/index.html', {'judul': judul})

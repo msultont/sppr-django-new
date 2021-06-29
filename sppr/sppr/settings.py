@@ -76,14 +76,15 @@ WSGI_APPLICATION = 'sppr.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-'default':
-
-{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd7j14c0rpoanau',
+        'USER': 'irxmwpjpvkmynu',
+        'PASSWORD': '551ae6f0ebbc847b98dcc6852e550be1ceaab1ffba4dddd53ee495436bbb422c',
+        'HOST': 'ec2-34-202-54-225.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
-
-    }
+}
 
 
 
