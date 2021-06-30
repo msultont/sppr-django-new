@@ -30,6 +30,7 @@
                     </div>
                 </div>
 
+
                 <!-- Table -->
 
                 <!--Container-->
@@ -123,9 +124,39 @@
                         /*bg-indigo-500*/
                     }
                 </style>
-
+              
                 <!--Card-->
                 <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                   <!--Tombol di Tabel-->
+                                                <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                                                    <span>Excel</span>
+                                                  </button>
+                                                  
+                                                  <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                                                    <span>CSV</span>
+                                                  </button>
+                                                  
+                                                  <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+                                                    <span>PDF</span>
+                                                  </button>
+                        
+                                                  <div class="float-right">
+                                                  <button class="text-sm bg-gray-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">  
+                                                    <span>Add</span>
+                                                  </button>
+                                                  
+                                                  <button class="text-sm bg-gray-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                    
+                                                    <span>Edit</span>
+                                                  </button>
+                                                  
+                                                  <button class="text-sm bg-gray-300 hover:bg-red-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                    
+                                                    <span>Delete</span>
+                                                  </button></div>
                     <div>
                         Toggle column:
                         <a class="toggle-vis" data-column="0">No</a> -
@@ -135,6 +166,7 @@
                         <a class="toggle-vis" data-column="4">Direktorat Mitra</a> -
                         <a class="toggle-vis" data-column="5">Status Approval</a>
                     </div>
+                  
                     <table id="example" class="stripe hover display nowrap"
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                         <thead>
