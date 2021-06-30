@@ -1,14 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import Http404
-from .models import Proyek
-from .models import Question
 from .models import Endorsement
 
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'dashboard/index.html', context)
+    return render(request, 'dashboard/index.html')
 
 
 def detail(request, question_id):
@@ -72,8 +68,11 @@ def kebdaerah(request, menu):
 
     if menu in ["longlist", "prioritas"]:
         sub_menu = "list"
+        model = Endorsement
+        field_names = [f.name for f in model._meta.get_fields()]
         endorsement_list = Endorsement.objects.all()
         content["data"] = endorsement_list
+        content["fields"] = field_names
 
     elif menu in ["forum"]:
         sub_menu = "ckfp"

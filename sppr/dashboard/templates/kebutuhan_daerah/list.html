@@ -124,44 +124,51 @@
                     }
                 </style>
 
-                <div class="container w-full ">
-                    <!--Card-->
-                    <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-
-                        <table id="example" class="stripe hover"
-                            style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-                            <thead>
-                                <tr>
-                                    <th data-priority="1">id</th>
-                                    <th data-priority="2">Nama Kegiatan</th>
-                                    <th data-priority="3">Status Approval</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                {% for row in data %}
-
-                                <tr>
-                                    <td>{{row.id}}</td>
-                                    <td>{{row.nama_kegiatan}}</td>
-                                    <td>{{row.status_approval}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-
-                        </table>
-
-
+                <!--Card-->
+                <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                    <div>
+                        Toggle column:
+                        <a class="toggle-vis" data-column="0">No</a> -
+                        <a class="toggle-vis" data-column="1">Nama Kegiatan</a> -
+                        <a class="toggle-vis" data-column="2">Major Project</a> -
+                        <a class="toggle-vis" data-column="3">Lokasi</a> -
+                        <a class="toggle-vis" data-column="4">Direktorat Mitra</a> -
+                        <a class="toggle-vis" data-column="5">Status Approval</a>
                     </div>
-                    <!--/Card-->
+                    <table id="example" class="stripe hover display nowrap"
+                        style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                        <thead>
+                            <tr>
+                                <th data-priority="1">No</th>
+                                <th data-priority="1">Provinsi</th>
+                                <th data-priority="2">Nama Kegiatan</th>
+                                <th data-priority="3">Major Project</th>
+                                <th data-priority="3">Lokasi</th>
+                                <th data-priority="3">Direktorat Mitra</th>
+                                <th data-priority="3">Status Approval</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for row in data %}
+
+                            <tr>
+                                <td>{{row.id}}</td>
+                                <td>{{row.provinsi.nama_provinsi}}</td>
+                                <td>{{row.nama_kegiatan}}</td>
+                                <td>{{row.major_project}}</td>
+                                <td>{{row.lokasi}}</td>
+                                <td>{{row.direktorat_mitra}}</td>
+                                <td>{{row.status_approval}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
 
 
                 </div>
-                <!--/container-->
-
-
-
-
             </div>
         </div>
 
@@ -173,10 +180,30 @@
     $(document).ready(function () {
 
         var table = $('#example').DataTable({
-            responsive: true
+            responsive: true,
+            "scrollY": "500px",
+            "scrollX": true,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf'
+            ]
         })
-            .columns.adjust()
-            .responsive.recalc();
+
+        // .columns.adjust()
+        // .responsive.recalc()
+
+        $('a.toggle-vis').on('click', function (e) {
+            e.preventDefault();
+
+            // Get the column API object
+            var column = table.column($(this).attr('data-column'));
+
+            // Toggle the visibility
+            column.visible(!column.visible());
+        });
+
+
+
     });
 </script>
 

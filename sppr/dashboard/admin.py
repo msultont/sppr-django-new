@@ -1,11 +1,9 @@
 from django.contrib import admin
-from .models import Choice, Endorsement, Provinsi, Question
-from .models import Proyek
+from .models import Endorsement, ListProvinsi, KementrianLembaga, KeteranganPrioritasNasional
 
 # Register your models here.
 
-admin.site.register(Proyek)
-admin.site.register(Provinsi)
-admin.site.register(Question)
-admin.site.register(Choice)
 admin.site.register(Endorsement)
+admin.site.register(ListProvinsi)
+admin.site.register(KementrianLembaga)
+admin.site.register(KeteranganPrioritasNasional)
