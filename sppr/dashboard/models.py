@@ -57,3 +57,4 @@ class ListProvinsi(models.Model):
     class Meta:
         managed = False
         db_table = 'list_provinsi'
+

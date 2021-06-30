@@ -76,8 +76,11 @@ def kebdaerah(request, menu):
 
     if menu in ["longlist", "prioritas"]:
         sub_menu = "list"
+        model = Endorsement
+        field_names = [f.name for f in model._meta.get_fields()]
         endorsement_list = Endorsement.objects.all()
         content["data"] = endorsement_list
+        content["fields"] = field_names
 
     elif menu in ["forum"]:
         sub_menu = "ckfp"
