@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from django.shortcuts import Http404
 from .models import Endorsement
+from django.db.models import Count
+from django.http import JsonResponse
 
-def landing(request):
-    return render(request, 'dashboard/landing.html')
-
-def masuk(request):
-    return render(request, 'dashboard/login.html')
-
-def dashboard(request):
-    return render(request, 'dashboard/index.html')
 
 def index(request):
+    return render(request, 'index.html')
+
+
+def login(request):
+    return render(request, 'auth/login.html')
+
+
+def dashboard(request):
     return render(request, 'dashboard/index.html')
 
 
@@ -61,11 +63,59 @@ def cek_kebdaerah(menu):
     return judul
 
 
+def cek_proyek(menu):
+
+    if menu == "batam":
+        judul = "BP Batam"
+    elif menu == "sabang":
+        judul = "BPK Sabang"
+
+    return judul
+
+
 def profil(request, menu):
 
     judul = cek_profil(menu)
 
     return render(request, 'profil/index.html', {'judul': judul})
+
+
+def chart_ro(request):
+
+    labels = []
+    data = []
+    ro_by_kl = Endorsement.objects.values(
+        'ki_id').annotate(jumlah=Count('nama_kegiatan'))
+
+    for row in ro_by_kl:
+        labels.append(row['ki_id'])
+        data.append(row['jumlah'])
+
+    data = {
+        'labels': labels,
+        'data': data
+    }
+
+    return JsonResponse(data)
+
+
+def chart_prov(request):
+
+    labels = []
+    data = []
+    ro_by_prov = Endorsement.objects.values(
+        'provinsi_id').annotate(jumlah=Count('nama_kegiatan'))
+
+    for row in ro_by_prov:
+        labels.append(row['provinsi_id'])
+        data.append(row['jumlah'])
+
+    data = {
+        'labels': labels,
+        'data': data
+    }
+
+    return JsonResponse(data)
 
 
 def kebdaerah(request, menu):
@@ -79,6 +129,7 @@ def kebdaerah(request, menu):
         model = Endorsement
         field_names = [f.name for f in model._meta.get_fields()]
         endorsement_list = Endorsement.objects.all()
+
         content["data"] = endorsement_list
         content["fields"] = field_names
 
@@ -94,3 +145,8 @@ def kebdaerah(request, menu):
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
 
+def proyek(request, menu):
+
+    judul = cek_proyek(menu)
+
+    return render(request, 'proyek/index.html', {'judul': judul})

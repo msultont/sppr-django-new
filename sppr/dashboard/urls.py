@@ -4,29 +4,27 @@ from . import views
 
 urlpatterns = [
 
-    # ex: /landing 
-    path('', views.landing, name='landing'),
+    # Akses ke halaman landing page
+    path('', views.index, name='index'),
 
-    # ex: /halaman login page
-    path('dashboard/login', views.masuk, name='masuk'),
+    # Akses ke halaman login
+    path('auth/login', views.login, name='login'),
 
-    # ex: /dashboard
+    # Akses ke dashboard utama
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('dashboard/index', views.dashboard, name='dashboard'),
-
-    # ex: /dashboard / 5
-    path('<int:question_id>/', views.detail, name='detail'),
 
     # Akses untuk ke Menu Profil Daerah
     path('profil/<str:menu>', views.profil, name='profil'),
 
-    # ex: /dashboard/10/vote
-    # path('<int:question_id>/vote/', views.vote, name='vote')
-
     # Akses untuk ke Menu Kebutuhan Daerah
     path('kebdaerah/<str:menu>', views.kebdaerah, name='kebdaerah'),
 
+    # Akses untuk ke menu proyek mitra KL
+    path('proyek/<str:menu>', views.proyek, name="proyek"),
 
+    path('rochart', views.chart_ro, name='rochart'),
+
+    path('provchart', views.chart_prov, name='provchart')
 
 
 

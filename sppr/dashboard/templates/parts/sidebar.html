@@ -1,11 +1,12 @@
-<aside class="flex-shrink-0 hidden w-64 bg-gradient-to-r from-gray-800 to-gray-700 dark:border-primary-darker dark:bg-darker md:block">
+<aside
+    class="flex-shrink-0 hidden w-64 bg-gradient-to-r from-gray-800 to-gray-700 dark:border-primary-darker dark:bg-darker md:block">
     <div class="flex flex-col h-full">
         <!-- Sidebar links -->
         <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
             <!-- Dashboards -->
             <div x-data="{ isActive: true, open: true}">
                 <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
-                <a href=""
+                <a href="{% url 'dashboard'  %}"
                     class="flex items-center p-2 text-white transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary">
                     <span aria-hidden="true">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -94,9 +95,9 @@
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
                         Daftar Panjang Proyek
                     </a>
-                    <a href="{% url 'kebdaerah' 'prioritas' %}" role="menuitem"
+                    <a href="" role=" menuitem"
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
-                        Daftar Proyek Prioritas
+                        Hasil Analisis Kerangka Logis
                     </a>
                     <a href="{% url 'kebdaerah' 'forum' %}" role="menuitem"
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
@@ -117,6 +118,10 @@
                     <a href="{% url 'kebdaerah' 'musrenbangnas' %}" role="menuitem"
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                         Musrenbangnas
+                    </a>
+                    <a href="{% url 'kebdaerah' 'prioritas' %}" role="menuitem"
+                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
+                        Daftar Proyek Prioritas
                     </a>
                 </div>
             </div>
@@ -147,11 +152,11 @@
                 <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" aria-label="Authentication">
                     <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                     <!-- inActive classes 'text-white dark:text-white' -->
-                    <a href="" role="menuitem"
+                    <a href="{% url 'proyek' 'batam' %}" role="menuitem"
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                         BP Batam
                     </a>
-                    <a href="" role="menuitem"
+                    <a href="{% url 'proyek' 'sabang' %}" role="menuitem"
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                         BPK Sabang
                     </a>
