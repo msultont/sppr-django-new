@@ -1,5 +1,4 @@
 from django.urls import path
-
 from . import views
 
 urlpatterns = [
@@ -22,10 +21,11 @@ urlpatterns = [
     # Akses untuk ke menu proyek mitra KL
     path('proyek/<str:menu>', views.proyek, name="proyek"),
 
-    path('rochart', views.chart_ro, name='rochart'),
+    path('rochart/', views.chart_ro, name='rochart'),
 
-    path('provchart', views.chart_prov, name='provchart')
-
-
+    path('provchart/', views.chart_prov, name='provchart'),
+    # path('data/', views.ItemListView.as_view()),
+    path('ajax_datatable/permissions/', views.EndorsementDataView.as_view(),
+         name="ajax_datatable_permissions")
 
 ]

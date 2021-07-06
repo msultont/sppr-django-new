@@ -11,6 +11,12 @@
     <div class="mt-2">
 
 
+        <div class="embed-container pr-5 pl-5">
+            <br><iframe width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                title="Rakortekrenbang"
+                src="//geospasial.bappenas.go.id/portal/apps/Embed/index.html?webmap=1b7e084a1bcc41b98814bae9b1feaf9c&extent=91.2006,-15.1554,134.267,2.6814&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=false&theme=light">
+            </iframe>
+        </div>
         <!-- Charts -->
         <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
             <!-- Map Area -->
@@ -128,137 +134,72 @@
                 <!--Table-->
                 <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
                     <!--Tombol di Tabel-->
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                        </svg>
-                        <span>Excel</span>
-                    </button>
-
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                        </svg>
-                        <span>CSV</span>
-                    </button>
-
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                        </svg>
-                        <span>PDF</span>
-                    </button>
-
-                    <div class="float-right">
-                        <button
-                            class="text-sm bg-gray-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                            <span>Add</span>
+                    <div class="mb-10">
+                        <!-- <button
+                            class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20">
+                                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            </svg>
+                            <span>Excel</span>
                         </button>
 
                         <button
-                            class="text-sm bg-gray-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-
-                            <span>Edit</span>
+                            class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20">
+                                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            </svg>
+                            <span>CSV</span>
                         </button>
 
                         <button
-                            class="text-sm bg-gray-300 hover:bg-red-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                            class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                            <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20">
+                                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                            </svg>
+                            <span>PDF</span>
+                        </button> -->
 
-                            <span>Delete</span>
-                        </button>
-                    </div>
+                        <div class="float-right">
+                            <button
+                                class="text-sm bg-gray-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                <span>Add</span>
+                            </button>
 
-                    <div class="grid grid-cols-1 p-4 ">
-                        <div class="block">
-                            <span class="text-gray-700">Select Columns</span>
-                            <div class="mt-2 flex items-center p-4">
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="0">
-                                        <input type="checkbox" class="form-checkbox" checked>
-                                        <span class="ml-2">No</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="1">
-                                        <input type="checkbox" class="form-checkbox">
-                                        <span class="ml-2">Provinsi</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="2">
-                                        <input type="checkbox" class="form-checkbox">
-                                        <span class="ml-2">Nama Kegiatan</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="3">
-                                        <input type="checkbox" class="form-checkbox">
-                                        <span class="ml-2">Major Project</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="4">
-                                        <input type="checkbox" class="form-checkbox" checked>
-                                        <span class="ml-2">Lokasi</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="5">
-                                        <input type="checkbox" class="form-checkbox">
-                                        <span class="ml-2">Kementrian Lembaga</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="6">
-                                        <input type="checkbox" class="form-checkbox">
-                                        <span class="ml-2">Direktorat Mitra</span>
-                                    </label>
-                                </div>
-                                <div>
-                                    <label class="inline-flex items-center toggle-vis mr-3" data-column="7">
-                                        <input type="checkbox" class="form-checkbox">
-                                        <span class="ml-2">Status Aprroval</span>
-                                    </label>
-                                </div>
+                            <button
+                                class="text-sm bg-gray-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
 
-                            </div>
+                                <span>Edit</span>
+                            </button>
+
+                            <button
+                                class="text-sm bg-gray-300 hover:bg-red-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+
+                                <span>Delete</span>
+                            </button>
                         </div>
                     </div>
 
-                    <table id="example" class="stripe hover display nowrap"
+                    <!-- <div>
+                        Toggle column:
+                        <label class="inline-flex items-center mt-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600 toggle-vis" checked><span
+                                class="ml-2 text-gray-700">No</span>
+                        </label>
+                        -
+                        <a class="toggle-vis" data-column="1">Provinsi</a> -
+                        <a class="toggle-vis" data-column="2">Nama Kegiatan</a> -
+                        <a class="toggle-vis" data-column="3">Major Project</a> -
+                        <a class="toggle-vis" data-column="4">Lokasi</a> -
+                        <a class="toggle-vis" data-column="5">Kementrian / Lembaga</a> -
+                        <a class="toggle-vis" data-column="6">Direktorat Mitra</a> -
+                        <a class="toggle-vis" data-column="7">Status Approval</a>
+                    </div> -->
+
+                    <table id="example" class="stripe hover display nowrap text-center mt-4"
                         style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
-                        <thead>
-                            <tr>
-                                <th data-priority="0">No</th>
-                                <th data-priority="1">Provinsi</th>
-                                <th data-priority="2">Nama Kegiatan</th>
-                                <th data-priority="3">Major Project</th>
-                                <th data-priority="4">Lokasi</th>
-                                <th data-priority="5">Kementrian / Lembaga</th>
-                                <th data-priority="6">Direktorat Mitra</th>
-                                <th data-priority="7">Status Approval</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {% for row in data %}
-
-                            <tr>
-                                <td>{{row.id}}</td>
-                                <td>{{row.provinsi.nama_provinsi}}</td>
-                                <td>{{row.nama_kegiatan}}</td>
-                                <td>{{row.major_project}}</td>
-                                <td>{{row.lokasi}}</td>
-                                <td>{{row.ki.nama_kementrian_lembaga}}</td>
-                                <td>{{row.direktorat_mitra}}</td>
-                                <td>{{row.status_approval}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
 
                     </table>
 
@@ -273,18 +214,17 @@
     <div class="mt-2">
 
         <!-- Three grid columns -->
-        <!-- Two grid columns -->
         <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
             <!-- Active users chart -->
-            <div class="col-span-1 bg-gradient-to-r from-white to-gray-100 rounded-md dark:bg-darker">
+            <div class="col-span-1 bg-white rounded-md dark:bg-darker">
                 <!-- Card header -->
                 <div class="p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">API
-                        now</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Grafik Jumlah Kegiatan per Provinsi
+                    </h4>
                 </div>
                 <!-- Chart -->
                 <div class="relative p-4">
-                    <canvas id="thirdChart"></canvas>
+                    <canvas id="firstChart" data-url="{% url 'provchart' %}" width="500px" height="500px"></canvas>
                 </div>
             </div>
 
@@ -292,7 +232,9 @@
             <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Jumlah Kegiatan per Provinsi</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Grafik Jumlah Kegiatan per
+                        Kementrian / Lembaga
+                    </h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateLineChart()">
@@ -306,16 +248,15 @@
                     </div>
                 </div>
                 <!-- Chart -->
-                <div class="relative p-4 h-72">
-                    <canvas id="secondChart" data-url="{% url 'provchart' %}" width="400" height="400"></canvas>
+                <div class="relative p-4">
+                    <canvas id="secondChart" data-url="{% url 'rochart' %}" width="500px" height="500px"></canvas>
                 </div>
             </div>
 
             <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Jumlah Kegiatan per
-                        Kementrian/Lembaga </h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart</h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateLineChart()">
@@ -329,7 +270,9 @@
                     </div>
                 </div>
                 <!-- Chart -->
-                <canvas id="firstChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+                <div class="relative p-4">
+                    <canvas id="thirdChart"></canvas>
+                </div>
             </div>
         </div>
 
@@ -337,26 +280,28 @@
 </main>
 
 <script>
-
-
     $(document).ready(function () {
 
-        var table = $('#example').DataTable({
-            responsive: true,
-            "scrollY": "500px",
-            "scrollX": true,
-            dom: 'Bfrtip',
-            buttons: [{
-                extend: 'csv',
-                text: 'Save as CSV',
-                className: 'btn btn-blue'
-            },
-                'excel', 'pdf'
-            ]
-        })
 
-        // .columns.adjust()
-        // .responsive.recalc()
+        AjaxDatatableViewUtils.initialize_table(
+            $('#example'),
+            "{% url 'ajax_datatable_permissions' %}",
+            {
+                // extra_options (example)
+                processing: true,
+                autoWidth: false,
+                full_row_select: false,
+                scrollX: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'pageLength', 'csv', 'excel', 'pdf'
+                ]
+            }, {
+            // extra_data
+            // ...
+        },
+
+        );
 
         $('label.toggle-vis').on('click', function (e) {
             e.preventDefault();
@@ -368,70 +313,88 @@
             column.visible(!column.visible());
         });
 
-    });
 
-    var $roChart = $("#firstChart");
-    var $provChart = $('#secondChart');
+        var $roProvinsi = $("#firstChart");
+        var $roKemela = $("#secondChart")
 
-    $.ajax({
-        url: $roChart.data("url"),
-        success: function (data) {
+        $.ajax({
+            url: $roProvinsi.data("url"),
+            success: function (data) {
 
-            var ctx = $roChart[0].getContext("2d");
+                var ctx = $roProvinsi[0].getContext("2d");
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Nama Kementrian Lembaga',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        data: data.data,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    legend: {
-                        position: 'top',
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Jumlah Kegiatan per Provinsi',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            data: data.data
+                        }]
                     },
-                }
-            });
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    display: false //this will remove only the label
+                                }
+                            }]
+                        }
+                    }
+                });
 
-        }
-    });
+            }
+        });
 
-    $.ajax({
-        url: $provChart.data("url"),
-        success: function (data) {
+        $.ajax({
+            url: $roKemela.data("url"),
+            success: function (data) {
 
-            var ctx = $provChart[0].getContext("2d");
+                var ctx = $roKemela[0].getContext("2d");
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Nama Provinsi',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        data: data.data,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    legend: {
-                        position: 'top',
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Jumlah Kegiatan per Kementrian / Lembaga',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            data: data.data
+                        }]
                     },
-                }
-            });
+                    options: {
+                        responsive: true,
+                        legend: {
+                            position: 'top',
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    display: false //this will remove only the label
+                                }
+                            }]
+                        }
+                    }
+                });
 
-        }
+            }
+        });
+
+
     });
 
 
+
+
+    // var ct1 = document.getElementById('firstChart');
+    // var ct2 = document.getElementById('secondChart');
     var ct3 = document.getElementById('thirdChart');
 
 
@@ -467,6 +430,18 @@
             }
         }
     }
+
+    // var firstChart = new Chart(ct1, {
+    //     type: 'bar',
+    //     data: data,
+    //     options: options
+    // });
+
+    // var secondChart = new Chart(ct2, {
+    //     type: 'bar',
+    //     data: data,
+    //     options: options
+    // });
 
     var thirdChart = new Chart(ct3, {
         type: 'bar',
