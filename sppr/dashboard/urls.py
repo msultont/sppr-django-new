@@ -26,6 +26,11 @@ urlpatterns = [
     path('provchart/', views.chart_prov, name='provchart'),
     # path('data/', views.ItemListView.as_view()),
     path('ajax_datatable/permissions/', views.EndorsementDataView.as_view(),
-         name="ajax_datatable_permissions")
+         name="ajax_datatable_permissions"),
+
+    # path to form endorsement
+    path('forms/endorsement/add', views.addEndorsement, name="addEndorsement"),
+    path('forms/endorsement/update/<int:pk>',
+         views.updateEndorsement, name="updateEndorsement")
 
 ]

@@ -1,12 +1,10 @@
 from django.db import models
-from django.shortcuts import render
-from django.shortcuts import Http404
+from django.shortcuts import render, redirect
 from .models import Endorsement
 from django.db.models import Count
 from django.http import JsonResponse
-# from django_serverside_datatable.views import ServerSideDatatableView
 from ajax_datatable.views import AjaxDatatableView
-# from django_datatables_view.base_datatable_view import BaseDatatableView
+from .forms import EndorsementForm
 
 
 # class ItemListView(ServerSideDatatableView):
@@ -32,8 +30,32 @@ class EndorsementDataView(AjaxDatatableView):
         {'name': 'ki_id', 'foreign_field': 'ki__nama_kementrian_lembaga', 'title': 'Kementrian Lembaga',
             'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'status_approval', 'visible': True,
-            'choices': True, 'autofilter': True}
+            'choices': True, 'autofilter': True},
+        {'name': 'edit', 'title': 'Action', 'placeholder': True,
+            'searchable': False, 'orderable': False, },
+        {'name': 'direktorat_mitra', 'visible': False},
+        {'name': 'major_project', 'visible': False},
+        {'name': 'lokasi', 'visible': False}
+
     ]
+
+    def customize_row(self, row, obj):
+        row['edit'] = """
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" var id = this.closest('tr').id.substr(4); location.replace('/forms/endorsement/update/'+id);">
+               Edit
+            </button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+               onclick="var id = this.closest('tr').id.substr(4); window.confirm('Really want to delete ' + id + '?'); return false;">
+               Delete
+            </button>
+            <script>
+                function accessToEdit(id) {
+                    console.log(id)
+                    var url = "/forms/endorsement/update/"
+                    //location.replace(url+id)
+                }
+            </script>
+        """
 
 
 def index(request):
@@ -135,10 +157,10 @@ def chart_prov(request):
     labels = []
     data = []
     ro_by_prov = Endorsement.objects.values(
-        "provinsi_id__nama_provinsi").annotate(jumlah=Count('nama_kegiatan'))
+        "status_approval").annotate(jumlah=Count('nama_kegiatan'))
 
     for row in ro_by_prov:
-        labels.append(row["provinsi_id__nama_provinsi"])
+        labels.append(row["status_approval"])
         data.append(row['jumlah'])
 
     data = {
@@ -181,3 +203,34 @@ def proyek(request, menu):
     judul = cek_proyek(menu)
 
     return render(request, 'proyek/index.html', {'judul': judul})
+
+
+def addEndorsement(request):
+    # Call Form
+    form = EndorsementForm()
+    content = {}
+
+    if request.method == 'POST':
+        form = EndorsementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/kebdaerah/prioritas')
+
+    content["form"] = form
+
+    return render(request, 'forms/endorsement.html', content)
+
+
+def updateEndorsement(request, pk):
+    # Call Form
+    endorsement = Endorsement.objects.get(id=pk)
+    form = EndorsementForm(instance=endorsement)
+    content = {'form': form}
+
+    if request.method == 'POST':
+        form = EndorsementForm(request.POST, instance=endorsement)
+        if form.is_valid():
+            form.save()
+            return redirect('/kebdaerah/prioritas')
+
+    return render(request, 'forms/endorsement.html', content)
