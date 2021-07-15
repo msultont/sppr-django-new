@@ -88,8 +88,14 @@
                 </svg>
             </button> -->
 
+            {% if request.user.is_authenticated %}
+            <h2 class="mr-10 font-bold">Welcome, {{request.user.get_full_name}}!</h2>
+            {% endif %}
             <!-- User avatar button -->
             <div class="relative" x-data="{ open: false }">
+
+
+
                 <button @click="open = !open; $nextTick(() => { if(open){ $refs.userMenu.focus() } })" type="button"
                     aria-haspopup="true" :aria-expanded="open ? 'true' : 'false'"
                     class="transition-opacity duration-200 rounded-full dark:opacity-75 dark:hover:opacity-100 focus:outline-none focus:ring dark:focus:opacity-100">
@@ -115,7 +121,7 @@
                         class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary">
                         Settings
                     </a>
-                    <a href="#" role="menuitem"
+                    <a href="{% url 'logout' %}" role="menuitem"
                         class="block px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:text-light dark:hover:bg-primary">
                         Logout
                     </a>

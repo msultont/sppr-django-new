@@ -7,7 +7,8 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     # Akses ke halaman login
-    path('auth/login', views.login, name='login'),
+    path('auth/login', views.loginUser, name='login'),
+    path('auth/logout', views.logoutUser, name='logout'),
 
     # Akses ke dashboard utama
     path('dashboard/', views.dashboard, name='dashboard'),

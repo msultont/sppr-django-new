@@ -17,10 +17,13 @@
                         <h1 class="text-4xl text-center font-thin">Selamat Datang Bapak/Ibu</h1>
                         <div class="w-full mt-4">
                             <form class="form-horizontal w-3/4 mx-auto" method="POST" action="#">
+
+                                {% csrf_token %}
+
                                 <div class="flex flex-col mt-4">
-                                    <input id="email" type="text"
-                                        class="flex-grow h-8 px-2 border rounded border-grey-400" name="email" value=""
-                                        placeholder="Email">
+                                    <input id="user" type="text"
+                                        class="flex-grow h-8 px-2 border rounded border-grey-400" name="username"
+                                        value="" placeholder="Username">
                                 </div>
                                 <div class="flex flex-col mt-4">
                                     <input id="password" type="password"

@@ -5,7 +5,8 @@ from django.db.models import Count
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
 from .forms import EndorsementForm
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # class ItemListView(ServerSideDatatableView):
 #     queryset = Endorsement.objects.all()
@@ -59,13 +60,37 @@ class EndorsementDataView(AjaxDatatableView):
 
 
 def index(request):
-    return render(request, 'index.html')
+
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        return render(request, 'index.html')
 
 
-def login(request):
-    return render(request, 'auth/login.html')
+def loginUser(request):
+
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    else:
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('dashboard')
+
+        return render(request, 'auth/login.html')
 
 
+def logoutUser(request):
+    logout(request)
+    return redirect('index')
+
+
+@login_required(login_url='login')
 def dashboard(request):
     return render(request, 'dashboard/index.html')
 
@@ -126,6 +151,7 @@ def cek_proyek(menu):
     return judul
 
 
+@login_required(login_url='login')
 def profil(request, menu):
 
     judul = cek_profil(menu)
@@ -171,6 +197,7 @@ def chart_prov(request):
     return JsonResponse(data)
 
 
+@login_required(login_url='login')
 def kebdaerah(request, menu):
 
     sub_menu = ""
@@ -198,6 +225,7 @@ def kebdaerah(request, menu):
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
 
+@login_required(login_url='login')
 def proyek(request, menu):
 
     judul = cek_proyek(menu)
@@ -205,6 +233,7 @@ def proyek(request, menu):
     return render(request, 'proyek/index.html', {'judul': judul})
 
 
+@login_required(login_url='login')
 def addEndorsement(request):
     # Call Form
     form = EndorsementForm()
@@ -221,6 +250,7 @@ def addEndorsement(request):
     return render(request, 'forms/endorsement.html', content)
 
 
+@login_required(login_url='login')
 def updateEndorsement(request, pk):
     # Call Form
     endorsement = Endorsement.objects.get(id=pk)
