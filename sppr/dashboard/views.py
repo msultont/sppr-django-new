@@ -1,6 +1,6 @@
 from django.db import models
 from django.shortcuts import render, redirect
-from .models import Endorsement
+from .models import Endorsement, Longlist
 from django.db.models import Count
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
@@ -12,6 +12,48 @@ from django.contrib.auth.decorators import login_required
 #     queryset = Endorsement.objects.all()
 #     columns = ['id', 'provinsi', 'nama_kegiatan',
 #                'lokasi', 'ki', 'status_approval']
+
+
+class LonglistDataView(AjaxDatatableView):
+    model = Longlist
+    title = 'Longlist'
+    initial_order = [["ro_id", "asc"], ]
+    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    search_values_separator = ' '
+
+    column_defs = [
+        # AjaxDatatableView.render_row_tools_column_def(),
+        {'name': 'ro_id', 'visible': True, 'title': 'No'},
+        {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
+        {'name': 'lokasi_proyek', 'visible': True, 'title': 'Lokasi Proyek'},
+        {'name': 'kl_pelaksana', 'foreign_field': 'kl_pelaksana__nama', 'title': 'Kementrian Lembaga',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'isu_strategis', 'visible': True, 'title': 'Isu Strategis'},
+        {'name': 'status_usulan', 'foreign_field': 'status_usulan__nama_status', 'visible': True,
+            'choices': True, 'autofilter': True},
+        # {'name': 'edit', 'title': 'Action', 'placeholder': True,
+        #     'searchable': False, 'orderable': False, }
+    ]
+
+    # def customize_row(self, row, obj):
+    #     row['edit'] = """
+    #         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" var id = this.closest('tr').id.substr(4); location.replace('/forms/endorsement/update/'+id);">
+    #            Edit
+    #         </button>
+    #         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+    #            onclick="var id = this.closest('tr').id.substr(4); window.confirm('Really want to delete ' + id + '?'); return false;">
+    #            Delete
+    #         </button>
+    #         <script>
+    #             function accessToEdit(id) {
+    #                 console.log(id)
+    #                 var url = "/forms/endorsement/update/"
+    #                 //location.replace(url+id)
+    #             }
+    #         </script>
+    #     """
 
 
 class EndorsementDataView(AjaxDatatableView):
@@ -201,17 +243,21 @@ def chart_prov(request):
 def kebdaerah(request, menu):
 
     sub_menu = ""
+    dataView = ""
+    chartDataView = ""
     judul = cek_kebdaerah(menu)
     content = {}
 
     if menu in ["longlist", "prioritas"]:
         sub_menu = "list"
-        model = Endorsement
-        field_names = [f.name for f in model._meta.get_fields()]
-        endorsement_list = Endorsement.objects.all()
 
-        content["data"] = endorsement_list
-        content["fields"] = field_names
+        if menu == "longlist":
+            dataView = "longlistDataView"
+            chartDataView = "longlistChartView"
+
+        elif menu == "prioritas":
+            dataView = "endorsementDataView"
+            chartDataView = "endoresementChartView"
 
     elif menu in ["forum"]:
         sub_menu = "ckfp"
@@ -221,6 +267,11 @@ def kebdaerah(request, menu):
         sub_menu = "error"
 
     content["judul"] = judul
+
+    pageData = {
+        'tabularData': dataView,
+        'chartData': chartDataView
+    }
 
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
