@@ -251,9 +251,9 @@ class Longlist(models.Model):
     ro_id = models.IntegerField(blank=True, null=True)
     provinsi = models.ForeignKey(
         'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
-    judul_proyek = models.TextField()
+    judul_proyek = models.TextField(blank=True, null=False)
     # This field type is a guess.
-    lokasi_proyek = models.TextField(blank=True, null=True)
+    # lokasi_proyek = models.TextField(blank=True, null=True)
     lokasi_kabupaten = models.ForeignKey(
         KabupatenId, models.DO_NOTHING, db_column='lokasi_kabupaten', blank=True, null=True)
     target_2021 = models.IntegerField(blank=True, null=True)
@@ -295,6 +295,9 @@ class Longlist(models.Model):
     staging_perkembangan = models.TextField(blank=True, null=True)
     keterangan = models.TextField(blank=True, null=True)
     usulan_baru = models.BooleanField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.judul_proyek
 
     class Meta:
         managed = False

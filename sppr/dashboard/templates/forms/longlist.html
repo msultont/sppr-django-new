@@ -2,8 +2,21 @@
 
 {% block content %}
 
+<link href="https://unpkg.com/tailwindcss@1.0.4/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" />
+<!--Replace with your tailwind.css once created-->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
+<!-- Define your gradient here - use online tools to find a gradient matching your branding-->
+<style>
+    .gradient {
+        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+    }
+</style>
+
+
+
 <body class="flex items-center justify-center" style="background: #edf2f7;">
-    <form class="w-full max-w-screen-lg">
+    <form class="w-full max-w-screen-lg" method="post" action="#">
 
 
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -238,7 +251,8 @@
                     </div>
 
                 </div>
-                <p class="text-red-500 text-xs italic">(RPJMN, Prita/Prima Barata, PSN, PEN, Perpres Jatim/Jateng, DPP
+                <p class="text-red-500 text-xs italic">(RPJMN, Prita/Prima Barata, PSN, PEN, Perpres Jatim/Jateng,
+                    DPP
                     2021).</p>
             </div>
 
@@ -484,6 +498,10 @@
     </form>
 
 </body>
+
+
+
+
 
 
 {% endblock %}

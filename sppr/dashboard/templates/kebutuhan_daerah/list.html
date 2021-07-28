@@ -263,17 +263,19 @@
     </div>
 </main>
 
+<script type="text/javascript">
+    var dataURL = "{{dataView}}";
+</script>
 
 <script>
 
     $(document).ready(function () {
 
-        let dataView = $(".dataView")
-        let strVal = "{% url 'longlistDataView' %}"
+        // let strVal = "{% url 'endorsementDataView' %}"
 
         let table = AjaxDatatableViewUtils.initialize_table(
             $('#example'),
-            strVal,
+            '/ajax_datatable/' + dataURL,
             {
                 // extra_options (example)
                 processing: true,

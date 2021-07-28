@@ -7,6 +7,8 @@ from ajax_datatable.views import AjaxDatatableView
 from .forms import EndorsementForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from json import dumps
+from django.template import Template, Context
 
 # class ItemListView(ServerSideDatatableView):
 #     queryset = Endorsement.objects.all()
@@ -27,33 +29,32 @@ class LonglistDataView(AjaxDatatableView):
         {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
             'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
-        {'name': 'lokasi_proyek', 'visible': True, 'title': 'Lokasi Proyek'},
         {'name': 'kl_pelaksana', 'foreign_field': 'kl_pelaksana__nama', 'title': 'Kementrian Lembaga',
             'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'isu_strategis', 'visible': True, 'title': 'Isu Strategis'},
         {'name': 'status_usulan', 'foreign_field': 'status_usulan__nama_status', 'visible': True,
             'choices': True, 'autofilter': True},
-        # {'name': 'edit', 'title': 'Action', 'placeholder': True,
-        #     'searchable': False, 'orderable': False, }
+        {'name': 'edit', 'title': 'Action', 'placeholder': True,
+            'searchable': False, 'orderable': False, }
     ]
 
-    # def customize_row(self, row, obj):
-    #     row['edit'] = """
-    #         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" var id = this.closest('tr').id.substr(4); location.replace('/forms/endorsement/update/'+id);">
-    #            Edit
-    #         </button>
-    #         <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-    #            onclick="var id = this.closest('tr').id.substr(4); window.confirm('Really want to delete ' + id + '?'); return false;">
-    #            Delete
-    #         </button>
-    #         <script>
-    #             function accessToEdit(id) {
-    #                 console.log(id)
-    #                 var url = "/forms/endorsement/update/"
-    #                 //location.replace(url+id)
-    #             }
-    #         </script>
-    #     """
+    def customize_row(self, row, obj):
+        row['edit'] = """
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" location.replace('/forms/longlist/update');">
+               Edit
+            </button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+               onclick="var id = this.closest('tr').id.substr(4); window.confirm('Really want to delete ' + id + '?'); return false;">
+               Delete
+            </button>
+            <script>
+                function accessToEdit(id) {
+                    console.log(id)
+                    var url = "/forms/endorsement/update/"
+                    //location.replace(url+id)
+                }
+            </script>
+        """
 
 
 class EndorsementDataView(AjaxDatatableView):
@@ -268,10 +269,7 @@ def kebdaerah(request, menu):
 
     content["judul"] = judul
 
-    pageData = {
-        'tabularData': dataView,
-        'chartData': chartDataView
-    }
+    content["dataView"] = dataView
 
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
@@ -315,3 +313,8 @@ def updateEndorsement(request, pk):
             return redirect('/kebdaerah/prioritas')
 
     return render(request, 'forms/endorsement.html', content)
+
+
+@login_required(login_url='login')
+def updateLonglist(request):
+    return render(request, 'forms/longlist.html')
