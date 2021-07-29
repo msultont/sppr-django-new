@@ -165,7 +165,7 @@
 
                         <div class="float-right">
 
-                            <a href="{% url 'addEndorsement' %}">
+                            <a href="{% url 'addSingleLonglist' %}">
                                 <button
                                     class="text-sm bg-gray-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ">
                                     <span>Add Single Data</span>
@@ -271,7 +271,6 @@
 
     $(document).ready(function () {
 
-        // let strVal = "{% url 'endorsementDataView' %}"
 
         let table = AjaxDatatableViewUtils.initialize_table(
             $('#example'),

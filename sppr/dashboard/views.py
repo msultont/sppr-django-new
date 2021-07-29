@@ -4,11 +4,11 @@ from .models import Endorsement, Longlist
 from django.db.models import Count
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import EndorsementForm
+from .forms import EndorsementForm, LonglistForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from json import dumps
-from django.template import Template, Context
+from django.template import Template, Context, context
 
 # class ItemListView(ServerSideDatatableView):
 #     queryset = Endorsement.objects.all()
@@ -19,13 +19,13 @@ from django.template import Template, Context
 class LonglistDataView(AjaxDatatableView):
     model = Longlist
     title = 'Longlist'
-    initial_order = [["ro_id", "asc"], ]
+    initial_order = [["pk", "asc"], ]
     length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
         # AjaxDatatableView.render_row_tools_column_def(),
-        {'name': 'ro_id', 'visible': True, 'title': 'No'},
+        {'name': 'pk', 'visible': True, 'title': 'No'},
         {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
             'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
@@ -40,7 +40,7 @@ class LonglistDataView(AjaxDatatableView):
 
     def customize_row(self, row, obj):
         row['edit'] = """
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" location.replace('/forms/longlist/update');">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/update/'+id);">
                Edit
             </button>
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
@@ -253,11 +253,11 @@ def kebdaerah(request, menu):
         sub_menu = "list"
 
         if menu == "longlist":
-            dataView = "longlistDataView"
+            dataView = "longlist"
             chartDataView = "longlistChartView"
 
         elif menu == "prioritas":
-            dataView = "endorsementDataView"
+            dataView = "endorsement"
             chartDataView = "endoresementChartView"
 
     elif menu in ["forum"]:
@@ -300,6 +300,38 @@ def addEndorsement(request):
 
 
 @login_required(login_url='login')
+def addSingleLonglist(request):
+    form = LonglistForm()
+    content = {}
+
+    if request.method == 'POST':
+        form = LonglistForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/kebdaerah/longlist')
+
+    content["form"] = form
+
+    return render(request, 'forms/longlist.html', content)
+
+
+@login_required(login_url='login')
+def updateLonglist(request, pk):
+
+    longlist = Longlist.objects.get(id=pk)
+    form = LonglistForm(instance=longlist)
+    content = {'form': form}
+
+    if request.method == 'POST':
+        form = LonglistForm(request.POST, instance=longlist)
+        if form.is_valid():
+            form.save()
+            return redirect('/kebdaerah/longlist')
+
+    return render(request, 'forms/longlist.html', content)
+
+
+@login_required(login_url='login')
 def updateEndorsement(request, pk):
     # Call Form
     endorsement = Endorsement.objects.get(id=pk)
@@ -313,8 +345,3 @@ def updateEndorsement(request, pk):
             return redirect('/kebdaerah/prioritas')
 
     return render(request, 'forms/endorsement.html', content)
-
-
-@login_required(login_url='login')
-def updateLonglist(request):
-    return render(request, 'forms/longlist.html')

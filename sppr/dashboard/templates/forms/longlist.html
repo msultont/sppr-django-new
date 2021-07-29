@@ -2,69 +2,64 @@
 
 {% block content %}
 
-<link href="https://unpkg.com/tailwindcss@1.0.4/dist/tailwind.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" />
-<!--Replace with your tailwind.css once created-->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
-<!-- Define your gradient here - use online tools to find a gradient matching your branding-->
-<style>
-    .gradient {
-        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
-    }
-</style>
 
+<form class="w-full max-w-screen-lg" action="" method="POST">
 
+    {% csrf_token %}
+    <!-- {{form}} -->
 
-<body class="flex items-center justify-center" style="background: #edf2f7;">
-    <form class="w-full max-w-screen-lg" method="post" action="#">
-
-
+    <div class="p-8">
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Tahapan
-                </label>
-                <div class="relative">
-                    <select
-                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Long-list</option>
-                        <option>Short-list</option>
-                        <option>Prarakorgub</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
 
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+
+                {% if form.judul_proyek.errors %}
+                <ol>
+                    {% for error in form.judul_proyek.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ol>
+                {% endif %}
+
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Judul Proyek
+                    {{form.judul_proyek.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Contoh : Proyek Jalan Tol">
+                    name="judul_proyek" id="id_judul_proyek" type="text" value="{{form.instance.judul_proyek}}">
             </div>
         </div>
 
 
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                {{form.provinsi.errors}}
+
+                {% if form.provinsi.errors %}
+                <ol>
+                    {% for error in form.provinsi.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ol>
+                {% endif %}
+
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Provinsi
+                    {{form.provinsi.label}}
                 </label>
                 <div class="relative">
+
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Aceh</option>
-                        <option>Sumatera Utara</option>
-                        <option>Sumatera Barat</option>
+                        name="provinsi" id="id_provinsi">
+
+                        <option selected disabled=true value=""> -- Select Provinsi -- </option>
+
+                        {% for prov in form.provinsi %}
+                        <option>{{prov}}</option>
+                        {% endfor %}
+
                     </select>
+
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -76,15 +71,15 @@
 
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Kabupaten/Kota
+                    {{form.lokasi_kabupaten.label}}
                 </label>
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Kabupaten Bandung</option>
-                        <option>Kota Cirebon</option>
-                        <option>Kota Semarang</option>
+                        name="lokasi_kabupaten" id="id_lokasi_kabupaten">
+                        {% for kabkot in form.lokasi_kabupaten %}
+                        <option>{{kabkot}}</option>
+                        {% endfor %}
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -97,108 +92,122 @@
 
             <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Lokasi Detail
+                    {{form.lokasi_proyek.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Contoh : Dekat pelabuhan X">
+                    name="lokasi_proyek" id="id_lokasi_proyek" value={{form.instance.lokasi_proyek}} type="text"
+                    placeholder="Contoh : Dekat pelabuhan X">
                 <p class="text-red-500 text-xs italic">Tulis lokasi detail disini.</p>
             </div>
         </div>
-        </div>
 
 
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Target 2021
+                    {{form.target_2021.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Satuan : persen (%)">
+                    name="target_2021" id="id_target_2021" value="{{form.instance.target_2021}}" type="text"
+                    placeholder="Satuan : persen (%)">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Indikasi Pendanaan 2021
+                    {{form.indikasi_pendanaan_2021.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Dalam Rp. Juta">
+                    name="indikasi_pendanaan_2021" id="id_indikasi_pendanaan_2021"
+                    value="{{form.instance.indikasi_pendanaan_2021}}" type="text" placeholder="Dalam Rp. Juta">
             </div>
 
 
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Target 2022
+                    {{form.target_2022.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Satuan : persen (%)">
+                    name="target_2022" id="id_target_2022" value="{{form.instance.target_2022}}" type="text"
+                    placeholder="Satuan : persen (%)">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Indikasi Pendanaan 2022
+                    {{form.indikasi_pendanaan_2022.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Dalam Rp. Juta">
+                    name="indikasi_pendanaan_2022" id="id_indikasi_pendanaan_2022"
+                    value="{{form.instance.indikasi_pendanaan_2022}}" type="text" placeholder="Dalam Rp. Juta">
             </div>
         </div>
 
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Target 2023
+                    {{form.target_2023.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Satuan : persen (%)">
+                    name="target_2023" id="id_target_2023" value="{{form.instance.target_2023}}" type="text"
+                    placeholder="Satuan : persen (%)">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Indikasi Pendanaan 2023
+                    {{form.indikasi_pendanaan_2023.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Dalam Rp. Juta">
+                    name="indikasi_pendanaan_2023" id="id_indikasi_pendanaan_2023"
+                    value="{{form.instance.indikasi_pendanaan_2023}}" type="text" placeholder="Dalam Rp. Juta">
             </div>
-
 
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Target 2024
+                    {{form.target_2024.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Satuan : persen (%)">
+                    name="target_2024" id="id_target_2024" value="{{form.instance.target_2024}}" type="text"
+                    placeholder="Satuan : persen (%)">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Indikasi Pendanaan 2024
+                    {{form.indikasi_pendanaan_2024.label}}
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Dalam Rp. Juta">
+                    name="indikasi_pendanaan_2024" id="id_indikasi_pendanaan_2024"
+                    value="{{form.instance.indikasi_pendanaan_2024}}" type="text" placeholder="Dalam Rp. Juta">
             </div>
+
+
         </div>
 
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Short-List 2022
+                    {{form.sumber_data.label}}
                 </label>
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Ya</option>
-                        <option>Tidak</option>
+                        name="sumber_data" id="id_sumber_data">
+
+                        <option selected disabled=true value=""> -- Select Sumber Data -- </option>
+
+                        {% for data in form.sumber_data %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -207,52 +216,7 @@
                     </div>
 
                 </div>
-            </div>
-
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Short-List 2023
-                </label>
-                <div class="relative">
-                    <select
-                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Ya</option>
-                        <option>Tidak</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    Sumber Data
-                </label>
-                <div class="relative">
-                    <select
-                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>RPJMN</option>
-                        <option>Prita/Prima Barata</option>
-                        <option>PSN</option>
-                        <option>PEN</option>
-                        <option>Perpres</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                    </div>
-
-                </div>
-                <p class="text-red-500 text-xs italic">(RPJMN, Prita/Prima Barata, PSN, PEN, Perpres Jatim/Jateng,
-                    DPP
+                <p class="text-red-500 text-xs italic">(RPJMN, Prita/Prima Barata, PSN, PEN, Perpres Jatim/Jateng, DPP
                     2021).</p>
             </div>
 
@@ -263,12 +227,14 @@
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>PUPR</option>
-                        <option>ATR/BPN</option>
-                        <option>KLHK</option>
-                        <option>Kemendagri</option>
-                        <option>Kominfo</option>
+                        name="kl_pelaksana" id="id_kl_pelaksana">
+
+                        <option selected disabled=true value=""> -- Select Sumber Data -- </option>
+
+                        {% for data in form.kl_pelaksana %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -286,7 +252,8 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Contoh : Antisipasi Banjir, Rob, dan Genangan">
+                    name="isu_strategis" id="id_isu_strategis" value="{{form.instance.isu_strategis}}" type="text"
+                    placeholder="Contoh : Antisipasi Banjir, Rob, dan Genangan">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
@@ -295,7 +262,7 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text"
+                    name="tujuan_lfa" id="id_tujuan_lfa" value="{{form.instance.tujuan_lfa}}" type="text"
                     placeholder="Contoh : Meningkatkan ketahanan masyarakat terhadap bencana">
             </div>
 
@@ -307,7 +274,8 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Contoh : Mengurangi Risiko Bencana">
+                    name="sasaran_lfa" id="id_sasaran_lfa" value="{{form.instance.sasaran_lfa}}" type="text"
+                    placeholder="Contoh : Mengurangi Risiko Bencana">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
@@ -316,7 +284,8 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Contoh : Peningkatan pemeliharaan sungai">
+                    name="output_lfa" id="id_output_lfa" value="{{form.instance.output_lfa}}" type="text"
+                    placeholder="Contoh : Peningkatan pemeliharaan sungai">
             </div>
         </div>
 
@@ -328,12 +297,14 @@
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>MP 1</option>
-                        <option>MP 2</option>
-                        <option>MP 3</option>
-                        <option>MP 4</option>
-                        <option>MP 5</option>
+                        name="mp" id="id_mp">
+
+                        <option selected disabled=true value=""> -- Select Major Project -- </option>
+
+                        {% for data in form.mp %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -350,11 +321,14 @@
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Diakomodir</option>
-                        <option>Dibahas Lebih Lanjut</option>
-                        <option>Ditolak</option>
-                        <option>Belum Dibahas</option>
+                        name="status_usulan" id="id_status_usulan">
+
+                        <option selected disabled=true value=""> -- Select Major Project -- </option>
+
+                        {% for data in form.mp %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -400,7 +374,9 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Diambil dari dari hasil kajian kawasan prioritas">
+                    name="taging_kawasan_prioritas" id="id_taging_kawasan_prioritas"
+                    value="{{form.instance.taging_kawasan_prioritas}}" type="text"
+                    placeholder="Diambil dari dari hasil kajian kawasan prioritas">
             </div>
         </div>
 
@@ -412,9 +388,14 @@
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>Infrastruktur</option>
-                        <option>Non-Infrastruktur</option>
+                        name="jenis_project" id="id_jenis_project">
+
+                        <option selected disabled=true value=""> -- Select Jenis Proyek -- </option>
+
+                        {% for data in form.jenis_project %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -431,12 +412,14 @@
                 <div class="relative">
                     <select
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-state">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        name="sub_tema_rkp" id="id_sub_tema_rkp">
+
+                        <option selected disabled=true value=""> -- Select Sub Tema RKP -- </option>
+
+                        {% for data in form.sub_tema_rkp %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -454,7 +437,8 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Isi klasifikasi proyek disini">
+                    name="klasifikasi_proyek" id="id_klasifikasi_proyek" value="{{form.instance.klasifikasi_proyek}}"
+                    type="text" placeholder="Isi klasifikasi proyek disini">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
@@ -463,7 +447,8 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Isi Jenis Impact disini">
+                    name="jenis_impact" id="id_jenis_impact" value="{{form.instance.jenis_impact}}" type="text"
+                    placeholder="Isi Jenis Impact disini">
             </div>
 
 
@@ -474,7 +459,9 @@
                 </label>
                 <input
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Isi Staging Perkembangan disini">
+                    name="staging_perkembangan" id="id_staging_perkembangan"
+                    value="{{form.instance.staging_perkembangan}}" type="text"
+                    placeholder="Isi Staging Perkembangan disini">
             </div>
 
             <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
@@ -483,24 +470,97 @@
                 </label>
                 <textarea
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    id="grid-first-name" type="text" placeholder="Isi Keterangan jika ada"></textarea>
+                    name="keterangan" id="id_keterangan" value="{{form.instance.keterangan}}" type="text"
+                    placeholder="Isi Keterangan jika ada"></textarea>
             </div>
         </div>
 
+        <div class="flex flex-wrap -mx-3 mb-6">
 
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Short List 2022
+                </label>
+                <div class="relative">
+                    <select
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        name="shortlist_2022" id="id_shortlist_2022">
+
+                        <option selected disabled=true value=""> -- Select Short List 2022 -- </option>
+
+                        {% for data in form.shortlist_2022 %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Short List 2023
+                </label>
+                <div class="relative">
+                    <select
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        name="shortlist_2023" id="id_shortlist_2023">
+
+                        <option selected disabled=true value=""> -- Select Short List 2023 -- </option>
+
+                        {% for data in form.shortlist_2023 %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    Usulan Baru
+                </label>
+                <div class="relative">
+                    <select
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        name="usulan_baru" id="id_usulan_baru">
+
+                        <option selected disabled=true value=""> -- Select Usulan Baru -- </option>
+
+                        {% for data in form.usulan_baru %}
+                        <option>{{data}}</option>
+                        {% endfor %}
+
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
 
 
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            type="submit">Save/Submit</button>
+
+    </div>
 
 
-    </form>
 
-</body>
-
-
-
+</form>
 
 
 
