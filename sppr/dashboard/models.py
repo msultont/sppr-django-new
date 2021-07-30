@@ -293,9 +293,9 @@ class Longlist(models.Model):
     # ro_id = models.IntegerField(blank=True, null=True)
     provinsi = models.ForeignKey(
         'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
-    judul_proyek = models.TextField(blank=True, null=False)
+    judul_proyek = models.TextField(blank=True, null=False, default="")
     # This field type is a guess.
-    lokasi_proyek = models.TextField(blank=True, null=True)
+    lokasi_proyek = models.TextField(blank=True, null=True, default="")
     lokasi_kabupaten = models.ForeignKey(
         KabupatenId, models.DO_NOTHING, db_column='lokasi_kabupaten', blank=True, null=True)
     target_2021 = models.IntegerField(blank=True, null=True, default=0)
@@ -318,16 +318,16 @@ class Longlist(models.Model):
         KlId, models.DO_NOTHING, db_column='KL_pelaksana', blank=True, null=True)
     shortlist_2022 = models.BooleanField(blank=True, null=True)
     shortlist_2023 = models.BooleanField(blank=True, null=True)
-    isu_strategis = models.TextField(blank=True, null=True)
+    isu_strategis = models.TextField(blank=True, null=True, default="")
     # Field name made lowercase.
     tujuan_lfa = models.TextField(
-        db_column='tujuan_LFA', blank=True, null=True)
+        db_column='tujuan_LFA', blank=True, null=True, default="")
     # Field name made lowercase.
     sasaran_lfa = models.TextField(
-        db_column='sasaran_LFA', blank=True, null=True)
+        db_column='sasaran_LFA', blank=True, null=True, default="")
     # Field name made lowercase.
     output_lfa = models.TextField(
-        db_column='output_LFA', blank=True, null=True)
+        db_column='output_LFA', blank=True, null=True, default="")
     # Field name made lowercase.
     mp = models.ForeignKey('MajorprojectId', models.DO_NOTHING,
                            db_column='MP', blank=True, null=True)
@@ -339,11 +339,11 @@ class Longlist(models.Model):
         'ProyekId', models.DO_NOTHING, db_column='jenis_project', blank=True, null=True)
     sub_tema_rkp = models.ForeignKey(
         'SubtemaId', models.DO_NOTHING, db_column='sub_tema_rkp', blank=True, null=True)
-    klasifikasi_proyek = models.TextField(blank=True, null=True)
-    jenis_impact = models.TextField(blank=True, null=True)
-    staging_perkembangan = models.TextField(blank=True, null=True)
-    keterangan = models.TextField(blank=True, null=True)
-    usulan_baru = models.BooleanField(blank=True, null=True)
+    klasifikasi_proyek = models.TextField(blank=True, null=True, default="")
+    jenis_impact = models.TextField(blank=True, null=True, default="")
+    staging_perkembangan = models.TextField(blank=True, null=True, default="")
+    keterangan = models.TextField(blank=True, null=True, default="")
+    usulan_baru = models.BooleanField(blank=True, null=True, default="")
 
     def __str__(self) -> str:
         return self.judul_proyek
