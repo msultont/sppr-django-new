@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ajax_datatable'
+    'ajax_datatable',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

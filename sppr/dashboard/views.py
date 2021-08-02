@@ -60,7 +60,7 @@ class LonglistDataView(AjaxDatatableView):
                Edit
             </button>
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-               onclick="var id = this.closest('tr').id.substr(4); window.confirm('Really want to delete ' + id + '?'); return false;">
+               onclick="var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/delete/'+id);">
                Delete
             </button>
             <script>
@@ -345,6 +345,15 @@ def updateLonglist(request, pk):
             return redirect('/kebdaerah/longlist')
 
     return render(request, 'forms/longlist.html', content)
+
+
+@login_required(login_url='login')
+def deleteSingleLonglist(request, pk):
+
+    longlist = Longlist.objects.get(id=pk)
+    longlist.delete()
+
+    return redirect('/kebdaerah/longlist')
 
 
 @login_required(login_url='login')

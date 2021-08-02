@@ -38,8 +38,12 @@ urlpatterns = [
     path('forms/endorsement/update/<int:pk>',
          views.updateEndorsement, name="updateEndorsement"),
 
-    path('forms/longlist/add', views.addSingleLonglist, name="addSingleLonglist"),
+    # Path to CRUD Longlist
+    path('forms/longlist/add', views.addSingleLonglist,
+         name="addSingleLonglist"),
     path('forms/longlist/update/<int:pk>',
-         views.updateLonglist, name="updateLonglist")
+         views.updateLonglist, name="updateLonglist"),
+    path('forms/longlist/delete/<int:pk>',
+         views.deleteSingleLonglist, name="deleteSingleLonglist")
 
 ]

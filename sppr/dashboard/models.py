@@ -290,6 +290,9 @@ class UserStatus(models.Model):
 
 
 class Longlist(models.Model):
+
+    bool_choices = [(True, 'Yes'), (False, 'No')]
+
     # ro_id = models.IntegerField(blank=True, null=True)
     provinsi = models.ForeignKey(
         'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
@@ -316,8 +319,10 @@ class Longlist(models.Model):
     # Field name made lowercase.
     kl_pelaksana = models.ForeignKey(
         KlId, models.DO_NOTHING, db_column='KL_pelaksana', blank=True, null=True)
-    shortlist_2022 = models.BooleanField(blank=True, null=True)
-    shortlist_2023 = models.BooleanField(blank=True, null=True)
+    shortlist_2022 = models.BooleanField(
+        blank=True, null=True, choices=bool_choices)
+    shortlist_2023 = models.BooleanField(
+        blank=True, null=True, choices=bool_choices)
     isu_strategis = models.TextField(blank=True, null=True, default="")
     # Field name made lowercase.
     tujuan_lfa = models.TextField(
@@ -343,7 +348,8 @@ class Longlist(models.Model):
     jenis_impact = models.TextField(blank=True, null=True, default="")
     staging_perkembangan = models.TextField(blank=True, null=True, default="")
     keterangan = models.TextField(blank=True, null=True, default="")
-    usulan_baru = models.BooleanField(blank=True, null=True, default="")
+    usulan_baru = models.BooleanField(
+        blank=True, null=True, default="", choices=bool_choices)
 
     def __str__(self) -> str:
         return self.judul_proyek
