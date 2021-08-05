@@ -1,4 +1,5 @@
 from django.db import models
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Endorsement, Longlist
 from django.db.models import Count
@@ -284,8 +285,9 @@ def kebdaerah(request, menu):
         sub_menu = "error"
 
     content["judul"] = judul
-
     content["dataView"] = dataView
+
+    
 
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
@@ -370,3 +372,8 @@ def updateEndorsement(request, pk):
             return redirect('/kebdaerah/prioritas')
 
     return render(request, 'forms/endorsement.html', content)
+
+@login_required(login_url='login')
+def uploadCSVLonglist(request):
+
+    return HttpResponse('This is upload')

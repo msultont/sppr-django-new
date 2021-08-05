@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.fields.related import ForeignKey
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -296,24 +297,24 @@ class Longlist(models.Model):
     # ro_id = models.IntegerField(blank=True, null=True)
     provinsi = models.ForeignKey(
         'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
-    judul_proyek = models.TextField(blank=True, null=False, default="")
+    judul_proyek = models.TextField(null=False)
     # This field type is a guess.
-    lokasi_proyek = models.TextField(blank=True, null=True, default="")
+    lokasi_proyek = models.TextField(blank=True, null=True)
     lokasi_kabupaten = models.ForeignKey(
         KabupatenId, models.DO_NOTHING, db_column='lokasi_kabupaten', blank=True, null=True)
-    target_2021 = models.IntegerField(blank=True, null=True, default=0)
-    target_2022 = models.IntegerField(blank=True, null=True, default=0)
-    target_2023 = models.IntegerField(blank=True, null=True, default=0)
-    target_2024 = models.IntegerField(blank=True, null=True, default=0)
-    target_2025 = models.IntegerField(blank=True, null=True, default=0)
+    target_2021 = models.IntegerField(blank=True, null=True)
+    target_2022 = models.IntegerField(blank=True, null=True)
+    target_2023 = models.IntegerField(blank=True, null=True)
+    target_2024 = models.IntegerField(blank=True, null=True)
+    target_2025 = models.IntegerField(blank=True, null=True)
     indikasi_pendanaan_2021 = models.FloatField(
-        blank=True, null=True, default=0)
+        blank=True, null=True)
     indikasi_pendanaan_2022 = models.FloatField(
-        blank=True, null=True, default=0)
+        blank=True, null=True)
     indikasi_pendanaan_2023 = models.FloatField(
-        blank=True, null=True, default=0)
+        blank=True, null=True)
     indikasi_pendanaan_2024 = models.FloatField(
-        blank=True, null=True, default=0)
+        blank=True, null=True)
     sumber_data = models.ForeignKey(
         'SumberdataId', models.DO_NOTHING, db_column='sumber_data', blank=True, null=True)
     # Field name made lowercase.
@@ -344,10 +345,10 @@ class Longlist(models.Model):
         'ProyekId', models.DO_NOTHING, db_column='jenis_project', blank=True, null=True)
     sub_tema_rkp = models.ForeignKey(
         'SubtemaId', models.DO_NOTHING, db_column='sub_tema_rkp', blank=True, null=True)
-    klasifikasi_proyek = models.TextField(blank=True, null=True, default="")
-    jenis_impact = models.TextField(blank=True, null=True, default="")
-    staging_perkembangan = models.TextField(blank=True, null=True, default="")
-    keterangan = models.TextField(blank=True, null=True, default="")
+    klasifikasi_proyek = models.TextField(blank=True, null=True)
+    jenis_impact = models.TextField(blank=True, null=True)
+    staging_perkembangan = models.TextField(blank=True, null=True)
+    keterangan = models.TextField(blank=True, null=True)
     usulan_baru = models.BooleanField(
         blank=True, null=True, default="", choices=bool_choices)
 
@@ -366,3 +367,12 @@ class ShortList(models.Model):
 
     def __str__(self) -> str:
         return self.judul_proyek
+
+
+class CsvLongList(models.Model):
+    file_name = models.FileField(upload_to="csv_longlist")
+    uploaded = models.DateTimeField(auto_now_add=True)
+    user_uploaded = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"File id: {self.id}"

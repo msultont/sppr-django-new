@@ -44,6 +44,10 @@ urlpatterns = [
     path('forms/longlist/update/<int:pk>',
          views.updateLonglist, name="updateLonglist"),
     path('forms/longlist/delete/<int:pk>',
-         views.deleteSingleLonglist, name="deleteSingleLonglist")
+         views.deleteSingleLonglist, name="deleteSingleLonglist"),
+
+    # Path to upload data csv to longlist
+    path('forms/longlist/upload-csv',
+         views.uploadCSVLonglist, name="uploadCSVLonglist")
 
 ]
