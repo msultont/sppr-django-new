@@ -2,7 +2,7 @@ from django import forms
 from django.db import models
 from django.db.models import fields
 from django.forms import ModelForm, widgets
-from .models import Endorsement, Longlist
+from .models import CsvLongList, Endorsement, Longlist
 
 
 class EndorsementForm(ModelForm):
@@ -67,3 +67,11 @@ class LonglistForm(ModelForm):
             'shortlist_2023': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'usulan_baru': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'})
         }
+
+# Create form for upload CSV File
+
+
+class CsvModelForm(ModelForm):
+    class Meta:
+        model = CsvLongList
+        fields = ['file_name']

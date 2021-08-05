@@ -1,15 +1,16 @@
+from django import forms
 from django.db import models
-from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Endorsement, Longlist
+from .models import *
 from django.db.models import Count
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import EndorsementForm, LonglistForm
+from .forms import CsvModelForm, EndorsementForm, LonglistForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from json import dumps
-from django.template import Template, Context, context
+import csv
+from distutils import util
 
 # class ItemListView(ServerSideDatatableView):
 #     queryset = Endorsement.objects.all()
@@ -287,8 +288,6 @@ def kebdaerah(request, menu):
     content["judul"] = judul
     content["dataView"] = dataView
 
-    
-
     return render(request, f'kebutuhan_daerah/{sub_menu}.html', content)
 
 
@@ -373,7 +372,66 @@ def updateEndorsement(request, pk):
 
     return render(request, 'forms/endorsement.html', content)
 
+
 @login_required(login_url='login')
 def uploadCSVLonglist(request):
 
-    return HttpResponse('This is upload')
+    form = CsvModelForm(request.POST or None, request.FILES or None)
+
+    if form.is_valid():
+        obj = form.save()
+
+        # Read data from csv
+
+        with open(obj.file_name.path, 'r') as f:
+            reader = csv.reader(f)
+
+            for i, row in enumerate(reader):
+                if i == 0:
+                    pass
+                else:
+                    Longlist.objects.create(
+
+                        judul_proyek=row[2],
+                        provinsi=ProvinsiId(provinsi_id=int(row[1])),
+                        lokasi_kabupaten=KabupatenId(kabupaten_id=int(row[4])),
+                        lokasi_proyek=row[5],
+                        target_2021=float(row[6]),
+                        target_2022=float(row[7]),
+                        target_2023=float(row[8]),
+                        target_2024=float(row[9]),
+                        target_2025=float(row[10]),
+                        indikasi_pendanaan_2021=float(row[11]),
+                        indikasi_pendanaan_2022=float(row[12]),
+                        indikasi_pendanaan_2023=float(row[13]),
+                        indikasi_pendanaan_2024=float(row[14]),
+                        shortlist_2022=bool(
+                            util.strtobool(row[19])),
+                        shortlist_2023=bool(
+                            util.strtobool(row[20])),
+                        isu_strategis=row[21],
+                        tujuan_lfa=row[22],
+                        sasaran_lfa=row[23],
+                        output_lfa=row[24],
+                        sumber_bahasan=row[29],
+                        taging_kawasan_prioritas=row[30],
+                        klasifikasi_proyek=row[35],
+                        jenis_impact=row[36],
+                        staging_perkembangan=row[37],
+                        keterangan=row[38],
+                        usulan_baru=bool(
+                            util.strtobool(row[39])),
+                        sumber_data=SumberdataId(sumberdata_id=int(row[16])),
+                        kl_pelaksana=KlId(kl_id=int(row[18])),
+                        mp=MajorprojectId(mp_id=int(row[26])),
+                        status_usulan=StatusId(status_id=int(row[28])),
+                        jenis_project=ProyekId(proyek_idd=int(row[32])),
+                        sub_tema_rkp=SubtemaId(sub_tema_id=int(row[34])),
+
+                    )
+
+        return redirect('/kebdaerah/longlist')
+
+    content = {'form': form}
+
+    return render(request, 'forms/longlist-upload.html', content)

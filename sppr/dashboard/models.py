@@ -1,6 +1,8 @@
+from django.core import validators
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 
@@ -292,7 +294,7 @@ class UserStatus(models.Model):
 
 class Longlist(models.Model):
 
-    bool_choices = [(True, 'Yes'), (False, 'No')]
+    bool_choices = [(True, 'YES'), (False, 'NO')]
 
     # ro_id = models.IntegerField(blank=True, null=True)
     provinsi = models.ForeignKey(
@@ -370,9 +372,9 @@ class ShortList(models.Model):
 
 
 class CsvLongList(models.Model):
-    file_name = models.FileField(upload_to="csv_longlist")
+    file_name = models.FileField(upload_to="csv_longlist", null=False, validators=[
+                                 FileExtensionValidator(['csv'])])
     uploaded = models.DateTimeField(auto_now_add=True)
-    user_uploaded = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f"File id: {self.id}"
+        return f"File name: {self.file_name}"
