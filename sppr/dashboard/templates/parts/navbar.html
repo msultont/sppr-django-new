@@ -16,8 +16,8 @@
         <!-- Brand -->
         <a href="index.html"
             class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light">
-            Direktorat Regional 1
-        </a>
+             
+        </a> 
 
         <!-- Mobile sub menu button -->
         <button @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
@@ -89,7 +89,7 @@
             </button> -->
 
             {% if request.user.is_authenticated %}
-            <h2 class="mr-10 font-bold">Welcome, {{request.user.get_full_name}}!</h2>
+            <h2 class="mr-10 font-bold text-gray-800">Selamat Datang, {{request.user.get_full_name}}!</h2>
             {% endif %}
             <!-- User avatar button -->
             <div class="relative" x-data="{ open: false }">

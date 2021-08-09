@@ -6,13 +6,16 @@
 </style>
 
 <aside
-    class="flex-shrink-0 hidden w-64 bg-gradient-to-r from-gray-800 to-gray-700 dark:border-primary-darker dark:bg-darker md:block">
+    class="flex-shrink-0 hidden w-64 bg-purple-800 dark:border-primary-darker dark:bg-darker md:block">
     <div class="flex flex-col h-full">
         <!-- Sidebar links -->
         <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
             <!-- Dashboards -->
             <div x-data="{ isActive: true, open: true}">
                 <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <span class="ml-2 text-1xl text-white mb-3 font-semibold">Direktorat Regional I</span>
+                <br><br>
+
                 <a href="{% url 'dashboard'  %}"
                     class="flex items-center p-2 text-white transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary">
                     <span aria-hidden="true">
