@@ -273,6 +273,67 @@ def kebdaerah(request, menu):
         if menu == "longlist":
             dataView = "longlist"
             chartDataView = "longlistChartView"
+            form = CsvModelForm(request.POST or None, request.FILES or None)
+
+            if form.is_valid():
+                obj = form.save()
+
+                # Read data from csv
+
+                with open(obj.file_name.path, 'r') as f:
+                    reader = csv.reader(f)
+
+                    for i, row in enumerate(reader):
+                        if i == 0:
+                            pass
+                        else:
+                            Longlist.objects.create(
+
+                                judul_proyek=row[2],
+                                provinsi=ProvinsiId(provinsi_id=int(row[1])),
+                                lokasi_kabupaten=KabupatenId(
+                                    kabupaten_id=int(row[4])),
+                                lokasi_proyek=row[5],
+                                target_2021=float(row[6]),
+                                target_2022=float(row[7]),
+                                target_2023=float(row[8]),
+                                target_2024=float(row[9]),
+                                target_2025=float(row[10]),
+                                indikasi_pendanaan_2021=float(row[11]),
+                                indikasi_pendanaan_2022=float(row[12]),
+                                indikasi_pendanaan_2023=float(row[13]),
+                                indikasi_pendanaan_2024=float(row[14]),
+                                shortlist_2022=bool(
+                                    util.strtobool(row[19])),
+                                shortlist_2023=bool(
+                                    util.strtobool(row[20])),
+                                isu_strategis=row[21],
+                                tujuan_lfa=row[22],
+                                sasaran_lfa=row[23],
+                                output_lfa=row[24],
+                                sumber_bahasan=row[29],
+                                taging_kawasan_prioritas=row[30],
+                                klasifikasi_proyek=row[35],
+                                jenis_impact=row[36],
+                                staging_perkembangan=row[37],
+                                keterangan=row[38],
+                                usulan_baru=bool(
+                                    util.strtobool(row[39])),
+                                sumber_data=SumberdataId(
+                                    sumberdata_id=int(row[16])),
+                                kl_pelaksana=KlId(kl_id=int(row[18])),
+                                mp=MajorprojectId(mp_id=int(row[26])),
+                                status_usulan=StatusId(status_id=int(row[28])),
+                                jenis_project=ProyekId(
+                                    proyek_idd=int(row[32])),
+                                sub_tema_rkp=SubtemaId(
+                                    sub_tema_id=int(row[34])),
+
+                            )
+
+                return redirect('/kebdaerah/longlist')
+
+            content = {'form': form}
 
         elif menu == "prioritas":
             dataView = "endorsement"
@@ -319,7 +380,7 @@ def addEndorsement(request):
 @login_required(login_url='login')
 def addSingleLonglist(request):
     form = LonglistForm()
-    content = {}
+    content = {'judul': "Anda Sedang Menambah Data Longlist"}
 
     if request.method == 'POST':
         form = LonglistForm(request.POST)
@@ -337,7 +398,7 @@ def updateLonglist(request, pk):
 
     longlist = Longlist.objects.get(id=pk)
     form = LonglistForm(instance=longlist)
-    content = {'form': form}
+    content = {'form': form, 'judul': "Anda Sedang Memperbaharui Data Longlist"}
 
     if request.method == 'POST':
         form = LonglistForm(request.POST, instance=longlist)
@@ -362,7 +423,7 @@ def updateEndorsement(request, pk):
     # Call Form
     endorsement = Endorsement.objects.get(id=pk)
     form = EndorsementForm(instance=endorsement)
-    content = {'form': form}
+    content = {'form': form, 'id': pk}
 
     if request.method == 'POST':
         form = EndorsementForm(request.POST, instance=endorsement)
