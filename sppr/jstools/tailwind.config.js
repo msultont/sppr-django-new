@@ -11,7 +11,11 @@ module.exports = {
     ]
   },
   theme: {
-    extend: {},
+    extend: {
+      fontfamily: {
+      regional :['Philosopher']}
+
+    },
   },
   variants: {},
   plugins: [],
