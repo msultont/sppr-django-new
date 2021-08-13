@@ -6,96 +6,382 @@
 {% block content %}
 
 <style>
-    .embed-container {
-        position: relative;
-        padding-bottom: 40%;
-        height: 100%;
-        max-width: 100%;
-    }
+  .embed-container {
+    position: relative;
+    padding-bottom: 40%;
+    height: 100%;
+    max-width: 100%;
+  }
 
-    .embed-container iframe,
-    .embed-container object,
-    .embed-container iframe {
-        position: absolute;
-        top: 0;
-        left: 2%;
-        width: 95%;
-        height: 100%;
-    }
+  .embed-container iframe,
+  .embed-container object,
+  .embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 2%;
+    width: 95%;
+    height: 100%;
+  }
 
-    small {
-        position: absolute;
-        z-index: 40;
-        bottom: -50;
-        margin-bottom: -100px;
-    }
+  small {
+    position: absolute;
+    z-index: 40;
+    bottom: -50;
+    margin-bottom: -100px;
+  }
 </style>
 
 <main>
-    <!-- Content header -->
-    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
-        <h1 class="text-2xl font-semibold">Dashboard Utama</h1>
+  <!-- Content header -->
+  <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1
+      class="text-2xl font-semibold text-transparent  header-content bg-clip-text bg-gradient-to-br from-purple-800 to-purple-500">
+      Dashboard Utama</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="mt-2">
+    <!-- State cards -->
+    <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4">
+      <!-- Status card: Isu Strategis -->
+      <div
+        class="flex items-center justify-between p-4 bg-gradient-to-br from-purple-700 to-purple-400 rounded-2xl dark:bg-darker h-44">
+        <div>
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="40px" height="40px" viewBox="0 0 446.887 446.887"
+            style="enable-background:new 0 0 446.887 446.887" xml:space="preserve">
+            <g>
+              <path style="fill: white;" d="M215.824,262.818H57.605c-3.313,0-6,2.687-6,6s2.687,6,6,6h158.219c3.313,0,6-2.687,6-6S219.137,262.818,215.824,262.818z
+			" />
+              <path style="fill: white;"
+                d="M278.096,223.15H57.605c-3.313,0-6,2.687-6,6s2.687,6,6,6h220.491c3.312,0,6-2.687,6-6S281.41,223.15,278.096,223.15z" />
+              <path style="fill: white;"
+                d="M133.612,291.276H57.605c-3.313,0-6,2.688-6,6s2.687,6,6,6h76.007c3.313,0,6-2.688,6-6S136.925,291.276,133.612,291.276z" />
+              <path style="fill: white;" d="M464.434,111.561l-15.4-15.401l0,0l0,0l-15.402-15.402c-4.283-4.285-9.996-6.644-16.088-6.644s-11.805,2.359-16.09,6.644
+			l-63.352,63.354H34.106C15.299,144.112,0,159.413,0,178.219v184.648c0,18.807,15.3,34.106,34.106,34.106h316.525
+			c18.807,0,34.105-15.3,34.105-34.106V222.222c1.789-1.006,3.459-2.246,4.949-3.734l74.746-74.748
+			C473.305,134.868,473.305,120.432,464.434,111.561z M409.939,89.243c2.018-2.018,4.717-3.129,7.604-3.129s5.586,1.111,7.604,3.129
+			l11.16,11.159l-89.959,89.956l-11.156-11.157c-2.02-2.018-3.129-4.718-3.129-7.604c0-2.886,1.109-5.586,3.129-7.604
+			L409.939,89.243z M321.406,183.684l37.732,37.732l-44.348,6.789c-0.066,0.01-0.133,0.018-0.195,0.022
+			c0.004-0.058,0.012-0.123,0.021-0.197L321.406,183.684z M350.631,384.973H34.106c-12.189,0-22.106-9.917-22.106-22.106V178.219
+			c0-12.19,9.917-22.107,22.106-22.107h292.052c-3.361,3.608-5.436,8.128-5.957,13.01c-0.236-0.018-0.467-0.029-0.68-0.029
+			c-3.701,0-8.398,2.446-9.451,9.339l-7.314,47.783c-0.578,3.787,0.359,7.339,2.646,10c2.225,2.591,5.443,4.018,9.062,4.018
+			c0.705,0,1.428-0.057,2.145-0.166l47.781-7.314c3.91-0.599,6.875-2.532,8.348-5.381v135.495
+			C372.736,375.057,362.82,384.973,350.631,384.973z M455.947,135.254l-74.746,74.748c-2.02,2.018-4.719,3.129-7.604,3.129
+			c-2.887,0-5.586-1.111-7.605-3.129l-11.158-11.159l89.957-89.956l11.158,11.159C460.141,124.239,460.141,131.061,455.947,135.254z
+			" />
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+          <div class="bg-purple-400 rounded-lg p-2 mt-2 mb-2">
+
+            <h6 class="text-sm font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
+              Isu Strategis
+            </h6>
+          </div>
+          <span class="text-4xl font-semibold text-white">200</span>
+        </div>
+      </div>
+
+      <!-- Status card: Prioritas Nasional -->
+      <div
+        class="flex items-center justify-between p-4 bg-gradient-to-br from-purple-700 to-purple-400 rounded-2xl dark:bg-darker h-44">
+        <div>
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="40px" height="40px" viewBox="0 0 446.887 446.887"
+            style="enable-background:new 0 0 446.887 446.887" xml:space="preserve">
+            <g>
+              <path style="fill: white;" d="M373.386,340.729h-97.017l-8.222-257.126c8.596-0.014,15.585-7.01,15.585-15.609c0-8.609-7.002-15.611-15.607-15.611h-5.14
+              c0.614-1.494,0.958-3.127,0.958-4.842c0-4.874-2.739-9.117-6.759-11.274c0.624-1.72,1.107-3.776,1.107-6.021
+              c0-7.168-4.521-12.783-10.294-12.783h-3.674V4.137c0-2.285-1.854-4.137-4.139-4.137s-4.137,1.852-4.137,4.137v13.324h-3.676
+              c-5.773,0-10.292,5.615-10.292,12.783c0,2.245,0.482,4.301,1.107,6.021c-4.021,2.157-6.761,6.4-6.761,11.274
+              c0,1.714,0.344,3.348,0.958,4.842h-5.135c-8.609,0-15.611,7.004-15.611,15.611c0,8.599,6.987,15.595,15.583,15.609l-8.22,257.125
+              h-97.015c-2.284,0-4.137,1.854-4.137,4.137v13.971c0,2.283,1.853,4.137,4.137,4.137h20.775l42.906,82.188h-18.784
+              c-2.284,0-4.136,1.852-4.136,4.137v26.938c0,2.285,1.852,4.137,4.136,4.137h176.602c2.285,0,4.137-1.852,4.137-4.137v-26.938
+              c0-2.285-1.852-4.137-4.137-4.137h-18.784l42.908-82.188h20.773c2.286,0,4.137-1.854,4.137-4.137v-13.969
+              C377.522,342.582,375.672,340.729,373.386,340.729z M229.213,43.029c1.579,0,3.018-0.896,3.712-2.312
+              c0.695-1.417,0.524-3.105-0.439-4.354c-0.023-0.028-2.129-2.897-2.129-6.118c0-2.806,1.401-4.51,2.018-4.51H248
+              c0.616,0,2.021,1.704,2.021,4.51c0,3.244-2.125,6.111-2.129,6.118c-0.966,1.248-1.138,2.938-0.441,4.354
+              c0.695,1.417,2.137,2.312,3.712,2.312c2.489,0,4.512,2.022,4.512,4.511c0,2.487-2.021,4.51-4.512,4.51h-21.948
+              c-2.489,0-4.511-2.023-4.511-4.51C224.703,45.051,226.727,43.029,229.213,43.029z M204.914,67.993c0-4.046,3.292-7.338,7.338-7.338
+              h55.875c4.046,0,7.335,3.292,7.335,7.338c0,4.045-3.29,7.336-7.335,7.336h-4.245h-47.385h-4.245
+              C208.206,75.33,204.914,72.039,204.914,67.993z M220.502,83.603h39.373l8.22,257.125h-55.811L220.502,83.603z M324.351,472.096
+              H156.025v-18.664h21.473H302.88h21.472L324.351,472.096L324.351,472.096z M300.371,445.158H180.004l-42.907-82.188h206.182
+              L300.371,445.158z M369.251,354.697h-19.146H130.271h-19.145v-5.695h96.885h64.354c0.011,0.002,0.021,0.002,0.026,0h96.858
+              L369.251,354.697L369.251,354.697z" />
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+          <div class="bg-purple-400 rounded-lg p-2 mt-2 mb-2">
+
+            <h6 class="text-sm font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
+              Prioritas Nasional
+            </h6>
+          </div>
+          <span class="text-4xl font-semibold text-white">200</span>
+        </div>
+      </div>
+
+      <!-- Status card: Major Project -->
+      <div
+        class="flex items-center justify-between p-4 bg-gradient-to-br from-purple-700 to-purple-400 rounded-2xl dark:bg-darker h-44">
+        <div>
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="40px" height="40px" viewBox="0 0 446.887 446.887"
+            style="enable-background:new 0 0 446.887 446.887" xml:space="preserve">
+            <g>
+              <path style="fill: white;" d="M202.105,91.621H363.79c16.344,0,29.642-13.297,29.642-29.642c0-5.188-1.382-10.317-3.996-14.83
+				c-2.238-3.863-7.181-5.182-11.047-2.945c-3.863,2.238-5.183,7.184-2.944,11.047c1.207,2.085,1.819,4.348,1.819,6.728
+				c0,7.43-6.044,13.474-13.474,13.474H202.106c-7.43,0-13.474-6.044-13.474-13.474s6.043-13.475,13.473-13.475h121.475
+				c2.891,0,5.56-1.542,7.004-4.046c1.443-2.504,1.44-5.588-0.009-8.089c-1.207-2.085-1.818-4.348-1.818-6.728
+				c0-7.43,6.044-13.474,13.474-13.474h140.126c7.43,0,13.474,6.044,13.474,13.474c0,7.43-6.044,13.474-13.474,13.474h-68.985
+				c-4.466,0-8.084,3.62-8.084,8.084s3.619,8.084,8.084,8.084h68.985c16.344,0,29.642-13.297,29.642-29.642
+				C512,13.297,498.702,0,482.358,0H342.232c-16.344,0-29.642,13.297-29.642,29.642c0,0.901,0.042,1.8,0.124,2.695H202.105
+				c-16.344,0-29.642,13.297-29.642,29.642C172.463,78.324,185.761,91.621,202.105,91.621z" />
+              <path style="fill: white;"
+                d="M493.137,334.147H374.568c-10.401,0-18.863,8.463-18.863,18.863v19.402c0,4.465,3.618,8.084,8.084,8.084
+				c4.466,0,8.084-3.62,8.084-8.084V353.01c0-1.485,1.208-2.695,2.695-2.695h118.568c1.486,0,2.695,1.209,2.695,2.695v32.337
+				c0,1.485-1.208,2.695-2.695,2.695h-204.8c-10.401,0-18.863,8.463-18.863,18.863v88.926h-48.505V460.8
+				c0-10.401-8.463-18.863-18.863-18.863h-45.811v-307.2H374.38c0.129,0.003,0.252,0.003,0.376,0H409.6v114.3
+				c-12.428,3.527-21.558,14.977-21.558,28.521c0,16.345,13.298,29.642,29.642,29.642s29.642-13.297,29.642-29.642
+				c0-4.465-3.618-8.084-8.084-8.084c-4.466,0-8.084,3.62-8.084,8.084c0,7.43-6.044,13.474-13.474,13.474
+				s-13.474-6.044-13.474-13.474s6.044-13.474,13.474-13.474c4.466,0,8.084-3.62,8.084-8.084V134.737h2.695
+				c4.466,0,8.084-3.62,8.084-8.084c0-4.465-3.618-8.084-8.084-8.084h-52.471L322.396,99.08c-4.198-1.525-8.834,0.639-10.361,4.834
+				c-1.525,4.195,0.638,8.833,4.834,10.36l11.81,4.294H118.568V8.084c0-4.465-3.62-8.084-8.084-8.084
+				c-4.465,0-8.084,3.62-8.084,8.084v110.484H25.9l63.721-72.825c2.939-3.36,2.599-8.467-0.761-11.407
+				c-3.36-2.938-8.466-2.599-11.407,0.761L2.029,121.297C0,123.588-0.001,126.385,0,126.689v64.637
+				c0,10.401,8.463,18.863,18.863,18.863h21.558c10.401,0,18.863-8.463,18.863-18.863v-56.589h26.947v45.621
+				c-0.003,0.126-0.003,0.251,0,0.377v44.894c-0.003,0.126-0.003,0.251,0,0.377v44.894c-0.003,0.126-0.003,0.251,0,0.377v44.894
+				c-0.003,0.126-0.003,0.251,0,0.377v44.894c-0.003,0.126-0.003,0.251,0,0.377v44.894c-0.003,0.126-0.003,0.251,0,0.377v34.844
+				H29.642c-10.401,0-18.863,8.463-18.863,18.863v35.032H8.084c-4.465,0-8.084,3.62-8.084,8.084C0,508.38,3.62,512,8.084,512
+				h140.126c4.465,0,8.084-3.62,8.084-8.084c0-4.465-3.62-8.084-8.084-8.084H26.947V460.8c0-1.485,1.209-2.695,2.695-2.695h172.463
+				c1.485,0,2.695,1.209,2.695,2.695v35.032h-24.253c-4.465,0-8.084,3.62-8.084,8.084c0,4.465,3.62,8.084,8.084,8.084h323.368
+				c4.466,0,8.084-3.62,8.084-8.084c0-4.465-3.618-8.084-8.084-8.084h-13.474V460.8c0-10.401-8.463-18.863-18.863-18.863h-96.741
+				c-4.466,0-8.084,3.62-8.084,8.084c0,4.465,3.619,8.084,8.084,8.084h96.741c1.486,0,2.695,1.209,2.695,2.695v35.032H285.642
+				v-37.726h57.398c4.466,0,8.084-3.62,8.084-8.084c0-4.465-3.618-8.084-8.084-8.084h-57.398v-35.032
+				c0-1.485,1.208-2.695,2.695-2.695h142.821v22.366c0,4.465,3.618,8.084,8.084,8.084c4.466,0,8.084-3.62,8.084-8.084v-22.366
+				h45.811c10.401,0,18.863-8.463,18.863-18.863V353.01C512,342.61,503.537,334.147,493.137,334.147z M43.116,191.326
+				c0,1.485-1.209,2.695-2.695,2.695H18.863c-1.485,0-2.695-1.209-2.695-2.695v-56.589h26.947V191.326z M140.126,441.937H102.4
+				v-29.204l26.808-8.936c4.236-1.412,6.526-5.991,5.114-10.226c-1.412-4.236-5.992-6.526-10.226-5.114l-21.696,7.232v-28.228
+				l26.808-8.936c4.236-1.412,6.526-5.991,5.114-10.226c-1.412-4.237-5.992-6.524-10.226-5.114l-21.696,7.232v-28.228l26.808-8.936
+				c4.236-1.412,6.526-5.991,5.114-10.226c-1.412-4.236-5.992-6.526-10.226-5.114l-21.696,7.232v-28.228l26.808-8.936
+				c4.236-1.412,6.526-5.991,5.114-10.226c-1.412-4.236-5.992-6.525-10.226-5.114l-21.696,7.232v-28.228l26.808-8.936
+				c4.236-1.412,6.526-5.991,5.114-10.226c-1.412-4.237-5.992-6.526-10.226-5.114l-21.696,7.232v-28.228l26.808-8.936
+				c4.236-1.412,6.526-5.991,5.114-10.226c-1.412-4.236-5.992-6.524-10.226-5.114l-21.696,7.232v-34.594h37.726V441.937z" />
+              <path style="fill: white;" d="M134.668,48.018l21.558,7.84c0.913,0.332,1.845,0.489,2.763,0.489c3.303,0,6.404-2.04,7.598-5.324
+				c1.526-4.195-0.638-8.833-4.834-10.36l-21.558-7.84c-4.193-1.524-8.833,0.638-10.36,4.834
+				C128.308,41.855,130.473,46.493,134.668,48.018z" />
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+          <div class="bg-purple-400 rounded-lg p-2 mt-2 mb-2">
+
+            <h6 class="text-sm font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
+              Major Project
+            </h6>
+          </div>
+          <span class="text-4xl font-semibold text-white">200</span>
+        </div>
+      </div>
+
+      <!-- Status card: Provinsi -->
+      <div
+        class="flex items-center justify-between p-4 bg-gradient-to-br from-purple-700 to-purple-400 rounded-2xl dark:bg-darker h-44">
+        <div>
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" width="40px" height="40px" viewBox="0 0 446.887 446.887"
+            style="enable-background:new 0 0 446.887 446.887" xml:space="preserve">
+            <g>
+              <path style="fill: white;" d="M504.755,199.948c0-0.001,0-0.001-0.001-0.002c-5.817-22.133-15.065-43.336-27.491-63.023
+              c-17.666-27.99-40.935-51.967-69.158-71.266C363.825,35.381,311.228,19.378,256,19.378c-15.448,0-30.959,1.291-46.103,3.837
+              c-42.923,7.216-83.441,24.689-117.168,50.531c-49.576,37.985-81.659,91.227-90.339,149.919C0.804,234.386,0,245.264,0,256
+              c0,42.127,12.129,83.49,35.075,119.617c22.189,34.936,53.913,64.224,91.743,84.698c0.003,0.002,0.006,0.004,0.009,0.005
+              c21.464,11.616,44.583,20.243,68.715,25.645c19.732,4.417,40.074,6.656,60.458,6.656c49.509,0,97.548-13.086,138.924-37.842
+              c40.419-24.183,72.565-58.22,92.963-98.427C503.888,324.811,512,291.048,512,256C512,237.098,509.562,218.24,504.755,199.948z
+               M412.152,94.092c12.785,10.373,24.232,21.918,34.257,34.545l-20.162-4.63c-6.466-1.485-13.11,0.087-18.227,4.308
+              c-5.118,4.222-7.922,10.448-7.691,17.08c0.01,0.274-0.127,0.539-0.359,0.689l-14.81,9.673c-0.249,0.162-0.566,0.172-0.824,0.024
+              L363.474,143.9c-1.856-1.058-2.813-3.249-2.325-5.33l4.694-20.037c0.503-2.146,2.393-3.686,4.596-3.747l17.674-0.492
+              C399.968,113.964,409.836,105.307,412.152,94.092z M126.715,414.119l-2.982,20.807C59.64,394.883,20.398,327.546,20.398,256
+              c0-6.33,0.308-12.715,0.919-19.083l13.65,2.206c3.437,0.556,6.949,0.838,10.436,0.838h6.914c9.584,0,19.103,3.144,26.802,8.852
+              l10.476,7.766c0.896,0.664,1.48,1.682,1.599,2.792l1.42,13.137c0.229,2.125-1.244,4.055-3.355,4.393
+              c-11.911,1.905-20.745,12.437-20.55,24.497l0.746,46.244c0.085,5.254,1.814,10.239,5.002,14.415l16.623,21.78
+              c7.843,10.278,18.449,17.937,30.671,22.152C125.135,407.156,127.223,410.575,126.715,414.119z M192.423,464.242
+              c-17.254-4.427-33.891-10.659-49.622-18.587l4.105-28.639c1.895-13.213-5.889-25.96-18.506-30.311
+              c-8.41-2.9-15.708-8.172-21.105-15.244l-16.622-21.779c-0.524-0.686-0.808-1.506-0.822-2.369l-0.746-46.243
+              c-0.032-1.983,1.421-3.714,3.378-4.027c12.844-2.055,21.81-13.795,20.412-26.728l-1.42-13.138
+              c-0.729-6.75-4.276-12.941-9.731-16.985l-10.476-7.766c-11.19-8.295-25.023-12.864-38.951-12.864h-6.914
+              c-2.4,0-4.815-0.194-7.181-0.576l-13.932-2.252c9.889-49.492,38.323-94.217,80.844-126.797
+              c29.971-22.964,65.793-38.765,103.851-45.846c5.773,4.803,10.241,10.963,13.03,18.011l0.578,1.463
+              c1.448,3.659,2.412,7.497,2.863,11.407l0.514,4.45c0.913,7.915-0.298,15.955-3.5,23.25l-5.546,12.635
+              c-3.631,8.268-9.588,15.183-17.229,19.993l-6.91,4.351c-7.001,4.407-11.094,12.279-10.682,20.542l0.934,18.667
+              c0.047,0.953-0.396,1.586-0.776,1.95c-0.38,0.363-1.031,0.774-1.983,0.687c-0.841-0.08-1.582-0.572-1.983-1.316l-8.487-15.761
+              c-2.938-5.459-8.049-9.545-14.021-11.212l-29.996-8.372c-7.883-2.2-16.329-1.546-23.779,1.84l-7.143,3.247
+              c-15.028,6.831-23.241,23.464-19.529,39.547c1.469,6.369,4.69,12.18,9.311,16.801l19.489,19.49
+              c1.099,1.097,2.152,2.268,3.133,3.478l13.361,16.479c5.9,7.277,14.647,11.446,24.013,11.445c0.032,0,0.063,0,0.095,0l36.401-0.111
+              c0.011,0,0.021,0,0.033,0c3.726,0,7.205,1.997,9.083,5.218c4.37,7.493,11.742,12.834,20.226,14.652l13.639,2.922
+              c2.999,0.643,5.561,2.555,7.029,5.248l6.587,12.076c2.641,4.842,6.636,8.722,11.553,11.221l30.957,15.731
+              c2.546,1.294,4.017,4.066,3.664,6.9c-0.205,1.642-1,3.15-2.24,4.246l-11.759,10.402c-3.315,2.932-5.889,6.673-7.444,10.818
+              l-2.564,6.836c-0.78,2.083-2.406,3.766-4.462,4.618l-12.525,5.193c-10.668,4.423-17.563,14.745-17.563,26.295
+              c0,1.298-0.319,2.594-0.922,3.745L192.423,464.242z M256,472.223c-14.387,0-28.747-1.203-42.851-3.584l29.352-55.996
+              c2.129-4.06,3.255-8.631,3.255-13.216c0-3.273,1.954-6.199,4.977-7.453l12.526-5.193c7.254-3.009,12.994-8.95,15.749-16.299
+              l2.563-6.832c0.389-1.036,1.032-1.971,1.86-2.704l11.759-10.402c4.96-4.388,8.143-10.424,8.965-16.993
+              c1.419-11.339-4.473-22.437-14.662-27.616l-30.958-15.731c-1.228-0.624-2.227-1.594-2.886-2.804l-6.587-12.076
+              c-4.316-7.915-11.848-13.536-20.663-15.426l-13.638-2.922c-2.886-0.618-5.394-2.436-6.881-4.984
+              c-5.523-9.467-15.749-15.338-26.704-15.338c-0.032,0-0.063,0-0.095,0l-36.4,0.111c-0.011,0-0.021,0-0.033,0
+              c-3.186,0-6.162-1.418-8.169-3.893l-13.362-16.479c-1.426-1.759-2.959-3.461-4.555-5.056l-19.488-19.488
+              c-1.915-1.914-3.249-4.322-3.858-6.962c-1.538-6.667,1.866-13.561,8.094-16.392l7.143-3.247c3.089-1.403,6.589-1.675,9.857-0.763
+              l29.996,8.372c0.657,0.184,1.219,0.633,1.543,1.234l8.488,15.762c3.638,6.756,10.37,11.223,18.009,11.951
+              c6.629,0.633,13.197-1.646,18.013-6.249c4.816-4.603,7.386-11.06,7.054-17.714l-0.934-18.667c-0.045-0.91,0.405-1.776,1.176-2.261
+              l6.91-4.351c11.105-6.992,19.763-17.039,25.039-29.055l5.546-12.635c4.654-10.602,6.413-22.285,5.086-33.789l-0.514-4.45
+              c-0.655-5.68-2.055-11.257-4.16-16.575l-0.579-1.464c-1.955-4.938-4.486-9.571-7.515-13.834h0.013
+              c7.483-0.654,15.01-0.983,22.52-0.983c49.28,0,96.25,13.738,136.193,39.782l0.076,9.449c0.021,2.626-2.098,4.822-4.723,4.896
+              l-17.673,0.492c-11.454,0.318-21.278,8.332-23.89,19.487l-4.694,20.035c-2.534,10.816,2.438,22.211,12.09,27.708l20.861,11.881
+              c3.274,1.864,6.887,2.792,10.492,2.792c4.031,0,8.053-1.16,11.581-3.463l14.81-9.673c6.172-4.03,9.846-11.11,9.59-18.475
+              c-0.004-0.106-0.014-0.391,0.287-0.638c0.304-0.249,0.578-0.183,0.68-0.161l22.874,5.253c0.568,0.131,1.149,0.239,1.733,0.322
+              l16.17,2.321c7.032,11.706,12.847,23.961,17.384,36.627l-15.799-3.819c-0.63-0.152-1.274-0.283-1.915-0.386l-17.252-2.782
+              c-18.733-3.021-37.783,3.341-50.941,17.026l-2.596,2.7c-7.696,8.004-12.903,17.992-15.059,28.884l-6.578,33.245
+              c-2.294,11.589-1.02,23.443,3.683,34.281c8.211,18.921,26.041,32.128,46.531,34.466l3.196,0.365
+              c8.762,1.002,17.784-0.043,26.085-3.017l10.879-3.897c1.938-0.695,4.115-0.086,5.416,1.52l1.428,1.763
+              c0.667,0.824,1.05,1.86,1.082,2.917l0.516,17.729C429.455,424.098,346.343,472.223,256,472.223z M482.538,315.632l-1.189-1.47
+              c-4.887-6.037-12.171-9.364-19.652-9.364c-2.844,0-5.717,0.481-8.497,1.477l-10.879,3.896c-5.377,1.927-11.222,2.603-16.893,1.954
+              l-3.195-0.365c-13.27-1.515-24.817-10.068-30.134-22.32c-3.047-7.018-3.872-14.695-2.387-22.2l6.578-33.245
+              c1.396-7.054,4.768-13.522,9.753-18.705l2.596-2.7c8.521-8.861,20.856-12.983,32.99-11.025l17.25,2.782
+              c0.122,0.02,0.245,0.044,0.368,0.074l27.225,6.579c3.406,14.75,5.129,29.859,5.129,44.999
+              C491.602,276.427,488.563,296.38,482.538,315.632z" />
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+            <g>
+            </g>
+          </svg>
+          <div class="bg-purple-400 rounded-lg p-2 mt-2 mb-2">
+
+            <h6 class="text-sm font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
+              Provinsi
+            </h6>
+          </div>
+          <span class="text-4xl font-semibold text-white">200</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Content -->
-    <div class="mt-2">
-        <!-- State cards -->
-        <div class="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 xl:grid-cols-4">
-            <!-- Status card: Isu Strategis -->
-            <div
-                class="flex items-center justify-between p-4 bg-gradient-to-r from-green-600 to-green-400 rounded-md dark:bg-darker">
-                <div>
-                    <h6
-                        class="text-xs font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
-                        Isu Strategis
-                    </h6>
-                    <span class="text-xl font-semibold text-white">200</span>
-                </div>
-            </div>
+    <!-- Main Map -->
 
-            <!-- Status card: Prioritas Nasional -->
-            <div
-                class="flex items-center justify-between p-4 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-md dark:bg-darker">
-                <div>
-                    <h6
-                        class="text-xs font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
-                        Prioritas Nasional
-                    </h6>
-                    <span class="text-xl font-semibold text-white">200</span>
-                </div>
-            </div>
-
-            <!-- Status card: Major Project -->
-            <div
-                class="flex items-center justify-between p-4 bg-gradient-to-r from-red-500 to-red-400 rounded-md dark:bg-darker">
-                <div>
-                    <h6
-                        class="text-xs font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
-                        Major Project
-                    </h6>
-                    <span class="text-xl font-semibold text-white">200</span>
-                </div>
-            </div>
-
-            <!-- Status card: Provinsi -->
-            <div
-                class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-500 to-gray-400 rounded-md dark:bg-darker">
-                <div>
-                    <h6
-                        class="text-xs font-medium leading-none tracking-wider text-white uppercase dark:text-primary-light ">
-                        Provinsi
-                    </h6>
-                    <span class="text-xl font-semibold text-white">200</span>
-                </div>
-            </div>
-
-
-
-        </div>
-
-        <!-- Main Map -->
-
-        <!-- <div class="embed-container">
+    <!-- <div class="embed-container">
             <br><iframe width="500" height="10" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 title="Rakortekrenbang"
                 src="//geospasial.bappenas.go.id/portal/apps/Embed/index.html?webmap=1b7e084a1bcc41b98814bae9b1feaf9c&extent=91.2006,-15.1554,134.267,2.6814&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&details=true&legend=true&active_panel=details&basemap_gallery=true&disable_scroll=false&theme=light">
@@ -104,159 +390,281 @@
 
         <br> -->
 
-        <!-- Arcgis dashboard -->
+    <!-- Arcgis dashboard -->
 
-        <div class="embed-container pr-5 pl-5">
-            <br><iframe width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                title="Rakortekrenbang"
-                src="https://geospasial.bappenas.go.id/portal/apps/opsdashboard/index.html#/6d57f95a98ae411181dae1c4e2b32e93">
-            </iframe>
-        </div>
-        <!-- Two grid columns -->
-        <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-            <!-- Active users chart -->
-            <div class="col-span-1 bg-gradient-to-r from-white to-gray-100 rounded-md dark:bg-darker">
-                <!-- Card header -->
-                <div class="p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">API
-                        now</h4>
-                </div>
-                <!-- Chart -->
-                <div class="relative p-4">
-                    <canvas id="activeUsersChart"></canvas>
-                </div>
-            </div>
-
-
-            <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Card header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">API dari Simrenas & TRPB</h4>
-                    <div class="flex items-center">
-                        <button class="relative focus:outline-none" x-cloak
-                            @click="isOn = !isOn; $parent.updateLineChart()">
-                            <div
-                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
-                            </div>
-                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
-                            </div>
-                        </button>
-                    </div>
-                </div>
-                <!-- Chart -->
-                <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
-            </div>
-        </div>
-
-
-        <div class="container mx-3">
-            <div class="flex flex-wrap -mx-1">
-              <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-                <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                <div class="relative pb-48 overflow-hidden">
-                  <img class="absolute inset-0 h-full w-full object-cover" src="data:image/jpeg;base64,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" alt="">
-                </div>
-                <div class="p-3">
-                  <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
-                  <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Sumatera I</h2>
-                  <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                  <div class="mt-3 flex items-center">
-                    <span class="text-sm font-semibold">Lihat Selengkapnya</span>
-                  </div>
-                </div>
-                <div class="p-4 border-t border-b text-xs text-gray-700">
-                  <span class="flex items-center mb-1">
-                    <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
-                  </span>
-                  <span class="flex items-center">
-                    <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
-                  </span>        
-                </div>
-                <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-gray-400"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><span class="ml-2">Direkomendasikan</span></div>
-              </a>
-              </div>
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-                <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                <div class="relative pb-48 overflow-hidden">
-                  <img class="absolute inset-0 h-full w-full object-cover" src="data:image/jpeg;base64,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" alt="">
-                </div>
-                <div class="p-3">
-                  <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
-                  <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Sumatera II</h2>
-                  <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                  <div class="mt-3 flex items-center">
-                    <span class="text-sm font-semibold">Lihat Selengkapnya</span>
-                  </div>
-                </div>
-                <div class="p-4 border-t border-b text-xs text-gray-700">
-                  <span class="flex items-center mb-1">
-                    <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
-                  </span>
-                  <span class="flex items-center">
-                    <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
-                  </span>        
-                </div>
-                <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-gray-400"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><span class="ml-2">Direkomendasikan</span></div>
-              </a>
-              </div>
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-                <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                <div class="relative pb-48 overflow-hidden">
-                  <img class="absolute inset-0 h-full w-full object-cover" src="https://cdn1-production-images-kly.akamaized.net/8y0B8M7IMA_YOjkfrEnG2pe529g=/640x640/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/1096309/original/041101500_1451368462-Tidak-Liburan-Ke-Luar-Kota-Ide-Staycation-Dan-Liburan-Di-Jakarta-Ini-Akan-Sangat-Membantu-Kalian.jpg" alt="">
-                </div>
-                <div class="p-3">
-                  <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
-                  <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Jawa I</h2>
-                  <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                  <div class="mt-3 flex items-center">
-                    <span class="text-sm font-semibold">Lihat Selengkapnya</span>
-                  </div>
-                </div>
-                <div class="p-4 border-t border-b text-xs text-gray-700">
-                  <span class="flex items-center mb-1">
-                    <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
-                  </span>
-                  <span class="flex items-center">
-                    <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
-                  </span>        
-                </div>
-                <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-gray-400"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><span class="ml-2">Direkomendasikan</span></div>
-              </a>
-              </div>
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-                <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                <div class="relative pb-48 overflow-hidden">
-                  <img class="absolute inset-0 h-full w-full object-cover" src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2021/05/03112735/Tempat-Tinggal-Terbaik-di-Bali.jpg" alt="">
-                </div>
-                <div class="p-3">
-                  <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
-                  <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Jawa II Bali</h2>
-                  <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                  <div class="mt-3 flex items-center">
-                    <span class="text-sm font-semibold">Lihat Selengkapnya</span>
-                  </div>
-                </div>
-                <div class="p-4 border-t border-b text-xs text-gray-700">
-                  <span class="flex items-center mb-1">
-                    <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
-                  </span>
-                  <span class="flex items-center">
-                    <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
-                  </span>        
-                </div>
-                <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-gray-400"><path d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z"></path></svg><span class="ml-2">Direkomendasikan</span></div>
-              </a>
-              </div>
-            
-                
-        
-            </div>
-          </div>
-
-
-
+    <div class="embed-container pr-5 pl-5">
+      <br><iframe width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+        title="Rakortekrenbang"
+        src="https://geospasial.bappenas.go.id/portal/apps/opsdashboard/index.html#/6d57f95a98ae411181dae1c4e2b32e93">
+      </iframe>
     </div>
+    <!-- Two grid columns -->
+    <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+      <!-- Active users chart -->
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            API dari Simrenas & TRPB</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            API dari Simrenas & TRPB</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+    </div>
+
+
+    <div class="container mx-3">
+      <div class="flex flex-wrap -mx-1">
+        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+            <div class="relative pb-48 overflow-hidden">
+              <img class="absolute inset-0 h-full w-full object-cover"
+                src="data:image/jpeg;base64,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"
+                alt="">
+            </div>
+            <div class="p-3">
+              <span
+                class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
+              <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Sumatera I</h2>
+              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
+                non metus auctor fringilla.</p>
+              <div class="mt-3 flex items-center">
+                <span class="text-sm font-semibold">Lihat Selengkapnya</span>
+              </div>
+            </div>
+            <div class="p-4 border-t border-b text-xs text-gray-700">
+              <span class="flex items-center mb-1">
+                <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
+              </span>
+              <span class="flex items-center">
+                <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
+              </span>
+            </div>
+            <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-gray-400">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><span class="ml-2">Direkomendasikan</span></div>
+          </a>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+            <div class="relative pb-48 overflow-hidden">
+              <img class="absolute inset-0 h-full w-full object-cover"
+                src="data:image/jpeg;base64,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"
+                alt="">
+            </div>
+            <div class="p-3">
+              <span
+                class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
+              <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Sumatera II</h2>
+              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
+                non metus auctor fringilla.</p>
+              <div class="mt-3 flex items-center">
+                <span class="text-sm font-semibold">Lihat Selengkapnya</span>
+              </div>
+            </div>
+            <div class="p-4 border-t border-b text-xs text-gray-700">
+              <span class="flex items-center mb-1">
+                <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
+              </span>
+              <span class="flex items-center">
+                <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
+              </span>
+            </div>
+            <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-gray-400">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><span class="ml-2">Direkomendasikan</span></div>
+          </a>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+            <div class="relative pb-48 overflow-hidden">
+              <img class="absolute inset-0 h-full w-full object-cover"
+                src="https://cdn1-production-images-kly.akamaized.net/8y0B8M7IMA_YOjkfrEnG2pe529g=/640x640/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/1096309/original/041101500_1451368462-Tidak-Liburan-Ke-Luar-Kota-Ide-Staycation-Dan-Liburan-Di-Jakarta-Ini-Akan-Sangat-Membantu-Kalian.jpg"
+                alt="">
+            </div>
+            <div class="p-3">
+              <span
+                class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
+              <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Jawa I</h2>
+              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
+                non metus auctor fringilla.</p>
+              <div class="mt-3 flex items-center">
+                <span class="text-sm font-semibold">Lihat Selengkapnya</span>
+              </div>
+            </div>
+            <div class="p-4 border-t border-b text-xs text-gray-700">
+              <span class="flex items-center mb-1">
+                <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
+              </span>
+              <span class="flex items-center">
+                <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
+              </span>
+            </div>
+            <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-gray-400">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><span class="ml-2">Direkomendasikan</span></div>
+          </a>
+        </div>
+        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+            <div class="relative pb-48 overflow-hidden">
+              <img class="absolute inset-0 h-full w-full object-cover"
+                src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2021/05/03112735/Tempat-Tinggal-Terbaik-di-Bali.jpg"
+                alt="">
+            </div>
+            <div class="p-3">
+              <span
+                class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
+              <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Jawa II Bali</h2>
+              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
+                non metus auctor fringilla.</p>
+              <div class="mt-3 flex items-center">
+                <span class="text-sm font-semibold">Lihat Selengkapnya</span>
+              </div>
+            </div>
+            <div class="p-4 border-t border-b text-xs text-gray-700">
+              <span class="flex items-center mb-1">
+                <i class="far fa-clock fa-fw mr-2 text-gray-900"></i> Terakhir Update : 8/6/2021
+              </span>
+              <span class="flex items-center">
+                <i class="far fa-address-card fa-fw text-gray-900 mr-2"></i> Oleh Amrullah
+              </span>
+            </div>
+            <div class="p-4 flex items-center text-sm text-gray-600"><svg viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-yellow-500">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 fill-current text-gray-400">
+                <path
+                  d="M8.128 19.825a1.586 1.586 0 0 1-1.643-.117 1.543 1.543 0 0 1-.53-.662 1.515 1.515 0 0 1-.096-.837l.736-4.247-3.13-3a1.514 1.514 0 0 1-.39-1.569c.09-.271.254-.513.475-.698.22-.185.49-.306.776-.35L8.66 7.73l1.925-3.862c.128-.26.328-.48.577-.633a1.584 1.584 0 0 1 1.662 0c.25.153.45.373.577.633l1.925 3.847 4.334.615c.29.042.562.162.785.348.224.186.39.43.48.704a1.514 1.514 0 0 1-.404 1.58l-3.13 3 .736 4.247c.047.282.014.572-.096.837-.111.265-.294.494-.53.662a1.582 1.582 0 0 1-1.643.117l-3.865-2-3.865 2z">
+                </path>
+              </svg><span class="ml-2">Direkomendasikan</span></div>
+          </a>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+  </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -264,74 +672,74 @@
 
 <script>
 
-    var $roChart = $("#firstChart");
+  var $roChart = $("#firstChart");
 
-    $.ajax({
-        url: $roChart.data("url"),
-        success: function (data) {
+  $.ajax({
+    url: $roChart.data("url"),
+    success: function (data) {
 
-            var ctx = $roChart[0].getContext("2d");
+      var ctx = $roChart[0].getContext("2d");
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: data.labels,
-                    datasets: [{
-                        label: 'Nama Kementrian Lembaga',
-                        backgroundColor: 'blue',
-                        data: data.data
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Population Bar Chart'
-                    }
-                }
-            });
-
-        }
-    });
-
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
+      new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
+          labels: data.labels,
+          datasets: [{
+            label: 'Nama Kementrian Lembaga',
+            backgroundColor: 'blue',
+            data: data.data
+          }]
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Population Bar Chart'
+          }
         }
-    });
+      });
+
+    }
+  });
+
+  var ctx = document.getElementById('myChart');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 </script>
 
 {% endblock %}
