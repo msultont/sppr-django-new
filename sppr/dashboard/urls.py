@@ -1,3 +1,4 @@
+from os import name
 from django.urls import path
 from . import views
 
@@ -46,8 +47,8 @@ urlpatterns = [
     path('forms/longlist/delete/<int:pk>',
          views.deleteSingleLonglist, name="deleteSingleLonglist"),
 
-    # Path to upload data csv to longlist
-    path('forms/longlist/upload-csv',
-         views.uploadCSVLonglist, name="uploadCSVLonglist")
+    # Path to download excel longlist data format
+    path('download/format/longlist/',
+         views.download_longlist_format, name="downloadLonglist")
 
 ]

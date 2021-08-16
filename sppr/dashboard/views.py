@@ -11,6 +11,9 @@ from django.contrib.auth.decorators import login_required
 from json import dumps
 import csv
 from distutils import util
+import os
+import mimetypes
+from django.http.response import HttpResponse
 
 # class ItemListView(ServerSideDatatableView):
 #     queryset = Endorsement.objects.all()
@@ -266,6 +269,7 @@ def kebdaerah(request, menu):
     chartDataView = ""
     judul = cek_kebdaerah(menu)
     content = {}
+    status_upload = ""
 
     if menu in ["longlist", "prioritas"]:
         sub_menu = "list"
@@ -275,71 +279,75 @@ def kebdaerah(request, menu):
             chartDataView = "longlistChartView"
             form = CsvModelForm(request.POST or None, request.FILES or None)
 
-            # try:
-            if form.is_valid():
-                obj = form.save()
+            try:
+                if form.is_valid():
+                    row_uploaded = 0
+                    obj = form.save()
 
-                # Read data from csv
+                    # Read data from csv
 
-                with open(obj.file_name.path, 'r') as f:
-                    reader = csv.reader(f)
+                    with open(obj.file_name.path, 'r') as f:
+                        reader = csv.reader(f)
 
-                    for i, row in enumerate(reader):
-                        if i == 0:
-                            pass
-                        else:
-                            Longlist.objects.create(
+                        for i, row in enumerate(reader):
+                            if i == 0:
+                                pass
+                            elif row[2] == "":
+                                pass
+                            else:
+                                Longlist.objects.create(
 
-                                judul_proyek=row[2],
-                                provinsi=ProvinsiId(
-                                    provinsi_id=int(row[1])),
-                                lokasi_kabupaten=KabupatenId(
-                                    kabupaten_id=int(row[4])),
-                                lokasi_proyek=row[5],
-                                target_2021=float(row[6]),
-                                target_2022=float(row[7]),
-                                target_2023=float(row[8]),
-                                target_2024=float(row[9]),
-                                target_2025=float(row[10]),
-                                indikasi_pendanaan_2021=float(row[11]),
-                                indikasi_pendanaan_2022=float(row[12]),
-                                indikasi_pendanaan_2023=float(row[13]),
-                                indikasi_pendanaan_2024=float(row[14]),
-                                shortlist_2022=bool(
-                                    util.strtobool(row[19])),
-                                shortlist_2023=bool(
-                                    util.strtobool(row[20])),
-                                isu_strategis=row[21],
-                                tujuan_lfa=row[22],
-                                sasaran_lfa=row[23],
-                                output_lfa=row[24],
-                                sumber_bahasan=row[29],
-                                taging_kawasan_prioritas=row[30],
-                                klasifikasi_proyek=row[35],
-                                jenis_impact=row[36],
-                                staging_perkembangan=row[37],
-                                keterangan=row[38],
-                                usulan_baru=bool(
-                                    util.strtobool(row[39])),
-                                sumber_data=SumberdataId(
-                                    sumberdata_id=int(row[16])),
-                                kl_pelaksana=KlId(kl_id=int(row[18])),
-                                mp=MajorprojectId(mp_id=int(row[26])),
-                                status_usulan=StatusId(
-                                    status_id=int(row[28])),
-                                jenis_project=ProyekId(
-                                    proyek_idd=int(row[32])),
-                                sub_tema_rkp=SubtemaId(
-                                    sub_tema_id=int(row[34])),
+                                    judul_proyek=row[2],
+                                    provinsi=ProvinsiId(
+                                        provinsi_id=int(row[1])),
+                                    lokasi_kabupaten=KabupatenId(
+                                        kabupaten_id=int(row[4])),
+                                    lokasi_proyek=row[5],
+                                    target_2021=float(row[6]),
+                                    target_2022=float(row[7]),
+                                    target_2023=float(row[8]),
+                                    target_2024=float(row[9]),
+                                    target_2025=float(row[10]),
+                                    indikasi_pendanaan_2021=float(row[11]),
+                                    indikasi_pendanaan_2022=float(row[12]),
+                                    indikasi_pendanaan_2023=float(row[13]),
+                                    indikasi_pendanaan_2024=float(row[14]),
+                                    shortlist_2022=bool(
+                                        util.strtobool(row[19])),
+                                    shortlist_2023=bool(
+                                        util.strtobool(row[20])),
+                                    isu_strategis=row[21],
+                                    tujuan_lfa=row[22],
+                                    sasaran_lfa=row[23],
+                                    output_lfa=row[24],
+                                    sumber_bahasan=row[29],
+                                    taging_kawasan_prioritas=row[30],
+                                    klasifikasi_proyek=row[35],
+                                    jenis_impact=row[36],
+                                    staging_perkembangan=row[37],
+                                    keterangan=row[38],
+                                    usulan_baru=bool(
+                                        util.strtobool(row[39])),
+                                    sumber_data=SumberdataId(
+                                        sumberdata_id=int(row[16])),
+                                    kl_pelaksana=KlId(kl_id=int(row[18])),
+                                    mp=MajorprojectId(mp_id=int(row[26])),
+                                    status_usulan=StatusId(
+                                        status_id=int(row[28])),
+                                    jenis_project=ProyekId(
+                                        proyek_idd=int(row[32])),
+                                    sub_tema_rkp=SubtemaId(
+                                        sub_tema_id=int(row[34])),
 
-                            )
+                                )
+                                row_uploaded += 1
 
-                return redirect('/kebdaerah/longlist')
+                    # content[status_upload] = f'Berhasil Mengunggah {row_uploaded} Objek Data.'
+                    return redirect('/kebdaerah/longlist', content)
 
-            # except:
-            #     content = {
-            #         'error_upload_longlist': "Format file CSV tidak sesuai dengan sistem"}
-            #     return redirect('/kebdaerah/longlist')
+            except:
+                content['status_upload'] = f'Terdapat Kesalahan Dalam Mengunggah Data. Cek Kembali Format Data.'
+                return redirect('/kebdaerah/longlist', content)
 
             content = {'form': form}
 
@@ -442,66 +450,20 @@ def updateEndorsement(request, pk):
     return render(request, 'forms/endorsement.html', content)
 
 
-@login_required(login_url='login')
-def uploadCSVLonglist(request):
-
-    form = CsvModelForm(request.POST or None, request.FILES or None)
-
-    if form.is_valid():
-        obj = form.save()
-
-        if "Longlist_Format" in obj.file_name.path:
-            # Read data from csv
-            with open(obj.file_name.path, 'r') as f:
-                reader = csv.reader(f)
-
-                for i, row in enumerate(reader):
-                    if i == 0:
-                        pass
-                    else:
-                        Longlist.objects.create(
-                            judul_proyek=row[2],
-                            provinsi=ProvinsiId(provinsi_id=int(row[1])),
-                            lokasi_kabupaten=KabupatenId(
-                                kabupaten_id=int(row[4])),
-                            lokasi_proyek=row[5],
-                            target_2021=float(row[6]),
-                            target_2022=float(row[7]),
-                            target_2023=float(row[8]),
-                            target_2024=float(row[9]),
-                            target_2025=float(row[10]),
-                            indikasi_pendanaan_2021=float(row[11]),
-                            indikasi_pendanaan_2022=float(row[12]),
-                            indikasi_pendanaan_2023=float(row[13]),
-                            indikasi_pendanaan_2024=float(row[14]),
-                            shortlist_2022=bool(
-                                util.strtobool(row[19])),
-                            shortlist_2023=bool(
-                                util.strtobool(row[20])),
-                            isu_strategis=row[21],
-                            tujuan_lfa=row[22],
-                            sasaran_lfa=row[23],
-                            output_lfa=row[24],
-                            sumber_bahasan=row[29],
-                            taging_kawasan_prioritas=row[30],
-                            klasifikasi_proyek=row[35],
-                            jenis_impact=row[36],
-                            staging_perkembangan=row[37],
-                            keterangan=row[38],
-                            usulan_baru=bool(
-                                util.strtobool(row[39])),
-                            sumber_data=SumberdataId(
-                                sumberdata_id=int(row[16])),
-                            kl_pelaksana=KlId(kl_id=int(row[18])),
-                            mp=MajorprojectId(mp_id=int(row[26])),
-                            status_usulan=StatusId(status_id=int(row[28])),
-                            jenis_project=ProyekId(proyek_idd=int(row[32])),
-                            sub_tema_rkp=SubtemaId(sub_tema_id=int(row[34])),
-
-                        )
-
-            return redirect('/kebdaerah/longlist')
-
-    content = {'form': form}
-
-    return redirect('/kebdaerah/longlist')
+def download_longlist_format(request):
+    # Define Django project base directory
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Define text file name
+    filename = 'Longlist Format Database.xlsx'
+    # Define the full file path
+    filepath = BASE_DIR + '/Format_Database/' + filename
+    # Open the file for reading content
+    path = open(filepath, 'rb')
+    # Set the mime type
+    mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response
