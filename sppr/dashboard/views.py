@@ -5,7 +5,7 @@ from .models import *
 from django.db.models import Count
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import CsvModelForm, EndorsementForm, LonglistForm
+from .forms import CsvModelForm, LonglistForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from json import dumps
@@ -14,11 +14,6 @@ from distutils import util
 import os
 import mimetypes
 from django.http.response import HttpResponse
-
-# class ItemListView(ServerSideDatatableView):
-#     queryset = Endorsement.objects.all()
-#     columns = ['id', 'provinsi', 'nama_kegiatan',
-#                'lokasi', 'ki', 'status_approval']
 
 
 class LonglistDataView(AjaxDatatableView):
@@ -30,7 +25,7 @@ class LonglistDataView(AjaxDatatableView):
 
     column_defs = [
         # AjaxDatatableView.render_row_tools_column_def(),
-        {'name': 'pk', 'visible': True, 'title': 'No'},
+        {'name': 'pk', 'visible': True, 'title': 'No', 'visible': True},
         {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
         {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
             'visible': True, 'choices': True, 'autofilter': True},
@@ -61,65 +56,11 @@ class LonglistDataView(AjaxDatatableView):
 
     def customize_row(self, row, obj):
         row['edit'] = """
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/update/'+id);">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" 
+            onclick=" 
+            var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/update/'+id);">
                Edit
             </button>
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-               onclick="var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/delete/'+id);">
-               Delete
-            </button>
-            <script>
-                function accessToEdit(id) {
-                    console.log(id)
-                    var url = "/forms/endorsement/update/"
-                    //location.replace(url+id)
-                }
-            </script>
-        """
-
-
-class EndorsementDataView(AjaxDatatableView):
-
-    model = Endorsement
-    title = 'Endorsement'
-    initial_order = [["id", "asc"], ]
-    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
-    search_values_separator = ' '
-
-    column_defs = [
-        # AjaxDatatableView.render_row_tools_column_def(),
-        {'name': 'id', 'visible': True, 'title': 'No'},
-        {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
-            'visible': True, 'choices': True, 'autofilter': True},
-        {'name': 'nama_kegiatan', 'visible': True, 'title': 'Nama Kegiatan'},
-        {'name': 'ki_id', 'foreign_field': 'ki__nama_kementrian_lembaga', 'title': 'Kementrian Lembaga',
-            'visible': True, 'choices': True, 'autofilter': True},
-        {'name': 'status_approval', 'visible': True,
-            'choices': True, 'autofilter': True},
-        {'name': 'edit', 'title': 'Action', 'placeholder': True,
-            'searchable': False, 'orderable': False, },
-        {'name': 'direktorat_mitra', 'visible': False},
-        {'name': 'major_project', 'visible': False},
-        {'name': 'lokasi', 'visible': False}
-
-    ]
-
-    def customize_row(self, row, obj):
-        row['edit'] = """
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onclick=" var id = this.closest('tr').id.substr(4); location.replace('/forms/endorsement/update/'+id);">
-               Edit
-            </button>
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-               onclick="var id = this.closest('tr').id.substr(4); window.confirm('Really want to delete ' + id + '?'); return false;">
-               Delete
-            </button>
-            <script>
-                function accessToEdit(id) {
-                    console.log(id)
-                    var url = "/forms/endorsement/update/"
-                    //location.replace(url+id)
-                }
-            </script>
         """
 
 
@@ -227,11 +168,11 @@ def chart_ro(request):
 
     labels = []
     data = []
-    ro_by_kl = Endorsement.objects.values(
-        'ki_id__nama_kementrian_lembaga').annotate(jumlah=Count('nama_kegiatan'))
+    ro_by_kl = Longlist.objects.values(
+        'kl_pelaksana__singkatan').annotate(jumlah=Count('judul_proyek'))
 
     for row in ro_by_kl:
-        labels.append(row['ki_id__nama_kementrian_lembaga'])
+        labels.append(row['kl_pelaksana__singkatan'])
         data.append(row['jumlah'])
 
     data = {
@@ -246,11 +187,11 @@ def chart_prov(request):
 
     labels = []
     data = []
-    ro_by_prov = Endorsement.objects.values(
-        "status_approval").annotate(jumlah=Count('nama_kegiatan'))
+    ro_by_prov = Longlist.objects.values(
+        'status_usulan__nama_status').annotate(jumlah=Count('judul_proyek'))
 
     for row in ro_by_prov:
-        labels.append(row["status_approval"])
+        labels.append(row["status_usulan__nama_status"])
         data.append(row['jumlah'])
 
     data = {
@@ -377,23 +318,6 @@ def proyek(request, menu):
 
 
 @login_required(login_url='login')
-def addEndorsement(request):
-    # Call Form
-    form = EndorsementForm()
-    content = {}
-
-    if request.method == 'POST':
-        form = EndorsementForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/kebdaerah/prioritas')
-
-    content["form"] = form
-
-    return render(request, 'forms/endorsement.html', content)
-
-
-@login_required(login_url='login')
 def addSingleLonglist(request):
     form = LonglistForm()
     content = {'judul': "Anda Sedang Menambah Data Longlist"}
@@ -414,7 +338,8 @@ def updateLonglist(request, pk):
 
     longlist = Longlist.objects.get(id=pk)
     form = LonglistForm(instance=longlist)
-    content = {'form': form, 'judul': "Anda Sedang Memperbaharui Data Longlist"}
+    content = {'form': form,
+               'judul': "Anda Sedang Memperbaharui Data Longlist", 'pk': pk}
 
     if request.method == 'POST':
         form = LonglistForm(request.POST, instance=longlist)
@@ -429,25 +354,9 @@ def updateLonglist(request, pk):
 def deleteSingleLonglist(request, pk):
 
     longlist = Longlist.objects.get(id=pk)
+
     longlist.delete()
-
     return redirect('/kebdaerah/longlist')
-
-
-@login_required(login_url='login')
-def updateEndorsement(request, pk):
-    # Call Form
-    endorsement = Endorsement.objects.get(id=pk)
-    form = EndorsementForm(instance=endorsement)
-    content = {'form': form, 'id': pk}
-
-    if request.method == 'POST':
-        form = EndorsementForm(request.POST, instance=endorsement)
-        if form.is_valid():
-            form.save()
-            return redirect('/kebdaerah/prioritas')
-
-    return render(request, 'forms/endorsement.html', content)
 
 
 def download_longlist_format(request):

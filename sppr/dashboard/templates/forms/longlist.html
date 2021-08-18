@@ -4,12 +4,45 @@
 
 {% block content %}
 
+<!--Delete Confirmation Modal-->
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="modal-id">
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+        <!--content-->
+        <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <!--header-->
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 class="text-xl font-semibold">
+                    Apakah anda yakin akan menghapus data?
+                </h3>
+
+            </div>
+            <!--body-->
+            <div class="relative p-6 flex-auto">
+                <button
+                    class="text-gray-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button" onclick="toggleModal('modal-id')">
+                    Cancel
+                </button>
+
+                <a href="{% url 'deleteSingleLonglist' pk=pk %}"><button
+                        class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Ya,
+                        Hapus</button></a>
+
+            </div>
+            <!--footer-->
+
+        </div>
+    </div>
+</div>
+<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+
 <!-- Content header -->
 <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
     <h1 class="text-2xl font-semibold">{{judul}}</h1>
     <p class="dataView" hidden> {{dataView}} </p>
 </div>
-
 
 <form class="w-full max-w-screen-lg" action="" method="POST">
 
@@ -421,15 +454,29 @@
 
         </div>
 
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-            type="submit">Save/Submit</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" type="submit">Simpan
+            Data</button>
 
     </div>
-
-
-
 </form>
 
 
+{% if pk %}
+<div class="mt-10 mb-10 ml-8">
+
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
+        onclick="toggleModal('modal-id')">Hapus Data</button>
+
+</div>
+{% endif %}
+
+<script>
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle("hidden");
+        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+        document.getElementById(modalID).classList.toggle("flex");
+        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    }
+</script>
 
 {% endblock %}

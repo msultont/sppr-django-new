@@ -416,6 +416,13 @@
                                 ticks: {
                                     display: false //this will remove only the label
                                 }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) { if (value % 1 === 0) { return value; } }
+                                }
                             }]
                         }
                     }
@@ -450,6 +457,13 @@
                             xAxes: [{
                                 ticks: {
                                     display: false //this will remove only the label
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function (value) { if (value % 1 === 0) { return value; } }
                                 }
                             }]
                         }
