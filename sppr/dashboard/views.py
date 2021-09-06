@@ -19,13 +19,12 @@ from django.http.response import HttpResponse
 class LonglistDataView(AjaxDatatableView):
     model = Longlist
     title = 'Longlist'
-    initial_order = [["pk", "asc"], ]
+    initial_order = [["judul_proyek", "asc"], ]
     length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
-        # AjaxDatatableView.render_row_tools_column_def(),
-        {'name': 'pk', 'visible': True, 'title': 'No', 'visible': True},
+        {'name': 'pk', 'visible': False, 'title': 'No'},
         {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
         {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
             'visible': True, 'choices': True, 'autofilter': True},
