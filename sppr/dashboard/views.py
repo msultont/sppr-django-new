@@ -179,8 +179,7 @@ def kebdaerah(request, menu):
 
     elif menu in ["forum"]:
         sub_menu = "ckfp"
-    elif menu in ["prakorgub", "rakorgub", "rakortekrenbang", "musrenbangnas"]:
-        sub_menu = "tahapan"
+
     else:
         sub_menu = "error"
 
@@ -198,6 +197,12 @@ def proyek(request, menu):
     judul = cek_proyek(menu)
 
     return render(request, 'proyek/index.html', {'judul': judul})
+
+
+@login_required(login_url="login")
+def kajian_wilayah(request):
+
+    return render(request, 'kajian_wilayah/index.html')
 
 ############################
 
@@ -330,7 +335,7 @@ def addSingleLonglist(request):
 
     content["form"] = form
 
-    return render(request, 'forms/longlist.html', content)
+    return render(request, 'forms/longlist-add.html', content)
 
 # Update Single Long List Data
 

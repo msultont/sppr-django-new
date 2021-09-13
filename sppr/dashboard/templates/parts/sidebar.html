@@ -5,8 +5,7 @@
     }
 </style>
 
-<aside
-    class="overflow-auto flex-shrink-0 hidden w-64 bg-purple-800 dark:border-primary-darker dark:bg-darker md:block">
+<aside class="overflow-auto flex-shrink-0 hidden w-64 bg-purple-800 dark:border-primary-darker dark:bg-darker md:block">
     <div class="flex flex-col h-full">
         <!-- Sidebar links -->
         <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-auto hover:overflow-y-auto">
@@ -57,11 +56,11 @@
                     <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                     <!-- inActive classes 'text-white dark:text-white' -->
                     <a href="{% url 'profil' 'ku' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700 disabled">
+                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
                         Kondisi Umum Wilayah
                     </a>
                     <a href="{% url 'profil' 'pis' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700 disabled">
+                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                         Permasalahan Isu Strategis
                     </a>
                     <a href="{% url 'profil' 'akl' %}" role="menuitem"
@@ -73,6 +72,22 @@
                         Analisis Kawasan Prioritas
                     </a>
                 </div>
+            </div>
+
+            <!-- Kebutuhan Daerah -->
+            <div x-data="{ isActive: true, open: true}">
+                <a href="{% url 'kawil'  %}"
+                    class="flex items-center p-2 text-white transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary">
+                    <span aria-hidden="true">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </span>
+                    <span class="ml-2 text-sm"> Kajian Kewilayahan </span>
+
+                </a>
             </div>
 
             <!-- Kebutuhan Daerah -->
@@ -110,24 +125,8 @@
                         Hasil Analisis Kerangka Logis
                     </a>
                     <a href="{% url 'kebdaerah' 'forum' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700 disabled">
+                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700">
                         Catatan Kesepakatan Forum Perencanaan
-                    </a>
-                    <a href="{% url 'kebdaerah' 'prakorgub' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700 disabled">
-                        Triwulanan / Pra-Rakorgub
-                    </a>
-                    <a href="{% url 'kebdaerah' 'rakorgub' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700 disabled">
-                        Rakorgub
-                    </a>
-                    <a href="{% url 'kebdaerah' 'rakortekrenbang' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700 disabled">
-                        Rakortekrenbang
-                    </a>
-                    <a href="{% url 'kebdaerah' 'musrenbangnas' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700 disabled">
-                        Musrenbangnas
                     </a>
                     <a href="{% url 'kebdaerah' 'prioritas' %}" role="menuitem"
                         class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:text-white dark:hover:text-light hover:text-gray-700 disabled">
@@ -163,7 +162,7 @@
                     <!-- active & hover classes 'text-gray-700 dark:text-light' -->
                     <!-- inActive classes 'text-white dark:text-white' -->
                     <a href="{% url 'proyek' 'batam' %}" role="menuitem"
-                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700 disabled">
+                        class="block p-2 text-sm text-white transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700">
                         BP Batam
                     </a>
                     <a href="{% url 'proyek' 'sabang' %}" role="menuitem"

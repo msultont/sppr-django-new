@@ -20,6 +20,9 @@ urlpatterns = [
     # Akses untuk ke Menu Kebutuhan Daerah
     path('kebdaerah/<str:menu>', views.kebdaerah, name='kebdaerah'),
 
+    # Akses untuk ke Menu Kajian Kewilayahan
+    path('kajian/', views.kajian_wilayah, name="kawil"),
+
     # Akses untuk ke menu proyek mitra KL
     path('proyek/<str:menu>', views.proyek, name="proyek"),
 
