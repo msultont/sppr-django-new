@@ -238,11 +238,11 @@ class Longlist(models.Model):
     lokasi_proyek = models.TextField(blank=True, null=True)
     lokasi_kabupaten = models.ForeignKey(
         KabupatenId, models.DO_NOTHING, db_column='lokasi_kabupaten', blank=True, null=True)
-    target_2021 = models.IntegerField(blank=True, null=True)
-    target_2022 = models.IntegerField(blank=True, null=True)
-    target_2023 = models.IntegerField(blank=True, null=True)
-    target_2024 = models.IntegerField(blank=True, null=True)
-    target_2025 = models.IntegerField(blank=True, null=True)
+    target_2021 = models.TextField(blank=True, null=True)
+    target_2022 = models.TextField(blank=True, null=True)
+    target_2023 = models.TextField(blank=True, null=True)
+    target_2024 = models.TextField(blank=True, null=True)
+    target_2025 = models.TextField(blank=True, null=True)
     indikasi_pendanaan_2021 = models.FloatField(
         blank=True, null=True)
     indikasi_pendanaan_2022 = models.FloatField(
@@ -286,7 +286,22 @@ class Longlist(models.Model):
     staging_perkembangan = models.TextField(blank=True, null=True)
     keterangan = models.TextField(blank=True, null=True)
     usulan_baru = models.BooleanField(
-        blank=True, null=True, default="", choices=bool_choices)
+        blank=True, null=True, default=False, choices=bool_choices)
+
+    shortlist = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
+    prarakorgub = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
+    rakorgub = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
+    rakortekbang = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
+    musrenbangprov = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
+    musrenbangnas = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
+    endorsement = models.BooleanField(
+        blank=True, null=True, default=False, choices=bool_choices)
 
     def __str__(self) -> str:
         return self.judul_proyek
@@ -294,15 +309,6 @@ class Longlist(models.Model):
     class Meta:
         managed = False
         db_table = 'Longlist'
-
-
-class ShortList(models.Model):
-
-    judul_proyek = models.OneToOneField(Longlist, on_delete=models.CASCADE)
-    tahun_shortlist_2023 = models.IntegerField(null=True)
-
-    def __str__(self) -> str:
-        return self.judul_proyek
 
 
 class CsvLongList(models.Model):

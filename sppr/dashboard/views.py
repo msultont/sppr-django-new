@@ -125,11 +125,11 @@ def kebdaerah(request, menu):
                                     lokasi_kabupaten=KabupatenId(
                                         kabupaten_id=int(row[4])),
                                     lokasi_proyek=row[5],
-                                    target_2021=float(row[6]),
-                                    target_2022=float(row[7]),
-                                    target_2023=float(row[8]),
-                                    target_2024=float(row[9]),
-                                    target_2025=float(row[10]),
+                                    target_2021=row[6],
+                                    target_2022=row[7],
+                                    target_2023=row[8],
+                                    target_2024=row[9],
+                                    target_2025=row[10],
                                     indikasi_pendanaan_2021=float(row[11]),
                                     indikasi_pendanaan_2022=float(row[12]),
                                     indikasi_pendanaan_2023=float(row[13]),
@@ -150,6 +150,20 @@ def kebdaerah(request, menu):
                                     keterangan=row[38],
                                     usulan_baru=bool(
                                         util.strtobool(row[39])),
+                                    shortlist=bool(
+                                        util.strtobool(row[40])),
+                                    prarakorgub=bool(
+                                        util.strtobool(row[41])),
+                                    rakorgub=bool(
+                                        util.strtobool(row[42])),
+                                    rakortekbang=bool(
+                                        util.strtobool(row[43])),
+                                    musrenbangprov=bool(
+                                        util.strtobool(row[44])),
+                                    musrenbangnas=bool(
+                                        util.strtobool(row[45])),
+                                    endorsement=bool(
+                                        util.strtobool(row[46])),
                                     sumber_data=SumberdataId(
                                         sumberdata_id=int(row[16])),
                                     kl_pelaksana=KlId(kl_id=int(row[18])),
@@ -197,6 +211,8 @@ def proyek(request, menu):
     judul = cek_proyek(menu)
 
     return render(request, 'proyek/index.html', {'judul': judul})
+
+# Route to Kajian Kewilayahan
 
 
 @login_required(login_url="login")
@@ -335,7 +351,7 @@ def addSingleLonglist(request):
 
     content["form"] = form
 
-    return render(request, 'forms/longlist-add.html', content)
+    return render(request, 'forms/longlist.html', content)
 
 # Update Single Long List Data
 
