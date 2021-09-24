@@ -2,6 +2,6 @@
 
 Tech Stack:
 
-Frontend: Tailwindcss, JavaScript
+Frontend: Tailwindcss, Vanilla JavaScript
 
 Backend: Django (Python)
