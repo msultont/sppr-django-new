@@ -77,8 +77,9 @@ def dashboard(request):
 def profil(request, menu):
 
     judul = cek_profil(menu)
+    template = cek_profil_template(menu)
 
-    return render(request, 'profil/index.html', {'judul': judul})
+    return render(request, f'profil/{template}.html', {'judul': judul})
 
 # Route to Kebutuhan Daerah Page
 
@@ -118,62 +119,67 @@ def kebdaerah(request, menu):
                                 pass
                             else:
                                 Longlist.objects.create(
-
                                     judul_proyek=row[2],
                                     provinsi=ProvinsiId(
                                         provinsi_id=int(row[1])),
                                     lokasi_kabupaten=KabupatenId(
                                         kabupaten_id=int(row[4])),
                                     lokasi_proyek=row[5],
-                                    target_2021=row[6],
-                                    target_2022=row[7],
-                                    target_2023=row[8],
-                                    target_2024=row[9],
-                                    target_2025=row[10],
-                                    indikasi_pendanaan_2021=float(row[11]),
-                                    indikasi_pendanaan_2022=float(row[12]),
-                                    indikasi_pendanaan_2023=float(row[13]),
-                                    indikasi_pendanaan_2024=float(row[14]),
-                                    shortlist_2022=bool(
-                                        util.strtobool(row[19])),
-                                    shortlist_2023=bool(
-                                        util.strtobool(row[20])),
-                                    isu_strategis=row[21],
-                                    tujuan_lfa=row[22],
-                                    sasaran_lfa=row[23],
-                                    output_lfa=row[24],
-                                    sumber_bahasan=row[29],
-                                    taging_kawasan_prioritas=row[30],
-                                    klasifikasi_proyek=row[35],
-                                    jenis_impact=row[36],
-                                    staging_perkembangan=row[37],
-                                    keterangan=row[38],
-                                    usulan_baru=bool(
-                                        util.strtobool(row[39])),
-                                    shortlist=bool(
-                                        util.strtobool(row[40])),
-                                    prarakorgub=bool(
-                                        util.strtobool(row[41])),
-                                    rakorgub=bool(
-                                        util.strtobool(row[42])),
-                                    rakortekbang=bool(
-                                        util.strtobool(row[43])),
-                                    musrenbangprov=bool(
-                                        util.strtobool(row[44])),
-                                    musrenbangnas=bool(
-                                        util.strtobool(row[45])),
-                                    endorsement=bool(
-                                        util.strtobool(row[46])),
+                                    target_2021=float(row[6]),
+                                    target_2022=float(row[7]),
+                                    target_2023=float(row[8]),
+                                    target_2024=float(row[9]),
+                                    target_2025=float(row[10]),
+                                    unit_satuan=row[11],
+                                    # indikasi_pendanaan_2021=float(row[12]),
+                                    # indikasi_pendanaan_2022=float(row[13]),
+                                    # indikasi_pendanaan_2023=float(row[14]),
+                                    # indikasi_pendanaan_2024=float(row[15]),
                                     sumber_data=SumberdataId(
-                                        sumberdata_id=int(row[16])),
-                                    kl_pelaksana=KlId(kl_id=int(row[18])),
-                                    mp=MajorprojectId(mp_id=int(row[26])),
+                                        sumberdata_id=int(row[17])),
+                                    ket_sumber_data=row[18],
+                                    kl_pelaksana=KlId(kl_id=int(row[20])),
+                                    ket_kl_pelaksana=row[21],
+                                    shortlist_2022=bool(
+                                        util.strtobool(row[22])),
+                                    shortlist_2023=bool(
+                                        util.strtobool(row[23])),
+                                    isu_strategis=row[24],
+                                    tujuan_lfa=row[25],
+                                    sasaran_lfa=row[26],
+                                    output_lfa=row[27],
+                                    mp=MajorprojectId(mp_id=int(row[29])),
                                     status_usulan=StatusId(
-                                        status_id=int(row[28])),
+                                        status_id=int(row[31])),
+                                    sumber_bahasan=row[32],
+                                    taging_kawasan_prioritas=KawasanprioritasId(
+                                        kp_id=int(row[34])),
+                                    prioritas_tahun_2022=row[35],
+                                    prioritas_tahun_2023=row[36],
+                                    prioritas_tahun_2024=row[37],
                                     jenis_project=ProyekId(
-                                        proyek_idd=int(row[32])),
-                                    sub_tema_rkp=SubtemaId(
-                                        sub_tema_id=int(row[34])),
+                                        proyek_idd=int(row[39])),
+                                    sub_tema_rkp=row[40],
+                                    klasifikasi_proyek=row[41],
+                                    jenis_impact=row[42],
+                                    staging_perkembangan=row[43],
+                                    keterangan=row[44],
+                                    usulan_baru=bool(
+                                        util.strtobool(row[45])),
+                                    shortlist=bool(
+                                        util.strtobool(row[46])),
+                                    prarakorgub=bool(
+                                        util.strtobool(row[47])),
+                                    rakorgub=bool(
+                                        util.strtobool(row[48])),
+                                    rakortekbang=bool(
+                                        util.strtobool(row[49])),
+                                    musrenbangprov=bool(
+                                        util.strtobool(row[50])),
+                                    musrenbangnas=bool(
+                                        util.strtobool(row[51])),
+                                    endorsement=bool(
+                                        util.strtobool(row[52]))
 
                                 )
                                 row_uploaded += 1
@@ -246,6 +252,20 @@ def cek_profil(menu):
     return judul
 
 
+def cek_profil_template(menu):
+    template = ""
+    if menu == "ku":
+        template = "index"
+    elif menu == "pis":
+        template = "isu-strategis"
+    elif menu == "akl":
+        template = "kerangka-logis"
+    elif menu == "akp":
+        template = "kawasan-prioritas"
+
+    return template
+
+
 def cek_kebdaerah(menu):
 
     if menu == "longlist":
@@ -308,8 +328,10 @@ class LonglistDataView(AjaxDatatableView):
             'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'status_usulan', 'foreign_field': 'status_usulan__nama_status', 'visible': True,
             'choices': True, 'autofilter': True},
+        {'name': 'taging_kawasan_prioritas', 'title': 'Taging Kawasan', 'foreign_field': 'taging_kawasan_prioritas__kawasan_prioritas',
+            'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'edit', 'title': 'Action', 'placeholder': True,
-            'searchable': False, 'orderable': False, },
+         'searchable': False, 'orderable': False, },
         {'name': 'lokasi_proyek', 'visible': False},
         {'name': 'target_2021', 'visible': False},
         {'name': 'target_2022', 'visible': False},

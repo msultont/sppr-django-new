@@ -72,6 +72,21 @@ class KabupatenId(models.Model):
         return self.nama_kabupaten
 
 
+class KawasanprioritasId(models.Model):
+    # Field name made lowercase.
+    kp_id = models.AutoField(db_column='KP_ID', primary_key=True)
+    # Field name made lowercase.
+    kawasan_prioritas = models.TextField(
+        db_column='Kawasan_Prioritas', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'KawasanPrioritas_ID'
+
+    def __str__(self) -> str:
+        return self.kawasan_prioritas
+
+
 class MajorprojectId(models.Model):
     # Field name made lowercase.
     mp_id = models.IntegerField(db_column='MP_ID', primary_key=True)
@@ -238,24 +253,25 @@ class Longlist(models.Model):
     lokasi_proyek = models.TextField(blank=True, null=True)
     lokasi_kabupaten = models.ForeignKey(
         KabupatenId, models.DO_NOTHING, db_column='lokasi_kabupaten', blank=True, null=True)
-    target_2021 = models.TextField(blank=True, null=True)
-    target_2022 = models.TextField(blank=True, null=True)
-    target_2023 = models.TextField(blank=True, null=True)
-    target_2024 = models.TextField(blank=True, null=True)
-    target_2025 = models.TextField(blank=True, null=True)
-    indikasi_pendanaan_2021 = models.FloatField(
-        blank=True, null=True)
-    indikasi_pendanaan_2022 = models.FloatField(
-        blank=True, null=True)
-    indikasi_pendanaan_2023 = models.FloatField(
-        blank=True, null=True)
-    indikasi_pendanaan_2024 = models.FloatField(
-        blank=True, null=True)
+    target_2021 = models.FloatField(blank=True, null=True)
+    target_2022 = models.FloatField(blank=True, null=True)
+    target_2023 = models.FloatField(blank=True, null=True)
+    target_2024 = models.FloatField(blank=True, null=True)
+    target_2025 = models.FloatField(blank=True, null=True)
+    unit_satuan = models.TextField(blank=True, null=True)
+    indikasi_pendanaan_2021 = models.FloatField(blank=True, null=True)
+    indikasi_pendanaan_2022 = models.FloatField(blank=True, null=True)
+    indikasi_pendanaan_2023 = models.FloatField(blank=True, null=True)
+    indikasi_pendanaan_2024 = models.FloatField(blank=True, null=True)
     sumber_data = models.ForeignKey(
         'SumberdataId', models.DO_NOTHING, db_column='sumber_data', blank=True, null=True)
+    ket_sumber_data = models.TextField(
+        db_column='ket_ sumber_data', blank=True, null=True)
     # Field name made lowercase.
     kl_pelaksana = models.ForeignKey(
         KlId, models.DO_NOTHING, db_column='KL_pelaksana', blank=True, null=True)
+    ket_kl_pelaksana = models.TextField(
+        db_column='ket_KL_pelaksana', blank=True, null=True)
     shortlist_2022 = models.BooleanField(
         blank=True, null=True, choices=bool_choices)
     shortlist_2023 = models.BooleanField(
@@ -276,11 +292,14 @@ class Longlist(models.Model):
     status_usulan = models.ForeignKey(
         'StatusId', models.DO_NOTHING, db_column='status_usulan', blank=True, null=True)
     sumber_bahasan = models.TextField(blank=True, null=True)
-    taging_kawasan_prioritas = models.TextField(blank=True, null=True)
+    taging_kawasan_prioritas = models.ForeignKey(
+        KawasanprioritasId, models.DO_NOTHING, db_column='taging_kawasan_prioritas', blank=True, null=True)
+    prioritas_tahun_2022 = models.TextField(blank=True, null=True)
+    prioritas_tahun_2023 = models.TextField(blank=True, null=True)
+    prioritas_tahun_2024 = models.TextField(blank=True, null=True)
     jenis_project = models.ForeignKey(
         'ProyekId', models.DO_NOTHING, db_column='jenis_project', blank=True, null=True)
-    sub_tema_rkp = models.ForeignKey(
-        'SubtemaId', models.DO_NOTHING, db_column='sub_tema_rkp', blank=True, null=True)
+    sub_tema_rkp = models.TextField(blank=True, null=True)
     klasifikasi_proyek = models.TextField(blank=True, null=True)
     jenis_impact = models.TextField(blank=True, null=True)
     staging_perkembangan = models.TextField(blank=True, null=True)
