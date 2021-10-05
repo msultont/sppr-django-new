@@ -2,40 +2,6 @@
 
 {% block content %}
 <main>
-
-    <!--Modal-->
-    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
-        id="modal-id">
-        <div class="relative w-auto my-6 mx-auto max-w-3xl">
-            <!--content-->
-            <div
-                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <!--header-->
-                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 class="text-3xl font-semibold">
-                        Hasil Analisis Korelasi
-                    </h3>
-
-                </div>
-                <!--body-->
-                <div class="relative p-6 flex-auto">
-                    <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
-                        Keterangan Tabel
-                    </p>
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                        type="button" onclick="toggleModal('modal-id')">
-
-                        <span>Tutup Tabel</span>
-                    </button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
-
-
     <!-- Content header -->
     <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
         <h1 class="text-2xl font-semibold">{{judul}}</h1>
@@ -49,611 +15,13 @@
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Main Content header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Provinsi</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
                 </div>
                 <!-- Main Content -->
-                <div class="w-full my-4">
 
-                    <div class="mt-5 mb-5">
-                        <p class="p-5">Pilih Provinsi</p>
+                <!-- Create a div where the graph will take place -->
+                <div id="my_dataviz"></div>
 
-                        <select name="" id=""
-                            class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                            <option value="Jawa Barat">Jawa Barat</option>
-
-                        </select>
-
-                    </div>
-
-                    <div x-data={show:false} class="rounded-sm">
-                        <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                            <button @click="show=!show"
-                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none" type="button">
-                                Tujuan 1
-                            </button>
-                        </div>
-                        <div x-show="show" class="border border-b-0 px-10 py-6">
-                            <div x-data={show:false} class="rounded-sm">
-                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                    <button @click="show=!show"
-                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                        type="button">
-                                        Sasaran 1
-                                    </button>
-                                </div>
-                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 1
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-0 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 2
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-1 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div x-data={show:false} class="rounded-sm">
-                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                    <button @click="show=!show"
-                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                        type="button">
-                                        Sasaran 2
-                                    </button>
-                                </div>
-                                <div x-show="show" class="border border-b-1 px-10 py-6">
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 1
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-0 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 2
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-1 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div x-data={show:false} class="rounded-sm">
-                        <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                            <button @click="show=!show"
-                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none" type="button">
-                                Tujuan 1
-                            </button>
-                        </div>
-                        <div x-show="show" class="border border-b-1 px-10 py-6">
-                            <div x-data={show:false} class="rounded-sm">
-                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                    <button @click="show=!show"
-                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                        type="button">
-                                        Sasaran 1
-                                    </button>
-                                </div>
-                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 1
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-0 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 2
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-1 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div x-data={show:false} class="rounded-sm">
-                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                    <button @click="show=!show"
-                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                        type="button">
-                                        Sasaran 2
-                                    </button>
-                                </div>
-                                <div x-show="show" class="border border-b-1 px-10 py-6">
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 1
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-1 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div x-data={show:false} class="rounded-sm">
-                                        <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                            <button @click="show=!show"
-                                                class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                type="button">
-                                                Output 2
-                                            </button>
-                                        </div>
-                                        <div x-show="show" class="border border-b-1 px-10 py-6">
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 1
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-0 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 2
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div x-data={show:false} class="rounded-sm">
-                                                <div class="border border-b-1 bg-gray-100 px-10 py-6" id="headingOne">
-                                                    <button @click="show=!show"
-                                                        class="underline text-blue-500 hover:text-blue-700 focus:outline-none"
-                                                        type="button">
-                                                        Aktivitas 3
-                                                    </button>
-                                                </div>
-                                                <div x-show="show" class="border border-b-0 px-10 py-6">
-                                                    <p class="mb-5">Ini adalah aktivitas 1</p>
-                                                    <button
-                                                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                                                        type="button" onclick="toggleModal('modal-id')">
-
-                                                        <span>Detail</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
             </div>
         </div>
 
@@ -688,12 +56,60 @@
 
 <script>
 
-    function toggleModal(modalID) {
-        document.getElementById(modalID).classList.toggle("hidden");
-        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
-        document.getElementById(modalID).classList.toggle("flex");
-        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
-    }
+    // set the dimensions and margins of the graph
+    const width = 460
+    const height = 460
+
+    // append the svg object to the body of the page
+    const svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(40,0)");  // bit of margin on the left = 40
+
+    // read json data
+    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_dendrogram.json").then(function (data) {
+
+        // Create the cluster layout:
+        const cluster = d3.cluster()
+            .size([height, width - 100]);  // 100 is the margin I will have on the right side
+
+        // Give the data to this cluster layout:
+        const root = d3.hierarchy(data, function (d) {
+            return d.children;
+        });
+        cluster(root);
+
+
+        // Add the links between nodes:
+        svg.selectAll('path')
+            .data(root.descendants().slice(1))
+            .join('path')
+            .attr("d", function (d) {
+                return "M" + d.y + "," + d.x
+                    + "C" + (d.parent.y + 50) + "," + d.x
+                    + " " + (d.parent.y + 150) + "," + d.parent.x // 50 and 150 are coordinates of inflexion, play with it to change links shape
+                    + " " + d.parent.y + "," + d.parent.x;
+            })
+            .style("fill", 'none')
+            .attr("stroke", '#ccc')
+
+
+        // Add a circle for each node.
+        svg.selectAll("g")
+            .data(root.descendants())
+            .join("g")
+            .attr("transform", function (d) {
+                return `translate(${d.y},${d.x})`
+            })
+            .append("circle")
+            .attr("r", 7)
+            .style("fill", "#69b3a2")
+            .attr("stroke", "black")
+            .style("stroke-width", 2)
+
+    })
 
 </script>
 
