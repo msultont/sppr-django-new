@@ -10,29 +10,152 @@
     <!-- Content -->
     <div class="mt-2">
 
-        <!-- Charts -->
+        <!-- Main Content -->
         <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
-            <!-- Map Area -->
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Card header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Table Area</h4>
-                    <div class="flex items-center">
-                        <button class="relative focus:outline-none" x-cloak
-                            @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)">
-                            <div
-                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                <!-- Main Content header -->
+                <div class="flex items-center justify-between p-4">
+                    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+                        <div class="w-full text-center pb-8">
+                        </div>
+                        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Model Spasial Dinamis</p>
+                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                    <button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        Detail
+                                    </button>
+                                </div>
                             </div>
-                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Ulapan</p>
+                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                    <button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        Detail
+                                    </button>
+                                </div>
                             </div>
-                        </button>
-                    </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Masterplan Banten</p>
+                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                    <button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Masterplan Jabar Selatan</p>
+                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                    <button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Desk Aceh</p>
+                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                    <button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Koordinasi Strategis Alternatif
+                                        </p>
+                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                        amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                    <button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
-                <!-- Table -->
-
-                {% include 'parts/table.html' %}
 
             </div>
         </div>
