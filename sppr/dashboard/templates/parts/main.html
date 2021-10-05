@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="bumblebee">
 
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,6 +71,12 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 
+    <!-- Daisy UI -->
+
+    <!-- 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.2/dist/full.css" rel="stylesheet" type="text/css" /> -->
+
     <style>
         .regional {
 
@@ -88,8 +94,8 @@
 
 <body>
 
-    <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
-        <div class="flex h-screen antialiased text-gray-900  dark:bg-dark dark:text-light">
+    <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);">
+        <div class="flex h-screen antialiased text-gray-900 ">
 
 
 

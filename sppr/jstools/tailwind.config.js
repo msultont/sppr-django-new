@@ -13,10 +13,11 @@ module.exports = {
   theme: {
     extend: {
       fontfamily: {
-      regional :['Philosopher']}
+        regional: ['Philosopher']
+      }
 
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [require('daisyui')],
 }
