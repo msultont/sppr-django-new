@@ -16,8 +16,76 @@
             <!-- Map Area -->
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
+
+                <nav class="flex items-center justify-between flex-wrap bg-purple-600 p-6">
+                    <div class="flex items-center flex-shrink-0 text-white mr-6">
+                      <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+                      <span class="font-semibold text-xl tracking-tight">Profil Daerah Regional I</span>
+                    </div>
+                    <div class="block lg:hidden">
+                      <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+                      </button>
+                    </div>
+                    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                      <div class="text-sm lg:flex-grow">
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Aceh
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Sumatera Utara
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Sumatera Barat
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Jambi
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Riau
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Kep. Riau
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Bengkulu
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Sumatera Selatan
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Bangka Belitung
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Lampung
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Banten
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            DKI Jakarta
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Jawa Barat
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Jawa Tengah
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Daerah Istimewa Yogyakarta
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Jawa Timur
+                        </a>
+                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                            Bali
+                        </a>
+                      </div>
+                    </div>
+                  </nav>
+
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Profilling</h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)">
@@ -44,7 +112,7 @@
             <div class="col-span-1 bg-white rounded-md dark:bg-darker">
                 <!-- Card header -->
                 <div class="p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart One</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Tingkat Pengangguran Terbuka</h4>
                 </div>
                 <!-- Chart -->
                 <div class="relative p-4 ">
@@ -56,7 +124,7 @@
             <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart One</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Indeks Kemanusiaan</h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateLineChart()">
@@ -78,7 +146,7 @@
             <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Chart Two</h4>
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Indeks Lingkungan Hidup</h4>
                     <div class="flex items-center">
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateLineChart()">
