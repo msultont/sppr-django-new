@@ -1,6 +1,23 @@
 {% extends 'parts/main.html' %}
-
+{% load static %}
 {% block content %}
+
+<style>
+    .chart--container {
+        height: 100%;
+        width: 100%;
+        min-height: 530px;
+    }
+
+    .zc-ref {
+        display: none;
+    }
+
+    select {
+        margin: 10px;
+    }
+</style>
+
 <main>
     <!-- Content header -->
     <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
@@ -19,8 +36,9 @@
                 </div>
                 <!-- Main Content -->
 
-                <!-- Create a div where the graph will take place -->
-                <div id="my_dataviz"></div>
+                <!-- CHART CONTAINER -->
+                <div id="tree-container">
+                </div>
 
             </div>
         </div>
@@ -53,63 +71,127 @@
     </div>
 </main>
 
+<script>
+    d3.json("{% static 'json/data-example.json' %}", function (error, json) {
+        treeBoxes('', json.tree);
+    });
+</script>
 
 <script>
 
-    // set the dimensions and margins of the graph
-    const width = 460
-    const height = 460
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // window:load event for Javascript to run after HTML
+    // because this Javascript is injected into the document head
+    window.addEventListener('load', () => {
+        let chartData = [{
+            id: 'theworld',
+            parent: '',
+            name: 'The World',
+        },
+        {
+            id: 'asia',
+            parent: 'theworld',
+            name: 'Asia',
+            value: 4100000000
+        },
+        {
+            id: 'africa',
+            parent: 'theworld',
+            name: 'Africa',
+            value: 1260000000
+        },
+        {
+            id: 'america',
+            parent: 'theworld',
+            name: 'America',
+            value: 328000000
+        },
+        {
+            id: 'europe',
+            parent: 'theworld',
+            name: 'Europe',
+            value: 741000000
+        },
+        {
+            id: 'ca',
+            parent: 'america',
+            name: 'California',
+            value: 32000000
+        },
+        {
+            id: 'ny',
+            parent: 'america',
+            name: 'New York',
+            value: 19000000
+        },
+        {
+            id: 'txt',
+            parent: 'america',
+            name: 'Texas',
+            value: 29000000
+        },
+        {
+            id: 'txt1',
+            parent: 'txt',
+            name: 'Texas',
+            value: 29000000
+        },
+        {
+            id: 'txt2',
+            parent: 'txt',
+            name: 'Texas',
+            value: 29000000
+        },
+        {
+            id: 'txt3',
+            parent: 'txt',
+            name: 'Texas',
+            value: 29000000
+        },
+        ];
 
-    // append the svg object to the body of the page
-    const svg = d3.select("#my_dataviz")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate(40,0)");  // bit of margin on the left = 40
+        let chartConfig = {
+            type: 'tree',
+            options: {
+                link: {
+                    aspect: 'arc'
+                },
+                maxSize: 20,
+                minSize: 10,
+                node: {
+                    type: 'circle',
+                    tooltip: {
+                        padding: '20px 20px',
+                        borderRadius: '3px',
+                    }
+                }
+            },
+            series: chartData
+        };
 
-    // read json data
-    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_dendrogram.json").then(function (data) {
-
-        // Create the cluster layout:
-        const cluster = d3.cluster()
-            .size([height, width - 100]);  // 100 is the margin I will have on the right side
-
-        // Give the data to this cluster layout:
-        const root = d3.hierarchy(data, function (d) {
-            return d.children;
+        zingchart.render({
+            id: 'myChart',
+            data: chartConfig,
+            height: '95%',
+            width: '100%',
+            output: 'canvas'
         });
-        cluster(root);
 
+        // change tree layout
+        document.getElementById('tree-aspect').addEventListener('change', function (e) {
+            chartConfig.options.aspect = e.srcElement.value;
+            zingchart.exec('myChart', 'setdata', {
+                data: chartConfig
+            });
+        });
 
-        // Add the links between nodes:
-        svg.selectAll('path')
-            .data(root.descendants().slice(1))
-            .join('path')
-            .attr("d", function (d) {
-                return "M" + d.y + "," + d.x
-                    + "C" + (d.parent.y + 50) + "," + d.x
-                    + " " + (d.parent.y + 150) + "," + d.parent.x // 50 and 150 are coordinates of inflexion, play with it to change links shape
-                    + " " + d.parent.y + "," + d.parent.x;
-            })
-            .style("fill", 'none')
-            .attr("stroke", '#ccc')
-
-
-        // Add a circle for each node.
-        svg.selectAll("g")
-            .data(root.descendants())
-            .join("g")
-            .attr("transform", function (d) {
-                return `translate(${d.y},${d.x})`
-            })
-            .append("circle")
-            .attr("r", 7)
-            .style("fill", "#69b3a2")
-            .attr("stroke", "black")
-            .style("stroke-width", 2)
-
-    })
+        // change tree connector
+        document.getElementById('tree-node').addEventListener('change', function (e) {
+            chartConfig.options.link.aspect = e.srcElement.value;
+            zingchart.exec('myChart', 'setdata', {
+                data: chartConfig
+            });
+        });
+    });
 
 </script>
 
