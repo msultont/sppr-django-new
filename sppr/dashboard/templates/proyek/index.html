@@ -15,17 +15,22 @@
         <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
             <!-- Map Area -->
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                
-        
+
+
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
 
-                        <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
-                        title="Rakortekrenbang"
+                    {% if judul is "BP Batam" %}
+                    <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0"
+                        marginwidth="0" title="Proyek Batam"
                         src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=01fbab505a264e34837cb89423e3806d&extent=103.657,0.8945,104.3299,1.2151">
-                      </iframe>
-
-
+                    </iframe>
+                    {% else %}
+                    <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0"
+                        marginwidth="0" title="Proyek Sabang"
+                        src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=8c51f53a577d4d6fa2de68a67967794b&extent=94.5633,5.3913,95.9091,6.0294">
+                    </iframe>
+                    {% endif %}
 
                 </div>
             </div>
