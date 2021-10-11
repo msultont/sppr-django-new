@@ -2,6 +2,40 @@
 
 {% block content %}
 <main>
+
+    <!--Modal-->
+    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+        id="modal-id">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                    <h3 class="text-3xl font-semibold">
+                        Keterangan
+                    </h3>
+
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto">
+                    <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
+                        Keterangan Tabel
+                    </p>
+                    <button
+                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
+                        type="button" onclick="toggleModal('modal-id')">
+
+                        <span>Tutup Tabel</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+
+
     <!-- Content header -->
     <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
         <h1 class="text-2xl font-semibold">Kajian Kewilayahan</h1>
@@ -26,17 +60,18 @@
                                         alt="photo">
                                     <div>
                                         <p class="text-xl text-gray-700 font-bold mb-1">Model Spasial Dinamis</p>
-                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
                                         amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        laboris nisi ut aliquip ex ea commodo consequat.</h4>
 
                                     <button
-                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
                                         Detail
                                     </button>
                                 </div>
@@ -48,17 +83,18 @@
                                         alt="photo">
                                     <div>
                                         <p class="text-xl text-gray-700 font-bold mb-1">Ulapan</p>
-                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
                                         amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        laboris nisi ut aliquip ex ea commodo consequat.</h4>
 
                                     <button
-                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
                                         Detail
                                     </button>
                                 </div>
@@ -70,17 +106,18 @@
                                         alt="photo">
                                     <div>
                                         <p class="text-xl text-gray-700 font-bold mb-1">Masterplan Banten</p>
-                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
                                         amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        laboris nisi ut aliquip ex ea commodo consequat.</h4>
 
                                     <button
-                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
                                         Detail
                                     </button>
                                 </div>
@@ -92,17 +129,18 @@
                                         alt="photo">
                                     <div>
                                         <p class="text-xl text-gray-700 font-bold mb-1">Masterplan Jabar Selatan</p>
-                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
                                         amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        laboris nisi ut aliquip ex ea commodo consequat.</h4>
 
                                     <button
-                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
                                         Detail
                                     </button>
                                 </div>
@@ -114,17 +152,18 @@
                                         alt="photo">
                                     <div>
                                         <p class="text-xl text-gray-700 font-bold mb-1">Desk Aceh</p>
-                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
                                         amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        laboris nisi ut aliquip ex ea commodo consequat.</h4>
 
                                     <button
-                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
                                         Detail
                                     </button>
                                 </div>
@@ -137,17 +176,17 @@
                                     <div>
                                         <p class="text-xl text-gray-700 font-bold mb-1">Koordinasi Strategis Alternatif
                                         </p>
-                                        <p class="text-base text-blue-600 font-normal">Kategori</p>
+
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Lorem ipsum dolor sit
                                         amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                        laboris nisi ut aliquip ex ea commodo consequat.</p>
-
+                                        laboris nisi ut aliquip ex ea commodo consequat.</h4>
                                     <button
-                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600">
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
                                         Detail
                                     </button>
                                 </div>
@@ -165,6 +204,15 @@
 
     </div>
 </main>
+
+<script>
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle("hidden");
+        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+        document.getElementById(modalID).classList.toggle("flex");
+        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    }
+</script>
 
 
 {% endblock %}
