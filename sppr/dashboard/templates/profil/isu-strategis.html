@@ -36,6 +36,19 @@
                 </div>
                 <!-- Main Content -->
 
+                <div class="mt-5 mb-5">
+                    <p class="p-5">Pilih Provinsi</p>
+
+                    <select name="" id=""
+                        class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
+
+                        <option value="Jawa Barat">Jawa Barat</option>
+
+                    </select>
+
+                </div>
+
+
                 <!-- CHART CONTAINER -->
                 <div id="tree-container">
                 </div>
@@ -71,127 +84,246 @@
     </div>
 </main>
 
-<script>
-    d3.json("{% static 'json/data-example.json' %}", function (error, json) {
-        treeBoxes('', json.tree);
-    });
-</script>
-
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
 
-    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"]; // window:load event for Javascript to run after HTML
-    // because this Javascript is injected into the document head
-    window.addEventListener('load', () => {
-        let chartData = [{
-            id: 'theworld',
-            parent: '',
-            name: 'The World',
-        },
-        {
-            id: 'asia',
-            parent: 'theworld',
-            name: 'Asia',
-            value: 4100000000
-        },
-        {
-            id: 'africa',
-            parent: 'theworld',
-            name: 'Africa',
-            value: 1260000000
-        },
-        {
-            id: 'america',
-            parent: 'theworld',
-            name: 'America',
-            value: 328000000
-        },
-        {
-            id: 'europe',
-            parent: 'theworld',
-            name: 'Europe',
-            value: 741000000
-        },
-        {
-            id: 'ca',
-            parent: 'america',
-            name: 'California',
-            value: 32000000
-        },
-        {
-            id: 'ny',
-            parent: 'america',
-            name: 'New York',
-            value: 19000000
-        },
-        {
-            id: 'txt',
-            parent: 'america',
-            name: 'Texas',
-            value: 29000000
-        },
-        {
-            id: 'txt1',
-            parent: 'txt',
-            name: 'Texas',
-            value: 29000000
-        },
-        {
-            id: 'txt2',
-            parent: 'txt',
-            name: 'Texas',
-            value: 29000000
-        },
-        {
-            id: 'txt3',
-            parent: 'txt',
-            name: 'Texas',
-            value: 29000000
-        },
-        ];
-
-        let chartConfig = {
-            type: 'tree',
-            options: {
-                link: {
-                    aspect: 'arc'
-                },
-                maxSize: 20,
-                minSize: 10,
-                node: {
-                    type: 'circle',
-                    tooltip: {
-                        padding: '20px 20px',
-                        borderRadius: '3px',
+    var treeData =
+    {
+        "name": "Belum memadainya  infrastruktur di Jabar bagian Selatan",
+        "fill": "#FCD2D1",
+        "children": [
+            {
+                "name": "Belum selesainya pembangunan infrastruktur kereta api",
+                "fill": "#FCD2D1",
+                "children": [
+                    {
+                        "name": "Belum tuntasnya Pembanguna Jalur Ganda Kereta Api di Jabar Selatan",
+                        "fill": "#FCD2D1",
+                    },
+                    {
+                        "name": "Belum tuntasnya Reaktivasi Jaringan Kereta Api di Jabar selatan",
+                        "fill": "#FCD2D1",
                     }
-                }
+                ]
             },
-            series: chartData
-        };
+            {
+                "name": "Belum selesainya  pembangunan Infrastruktur jalan",
+                "fill": "#FCD2D1",
+                "children": [
+                    {
+                        "name": "Belum tuntasnya pembangunan Jalur Lintas Selatan (JLS)",
+                        "fill": "#FCD2D1",
+                    },
+                    {
+                        "name": "Belum tuntasnya pembangunan jalan tol di Jabar Selatan",
+                        "fill": "#FCD2D1",
+                    }
+                ]
+            },
+            {
+                "name": "Masih terbatasnya infrastruktur TIK",
+                "fill": "#FCD2D1",
+                "children": [
+                    {
+                        "name": "Terbatasnya jaringan internet",
+                        "fill": "#FCD2D1"
+                    }
+                ]
+            }
+        ]
+    };
 
-        zingchart.render({
-            id: 'myChart',
-            data: chartConfig,
-            height: '95%',
-            width: '100%',
-            output: 'canvas'
-        });
+    // Set the dimensions and margins of the diagram
+    var margin = { top: 20, right: 90, bottom: 30, left: 90 },
+        width = 1080 - margin.left - margin.right,
+        height = 1000 - margin.top - margin.bottom;
 
-        // change tree layout
-        document.getElementById('tree-aspect').addEventListener('change', function (e) {
-            chartConfig.options.aspect = e.srcElement.value;
-            zingchart.exec('myChart', 'setdata', {
-                data: chartConfig
+    // append the svg object to the body of the page
+    // appends a 'group' element to 'svg'
+    // moves the 'group' element to the top left margin
+    var svg = d3.select("#tree-container").append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("
+            + margin.left + "," + margin.top + ")");
+
+    var i = 0,
+        duration = 750,
+        root;
+
+    // declares a tree layout and assigns the size
+    var treemap = d3.tree().size([height, width]);
+
+    // Assigns parent, children, height, depth
+    root = d3.hierarchy(treeData, function (d) { return d.children; });
+    root.x0 = height / 2;
+    root.y0 = 0;
+
+    // Collapse after the second level
+    root.children.forEach(collapse);
+
+    update(root);
+
+    // Collapse the node and all it's children
+    function collapse(d) {
+        if (d.children) {
+            d._children = d.children
+            d._children.forEach(collapse)
+            d.children = null
+        }
+    }
+
+    function update(source) {
+
+        // Assigns the x and y position for the nodes
+        var treeData = treemap(root);
+
+        // Compute the new tree layout.
+        var nodes = treeData.descendants(),
+            links = treeData.descendants().slice(1);
+
+        // Normalize for fixed-depth.
+        nodes.forEach(function (d) { d.y = d.depth * 180 });
+
+        // ****************** Nodes section ***************************
+
+        // Update the nodes...
+        var node = svg.selectAll('g.node')
+            .data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+        // Enter any new modes at the parent's previous position.
+        var nodeEnter = node.enter().append('g')
+            .attr('class', 'node')
+            .attr("transform", function (d) {
+                return "translate(" + source.y0 + "," + source.x0 + ")";
+            })
+            .on('click', click);
+
+        var rectHeight = 60, rectWidth = 150;
+
+        nodeEnter.append('rect')
+            .attr('class', 'node')
+            .attr("width", rectWidth)
+            .attr("height", rectHeight)
+            .attr("x", 0)
+            .attr("y", (rectHeight / 2) * -1)
+            .attr("rx", "5")
+            .style("fill", function (d) {
+                return d.data.fill;
             });
+
+        // Add labels for the nodes
+        nodeEnter.append('text')
+            .attr("dy", "-.35em")
+            .attr("x", function (d) {
+                return 10;
+            })
+            .attr("text-anchor", function (d) {
+                return "start";
+            })
+            .text(function (d) { return d.data.name; })
+            .style("font-size", "10px")
+            .style("font-weight", "bold")
+            .append("tspan")
+            .attr("dy", "1.75em")
+
+
+        // UPDATE
+        var nodeUpdate = nodeEnter.merge(node);
+
+        // Transition to the proper position for the node
+        nodeUpdate.transition()
+            .duration(duration)
+            .attr("transform", function (d) {
+                return "translate(" + d.y + "," + d.x + ")";
+            });
+
+        // Update the node attributes and style
+        nodeUpdate.select('circle.node')
+            .attr('r', 10)
+            .style("fill", function (d) {
+                return d._children ? "lightsteelblue" : "#fff";
+            })
+            .attr('cursor', 'pointer');
+
+
+        // Remove any exiting nodes
+        var nodeExit = node.exit().transition()
+            .duration(duration)
+            .attr("transform", function (d) {
+                return "translate(" + source.y + "," + source.x + ")";
+            })
+            .remove();
+
+        // On exit reduce the node circles size to 0
+        nodeExit.select('circle')
+            .attr('r', 1e-6);
+
+        // On exit reduce the opacity of text labels
+        nodeExit.select('text')
+            .style('fill-opacity', 1e-6);
+
+        // ****************** links section ***************************
+
+        // Update the links...
+        var link = svg.selectAll('path.link')
+            .data(links, function (d) { return d.id; });
+
+        // Enter any new links at the parent's previous position.
+        var linkEnter = link.enter().insert('path', "g")
+            .attr("class", "link")
+            .attr('d', function (d) {
+                var o = { x: source.x0, y: source.y0 }
+                return diagonal(o, o)
+            });
+
+        // UPDATE
+        var linkUpdate = linkEnter.merge(link);
+
+        // Transition back to the parent element position
+        linkUpdate.transition()
+            .duration(duration)
+            .attr('d', function (d) { return diagonal(d, d.parent) });
+
+        // Remove any exiting links
+        var linkExit = link.exit().transition()
+            .duration(duration)
+            .attr('d', function (d) {
+                var o = { x: source.x, y: source.y }
+                return diagonal(o, o)
+            })
+            .remove();
+
+        // Store the old positions for transition.
+        nodes.forEach(function (d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
         });
 
-        // change tree connector
-        document.getElementById('tree-node').addEventListener('change', function (e) {
-            chartConfig.options.link.aspect = e.srcElement.value;
-            zingchart.exec('myChart', 'setdata', {
-                data: chartConfig
-            });
-        });
-    });
+        // Creates a curved (diagonal) path from parent to the child nodes
+        function diagonal(s, d) {
+
+            path = `M ${s.y} ${s.x}
+        C ${(s.y + d.y) / 2} ${s.x},
+          ${(s.y + d.y) / 2} ${d.x},
+          ${d.y} ${d.x}`
+
+            return path
+        }
+
+        // Toggle children on click.
+        function click(d) {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+            update(d);
+        }
+    }
 
 </script>
 
