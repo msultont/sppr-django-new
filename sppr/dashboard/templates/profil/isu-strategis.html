@@ -90,43 +90,43 @@
     var treeData =
     {
         "name": "Belum memadainya  infrastruktur di Jabar bagian Selatan",
-        "fill": "#FCD2D1",
+        "fill": "#6D28D9",
         "children": [
             {
                 "name": "Belum selesainya pembangunan infrastruktur kereta api",
-                "fill": "#FCD2D1",
+                "fill": "#6D5CF6",
                 "children": [
                     {
                         "name": "Belum tuntasnya Pembanguna Jalur Ganda Kereta Api di Jabar Selatan",
-                        "fill": "#FCD2D1",
+                        "fill": "#6D5CF6",
                     },
                     {
                         "name": "Belum tuntasnya Reaktivasi Jaringan Kereta Api di Jabar selatan",
-                        "fill": "#FCD2D1",
+                        "fill": "#6D5CF6",
                     }
                 ]
             },
             {
                 "name": "Belum selesainya  pembangunan Infrastruktur jalan",
-                "fill": "#FCD2D1",
+                "fill": "#6D5CF6",
                 "children": [
                     {
                         "name": "Belum tuntasnya pembangunan Jalur Lintas Selatan (JLS)",
-                        "fill": "#FCD2D1",
+                        "fill": "#6D5CF6",
                     },
                     {
                         "name": "Belum tuntasnya pembangunan jalan tol di Jabar Selatan",
-                        "fill": "#FCD2D1",
+                        "fill": "#6D5CF6",
                     }
                 ]
             },
             {
                 "name": "Masih terbatasnya infrastruktur TIK",
-                "fill": "#FCD2D1",
+                "fill": "#6D5CF6",
                 "children": [
                     {
                         "name": "Terbatasnya jaringan internet",
-                        "fill": "#FCD2D1"
+                        "fill": "#6D5CF6"
                     }
                 ]
             }
@@ -215,7 +215,6 @@
 
         // Add labels for the nodes
         nodeEnter.append('text')
-            .attr("dy", "-.35em")
             .attr("x", function (d) {
                 return 10;
             })
@@ -223,10 +222,9 @@
                 return "start";
             })
             .text(function (d) { return d.data.name; })
+            .style("fill", "white")
             .style("font-size", "10px")
             .style("font-weight", "bold")
-            .append("tspan")
-            .attr("dy", "1.75em")
 
 
         // UPDATE
