@@ -202,6 +202,21 @@
 
         var rectHeight = 60, rectWidth = 150;
 
+        // Create Tooltip
+
+        var tooltip = d3.select("body")
+            .append("div")
+            .style("width", "100px")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("background", "white")
+            .style("padding", "15px")
+            .style("border", "1px solid #6D5CF6")
+            .style("border-radius", "10px")
+            .style("font-size", "8px")
+
+
         nodeEnter.append('rect')
             .attr('class', 'node')
             .attr("width", rectWidth)
@@ -211,7 +226,11 @@
             .attr("rx", "5")
             .style("fill", function (d) {
                 return d.data.fill;
-            });
+            })
+            .on("mouseover", function (d) { tooltip.text(d.data.name); return tooltip.style("visibility", "visible"); })
+            .on("mousemove", function () { return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
+            .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
+
 
         // Add labels for the nodes
         nodeEnter.append('text')
@@ -223,9 +242,9 @@
             })
             .text(function (d) { return d.data.name; })
             .style("fill", "white")
-            .style("font-size", "10px")
+            .style("font-size", ".5em")
             .style("font-weight", "bold")
-
+            .attr("dy", ".35em");
 
         // UPDATE
         var nodeUpdate = nodeEnter.merge(node);
