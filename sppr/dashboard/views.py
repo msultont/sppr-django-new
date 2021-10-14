@@ -94,111 +94,113 @@ def kebdaerah(request, menu):
     content = {}
     status_upload = ""
 
-    if menu in ["longlist", "prioritas"]:
-        sub_menu = "list"
+    if menu == "longlist":
+        dataView = "longlist"
+        chartDataView = "longlistChartView"
+        form = CsvModelForm(request.POST or None, request.FILES or None)
 
-        if menu == "longlist":
-            dataView = "longlist"
-            chartDataView = "longlistChartView"
-            form = CsvModelForm(request.POST or None, request.FILES or None)
+        try:
+            if form.is_valid():
+                row_uploaded = 0
+                obj = form.save()
 
-            try:
-                if form.is_valid():
-                    row_uploaded = 0
-                    obj = form.save()
+                # Read data from csv
 
-                    # Read data from csv
+                with open(obj.file_name.path, 'r') as f:
+                    reader = csv.reader(f)
 
-                    with open(obj.file_name.path, 'r') as f:
-                        reader = csv.reader(f)
+                    for i, row in enumerate(reader):
+                        if i == 0:
+                            pass
+                        elif row[2] == "":
+                            pass
+                        else:
+                            Longlist.objects.create(
+                                judul_proyek=row[2],
+                                provinsi=ProvinsiId(
+                                    provinsi_id=int(row[1])),
+                                lokasi_kabupaten=KabupatenId(
+                                    kabupaten_id=int(row[4])),
+                                lokasi_proyek=row[5],
+                                target_2021=float(row[6]),
+                                target_2022=float(row[7]),
+                                target_2023=float(row[8]),
+                                target_2024=float(row[9]),
+                                target_2025=float(row[10]),
+                                unit_satuan=row[11],
+                                # indikasi_pendanaan_2021=float(row[12]),
+                                # indikasi_pendanaan_2022=float(row[13]),
+                                # indikasi_pendanaan_2023=float(row[14]),
+                                # indikasi_pendanaan_2024=float(row[15]),
+                                sumber_data=SumberdataId(
+                                    sumberdata_id=int(row[17])),
+                                ket_sumber_data=row[18],
+                                kl_pelaksana=KlId(kl_id=int(row[20])),
+                                ket_kl_pelaksana=row[21],
+                                shortlist_2022=bool(
+                                    util.strtobool(row[22])),
+                                shortlist_2023=bool(
+                                    util.strtobool(row[23])),
+                                isu_strategis=row[24],
+                                tujuan_lfa=row[25],
+                                sasaran_lfa=row[26],
+                                output_lfa=row[27],
+                                mp=MajorprojectId(mp_id=int(row[29])),
+                                status_usulan=StatusId(
+                                    status_id=int(row[31])),
+                                sumber_bahasan=row[32],
+                                taging_kawasan_prioritas=KawasanprioritasId(
+                                    kp_id=int(row[34])),
+                                prioritas_tahun_2022=row[35],
+                                prioritas_tahun_2023=row[36],
+                                prioritas_tahun_2024=row[37],
+                                jenis_project=ProyekId(
+                                    proyek_idd=int(row[39])),
+                                sub_tema_rkp=row[40],
+                                klasifikasi_proyek=row[41],
+                                jenis_impact=row[42],
+                                staging_perkembangan=row[43],
+                                keterangan=row[44],
+                                usulan_baru=bool(
+                                    util.strtobool(row[45])),
+                                shortlist=bool(
+                                    util.strtobool(row[46])),
+                                prarakorgub=bool(
+                                    util.strtobool(row[47])),
+                                rakorgub=bool(
+                                    util.strtobool(row[48])),
+                                rakortekbang=bool(
+                                    util.strtobool(row[49])),
+                                musrenbangprov=bool(
+                                    util.strtobool(row[50])),
+                                musrenbangnas=bool(
+                                    util.strtobool(row[51])),
+                                endorsement=bool(
+                                    util.strtobool(row[52]))
 
-                        for i, row in enumerate(reader):
-                            if i == 0:
-                                pass
-                            elif row[2] == "":
-                                pass
-                            else:
-                                Longlist.objects.create(
-                                    judul_proyek=row[2],
-                                    provinsi=ProvinsiId(
-                                        provinsi_id=int(row[1])),
-                                    lokasi_kabupaten=KabupatenId(
-                                        kabupaten_id=int(row[4])),
-                                    lokasi_proyek=row[5],
-                                    target_2021=float(row[6]),
-                                    target_2022=float(row[7]),
-                                    target_2023=float(row[8]),
-                                    target_2024=float(row[9]),
-                                    target_2025=float(row[10]),
-                                    unit_satuan=row[11],
-                                    # indikasi_pendanaan_2021=float(row[12]),
-                                    # indikasi_pendanaan_2022=float(row[13]),
-                                    # indikasi_pendanaan_2023=float(row[14]),
-                                    # indikasi_pendanaan_2024=float(row[15]),
-                                    sumber_data=SumberdataId(
-                                        sumberdata_id=int(row[17])),
-                                    ket_sumber_data=row[18],
-                                    kl_pelaksana=KlId(kl_id=int(row[20])),
-                                    ket_kl_pelaksana=row[21],
-                                    shortlist_2022=bool(
-                                        util.strtobool(row[22])),
-                                    shortlist_2023=bool(
-                                        util.strtobool(row[23])),
-                                    isu_strategis=row[24],
-                                    tujuan_lfa=row[25],
-                                    sasaran_lfa=row[26],
-                                    output_lfa=row[27],
-                                    mp=MajorprojectId(mp_id=int(row[29])),
-                                    status_usulan=StatusId(
-                                        status_id=int(row[31])),
-                                    sumber_bahasan=row[32],
-                                    taging_kawasan_prioritas=KawasanprioritasId(
-                                        kp_id=int(row[34])),
-                                    prioritas_tahun_2022=row[35],
-                                    prioritas_tahun_2023=row[36],
-                                    prioritas_tahun_2024=row[37],
-                                    jenis_project=ProyekId(
-                                        proyek_idd=int(row[39])),
-                                    sub_tema_rkp=row[40],
-                                    klasifikasi_proyek=row[41],
-                                    jenis_impact=row[42],
-                                    staging_perkembangan=row[43],
-                                    keterangan=row[44],
-                                    usulan_baru=bool(
-                                        util.strtobool(row[45])),
-                                    shortlist=bool(
-                                        util.strtobool(row[46])),
-                                    prarakorgub=bool(
-                                        util.strtobool(row[47])),
-                                    rakorgub=bool(
-                                        util.strtobool(row[48])),
-                                    rakortekbang=bool(
-                                        util.strtobool(row[49])),
-                                    musrenbangprov=bool(
-                                        util.strtobool(row[50])),
-                                    musrenbangnas=bool(
-                                        util.strtobool(row[51])),
-                                    endorsement=bool(
-                                        util.strtobool(row[52]))
+                            )
+                            row_uploaded += 1
 
-                                )
-                                row_uploaded += 1
-
-                    # content[status_upload] = f'Berhasil Mengunggah {row_uploaded} Objek Data.'
-                    return redirect('/kebdaerah/longlist', content)
-
-            except:
-                content['status_upload'] = f'Terdapat Kesalahan Dalam Mengunggah Data. Cek Kembali Format Data.'
+                # content[status_upload] = f'Berhasil Mengunggah {row_uploaded} Objek Data.'
                 return redirect('/kebdaerah/longlist', content)
 
-            content = {'form': form}
+        except:
+            content['status_upload'] = f'Terdapat Kesalahan Dalam Mengunggah Data. Cek Kembali Format Data.'
+            return redirect('/kebdaerah/longlist', content)
 
-        elif menu == "prioritas":
-            dataView = "endorsement"
-            chartDataView = "endoresementChartView"
+        content = {'form': form}
+        sub_menu = "longlist"
 
-    elif menu in ["forum"]:
+    elif menu == "prioritas":
+        dataView = "endorsement"
+        chartDataView = "endoresementChartView"
+        sub_menu = "endorsement"
+
+    elif menu == "forum":
         sub_menu = "ckfp"
+
+    elif menu == "logis":
+        sub_menu = "kerangka-logis"
 
     else:
         sub_menu = "error"
@@ -274,14 +276,8 @@ def cek_kebdaerah(menu):
         judul = "Daftar Proyek Prioritas"
     elif menu == "forum":
         judul = "Catatan Kesepakatan Forum perencanaan"
-    elif menu == "prakorgub":
-        judul = "Pra Rapat Koordinasi Gubernur"
-    elif menu == "rakorgub":
-        judul = "Rapat Koordinasi Gubernur"
-    elif menu == "rakortekrenbang":
-        judul = "Rapat Koordinasi Teknis Pembangunan"
-    elif menu == "musrenbangnas":
-        judul = "Musyawarah Pembangunan Nasional"
+    elif menu == "logis":
+        judul = "Hasil Analisis Kerangka Logis"
     else:
         judul = "Kesalahan Memilih Menu"
 

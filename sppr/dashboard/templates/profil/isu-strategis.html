@@ -210,12 +210,11 @@
             .style("position", "absolute")
             .style("z-index", "10")
             .style("visibility", "hidden")
-            .style("background", "white")
+            .style("background", "black")
             .style("padding", "15px")
-            .style("border", "1px solid #6D5CF6")
             .style("border-radius", "10px")
             .style("font-size", "8px")
-
+            .style("color", "white")
 
         nodeEnter.append('rect')
             .attr('class', 'node')
@@ -227,7 +226,7 @@
             .style("fill", function (d) {
                 return d.data.fill;
             })
-            .on("mouseover", function (d) { tooltip.text(d.data.name); return tooltip.style("visibility", "visible"); })
+            .on("mouseover", function (d) { tooltip.text("Data: 100% Lorem Ipsum"); return tooltip.style("visibility", "visible"); })
             .on("mousemove", function () { return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
             .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
 
