@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
-from django.db.models import Count
+from django.db.models import Count, query
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
 from .forms import CsvModelForm, LonglistForm
@@ -354,6 +354,47 @@ class LonglistDataView(AjaxDatatableView):
         """
 
 # Create Single Long List Data
+
+
+class EndorsementDataView(AjaxDatatableView):
+
+    model = Longlist
+    title = 'Endorsement'
+
+    initial_order = [["judul_proyek", "asc"], ]
+    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    search_values_separator = ' '
+
+    column_defs = [
+        {'name': 'pk', 'visible': False, 'title': 'No'},
+        {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
+        {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'isu_strategis', 'visible': True, 'title': 'Isu Strategis'},
+        {'name': 'kl_pelaksana', 'foreign_field': 'kl_pelaksana__nama', 'title': 'Kementrian Lembaga',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'sumber_data', 'foreign_field': 'sumber_data__nama_sumber', 'title': 'Sumber Data',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'status_usulan', 'foreign_field': 'status_usulan__nama_status', 'visible': True,
+            'choices': True, 'autofilter': True},
+        {'name': 'taging_kawasan_prioritas', 'title': 'Taging Kawasan', 'foreign_field': 'taging_kawasan_prioritas__kawasan_prioritas',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'edit', 'title': 'Action', 'placeholder': True,
+         'searchable': False, 'orderable': False, }
+    ]
+
+    def get_initial_queryset(self, request=None):
+        queryset = self.model.objects.filter(endorsement=True)
+        return queryset
+
+    def customize_row(self, row, obj):
+        row['edit'] = """
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" 
+            onclick=" 
+            var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/update/'+id);">
+               Edit
+            </button>
+        """
 
 
 @login_required(login_url='login')
