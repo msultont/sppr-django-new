@@ -337,3 +337,24 @@ class CsvLongList(models.Model):
 
     def __str__(self) -> str:
         return f"File name: {self.file_name}"
+
+
+class DataKawasanPrioritas(models.Model):
+    id = models.IntegerField(primary_key=True)
+    nama_kawasan_prioritas = models.TextField(blank=True, null=True)
+    perencanaan = models.FloatField(blank=True, null=True)
+    kesiapan_kawasan = models.FloatField(blank=True, null=True)
+    potensi_konektivitas = models.FloatField(blank=True, null=True)
+    dampak_ekonomi = models.FloatField(blank=True, null=True)
+    dampak_lingkungan = models.FloatField(blank=True, null=True)
+    risiko_bencana = models.FloatField(blank=True, null=True)
+    total_nilai = models.FloatField(blank=True, null=True)
+    dampak_ekonomi_revisi = models.FloatField(blank=True, null=True)
+    kawasan_prioritas = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Data_Kawasan_Prioritas'
+
+    def __str__(self) -> str:
+        return self.nama_kawasan_prioritas
