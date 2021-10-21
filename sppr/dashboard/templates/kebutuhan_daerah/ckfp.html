@@ -18,7 +18,9 @@
                 <!-- Card header -->
                 <div class="flex items-center justify-between p-4 border-b dark:border-primary">
                     <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
+
                     <div class="flex items-center">
+
                         <button class="relative focus:outline-none" x-cloak
                             @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)">
                             <div
@@ -30,6 +32,11 @@
                         </button>
                     </div>
                 </div>
+
+                <iframe width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                title="Rakortekrenbang"
+                src="https://geospasial.bappenas.go.id/portal/apps/opsdashboard/index.html#/6d57f95a98ae411181dae1c4e2b32e93">
+              </iframe>
                 <!-- Chart -->
                 <div class="relative p-4 h-72">
                     <canvas id="doughnutChart"></canvas>

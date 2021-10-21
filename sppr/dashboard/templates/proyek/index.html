@@ -18,23 +18,27 @@
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
 
                 <!-- Card header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
 
-                    {% if judul == "BP Batam" %}
-                    <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0"
-                        marginwidth="0" title="Proyek Batam"
-                        src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=01fbab505a264e34837cb89423e3806d&extent=103.657,0.8945,104.3299,1.2151">
-                    </iframe>
-                    <h1>Ini BP Batam</h1>
-                    {% else %}
-                    <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0"
-                        marginwidth="0" title="Proyek Sabang"
-                        src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=8c51f53a577d4d6fa2de68a67967794b&extent=94.5633,5.3913,95.9091,6.0294">
-                    </iframe>
-                    <h1>Ini BP Sabang</h1>
-                    {% endif %}
+                {% if judul == "BP Batam" %}
+                <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                    title="BP Batam"
+                    src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=01fbab505a264e34837cb89423e3806d&extent=103.657,0.8945,104.3299,1.2151">
+                </iframe>
 
-                </div>
+                {% include 'parts/BPBatam.html' %}
+                <br>
+
+                {% else %}
+                <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                    title="Proyek Sabang"
+                    src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=8c51f53a577d4d6fa2de68a67967794b&extent=94.5633,5.3913,95.9091,6.0294">
+                </iframe>
+                {% include 'parts/BPSabang.html' %}
+                <br>
+
+                {% endif %}
+
+
             </div>
         </div>
 
@@ -43,23 +47,7 @@
             <!-- Map Area -->
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Line Chart</h4>
-                    <div class="flex items-center">
-                        <button class="relative focus:outline-none" x-cloak
-                            @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)">
-                            <div
-                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
-                            </div>
-                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
-                            </div>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Chart -->
-                <canvas id="lineChart" height="75"></canvas>
 
             </div>
         </div>
@@ -86,7 +74,8 @@
 
                 <!-- Table -->
 
-                {% include 'parts/table.html' %}
+
+
 
             </div>
         </div>
