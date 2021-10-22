@@ -44,6 +44,10 @@ urlpatterns = [
     path('ajax_datatable/kesepakatan-forum',
          views.KesepakatanForumDataView.as_view(), name="kesepakatan-forum"),
 
+    # Path to Kawasan Prioritas Data View
+    path('ajax_datatable/kawasan-prioritas',
+         views.KawasanPrioritasDataView.as_view(), name="kawasan-prioritas"),
+
     # Path to CRUD Longlist
     path('forms/longlist/add', views.addSingleLonglist,
          name="addSingleLonglist"),

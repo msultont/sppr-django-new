@@ -441,6 +441,35 @@ class KesepakatanForumDataView(AjaxDatatableView):
             </button>
         """
 
+# Retrieve Kawasan Prioritas List Data
+
+
+class KawasanPrioritasDataView(AjaxDatatableView):
+
+    model = DataKawasanPrioritas
+    title = 'Skoring Kawasan Prioritas'
+
+    initial_order = [["id", "asc"], ]
+    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    search_values_separator = ' '
+
+    column_defs = [
+        {'name': 'id', 'visible': True, 'title': 'No'},
+        {'name': 'nama_kawasan_prioritas',
+            'visible': True, 'title': 'Kawasan Prioritas'},
+        {'name': 'perencanaan', 'visible': True, 'title': 'Perencanaan'},
+        {'name': 'kesiapan_kawasan', 'visible': True, 'title': 'Kesiapan Kawasan'},
+        {'name': 'potensi_konektivitas', 'visible': True,
+            'title': 'Potensi Konektivitas'},
+        {'name': 'dampak_ekonomi', 'visible': True, 'title': 'Dampak Ekonomi'},
+        {'name': 'dampak_lingkungan', 'visible': True, 'title': 'Dampak Lingkungan'},
+        {'name': 'risiko_bencana', 'visible': True, 'title': 'Risiko Bencana'},
+        {'name': 'total_nilai', 'visible': True, 'title': 'Total Nilai'},
+        {'name': 'dampak_ekonomi_revisi', 'visible': True,
+            'title': 'Dampak Ekonomi Revisi'},
+        {'name': 'kawasan_prioritas', 'visible': True, 'title': 'Kawasan Prioritas'},
+    ]
+
 # Create Single Long List Data
 
 
