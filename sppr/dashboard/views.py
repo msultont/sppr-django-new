@@ -197,6 +197,7 @@ def kebdaerah(request, menu):
         sub_menu = "endorsement"
 
     elif menu == "forum":
+        dataView = "kesepakatan-forum"
         sub_menu = "ckfp"
 
     elif menu == "logis":
@@ -353,8 +354,8 @@ class LonglistDataView(AjaxDatatableView):
             </button>
         """
 
-# Create Single Long List Data
 
+# Retrieve Endorsement List Data
 
 class EndorsementDataView(AjaxDatatableView):
 
@@ -395,6 +396,52 @@ class EndorsementDataView(AjaxDatatableView):
                Edit
             </button>
         """
+
+# Retrieve Endorsement List Data
+
+
+class KesepakatanForumDataView(AjaxDatatableView):
+
+    model = Longlist
+    title = 'Catatan Kesepakatan Forum Perencanaan'
+
+    initial_order = [["judul_proyek", "asc"], ]
+    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    search_values_separator = ' '
+
+    column_defs = [
+        {'name': 'pk', 'visible': False, 'title': 'No'},
+        {'name': 'judul_proyek', 'visible': True, 'title': 'Judul Proyek'},
+        {'name': 'provinsi', 'title': 'Provinsi', 'foreign_field': 'provinsi__nama_provinsi',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'isu_strategis', 'visible': True, 'title': 'Isu Strategis'},
+        {'name': 'kl_pelaksana', 'foreign_field': 'kl_pelaksana__nama', 'title': 'Kementrian Lembaga',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'sumber_data', 'foreign_field': 'sumber_data__nama_sumber', 'title': 'Sumber Data',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'status_usulan', 'foreign_field': 'status_usulan__nama_status', 'visible': True,
+            'choices': True, 'autofilter': True},
+        {'name': 'taging_kawasan_prioritas', 'title': 'Taging Kawasan', 'foreign_field': 'taging_kawasan_prioritas__kawasan_prioritas',
+            'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'edit', 'title': 'Action', 'placeholder': True,
+         'searchable': False, 'orderable': False, }
+    ]
+
+    def get_initial_queryset(self, request=None):
+        queryset = self.model.objects.filter(
+            shortlist=True, prarakorgub=True, rakorgub=True, rakortekbang=True, musrenbangprov=True, musrenbangnas=True)
+        return queryset
+
+    def customize_row(self, row, obj):
+        row['edit'] = """
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" 
+            onclick=" 
+            var id = this.closest('tr').id.substr(4); location.replace('/forms/longlist/update/'+id);">
+               Edit
+            </button>
+        """
+
+# Create Single Long List Data
 
 
 @login_required(login_url='login')

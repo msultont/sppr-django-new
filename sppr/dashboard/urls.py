@@ -39,6 +39,11 @@ urlpatterns = [
     path('ajax_datatable/endorsement', views.EndorsementDataView.as_view(),
          name="endorsement"),
 
+    # Path to Kesepakatan Forum Data View
+
+    path('ajax_datatable/kesepakatan-forum',
+         views.KesepakatanForumDataView.as_view(), name="kesepakatan-forum"),
+
     # Path to CRUD Longlist
     path('forms/longlist/add', views.addSingleLonglist,
          name="addSingleLonglist"),
