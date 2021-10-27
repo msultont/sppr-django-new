@@ -3,9 +3,41 @@ from django.db import models
 from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
+from mptt.models import MPTTModel, TreeForeignKey
 
 # Create your models here.
 
+
+class IsuStrategis(MPTTModel):
+    nama_isu = models.CharField(max_length=400, blank=True, null=True)
+    provinsi = models.ForeignKey(
+        'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE,
+                            null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['nama_isu']
+
+    def __str__(self) -> str:
+        return self.nama_isu
+
+
+class AnalisisKerangkaLogis(MPTTModel):
+    nama_hirarki_logis = models.CharField(max_length=250, unique=True)
+    provinsi = models.ForeignKey(
+        'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
+    indikator = models.CharField(max_length=400, blank=True, null=True)
+    sumber_data = models.CharField(max_length=400, blank=True, null=True)
+    sumber = models.CharField(max_length=400, blank=True, null=True)
+    asumsi = models.CharField(max_length=400, blank=True, null=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE,
+                            null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['nama_hirarki_logis']
+
+    def __str__(self) -> str:
+        return self.nama_hirarki_logis
 
 # New Model Corresponding to Longlist and Shortlist Model
 

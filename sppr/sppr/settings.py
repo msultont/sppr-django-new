@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ajax_datatable',
     'widget_tweaks',
+    'mptt'
 ]
 
 MIDDLEWARE = [
