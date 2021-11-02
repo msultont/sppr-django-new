@@ -2,7 +2,6 @@ asgiref==3.3.4
 autopep8==1.5.7
 Django==3.2.4
 django-ajax-datatable==4.0.0
-django-datatables-server-side==0.1
 django-datatables-view==1.19.1
 django-js-asset==1.2.2
 django-mptt==0.13.4
