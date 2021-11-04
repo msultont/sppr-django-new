@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'sppr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6hc5fqkg8m74d',
-        'USER': 'annbdtqptmaguj',
-        'PASSWORD': 'c027847d4515a7aa6b7490f6d8ea4732f7e7a2468b281e0f77bf28e90d1fa306',
-        'HOST': 'ec2-54-227-246-76.compute-1.amazonaws.com',
+        'NAME': 'dit_regional1',
+        'USER': 'dit_regional1',
+        'PASSWORD': 'regionals4tu',
+        'HOST': '10.1.178.88',
         'PORT': '5432'
     }
 }

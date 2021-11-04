@@ -19,7 +19,7 @@ class IsuStrategis(MPTTModel):
         order_insertion_by = ['nama_isu']
 
     def __str__(self) -> str:
-        return self.nama_isu
+        return f'{self.provinsi} - {self.nama_isu}'
 
 
 class AnalisisKerangkaLogis(MPTTModel):
@@ -37,7 +37,7 @@ class AnalisisKerangkaLogis(MPTTModel):
         order_insertion_by = ['nama_hirarki_logis']
 
     def __str__(self) -> str:
-        return self.nama_hirarki_logis
+        return f'{self.provinsi} - {self.nama_hirarki_logis}'
 
 # New Model Corresponding to Longlist and Shortlist Model
 
