@@ -19,158 +19,341 @@
         <p class="dataView" hidden> {{dataView}} </p>
     </div>
 
-    <!-- Content -->
-    <div class="mt-2">
+    <div class="w-full my-4 justify-center items-center content-center p-4">
 
-        <!-- Charts -->
-        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+        <!-- Content -->
+        <div class="mt-2">
 
-            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Card header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h2
-                        class="text-2xl font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-800 to-purple-500">
-                        Table</h2>
-                    <div class="flex items-center">
-                        <button class="relative focus:outline-none">
-                            <div
-                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
-                            </div>
-                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
-                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
-                            </div>
-                        </button>
-                    </div>
-                </div>
+            <!-- Charts -->
+            <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
 
-
-                <!-- Table -->
-
-                <!--Container-->
-
-                <style>
-                    /*Form fields*/
-                    .dataTables_wrapper select,
-                    .dataTables_wrapper .dataTables_filter input {
-                        color: #4a5568;
-                        /*text-gray-700*/
-                        padding-left: 1rem;
-                        /*pl-4*/
-                        padding-right: 1rem;
-                        /*pl-4*/
-                        padding-top: .5rem;
-                        /*pl-2*/
-                        padding-bottom: .5rem;
-                        /*pl-2*/
-                        line-height: 1.25;
-                        /*leading-tight*/
-                        border-width: 2px;
-                        /*border-2*/
-                        border-radius: .25rem;
-                        border-color: #edf2f7;
-                        /*border-gray-200*/
-                        background-color: #edf2f7;
-                        /*bg-gray-200*/
-                    }
-
-                    /*Row Hover*/
-                    table.dataTable.hover tbody tr:hover,
-                    table.dataTable.display tbody tr:hover {
-                        background-color: #ebf4ff;
-                        /*bg-indigo-100*/
-                    }
-
-                    /*Pagination Buttons*/
-                    .dataTables_wrapper .dataTables_paginate .paginate_button {
-                        font-weight: 700;
-                        /*font-bold*/
-                        border-radius: .25rem;
-                        /*rounded*/
-                        border: 1px solid transparent;
-                        /*border border-transparent*/
-                    }
-
-                    /*Pagination Buttons - Current selected */
-                    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-                        color: #fff !important;
-                        /*text-white*/
-                        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-                        /*shadow*/
-                        font-weight: 700;
-                        /*font-bold*/
-                        border-radius: .25rem;
-                        /*rounded*/
-                        background: #667eea !important;
-                        /*bg-indigo-500*/
-                        border: 1px solid transparent;
-                        /*border border-transparent*/
-                    }
-
-                    /*Pagination Buttons - Hover */
-                    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                        color: #fff !important;
-                        /*text-white*/
-                        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
-                        /*shadow*/
-                        font-weight: 700;
-                        /*font-bold*/
-                        border-radius: .25rem;
-                        /*rounded*/
-                        background: #667eea !important;
-                        /*bg-indigo-500*/
-                        border: 1px solid transparent;
-                        /*border border-transparent*/
-                    }
-
-                    /*Add padding to bottom border */
-                    table.dataTable.no-footer {
-                        border-bottom: 1px solid #e2e8f0;
-                        /*border-b-1 border-gray-300*/
-                        margin-top: 0.75em;
-                        margin-bottom: 0.75em;
-                    }
-
-                    /*Change colour of responsive icon*/
-                    table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
-                    table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
-                        background-color: #667eea !important;
-                        /*bg-indigo-500*/
-                    }
-                </style>
-
-                <!--Table-->
-                <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-                    <!--Tombol di Tabel-->
-                    <div class="mb-10">
-                        <div class="float-right mb-14">
-
-                            <a href="{% url 'addSingleLonglist' %}">
-                                <button
-                                    class="text-sm bg-gray-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ">
-                                    <span>Add Single Data</span>
-                                </button>
-                            </a>
-
+                <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                    <!-- Card header -->
+                    <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                        <h2
+                            class="text-2xl font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-800 to-purple-500">
+                            Table</h2>
+                        <div class="flex items-center">
+                            <button class="relative focus:outline-none">
+                                <div
+                                    class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                                </div>
+                                <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                                    :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                                </div>
+                            </button>
                         </div>
                     </div>
 
-                    <table id="example" class="stripe hover display nowrap text-center mt-4"
-                        style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
 
-                    </table>
+                    <!-- Table -->
 
+                    <!--Container-->
+
+                    <style>
+                        /*Form fields*/
+                        .dataTables_wrapper select,
+                        .dataTables_wrapper .dataTables_filter input {
+                            color: #4a5568;
+                            /*text-gray-700*/
+                            padding-left: 1rem;
+                            /*pl-4*/
+                            padding-right: 1rem;
+                            /*pl-4*/
+                            padding-top: .5rem;
+                            /*pl-2*/
+                            padding-bottom: .5rem;
+                            /*pl-2*/
+                            line-height: 1.25;
+                            /*leading-tight*/
+                            border-width: 2px;
+                            /*border-2*/
+                            border-radius: .25rem;
+                            border-color: #edf2f7;
+                            /*border-gray-200*/
+                            background-color: #edf2f7;
+                            /*bg-gray-200*/
+                        }
+
+                        /*Row Hover*/
+                        table.dataTable.hover tbody tr:hover,
+                        table.dataTable.display tbody tr:hover {
+                            background-color: #ebf4ff;
+                            /*bg-indigo-100*/
+                        }
+
+                        /*Pagination Buttons*/
+                        .dataTables_wrapper .dataTables_paginate .paginate_button {
+                            font-weight: 700;
+                            /*font-bold*/
+                            border-radius: .25rem;
+                            /*rounded*/
+                            border: 1px solid transparent;
+                            /*border border-transparent*/
+                        }
+
+                        /*Pagination Buttons - Current selected */
+                        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+                            color: #fff !important;
+                            /*text-white*/
+                            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+                            /*shadow*/
+                            font-weight: 700;
+                            /*font-bold*/
+                            border-radius: .25rem;
+                            /*rounded*/
+                            background: #667eea !important;
+                            /*bg-indigo-500*/
+                            border: 1px solid transparent;
+                            /*border border-transparent*/
+                        }
+
+                        /*Pagination Buttons - Hover */
+                        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+                            color: #fff !important;
+                            /*text-white*/
+                            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+                            /*shadow*/
+                            font-weight: 700;
+                            /*font-bold*/
+                            border-radius: .25rem;
+                            /*rounded*/
+                            background: #667eea !important;
+                            /*bg-indigo-500*/
+                            border: 1px solid transparent;
+                            /*border border-transparent*/
+                        }
+
+                        /*Add padding to bottom border */
+                        table.dataTable.no-footer {
+                            border-bottom: 1px solid #e2e8f0;
+                            /*border-b-1 border-gray-300*/
+                            margin-top: 0.75em;
+                            margin-bottom: 0.75em;
+                        }
+
+                        /*Change colour of responsive icon*/
+                        table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+                        table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+                            background-color: #667eea !important;
+                            /*bg-indigo-500*/
+                        }
+                    </style>
+
+                    <!--Table-->
+                    <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                        <!--Tombol di Tabel-->
+                        <div class="mb-10">
+                            <div class="float-right mb-14">
+
+                                <a href="{% url 'addSingleLonglist' %}">
+                                    <button
+                                        class="text-sm bg-gray-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ">
+                                        <span>Add Single Data</span>
+                                    </button>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <table id="example" class="stripe hover display nowrap text-center mt-4"
+                            style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+
+                        </table>
+
+                    </div>
                 </div>
+
             </div>
 
+
         </div>
+        <!-- Content -->
+        <div class="mt-2">
+            <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Hasil Analisis Dampak</h4>
+            </div>
+            <!-- Main Content -->
+            <div class="w-full my-4">
 
+                <div class="mt-5 mb-5">
+                    <p class="p-5">Pilih Provinsi</p>
 
+                    <select name="" id=""
+                        class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
+
+                        <option value="Jawa Barat">Jawa Barat</option>
+
+                    </select>
+
+                </div>
+
+                <br>
+
+                <table class="border-separate table-fixed w-full bg-white table-striped">
+                    <thead>
+                        <tr class="text-center break-all">
+                            <th
+                                class="w-1/4 bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-600 font-bold tracking-wider uppercase text-xs">
+                                Aktivitas Isu Strategis
+                            </th>
+                            <th
+                                class="w-1/4 bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-600 font-bold tracking-wider uppercase text-xs">
+                                Nilai
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tujuan-data">
+                        <button>
+                            <tr class="text-center p-4">
+                                <td colspan="2"
+                                    class="border-dashed border-t bg-purple-600 text-white  text-center p-3">
+                                    Tujuan
+                                </td>
+                            </tr>
+
+                            <tr class="text-center p-4" id="sasaran-toggle">
+                                <td class="border-dashed border-t bg-purple-600 text-white  text-center p-3"
+                                    colspan="2">
+                                    Meningkatkan Kesejahteraan Masyarakat
+                                </td>
+                            </tr>
+                        </button>
+                        <tr>
+                    <tbody id="sasaran-data">
+                        <button>
+                            <tr class="text-center p-4">
+                                <td colspan="2"
+                                    class="border-dashed border-t bg-purple-500 text-white  text-center p-3">
+                                    Sasaran
+                                </td>
+                            </tr>
+                            <tr class="text-center" id="output-toggle">
+                                <td class="border-dashed border-t bg-purple-500 text-white  text-center p-3"
+                                    colspan="2">
+                                    Tersedianya SDM kompeten yang sesuai kebutuhan dunia usaha dan industri (link
+                                    and match)
+                                </td>
+                            </tr>
+                        </button>
+                        <tr>
+                    <tbody id="output-data">
+                        <button>
+                            <tr class="text-center p-4">
+                                <td colspan="2"
+                                    class="border-dashed border-t bg-purple-400 text-white  text-center p-3">
+                                    Output
+                                </td>
+                            </tr>
+                            <tr class="text-center" id="aktivitas-toggle">
+                                <td class="border-dashed border-t bg-purple-400 text-white  text-center p-3"
+                                    colspan="2">
+                                    Peningkatan Kompetensi lulusan SMK yang sesuai dengan kebutuhan Dunia Usaha dan
+                                    Industri (DUDI)
+                                </td>
+                            </tr>
+                        </button>
+                        <tr>
+                    <tbody id="aktivitas-data">
+                        <tr class="text-center p-4">
+                            <td colspan="2" class="border-dashed border-t bg-gray-200 text-center p-3">
+                                Aktivitas
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Revitalisasi SMK yang Mendukung Industri 4.0
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Pemetaan dan Penyelarasan Pendidikan dan Kebutuhan Dunia Usaha/Industri
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Fasilitasi Sertifikasi Kompetensi Siswa SMK
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Fasilitasi Pengembangan Teaching Factory
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Kurikulum Yang Sesuai Dengan Kebutuhan Industri dan Pengembangan Kurikulum Soft
+                                Skill/karakter Kerja
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Fasilitasi Pengembangan Bakat dan Minat Siswa
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Fasilitasi Pengembangan Pendidikan Kecakapan Kerja (PKK)
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 ">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Siswa SMK yang Tersertifikasi
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Lulusan yang Mengikuti Pusat Karir
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                1.5
+                            </td>
+                        </tr>
+                        <tr class="text-center">
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                Fasilitasi Uji Kompetensi Kepada Peserta Didik
+                            </td>
+                            <td class="border-dashed border-t border-gray-200 p-3">
+                                1.5
+                            </td>
+                        </tr>
+                    </tbody>
+                    </tr>
+                    </tbody>
+                    </tr>
+                    </tbody>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <!-- Content -->
-    <div class="mt-2">
 
 
-    </div>
 </main>
 
 <script type="text/javascript">

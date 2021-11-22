@@ -1,5 +1,5 @@
 {% extends 'parts/main.html' %}
-
+{% load static %}
 {% block content %}
 <main>
 
@@ -369,6 +369,15 @@
 
 
                     </table>
+                </div>
+
+                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Hasil Korelasi</h4>
+                </div>
+                <div class="w-full my-4 justify-center items-center content-center">
+
+                    <img src="{% static 'images/ss-korelasi.png' %}" width="75%" class="">
+
                 </div>
             </div>
         </div>
