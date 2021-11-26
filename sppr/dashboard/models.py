@@ -390,3 +390,12 @@ class DataKawasanPrioritas(models.Model):
 
     def __str__(self) -> str:
         return self.nama_kawasan_prioritas
+
+
+class SkoringPembobotanProyek(models.Model):
+    nama_proyek = models.ForeignKey(
+        Longlist, models.DO_NOTHING, db_column='longlist', blank=True, null=True)
+    nilai_korelasi_sasaran = models.FloatField(blank=True, null=True)
+    nilai_korelasi_output = models.FloatField(blank=True, null=True)
+    nilai_MP = models.FloatField(blank=True, null=True)
+    nilai_investasi = models.FloatField(blank=True, null=True)
