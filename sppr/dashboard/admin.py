@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AnalisisKerangkaLogis, CsvLongList, DataKawasanPrioritas, HasilSkoringProyek, IsuStrategis, Longlist, TestName
+from .models import AnalisisKerangkaLogis, CsvLongList, DataKawasanPrioritas, IsuStrategis, Longlist, SkoringProyek
 from mptt.admin import MPTTModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 
@@ -8,8 +8,7 @@ from mptt.admin import DraggableMPTTAdmin
 admin.site.register(Longlist)
 admin.site.register(CsvLongList)
 admin.site.register(DataKawasanPrioritas)
-admin.site.register(HasilSkoringProyek)
-admin.site.register(TestName)
+admin.site.register(SkoringProyek)
 
 admin.site.register(
     AnalisisKerangkaLogis,

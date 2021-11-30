@@ -402,7 +402,7 @@ class EndorsementDataView(AjaxDatatableView):
 
 class HasilSkoringDataView(AjaxDatatableView):
 
-    model = HasilSkoringProyek
+    model = SkoringProyek
     title = 'Hasil Skoring Proyek'
 
     initial_order = [["proyek", "asc"], ]

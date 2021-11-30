@@ -393,34 +393,29 @@ class DataKawasanPrioritas(models.Model):
         return self.nama_kawasan_prioritas
 
 
-class TestName(models.Model):
+class SkoringProyek(models.Model):
 
-    name = models.TextField(max_length=250)
+    bobot_korelasi_sasaran = 0.2
+    bobot_korelasi_output = 0.45
+    bobot_skor_MP = 0.15
+    bobot_investasi = 0.2
 
-
-class HasilSkoringProyek(models.Model):
+    id = models.IntegerField(primary_key=True)
     proyek = models.OneToOneField(
-        Longlist, on_delete=models.CASCADE, null=True, blank=True)
-    nilai_raw_korelasi_sasaran = models.FloatField(blank=True, null=True)
-    nilai_raw_korelasi_output = models.FloatField(blank=True, null=True)
-    nilai_raw_MP = models.FloatField(blank=True, null=True)
-    nilai_raw_investasi = models.FloatField(blank=True, null=True)
+        Longlist, on_delete=models.CASCADE)
+    nilai_raw_korelasi_sasaran = models.FloatField(
+        blank=True, null=True, default=0)
+    nilai_raw_korelasi_output = models.FloatField(
+        blank=True, null=True, default=0)
+    nilai_raw_MP = models.FloatField(blank=True, null=True, default=0)
+    nilai_raw_investasi = models.FloatField(blank=True, null=True, default=0)
 
-    def skor_korelasi_sasaran(self):
-        bobot = 0.2
-        return self.nilai_raw_korelasi_sasaran * bobot
-
-    def skor_korelasi_output(self):
-        bobot = 0.45
-        return self.nilai_raw_korelasi_output * bobot
-
-    def skor_MP(self):
-        bobot = 0.15
-        return self.nilai_raw_MP * bobot
-
-    def skor_investasi(self):
-        bobot = 0.2
-        return self.nilai_raw_investasi * bobot
-
+    @property
     def total_skoring(self):
-        return self.skor_investasi + self.skor_korelasi_output + self.skor_korelasi_sasaran + self.skor_MP
+        total = (self.nilai_raw_korelasi_output * self.bobot_korelasi_output) + (self.nilai_raw_korelasi_sasaran *
+                                                                                 self.bobot_korelasi_sasaran) + (self.nilai_raw_MP * self.bobot_skor_MP) + (self.nilai_raw_investasi * self.bobot_investasi)
+        # return self.skor_investasi + self.skor_korelasi_output + self.skor_korelasi_sasaran + self.skor_MP
+        return total
+
+    def __str__(self) -> str:
+        return self.proyek.judul_proyek
