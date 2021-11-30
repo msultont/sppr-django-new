@@ -39,6 +39,10 @@ urlpatterns = [
     path('ajax_datatable/endorsement', views.EndorsementDataView.as_view(),
          name="endorsement"),
 
+    # Path Hasil Skoring Data View
+    path('ajax_datatable/skoring_lfa', views.HasilSkoringDataView.as_view(),
+         name="skoring_lfa"),
+
     # Path to Kesepakatan Forum Data View
 
     path('ajax_datatable/kesepakatan-forum',

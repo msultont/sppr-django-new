@@ -192,7 +192,7 @@ def kebdaerah(request, menu):
         sub_menu = "longlist"
 
     elif menu == "prioritas":
-        dataView = "endorsement"
+        dataView = "skoring_lfa"
         chartDataView = "endoresementChartView"
         sub_menu = "endorsement"
 
@@ -397,7 +397,45 @@ class EndorsementDataView(AjaxDatatableView):
             </button>
         """
 
-# Retrieve Endorsement List Data
+# Retrieve Hasil Skoring
+
+
+class HasilSkoringDataView(AjaxDatatableView):
+
+    model = HasilSkoringProyek
+    title = 'Hasil Skoring Proyek'
+
+    initial_order = [["proyek", "asc"], ]
+    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    search_values_separator = ' '
+
+    column_defs = [
+        AjaxDatatableView.render_row_tools_column_def(),
+        {'name': 'proyek', 'visible': True, 'title': 'Judul Proyek',
+            'foreign_field': 'proyek__judul_proyek'},
+        {'name': 'nilai_raw_korelasi_sasaran',
+            'title': 'Nilai Korelasi Sasaran', 'visible': True},
+        {'name': 'nilai_raw_korelasi_output',
+            'title': 'Nilai Korelasi Output', 'visible': True},
+        {'name': 'nilai_raw_MP',
+            'title': 'Nilai MP', 'visible': True},
+        {'name': 'nilai_raw_investasi',
+         'title': 'Nilai Investasi', 'visible': True},
+
+    ]
+
+    def get_initial_queryset(self, request=None):
+        queryset = self.model.objects.filter(proyek__shortlist=True)
+        return queryset
+
+    def customize_row(self, row, obj):
+        row['edit'] = """
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            </button>
+        """
+
+
+# Retrieve Kesepakatan Forum List Data
 
 
 class KesepakatanForumDataView(AjaxDatatableView):

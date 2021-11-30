@@ -1,5 +1,6 @@
 from django.core import validators
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
@@ -390,3 +391,36 @@ class DataKawasanPrioritas(models.Model):
 
     def __str__(self) -> str:
         return self.nama_kawasan_prioritas
+
+
+class TestName(models.Model):
+
+    name = models.TextField(max_length=250)
+
+
+class HasilSkoringProyek(models.Model):
+    proyek = models.OneToOneField(
+        Longlist, on_delete=models.CASCADE, null=True, blank=True)
+    nilai_raw_korelasi_sasaran = models.FloatField(blank=True, null=True)
+    nilai_raw_korelasi_output = models.FloatField(blank=True, null=True)
+    nilai_raw_MP = models.FloatField(blank=True, null=True)
+    nilai_raw_investasi = models.FloatField(blank=True, null=True)
+
+    def skor_korelasi_sasaran(self):
+        bobot = 0.2
+        return self.nilai_raw_korelasi_sasaran * bobot
+
+    def skor_korelasi_output(self):
+        bobot = 0.45
+        return self.nilai_raw_korelasi_output * bobot
+
+    def skor_MP(self):
+        bobot = 0.15
+        return self.nilai_raw_MP * bobot
+
+    def skor_investasi(self):
+        bobot = 0.2
+        return self.nilai_raw_investasi * bobot
+
+    def total_skoring(self):
+        return self.skor_investasi + self.skor_korelasi_output + self.skor_korelasi_sasaran + self.skor_MP
