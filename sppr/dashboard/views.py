@@ -3,7 +3,7 @@ from .models import *
 from django.db.models import Count, query
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import CsvModelForm, LonglistForm
+from .forms import CsvModelForm, LonglistForm, SkoringProyekForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import csv
@@ -411,6 +411,7 @@ class HasilSkoringDataView(AjaxDatatableView):
 
     column_defs = [
         AjaxDatatableView.render_row_tools_column_def(),
+        {'name': 'id', 'visible': False, 'title': 'No'},
         {'name': 'proyek', 'visible': True, 'title': 'Judul Proyek',
             'foreign_field': 'proyek__judul_proyek'},
         {'name': 'nilai_raw_korelasi_sasaran',
@@ -421,6 +422,9 @@ class HasilSkoringDataView(AjaxDatatableView):
             'title': 'Nilai MP', 'visible': True},
         {'name': 'nilai_raw_investasi',
          'title': 'Nilai Investasi', 'visible': True},
+        {'name': 'total_skoring', 'title': 'Hasil Skoring', 'visible': True},
+        {'name': 'edit', 'title': 'Action', 'placeholder': True,
+         'searchable': False, 'orderable': False}
 
     ]
 
@@ -430,7 +434,11 @@ class HasilSkoringDataView(AjaxDatatableView):
 
     def customize_row(self, row, obj):
         row['edit'] = """
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" 
+            onClick="
+            var id = this.closest('tr').id.substr(4); 
+            location.replace('/forms/skoring/update/'+id);">
+            Edit
             </button>
         """
 
@@ -557,6 +565,27 @@ def deleteSingleLonglist(request, pk):
     return redirect('/kebdaerah/longlist')
 
 # Download Long List Data CSV Format
+
+# Update Hasil Skoring
+
+
+@login_required(login_url='login')
+def updateHasilSkoring(request, pk):
+    proyek = SkoringProyek.objects.get(id=pk)
+    form = SkoringProyekForm(instance=proyek)
+
+    content = {'form': form,
+               'judul': "Anda Sedang Memperbaharui Hasil Skoring Proyek", 'pk': pk,
+               'proyek': proyek
+               }
+
+    if request.method == 'POST':
+        form = SkoringProyekForm(request.POST, instance=proyek)
+        if form.is_valid():
+            form.save()
+            return redirect('/kebdaerah/prioritas')
+
+    return render(request, 'forms/dpp-update.html', content)
 
 
 def download_longlist_format(request):

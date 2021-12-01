@@ -2,7 +2,9 @@ from django import forms
 from django.db import models
 from django.db.models import fields
 from django.forms import ModelForm, widgets
-from .models import CsvLongList, Longlist
+from .models import CsvLongList, Longlist, SkoringProyek
+
+# Create form for Manipulate Longlist
 
 
 class LonglistForm(ModelForm):
@@ -69,6 +71,29 @@ class LonglistForm(ModelForm):
             'musrenbangprov': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'musrenbangnas': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'endorsement': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'})
+        }
+
+# Create form for edit DPP
+
+
+class SkoringProyekForm(ModelForm):
+
+    class Meta:
+        model = SkoringProyek
+        fields = ['nilai_raw_korelasi_sasaran', 'nilai_raw_korelasi_output',
+                  'nilai_raw_MP', 'nilai_raw_investasi']
+
+        widgets = {
+
+            'nilai_raw_korelasi_sasaran': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
+                                                                   'placeholder': "Nilai"}),
+            'nilai_raw_korelasi_output': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
+                                                                  'placeholder': "Nilai"}),
+            'nilai_raw_MP': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
+                                                     'placeholder': "Nilai"}),
+            'nilai_raw_investasi': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
+                                                            'placeholder': "Nilai"})
+
         }
 
 # Create form for upload CSV File

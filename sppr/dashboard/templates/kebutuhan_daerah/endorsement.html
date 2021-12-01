@@ -10,6 +10,53 @@
     }
 </style>
 
+<!--Import CSV Modal-->
+<div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="modal-id">
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+        <!--content-->
+        <div
+            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <!--header-->
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 class="text-3xl font-semibold">
+                    Import CSV to Longlist
+                </h3>
+
+            </div>
+            <!--body-->
+            <div class="relative p-6 flex-auto">
+                <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
+                    Pastikan file yang anda pilih adalah file CSV yang sudah diformat menyesuaikan sistem database
+                    regional 1.
+                </p>
+
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    {{form}}
+
+                    <div
+                        class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b mt-10">
+                        <button
+                            class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button" onclick="toggleModal('modal-id')">
+                            Cancel
+                        </button>
+
+                        <button
+                            class="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="submit">Confirm</button>
+                    </div>
+
+                </form>
+            </div>
+            <!--footer-->
+        </div>
+    </div>
+</div>
+<div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+
 <main>
     <!-- Content header -->
     <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker header-content">
@@ -196,7 +243,7 @@
                 buttons: [
                     'pageLength', {
                         extend: "csv", className: "text-sm bg-red-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-                    }, 'excel', 'pdf', 'colvis'
+                    }, 'excel'
 
                 ]
             }, {
@@ -205,6 +252,17 @@
         },
 
         );
+
+        $('a.toggle-vis').on('click', function (e) {
+            e.preventDefault();
+
+            // Get the column API object
+            var column = table.column($(this).attr('data-column'));
+
+            // Toggle the visibility
+            column.visible(!column.visible());
+        });
+
     });
 
 </script>

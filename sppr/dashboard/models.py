@@ -5,7 +5,7 @@ from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from mptt.models import MPTTModel, TreeForeignKey
-
+from decimal import Decimal
 # Create your models here.
 
 
@@ -362,6 +362,11 @@ class Longlist(models.Model):
         managed = False
         db_table = 'Longlist'
 
+    def save(self, *args, **kwargs):
+        super(Longlist, self).save(*args, **kwargs)
+        if self.shortlist == True:
+            SkoringProyek.objects.create(proyek=self)
+
 
 class CsvLongList(models.Model):
     file_name = models.FileField(upload_to="csv_longlist", null=False, validators=[
@@ -400,7 +405,7 @@ class SkoringProyek(models.Model):
     bobot_skor_MP = 0.15
     bobot_investasi = 0.2
 
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True)
     proyek = models.OneToOneField(
         Longlist, on_delete=models.CASCADE)
     nilai_raw_korelasi_sasaran = models.FloatField(
@@ -414,8 +419,7 @@ class SkoringProyek(models.Model):
     def total_skoring(self):
         total = (self.nilai_raw_korelasi_output * self.bobot_korelasi_output) + (self.nilai_raw_korelasi_sasaran *
                                                                                  self.bobot_korelasi_sasaran) + (self.nilai_raw_MP * self.bobot_skor_MP) + (self.nilai_raw_investasi * self.bobot_investasi)
-        # return self.skor_investasi + self.skor_korelasi_output + self.skor_korelasi_sasaran + self.skor_MP
-        return total
+        return round(Decimal(total), 2)
 
     def __str__(self) -> str:
         return self.proyek.judul_proyek

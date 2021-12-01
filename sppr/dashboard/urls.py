@@ -60,6 +60,10 @@ urlpatterns = [
     path('forms/longlist/delete/<int:pk>',
          views.deleteSingleLonglist, name="deleteSingleLonglist"),
 
+    # Path to CRUD Skoring
+    path('forms/skoring/update/<int:pk>',
+         views.updateHasilSkoring, name="updateSkoring"),
+
     # Path to download excel longlist data format
     path('download/format/longlist/',
          views.download_longlist_format, name="downloadLonglist")
