@@ -366,6 +366,8 @@ class Longlist(models.Model):
         super(Longlist, self).save(*args, **kwargs)
         if self.shortlist == True:
             SkoringProyek.objects.create(proyek=self)
+        elif self.shortlist == False:
+            SkoringProyek.objects.get(proyek=self).delete()
 
 
 class CsvLongList(models.Model):

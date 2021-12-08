@@ -363,7 +363,7 @@ class EndorsementDataView(AjaxDatatableView):
     title = 'Endorsement'
 
     initial_order = [["judul_proyek", "asc"], ]
-    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    length_menu = [[10, 20, 50, 100, -1], [10, 20, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
@@ -406,7 +406,7 @@ class HasilSkoringDataView(AjaxDatatableView):
     title = 'Hasil Skoring Proyek'
 
     initial_order = [["proyek", "asc"], ]
-    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    length_menu = [[10, 20, 50, 100, -1], [10, 20, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
