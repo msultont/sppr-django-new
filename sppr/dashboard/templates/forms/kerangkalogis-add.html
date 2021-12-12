@@ -1,0 +1,64 @@
+{% extends 'parts/main.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Content header -->
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">{{judul}}</h1>
+    <p class="dataView" hidden> {{dataView}} </p>
+</div>
+
+<form class="w-full max-w-screen-lg" action="" method="POST">
+
+    {% csrf_token %}
+    <!-- {{form}} -->
+
+    <div class="p-8">
+        <div class="flex flex-wrap -mx-3 mb-6">
+
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+
+                <!-- {% if form.judul_proyek.errors %}
+                <ol>
+                    {% for error in form.judul_proyek.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ol>
+                {% endif %} -->
+
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    {{form.judul_proyek.label}}
+                </label>
+                <!-- <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    name="judul_proyek" id="id_judul_proyek" type="text" value="{{form.instance.judul_proyek}}">
+
+                {% render_field form.judul_proyek class="appearance-none block w-full bg-gray-200 text-gray-700 border
+                border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" %} -->
+
+                {{form.judul_proyek}}
+
+            </div>
+        </div>
+
+
+
+
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" type="submit">Simpan
+            Data</button>
+
+    </div>
+</form>
+
+<script>
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle("hidden");
+        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+        document.getElementById(modalID).classList.toggle("flex");
+        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    }
+</script>
+
+{% endblock %}

@@ -11,10 +11,16 @@ urlpatterns = [
     path('auth/login', views.loginUser, name='login'),
     path('auth/logout', views.logoutUser, name='logout'),
 
+     # Akses ke form kerangka logis
+     path('profil/addkerangkalogis', views.addkerangkalogis, name='addkerangkalogis'),
+
     # Akses ke dashboard utama
     path('dashboard/', views.dashboard, name='dashboard'),
 
     # Akses untuk ke Menu Profil Daerah
+    path('profil/<str:menu>', views.profil, name='profil'),
+
+     # Akses untuk ke Menu Profil Daerah Aceh
     path('profil/<str:menu>', views.profil, name='profil'),
 
     # Akses untuk ke Menu Kebutuhan Daerah

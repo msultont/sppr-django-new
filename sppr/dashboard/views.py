@@ -238,6 +238,15 @@ def kajian_wilayah(request):
 
 """
 
+    # Create Hasil Kerangka Logis
+
+
+@login_required(login_url='login')
+def addkerangkalogis(request):
+    return render(request, 'forms/kerangkalogis-add.html')
+
+# Create Single Long List Data
+
 
 def cek_profil(menu):
 
@@ -249,6 +258,40 @@ def cek_profil(menu):
         judul = "Analisis Kerangka Logis"
     elif menu == "akp":
         judul = "Analisis Kawasan Prioritas"
+    elif menu == "aceh":
+        judul = "Kondisi Umum Wilayah Aceh"
+    elif menu == "sumaterabarat":
+        judul = "Kondisi Umum Wilayah Sumatera Barat"
+    elif menu == "sumaterautara":
+        judul = "Kondisi Umum Wilayah Sumatera Utara"
+    elif menu == "jambi":
+        judul = "Kondisi Umum Wilayah Jambi"
+    elif menu == "bengkulu":
+        judul = "Kondisi Umum Wilayah Bengkulu"
+    elif menu == "bangkabelitung":
+        judul = "Kondisi Umum Wilayah Bangka Belitung"
+    elif menu == "sumateraselatan":
+        judul = "Kondisi Umum Wilayah Sumatera Selatan"
+    elif menu == "riau":
+        judul = "Kondisi Umum Wilayah Riau"
+    elif menu == "kepulauanriau":
+        judul = "Kondisi Umum Wilayah Kepulauan Riau"
+    elif menu == "lampung":
+        judul = "Kondisi Umum Wilayah Lampung"
+    elif menu == "banten":
+        judul = "Kondisi Umum Wilayah Banten"
+    elif menu == "dkijakarta":
+        judul = "Kondisi Umum Wilayah DKI Jakarta"
+    elif menu == "jawabarat":
+        judul = "Kondisi Umum Wilayah Jawa Barat"
+    elif menu == "jawatengah":
+        judul = "Kondisi Umum Wilayah Jawa Tengah"
+    elif menu == "diy":
+        judul = "Kondisi Umum Wilayah Daerah Istimewa Yogyakarta"
+    elif menu == "bali":
+        judul = "Kondisi Umum Wilayah Bali"
+    elif menu == "jawatimur":
+        judul = "Kondisi Umum Wilayah Jawa Timur"
     else:
         judul = "Kesalahan Memilih Menu"
 
@@ -265,6 +308,40 @@ def cek_profil_template(menu):
         template = "kerangka-logis"
     elif menu == "akp":
         template = "kawasan-prioritas"
+    elif menu == "aceh":
+        template = "index"
+    elif menu == "sumaterabarat":
+        template = "index"
+    elif menu == "sumaterautara":
+        template = "index"
+    elif menu == "jambi":
+        template = "index"
+    elif menu == "bengkulu":
+        template = "index"
+    elif menu == "bangkabelitung":
+        template = "index"
+    elif menu == "sumateraselatan":
+        template = "index"
+    elif menu == "riau":
+        template = "index"
+    elif menu == "kepulauanriau":
+        template = "index"
+    elif menu == "lampung":
+        template = "index"
+    elif menu == "banten":
+        template = "index"
+    elif menu == "dkijakarta":
+        template = "index"
+    elif menu == "jawabarat":
+        template = "index"
+    elif menu == "jawatengah":
+        template = "index"
+    elif menu == "diy":
+        template = "index"
+    elif menu == "bali":
+        template = "index"
+    elif menu == "jawatimur":
+        template = "index"
 
     return template
 
@@ -515,8 +592,6 @@ class KawasanPrioritasDataView(AjaxDatatableView):
             'title': 'Dampak Ekonomi Revisi'},
         {'name': 'kawasan_prioritas', 'visible': True, 'title': 'Kawasan Prioritas'},
     ]
-
-# Create Single Long List Data
 
 
 @login_required(login_url='login')
