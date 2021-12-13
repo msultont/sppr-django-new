@@ -1,18 +1,44 @@
 from django.core import validators
 from django.db import models
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, DO_NOTHING
 from django.db.models.fields.related import ForeignKey
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from mptt.models import MPTTModel, TreeForeignKey
 from decimal import Decimal
+import datetime
 # Create your models here.
+
+
+class ProvinsiId(models.Model):
+    # Field name made lowercase.
+    provinsi_id = models.IntegerField(
+        db_column='Provinsi_ID', primary_key=True)
+    # Field name made lowercase. Field renamed to remove unsuitable characters.
+    nama_provinsi = models.TextField(
+        db_column='Nama Provinsi', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Provinsi_ID'
+
+    def __str__(self) -> str:
+        return self.nama_provinsi
+
+
+def year_choices():
+    return [(r, r) for r in range(2019, datetime.date.today().year + 5)]
+
+
+def current_year():
+    return datetime.date.today().year
 
 
 class IsuStrategis(MPTTModel):
     nama_isu = models.CharField(max_length=400, blank=True, null=True)
     provinsi = models.ForeignKey(
-        'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
+        ProvinsiId, models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
+    tahun = models.IntegerField(choices=year_choices(), default=2019)
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')
 
@@ -23,22 +49,47 @@ class IsuStrategis(MPTTModel):
         return f'{self.provinsi} - {self.nama_isu}'
 
 
-class AnalisisKerangkaLogis(MPTTModel):
-    nama_hirarki_logis = models.CharField(max_length=250, unique=True)
+class TujuanLFA(models.Model):
+    nama_tujuan = models.TextField(blank=False, null=False)
     provinsi = models.ForeignKey(
-        'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
-    indikator = models.CharField(max_length=400, blank=True, null=True)
-    sumber_data = models.CharField(max_length=400, blank=True, null=True)
-    sumber = models.CharField(max_length=400, blank=True, null=True)
-    asumsi = models.CharField(max_length=400, blank=True, null=True)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE,
-                            null=True, blank=True, related_name='children')
-
-    class MPTTMeta:
-        order_insertion_by = ['nama_hirarki_logis']
+        "ProvinsiId", models.DO_NOTHING, blank=True, null=True)
+    tahun = models.IntegerField(choices=year_choices(), default=2019)
+    indikator = models.TextField(max_length=500, blank=True, null=True)
+    sumber_data = models.TextField(max_length=500, blank=True, null=True)
+    asumsi = models.TextField(max_length=500, blank=True, null=True)
+    nilai = models.FloatField(default=0)
 
     def __str__(self) -> str:
-        return f'{self.provinsi} - {self.nama_hirarki_logis}'
+        return f'{self.provinsi} - {self.nama_tujuan}'
+
+
+class SasaranLFA(models.Model):
+    tujuan = models.ForeignKey(
+        'TujuanLFA', models.DO_NOTHING, blank=True, null=True)
+    nama_sasaran = models.TextField(blank=False, null=False)
+    indikator = models.TextField(max_length=500, blank=True, null=True)
+    sumber_data = models.TextField(max_length=500, blank=True, null=True)
+    asumsi = models.TextField(max_length=500, blank=True, null=True)
+    nilai = models.FloatField(default=0)
+    pengaruh_sasaran_tujuan = models.FloatField(default=0)
+
+    def __str__(self) -> str:
+        return f'{self.tujuan.nama_tujuan} - {self.nama_sasaran}'
+
+
+class OutputLFA(models.Model):
+    sasaran = models.ForeignKey(
+        'SasaranLFA', models.DO_NOTHING, blank=True, null=True)
+    nama_output = models.TextField(blank=False, null=False)
+    indikator = models.TextField(max_length=500, blank=True, null=True)
+    sumber_data = models.TextField(max_length=500, blank=True, null=True)
+    asumsi = models.TextField(max_length=500, blank=True, null=True)
+    nilai = models.FloatField(default=0)
+    pengaruh_output_sasaran = models.FloatField(default=0)
+
+    def __str__(self) -> str:
+        return f'{self.sasaran.tujuan.provinsi} - {self.nama_output}'
+
 
 # New Model Corresponding to Longlist and Shortlist Model
 
@@ -149,22 +200,6 @@ class MitraId(models.Model):
 
     def __str__(self) -> str:
         return self.nama_direktorat_mitra
-
-
-class ProvinsiId(models.Model):
-    # Field name made lowercase.
-    provinsi_id = models.IntegerField(
-        db_column='Provinsi_ID', primary_key=True)
-    # Field name made lowercase. Field renamed to remove unsuitable characters.
-    nama_provinsi = models.TextField(
-        db_column='Nama Provinsi', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'Provinsi_ID'
-
-    def __str__(self) -> str:
-        return self.nama_provinsi
 
 
 class ProyekId(models.Model):
@@ -355,6 +390,11 @@ class Longlist(models.Model):
     endorsement = models.BooleanField(
         blank=True, null=True, default=False, choices=bool_choices)
 
+    tahun_longlist = models.IntegerField(choices=year_choices())
+
+    output_test = models.ForeignKey(
+        'OutputLFA', models.DO_NOTHING, db_column='output_test', blank=True, null=True)
+
     def __str__(self) -> str:
         return self.judul_proyek
 
@@ -367,7 +407,8 @@ class Longlist(models.Model):
         if self.shortlist == True:
             SkoringProyek.objects.create(proyek=self)
         elif self.shortlist == False:
-            SkoringProyek.objects.get(proyek=self).delete()
+            if SkoringProyek.objects.filter(proyek=self).exists():
+                SkoringProyek.objects.get(proyek=self).delete()
 
 
 class CsvLongList(models.Model):
