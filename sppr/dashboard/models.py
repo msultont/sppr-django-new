@@ -74,7 +74,10 @@ class SasaranLFA(models.Model):
     pengaruh_sasaran_tujuan = models.FloatField(default=0)
 
     def __str__(self) -> str:
-        return f'{self.tujuan.nama_tujuan} - {self.nama_sasaran}'
+        try:
+            return f'{self.tujuan.nama_tujuan} - {self.nama_sasaran}'
+        except:
+            return f'{"Belum ada tujuan"} - {self.nama_sasaran}'
 
 
 class OutputLFA(models.Model):
@@ -88,8 +91,13 @@ class OutputLFA(models.Model):
     pengaruh_output_sasaran = models.FloatField(default=0)
 
     def __str__(self) -> str:
-        return f'{self.sasaran.tujuan.provinsi} - {self.nama_output}'
-
+        try:
+            try:
+                return f'{self.sasaran.tujuan.provinsi} - {self.nama_output}'
+            except:
+                return f'{self.sasaran.nama_sasaran} - {self.nama_output}'
+        except:
+            return f'{"Belum ada sasaran"} - {self.nama_output}'
 
 # New Model Corresponding to Longlist and Shortlist Model
 
