@@ -230,6 +230,14 @@ def kajian_wilayah(request):
 
     return render(request, 'kajian_wilayah/index.html')
 
+
+# Route to Monev Spasial
+
+
+@login_required(login_url="login")
+def monev_spasial(request):
+
+    return render(request, 'monev_spasial/index.html')
 ############################
 
 

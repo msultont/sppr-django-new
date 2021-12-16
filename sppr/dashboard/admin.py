@@ -24,10 +24,15 @@ class Longlist_Admin(admin.ModelAdmin):
     list_display = ["judul_proyek", "provinsi", "tahun_longlist"]
 
 
+class SkoringProyek_Admin(admin.ModelAdmin):
+    list_display = ["proyek", "nilai_raw_korelasi_sasaran",
+                    "nilai_raw_korelasi_output", "nilai_raw_MP", "nilai_raw_investasi"]
+
+
 admin.site.register(Longlist, Longlist_Admin)
 admin.site.register(CsvLongList)
 admin.site.register(DataKawasanPrioritas)
-admin.site.register(SkoringProyek)
+admin.site.register(SkoringProyek, SkoringProyek_Admin)
 admin.site.register(TujuanLFA, TujuanLFA_Admin)
 admin.site.register(SasaranLFA, SasaranLFA_Admin)
 admin.site.register(OutputLFA, OutputLFA_Admin)

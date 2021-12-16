@@ -11,8 +11,9 @@ urlpatterns = [
     path('auth/login', views.loginUser, name='login'),
     path('auth/logout', views.logoutUser, name='logout'),
 
-     # Akses ke form kerangka logis
-     path('profil/addkerangkalogis', views.addkerangkalogis, name='addkerangkalogis'),
+    # Akses ke form kerangka logis
+    path('profil/addkerangkalogis',
+         views.addkerangkalogis, name='addkerangkalogis'),
 
     # Akses ke dashboard utama
     path('dashboard/', views.dashboard, name='dashboard'),
@@ -20,7 +21,7 @@ urlpatterns = [
     # Akses untuk ke Menu Profil Daerah
     path('profil/<str:menu>', views.profil, name='profil'),
 
-     # Akses untuk ke Menu Profil Daerah Aceh
+    # Akses untuk ke Menu Profil Daerah Aceh
     path('profil/<str:menu>', views.profil, name='profil'),
 
     # Akses untuk ke Menu Kebutuhan Daerah
@@ -28,6 +29,8 @@ urlpatterns = [
 
     # Akses untuk ke Menu Kajian Kewilayahan
     path('kajian/', views.kajian_wilayah, name="kawil"),
+
+    path('monev_spasial/', views.monev_spasial, name="monev_spasial"),
 
     # Akses untuk ke menu proyek mitra KL
     path('proyek/<str:menu>', views.proyek, name="proyek"),
