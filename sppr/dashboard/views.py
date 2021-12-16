@@ -78,8 +78,9 @@ def profil(request, menu):
 
     judul = cek_profil(menu)
     template = cek_profil_template(menu)
+    content = cek_content(menu)
 
-    return render(request, f'profil/{template}.html', {'judul': judul})
+    return render(request, f'profil/{template}.html', {'judul': judul, 'content': content})
 
 # Route to Kebutuhan Daerah Page
 
@@ -238,7 +239,7 @@ def kajian_wilayah(request):
 
 """
 
-    # Create Hasil Kerangka Logis
+# Create Hasil Kerangka Logis
 
 
 @login_required(login_url='login')
@@ -296,6 +297,48 @@ def cek_profil(menu):
         judul = "Kesalahan Memilih Menu"
 
     return judul
+
+
+def cek_content(menu):
+    template = None
+    if menu == "aceh":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/bf53f8e1e7494042b70d1cf739838601"
+    elif menu == "sumaterabarat":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/ee0befefe0e4425da5a4f11d69475cc6"
+    elif menu == "sumaterautara":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/b40c48d5e33d4259aaac7bf783b4f11b"
+    elif menu == "jambi":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/b0cb7d450003489bb3beb5b148e91801"
+    elif menu == "bengkulu":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7230f3738de94355ba9e161134e26453/edit"
+    elif menu == "bangkabelitung":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8f2768f275024ce18f459830bdef8c65/edit"
+    elif menu == "sumateraselatan":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/fa9adec2980c49a99f605a45ad691b71/edit"
+    elif menu == "riau":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2a0d677b3c0840fca87948bbfb46900f/edit"
+    elif menu == "kepulauanriau":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/28949063aca549f596732f167f390836/edit"
+    elif menu == "lampung":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8aa01ff1c78b4911835d92a22a57d91a/edit"
+    elif menu == "banten":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/80475af1daaa4a0a8e22a5e415a7ee14/edit"
+    elif menu == "dkijakarta":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7b7384248e904e928845a9a044d751cd/edit"
+    elif menu == "jawabarat":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/942452b008cf46548eabdbc222b2302d/edit"
+    elif menu == "jawatengah":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/cb1ca19e1cd64ce793feca475f7cd4fc/edit"
+    elif menu == "diy":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/853f8a4a830a4eb090b00bd626438429/edit"
+    elif menu == "bali":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/088fb805d40e4eeaba7dfeeda46bc726/edit"
+    elif menu == "jawatimur":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2b68130db02b4d7d99103383fe138736/edit"
+    else:
+        template = None
+
+    return template
 
 
 def cek_profil_template(menu):
@@ -492,9 +535,9 @@ class HasilSkoringDataView(AjaxDatatableView):
         {'name': 'proyek', 'visible': True, 'title': 'Judul Proyek',
             'foreign_field': 'proyek__judul_proyek'},
         {'name': 'nilai_raw_korelasi_sasaran',
-            'title': 'Nilai Korelasi Sasaran', 'visible': True},
+            'title': 'Pengaruh Sasaran', 'visible': True},
         {'name': 'nilai_raw_korelasi_output',
-            'title': 'Nilai Korelasi Output', 'visible': True},
+            'title': 'Pengaruh Output', 'visible': True},
         {'name': 'nilai_raw_MP',
             'title': 'Nilai MP', 'visible': True},
         {'name': 'nilai_raw_investasi',
