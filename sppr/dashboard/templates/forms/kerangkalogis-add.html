@@ -61,4 +61,259 @@
     }
 </script>
 
+{% extends 'parts/main.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+<form class="w-full max-w-4xl l px-5">
+
+
+    <!-- HALAMAN PEMILIHAN PENGISIAN TUJUAN SASARAN OUTPUT -->
+
+    <h1 class="text-4xl font-normal leading-normal mt-0 mb-2 text-pink-800 text-center">
+        Silahkan Pilih Kategori yang Hendak Diisi :
+      </h1>
+
+    <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+        <!--Card 1-->
+        <div class="bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg">
+          
+          <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2 text-center text-gray-800">Tujuan</div>
+          </div>
+        </div>
+        <!--Card 2-->
+        <div class="bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg">
+          
+          <div class="px-2 py-4">
+            <div class="font-bold text-xl mb-2 text-center text-gray-800">Sasaran</div>
+          </div>
+        </div>
+    
+        <!--Card 3-->
+        <div class="bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg">
+          
+          <div class="px-2 py-4">
+            <div class="font-bold text-xl mb-2 text-center text-gray-800">Output</div>
+          </div>
+        </div>
+      </div>
+
+<!-- HALAMAN PENGISIAN TUJUAN -->
+
+    <div class="flex flex-wrap -mx-3 mb-2">
+        <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+              Silahkan Isi Provinsi
+            </label>
+            <div class="relative w-3/4">
+              <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option>Aceh</option>
+                <option>Sumatera Utara</option>
+                <option>Sumatera Barat</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
+          </div>
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+          Silahkan Isi Tahun
+        </label>
+        <div class="relative w-3/4">
+          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+            <option>2020-2024</option>
+            <option>2020-2024</option>
+            <option>2020-2024</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+          </div>
+        </div>
+      </div>
+      
+
+
+      <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Silahkan Isi Tujuan
+        </label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Silahkan Isi Tujuan Disini">
+        <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+      </div>
+
+
+      <div class="w-1/4 px-2 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Hierarki Logis
+        </label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Isi disini">
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Indikator
+        </label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Isi disini">
+    </div>
+    <div class="w-1/4 px-2 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+              Sumber Data
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Isi disini">
+            <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+          </div>
+          <div class="w-1/4 px-2">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+              Asumsi
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Isi disini">
+        </div>
+
+        <button
+        class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+        onclick="">
+        <p>Simpan</p>
+    </button>
+    <button
+        class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+        onclick="">
+        <p>Kembali</p>
+    </button>
+                <!-- {% if form.judul_proyek.errors %}
+                <ol>
+                    {% for error in form.judul_proyek.errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                </ol>
+                {% endif %} -->
+
+<!-- HALAMAN PENGISIAN SASARAN -->
+
+        <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+              Silahkan Isi Sasaran
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Silahkan Isi Tujuan Disini">
+            <p class="text-red-500 text-xs italic">Silahkan Isi Sasaran Disini</p>
+          </div>
+    
+          <div class="w-1/4 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+              Hierarki Logis
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Isi disini">
+            <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+          </div>
+          <div class="w-1/4 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+              Indikator
+            </label>
+            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Isi disini">
+        </div>
+        <div class="w-1/4 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Sumber Data
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Isi disini">
+                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+              </div>
+              <div class="w-1/4 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Asumsi
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Isi disini">
+            </div>
+
+            <button
+            class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+            onclick="">
+            <p>Simpan</p>
+        </button>
+        <button
+        class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+        onclick="">
+        <p>Kembali</p>
+    </button>
+
+<!-- HALAMAN PENGISIAN OUTPUT -->
+
+            <div class="w-full md:w-full px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                    {{form.judul_proyek.label}}
+                  Silahkan Isi Output
+                </label>
+
+                {{form.judul_proyek}}
+
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Silahkan Isi Tujuan Disini">
+                <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+              </div>
+        
+              <div class="w-1/4 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Aktivitas
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Isi disini">
+                <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+              </div>
+              <div class="w-1/4 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Indikator
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Isi disini">
+            </div>
+        
+
+            <div class="w-1/4 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                      Sumber Data
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Isi disini">
+                    <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+                  </div>
+                  <div class="w-1/4 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                      Asumsi
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Isi disini">
+                </div>
+
+                <button
+                class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+                onclick="">
+                <p>Simpan</p>
+            </button>
+            <button
+            class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+            onclick="">
+            <p>Kembali</p>
+        </button>
+
+            </div>
+        
+            
+
+    
+
+</form>
+
+
+
+  </form>
+
+
+<script>
+    function toggleModal(modalID) {
+        document.getElementById(modalID).classList.toggle("hidden");
+        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
+        document.getElementById(modalID).classList.toggle("flex");
+        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    }
+</script>
+
 {% endblock %}
