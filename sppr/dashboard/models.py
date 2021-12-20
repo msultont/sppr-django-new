@@ -79,6 +79,12 @@ class SasaranLFA(models.Model):
         except:
             return f'{"Belum ada tujuan"} - {self.nama_sasaran}'
 
+    @property
+    def pengaruh_sasaran_tujuan(self):
+
+        # Algoritma Korelasi & Regresi
+        return 0
+
 
 class OutputLFA(models.Model):
     sasaran = models.ForeignKey(
@@ -88,7 +94,6 @@ class OutputLFA(models.Model):
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
     nilai = models.FloatField(default=0)
-    pengaruh_output_sasaran = models.FloatField(default=0)
 
     def __str__(self) -> str:
         try:
@@ -99,6 +104,11 @@ class OutputLFA(models.Model):
         except:
             return f'{"Belum ada sasaran"} - {self.nama_output}'
 
+    @property
+    def pengaruh_output_sasaran(self):
+
+        # Algoritma Korelasi & Regresi
+        return 0
 # New Model Corresponding to Longlist and Shortlist Model
 
 

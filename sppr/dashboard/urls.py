@@ -11,10 +11,6 @@ urlpatterns = [
     path('auth/login', views.loginUser, name='login'),
     path('auth/logout', views.logoutUser, name='logout'),
 
-    # Akses ke form kerangka logis
-    path('profil/addkerangkalogis',
-         views.addkerangkalogis, name='addkerangkalogis'),
-
     # Akses ke dashboard utama
     path('dashboard/', views.dashboard, name='dashboard'),
 
@@ -75,6 +71,10 @@ urlpatterns = [
 
     # Path to download excel longlist data format
     path('download/format/longlist/',
-         views.download_longlist_format, name="downloadLonglist")
+         views.download_longlist_format, name="downloadLonglist"),
+
+    # Path to CRUD LFA
+    path('forms/add_lfa/<str:tipe>',
+         views.addkerangkalogis, name='addLfa'),
 
 ]

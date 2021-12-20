@@ -3,7 +3,7 @@ from .models import *
 from django.db.models import Count, query
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import CsvModelForm, LonglistForm, SkoringProyekForm
+from .forms import CsvModelForm, LonglistForm, Output_LFA_Form, Sasaran_LFA_Form, SkoringProyekForm, Tujuan_LFA_Form
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import csv
@@ -11,7 +11,8 @@ from distutils import util
 import os
 import mimetypes
 from django.http.response import HttpResponse
-
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 """
 
@@ -247,15 +248,6 @@ def monev_spasial(request):
 
 """
 
-# Create Hasil Kerangka Logis
-
-
-@login_required(login_url='login')
-def addkerangkalogis(request):
-    return render(request, 'forms/kerangkalogis-add.html')
-
-# Create Single Long List Data
-
 
 def cek_profil(menu):
 
@@ -438,7 +430,7 @@ class LonglistDataView(AjaxDatatableView):
     model = Longlist
     title = 'Longlist'
     initial_order = [["judul_proyek", "asc"], ]
-    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    length_menu = [[10, 50, 100, -1], [10, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
@@ -712,6 +704,82 @@ def updateHasilSkoring(request, pk):
             return redirect('/kebdaerah/prioritas')
 
     return render(request, 'forms/dpp-update.html', content)
+
+# Create Hasil Kerangka Logis
+
+
+@login_required(login_url='login')
+def addkerangkalogis(request, tipe):
+    content_title = ""
+    class_button_tujuan = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+    class_button_sasaran = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+    class_button_output = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+    a_class_tujuan = ""
+    a_class_sasaran = ""
+    a_class_output = ""
+    form = None
+
+    if tipe == 'tujuan':
+        content_title = "tujuan"
+        class_button_tujuan = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        a_class_tujuan = "disabled"
+        form = Tujuan_LFA_Form()
+        if request.method == 'POST':
+            form = Tujuan_LFA_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Berhasil Menambahkan Tujuan LFA')
+                return HttpResponseRedirect('/forms/add_lfa/tujuan')
+
+    elif tipe == 'sasaran':
+        content_title = "sasaran"
+        class_button_sasaran = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        a_class_sasaran = "disabled"
+        form = Sasaran_LFA_Form()
+        if request.method == 'POST':
+            form = Sasaran_LFA_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Berhasil Menambahkan Sasaran LFA')
+                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+            else:
+                messages.success(request, 'Gagal Menambahkan Sasaran LFA')
+                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+
+    elif tipe == 'output':
+        content_title = "output"
+        class_button_output = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        a_class_output = "disabled"
+        form = Output_LFA_Form()
+        if request.method == 'POST':
+            form = Output_LFA_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Berhasil Menambahkan Output LFA')
+                return HttpResponseRedirect('/forms/add_lfa/output')
+    else:
+        content_title = None
+
+    # content = {
+    #     'content_title' : content_title,
+    #     'b_tujuan':class_button_tujuan,
+    #     'b_sasaran':class_button_sasaran,
+    #     'b_output':class_button_output,
+    #     'a_tujuan':a_class_tujuan,
+    #     'a_sasaran':a_class_sasaran,
+    #     'a_output':a_class_output
+    # }
+
+    return render(request, 'forms/kerangkalogis-add.html', {'content': {
+        'content_title': content_title,
+        'b_tujuan': class_button_tujuan,
+        'b_sasaran': class_button_sasaran,
+        'b_output': class_button_output,
+        'a_tujuan': a_class_tujuan,
+        'a_sasaran': a_class_sasaran,
+        'a_output': a_class_output,
+        'form': form
+    }})
 
 
 def download_longlist_format(request):
