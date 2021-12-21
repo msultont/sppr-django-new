@@ -98,12 +98,7 @@ class LonglistForm(ModelForm):
             'ket_kl_pelaksana': forms.TextInput(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'isu_strategis': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
                                                     'placeholder': 'Contoh : Antisipasi Banjir, Rob, dan Genangan'}),
-            'tujuan_lfa': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
-                                                 'placeholder': 'Contoh : Meningkatkan ketahanan masyarakat terhadap bencana'}),
-            'sasaran_lfa': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
-                                                  'placeholder': 'Contoh : Mengurangi Risiko Bencana'}),
-            'output_lfa': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white',
-                                                 'placeholder': 'Contoh : Peningkatan pemeliharaan sungai'}),
+            'output_test': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'mp': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'status_usulan': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'taging_kawasan_prioritas': forms.Select(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'}),
@@ -125,7 +120,8 @@ class LonglistForm(ModelForm):
             'rakortekbang': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'musrenbangprov': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
             'musrenbangnas': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
-            'endorsement': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'})
+            'endorsement': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'tahun_longlist': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'})
         }
 
 # Create form for edit DPP

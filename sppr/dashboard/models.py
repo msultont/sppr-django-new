@@ -37,7 +37,7 @@ def current_year():
 class IsuStrategis(MPTTModel):
     nama_isu = models.CharField(max_length=400, blank=True, null=True)
     provinsi = models.ForeignKey(
-        ProvinsiId, models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
+        ProvinsiId, on_delete=models.SET_NULL, db_column='provinsi', blank=True, null=True)
     tahun = models.IntegerField(choices=year_choices(), default=2019)
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')
@@ -52,7 +52,7 @@ class IsuStrategis(MPTTModel):
 class TujuanLFA(models.Model):
     nama_tujuan = models.TextField(blank=False, null=False)
     provinsi = models.ForeignKey(
-        "ProvinsiId", models.DO_NOTHING, blank=True, null=True)
+        "ProvinsiId", on_delete=models.SET_NULL, blank=True, null=True)
     tahun = models.IntegerField(choices=year_choices(), default=2019)
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
@@ -65,7 +65,7 @@ class TujuanLFA(models.Model):
 
 class SasaranLFA(models.Model):
     tujuan = models.ForeignKey(
-        'TujuanLFA', models.DO_NOTHING, blank=True, null=True)
+        'TujuanLFA', on_delete=models.SET_NULL, blank=True, null=True)
     nama_sasaran = models.TextField(blank=False, null=False)
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
@@ -88,7 +88,7 @@ class SasaranLFA(models.Model):
 
 class OutputLFA(models.Model):
     sasaran = models.ForeignKey(
-        'SasaranLFA', models.DO_NOTHING, blank=True, null=True)
+        'SasaranLFA', on_delete=models.SET_NULL, blank=True, null=True)
     nama_output = models.TextField(blank=False, null=False)
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
@@ -333,12 +333,12 @@ class Longlist(models.Model):
 
     # ro_id = models.IntegerField(blank=True, null=True)
     provinsi = models.ForeignKey(
-        'ProvinsiId', models.DO_NOTHING, db_column='provinsi', blank=True, null=True)
+        'ProvinsiId', on_delete=models.SET_NULL, db_column='provinsi', blank=True, null=True)
     judul_proyek = models.TextField(null=False)
     # This field type is a guess.
     lokasi_proyek = models.TextField(blank=True, null=True)
     lokasi_kabupaten = models.ForeignKey(
-        KabupatenId, models.DO_NOTHING, db_column='lokasi_kabupaten', blank=True, null=True)
+        KabupatenId, on_delete=models.SET_NULL, db_column='lokasi_kabupaten', blank=True, null=True)
     target_2021 = models.FloatField(blank=True, null=True)
     target_2022 = models.FloatField(blank=True, null=True)
     target_2023 = models.FloatField(blank=True, null=True)
@@ -350,12 +350,12 @@ class Longlist(models.Model):
     indikasi_pendanaan_2023 = models.FloatField(blank=True, null=True)
     indikasi_pendanaan_2024 = models.FloatField(blank=True, null=True)
     sumber_data = models.ForeignKey(
-        'SumberdataId', models.DO_NOTHING, db_column='sumber_data', blank=True, null=True)
+        'SumberdataId', on_delete=models.SET_NULL, db_column='sumber_data', blank=True, null=True)
     ket_sumber_data = models.TextField(
         db_column='ket_ sumber_data', blank=True, null=True)
     # Field name made lowercase.
     kl_pelaksana = models.ForeignKey(
-        KlId, models.DO_NOTHING, db_column='KL_pelaksana', blank=True, null=True)
+        KlId, on_delete=models.SET_NULL, db_column='KL_pelaksana', blank=True, null=True)
     ket_kl_pelaksana = models.TextField(
         db_column='ket_KL_pelaksana', blank=True, null=True)
     shortlist_2022 = models.BooleanField(
@@ -373,18 +373,18 @@ class Longlist(models.Model):
     output_lfa = models.TextField(
         db_column='output_LFA', blank=True, null=True, default="")
     # Field name made lowercase.
-    mp = models.ForeignKey('MajorprojectId', models.DO_NOTHING,
+    mp = models.ForeignKey('MajorprojectId', on_delete=models.SET_NULL,
                            db_column='MP', blank=True, null=True)
     status_usulan = models.ForeignKey(
-        'StatusId', models.DO_NOTHING, db_column='status_usulan', blank=True, null=True)
+        'StatusId', on_delete=models.SET_NULL, db_column='status_usulan', blank=True, null=True)
     sumber_bahasan = models.TextField(blank=True, null=True)
     taging_kawasan_prioritas = models.ForeignKey(
-        KawasanprioritasId, models.DO_NOTHING, db_column='taging_kawasan_prioritas', blank=True, null=True)
+        KawasanprioritasId, on_delete=models.SET_NULL, db_column='taging_kawasan_prioritas', blank=True, null=True)
     prioritas_tahun_2022 = models.TextField(blank=True, null=True)
     prioritas_tahun_2023 = models.TextField(blank=True, null=True)
     prioritas_tahun_2024 = models.TextField(blank=True, null=True)
     jenis_project = models.ForeignKey(
-        'ProyekId', models.DO_NOTHING, db_column='jenis_project', blank=True, null=True)
+        'ProyekId', on_delete=models.SET_NULL, db_column='jenis_project', blank=True, null=True)
     sub_tema_rkp = models.TextField(blank=True, null=True)
     klasifikasi_proyek = models.TextField(blank=True, null=True)
     jenis_impact = models.TextField(blank=True, null=True)
@@ -408,10 +408,11 @@ class Longlist(models.Model):
     endorsement = models.BooleanField(
         blank=True, null=True, default=False, choices=bool_choices)
 
-    tahun_longlist = models.IntegerField(choices=year_choices())
+    tahun_longlist = models.IntegerField(
+        choices=year_choices(), blank=True, null=True)
 
     output_test = models.ForeignKey(
-        'OutputLFA', models.DO_NOTHING, db_column='output_test', blank=True, null=True)
+        'OutputLFA', on_delete=models.SET_NULL, db_column='output_test', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.judul_proyek
@@ -423,7 +424,8 @@ class Longlist(models.Model):
     def save(self, *args, **kwargs):
         super(Longlist, self).save(*args, **kwargs)
         if self.shortlist == True:
-            SkoringProyek.objects.create(proyek=self)
+            if SkoringProyek.objects.filter(proyek=self).exists() == False:
+                SkoringProyek.objects.create(proyek=self)
         elif self.shortlist == False:
             if SkoringProyek.objects.filter(proyek=self).exists():
                 SkoringProyek.objects.get(proyek=self).delete()

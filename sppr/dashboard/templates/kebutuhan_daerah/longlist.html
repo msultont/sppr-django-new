@@ -69,6 +69,19 @@
     <!-- Content -->
     <div class="mt-2">
 
+        {% if messages %}
+        <div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+            <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+                Success
+            </div>
+            <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+                {% for message in messages %}
+                <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
         <div class="embed-container pr-5 pl-5">
             <br><iframe width="100%" height="500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 title="Rakortekrenbang"
@@ -622,6 +635,12 @@
         document.getElementById(modalID).classList.toggle("flex");
         document.getElementById(modalID + "-backdrop").classList.toggle("flex");
     }
+
+    setTimeout(function () {
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 3000)
 
 </script>
 

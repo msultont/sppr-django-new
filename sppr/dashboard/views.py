@@ -447,6 +447,8 @@ class LonglistDataView(AjaxDatatableView):
             'choices': True, 'autofilter': True},
         {'name': 'taging_kawasan_prioritas', 'title': 'Taging Kawasan', 'foreign_field': 'taging_kawasan_prioritas__kawasan_prioritas',
             'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'output_test', 'title': 'Output LFA', 'foreign_field': 'output_test__nama_output',
+            'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'edit', 'title': 'Action', 'placeholder': True,
          'searchable': False, 'orderable': False, },
         {'name': 'lokasi_proyek', 'visible': False},
@@ -459,9 +461,6 @@ class LonglistDataView(AjaxDatatableView):
         {'name': 'indikasi_pendanaan_2022', 'visible': False},
         {'name': 'indikasi_pendanaan_2023', 'visible': False},
         {'name': 'indikasi_pendanaan_2024', 'visible': False},
-        {'name': 'tujuan_lfa', 'visible': False},
-        {'name': 'sasaran_lfa', 'visible': False},
-        {'name': 'output_lfa', 'visible': False},
         {'name': 'keterangan', 'visible': False},
     ]
 
@@ -667,7 +666,11 @@ def updateLonglist(request, pk):
         form = LonglistForm(request.POST, instance=longlist)
         if form.is_valid():
             form.save()
-            return redirect('/kebdaerah/longlist')
+            messages.success(request, 'Berhasil Mengubah Longlist')
+            return HttpResponseRedirect('/kebdaerah/longlist')
+        else:
+            messages.error(request, 'Gagal Mengubah Longlist')
+            return render(request, 'forms/longlist.html', content)
 
     return render(request, 'forms/longlist.html', content)
 
@@ -743,7 +746,7 @@ def addkerangkalogis(request, tipe):
                 messages.success(request, 'Berhasil Menambahkan Sasaran LFA')
                 return HttpResponseRedirect('/forms/add_lfa/sasaran')
             else:
-                messages.success(request, 'Gagal Menambahkan Sasaran LFA')
+                messages.error(request, 'Gagal Menambahkan Sasaran LFA')
                 return HttpResponseRedirect('/forms/add_lfa/sasaran')
 
     elif tipe == 'output':
