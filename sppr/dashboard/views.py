@@ -252,7 +252,7 @@ def monev_spasial(request):
 def cek_profil(menu):
 
     if menu == "ku":
-        judul = "Kondisi Umum Wilayah"
+        judul = "Kondisi Umum Wilayah Regional I"
     elif menu == "pis":
         judul = "Permasalahan Isu Strategis"
     elif menu == "akl":
@@ -303,6 +303,8 @@ def cek_content(menu):
     template = None
     if menu == "aceh":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/bf53f8e1e7494042b70d1cf739838601"
+    elif menu == "ku":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/f02d00cca5f64450bf426ac457a6579e"
     elif menu == "sumaterabarat":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/ee0befefe0e4425da5a4f11d69475cc6"
     elif menu == "sumaterautara":
