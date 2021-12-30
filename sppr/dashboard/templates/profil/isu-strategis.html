@@ -16,6 +16,10 @@
     select {
         margin: 10px;
     }
+
+
+    
+
 </style>
 
 <main>
@@ -137,9 +141,9 @@
     };
 
     // Set the dimensions and margins of the diagram
-    var margin = { top: 20, right: 90, bottom: 30, left: 90 },
-        width = 1080 - margin.left - margin.right,
-        height = 1000 - margin.top - margin.bottom;
+    var margin = { top: 20, right: 90, bottom: 30, left: 30 },
+        width = 2500 - margin.left - margin.right,
+        height = 550 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     // appends a 'group' element to 'svg'
@@ -187,7 +191,7 @@
             links = treeData.descendants().slice(1);
 
         // Normalize for fixed-depth.
-        nodes.forEach(function (d) { d.y = d.depth * 180 });
+        nodes.forEach(function (d) { d.y = d.depth * 400 });
 
         // ****************** Nodes section ***************************
 
@@ -203,33 +207,34 @@
             })
             .on('click', click);
 
-        var rectHeight = 60, rectWidth = 150;
+        var rectHeight = 50, rectWidth = "panjangteks", panjangteks = 380;
 
         // Create Tooltip
 
         var tooltip = d3.select("body")
             .append("div")
-            .style("width", "100px")
+            .style("width", "relative")
             .style("position", "absolute")
             .style("z-index", "10")
             .style("visibility", "hidden")
             .style("background", "black")
             .style("padding", "15px")
             .style("border-radius", "10px")
-            .style("font-size", "8px")
+            .style("font-size", "12px")
             .style("color", "white")
 
         nodeEnter.append('rect')
             .attr('class', 'node')
-            .attr("width", rectWidth)
+            .attr("width", panjangteks)
+            .attr("max-width", panjangteks)
             .attr("height", rectHeight)
-            .attr("x", 0)
+            .attr("x", -3)
             .attr("y", (rectHeight / 2) * -1)
-            .attr("rx", "5")
+            .attr("rx", "15")
             .style("fill", function (d) {
                 return d.data.fill;
             })
-            .on("mouseover", function (d) { tooltip.text("Data: 100% Lorem Ipsum"); return tooltip.style("visibility", "visible"); })
+            .on("mouseover", function (d) { tooltip.text("Data: Coba data kalau agak panjang tes coba data panjang lorem ipsum"); return tooltip.style("visibility", "visible"); })
             .on("mousemove", function () { return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
             .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
 
@@ -244,9 +249,11 @@
             })
             .text(function (d) { return d.data.name; })
             .style("fill", "white")
-            .style("font-size", ".5em")
+            .style("font-size", ".68em")
             .style("font-weight", "bold")
-            .attr("dy", ".35em");
+            .attr("dy", ".7em")
+            .style("max-width", panjangteks)
+            .style("position", "center");
 
         // UPDATE
         var nodeUpdate = nodeEnter.merge(node);

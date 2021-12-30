@@ -17,11 +17,16 @@ urlpatterns = [
     # Akses untuk ke Menu Profil Daerah
     path('profil/<str:menu>', views.profil, name='profil'),
 
+    # Akses untuk ke Menu Profil Daerah Aceh
+    path('profil/<str:menu>', views.profil, name='profil'),
+
     # Akses untuk ke Menu Kebutuhan Daerah
     path('kebdaerah/<str:menu>', views.kebdaerah, name='kebdaerah'),
 
     # Akses untuk ke Menu Kajian Kewilayahan
     path('kajian/', views.kajian_wilayah, name="kawil"),
+
+    path('monev_spasial/', views.monev_spasial, name="monev_spasial"),
 
     # Akses untuk ke menu proyek mitra KL
     path('proyek/<str:menu>', views.proyek, name="proyek"),
@@ -38,6 +43,10 @@ urlpatterns = [
     # Path to Endorsement Data View
     path('ajax_datatable/endorsement', views.EndorsementDataView.as_view(),
          name="endorsement"),
+
+    # Path Hasil Skoring Data View
+    path('ajax_datatable/skoring_lfa', views.HasilSkoringDataView.as_view(),
+         name="skoring_lfa"),
 
     # Path to Kesepakatan Forum Data View
 
@@ -56,8 +65,16 @@ urlpatterns = [
     path('forms/longlist/delete/<int:pk>',
          views.deleteSingleLonglist, name="deleteSingleLonglist"),
 
+    # Path to CRUD Skoring
+    path('forms/skoring/update/<int:pk>',
+         views.updateHasilSkoring, name="updateSkoring"),
+
     # Path to download excel longlist data format
     path('download/format/longlist/',
-         views.download_longlist_format, name="downloadLonglist")
+         views.download_longlist_format, name="downloadLonglist"),
+
+    # Path to CRUD LFA
+    path('forms/add_lfa/<str:tipe>',
+         views.addkerangkalogis, name='addLfa'),
 
 ]

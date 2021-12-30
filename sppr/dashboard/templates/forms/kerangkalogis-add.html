@@ -1,0 +1,329 @@
+{% extends 'parts/main.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Content header -->
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+  <h1 class="text-2xl font-semibold">Menambahkan LFA</h1>
+</div>
+
+<!-- HALAMAN PEMILIHAN PENGISIAN TUJUAN SASARAN OUTPUT -->
+
+<h1 class="text-4xl font-normal leading-normal mt-0 mb-2 text-pink-800 text-center mt-5">
+  {% if content.content_title %}
+  Anda Sedang Menambahkan {{content.content_title}}
+  {% else %}
+  Silahkan Pilih Kategori yang Hendak Diisi :
+  {% endif %}
+</h1>
+
+{% if messages %}
+<div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+  <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+  </div>
+  <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+    {% for message in messages %}
+    <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+  <!--Card 1-->
+  <a href="{% url 'addLfa' 'tujuan' %}" class="{{content.a_tujuan}}">
+    <div class="{{content.b_tujuan}}">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2 text-center text-white">
+          <p>Tujuan</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!--Card 2-->
+  <a href="{% url 'addLfa' 'sasaran' %}" class="{{content.a_sasaran}}">
+    <div class="{{content.b_sasaran}}">
+
+      <div class="px-2 py-4">
+        <div class="font-bold text-xl mb-2 text-center text-white">
+          <p>Sasaran</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+
+  <!--Card 3-->
+  <a href="{% url 'addLfa' 'output' %}" class="{{content.a_output}}">
+    <div class="{{content.b_output}}">
+
+      <div class="px-2 py-4">
+        <div class="font-bold text-xl mb-2 text-center text-white">
+
+          <p>Output</p>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+
+{% if content.content_title == 'tujuan' %}
+<!-- HALAMAN PENGISIAN TUJUAN -->
+
+<form class="w-full max-w-4xl l px-5 m-5" method="POST">
+
+  {% csrf_token %}
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+
+    <div class="flex flex-wrap -px-3 mb-6 mt-5">
+
+    </div>
+    <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Silahkan Isi Provinsi
+      </label>
+      <div class="relative w-3/4">
+        {{content.form.provinsi}}
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Silahkan Isi Tahun
+      </label>
+      <div class="relative w-3/4">
+        {{content.form.tahun}}
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Silahkan Isi Tujuan
+      </label>
+      {{content.form.nama_tujuan}}
+      <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+    </div>
+
+    <div class="flex flex-wrap -px-3 mb-6 mt-5">
+      <div class="w-1/4 px-2 mb-6  md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Indikator
+        </label>
+        {{content.form.indikator}}
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Nilai
+        </label>
+        {{content.form.nilai}}
+      </div>
+      <div class="w-1/4 px-2 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Sumber Data
+        </label>
+        {{content.form.sumber_data}}
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Asumsi
+        </label>
+        {{content.form.asumsi}}
+      </div>
+    </div>
+
+    <button class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Simpan</p>
+    </button>
+    <!-- <button class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Kembali</p>
+    </button> -->
+  </div>
+
+</form>
+
+{% elif content.content_title == 'sasaran' %}
+<!-- HALAMAN PENGISIAN SASARAN -->
+
+<form class="w-full max-w-4xl l px-5 m-5" method="POST">
+
+  {% csrf_token %}
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+
+    <div class="flex flex-wrap -px-3 mb-6 mt-5">
+
+    </div>
+    <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Silahkan Isi Tujuan
+      </label>
+      <div class="relative w-3/4">
+        {{content.form.tujuan}}
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Silahkan Isi Sasaran
+      </label>
+      {{content.form.nama_sasaran}}
+      <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+    </div>
+
+    <div class="flex flex-wrap -px-3 mb-6 mt-5">
+      <div class="w-1/4 px-2 mb-6  md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Indikator
+        </label>
+        {{content.form.indikator}}
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Nilai
+        </label>
+        {{content.form.nilai}}
+      </div>
+      <div class="w-1/4 px-2 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Sumber Data
+        </label>
+        {{content.form.sumber_data}}
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Asumsi
+        </label>
+        {{content.form.asumsi}}
+      </div>
+    </div>
+
+    <button class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Simpan</p>
+    </button>
+    <!-- <button class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Kembali</p>
+    </button> -->
+  </div>
+
+</form>
+
+{% elif content.content_title == 'output' %}
+<!-- HALAMAN PENGISIAN OUTPUT -->
+
+<form class="w-full max-w-4xl l px-5 m-5" method="POST">
+
+  {% csrf_token %}
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+
+    <div class="flex flex-wrap -px-3 mb-6 mt-5">
+
+    </div>
+    <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Silahkan Isi Sasaran
+      </label>
+      <div class="relative w-3/4">
+        {{content.form.sasaran}}
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Silahkan Isi Output
+      </label>
+      {{content.form.nama_output}}
+      <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+    </div>
+
+    <div class="flex flex-wrap -px-3 mb-6 mt-5">
+      <div class="w-1/4 px-2 mb-6  md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Indikator
+        </label>
+        {{content.form.indikator}}
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Nilai
+        </label>
+        {{content.form.nilai}}
+      </div>
+      <div class="w-1/4 px-2 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Sumber Data
+        </label>
+        {{content.form.sumber_data}}
+        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+      </div>
+      <div class="w-1/4 px-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+          Asumsi
+        </label>
+        {{content.form.asumsi}}
+      </div>
+    </div>
+
+    <button class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Simpan</p>
+    </button>
+    <!-- <button class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Kembali</p>
+    </button> -->
+  </div>
+
+  {% endif %}
+
+  <style>
+    a.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
+  </style>
+
+  <script>
+
+    setTimeout(function () {
+      if ($('#msg').length > 0) {
+        $('#msg').remove();
+      }
+    }, 3000)
+
+  </script>
+
+  {% endblock %}

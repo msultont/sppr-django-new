@@ -3,7 +3,7 @@ from .models import *
 from django.db.models import Count, query
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import CsvModelForm, LonglistForm
+from .forms import CsvModelForm, LonglistForm, Output_LFA_Form, Sasaran_LFA_Form, SkoringProyekForm, Tujuan_LFA_Form
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import csv
@@ -11,7 +11,8 @@ from distutils import util
 import os
 import mimetypes
 from django.http.response import HttpResponse
-
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 """
 
@@ -78,8 +79,9 @@ def profil(request, menu):
 
     judul = cek_profil(menu)
     template = cek_profil_template(menu)
+    content = cek_content(menu)
 
-    return render(request, f'profil/{template}.html', {'judul': judul})
+    return render(request, f'profil/{template}.html', {'judul': judul, 'content': content})
 
 # Route to Kebutuhan Daerah Page
 
@@ -192,7 +194,7 @@ def kebdaerah(request, menu):
         sub_menu = "longlist"
 
     elif menu == "prioritas":
-        dataView = "endorsement"
+        dataView = "skoring_lfa"
         chartDataView = "endoresementChartView"
         sub_menu = "endorsement"
 
@@ -229,6 +231,14 @@ def kajian_wilayah(request):
 
     return render(request, 'kajian_wilayah/index.html')
 
+
+# Route to Monev Spasial
+
+
+@login_required(login_url="login")
+def monev_spasial(request):
+
+    return render(request, 'monev_spasial/index.html')
 ############################
 
 
@@ -242,17 +252,95 @@ def kajian_wilayah(request):
 def cek_profil(menu):
 
     if menu == "ku":
-        judul = "Kondisi Umum Wilayah"
+        judul = "Kondisi Umum Wilayah Regional I"
     elif menu == "pis":
         judul = "Permasalahan Isu Strategis"
     elif menu == "akl":
         judul = "Analisis Kerangka Logis"
     elif menu == "akp":
         judul = "Analisis Kawasan Prioritas"
+    elif menu == "aceh":
+        judul = "Kondisi Umum Wilayah Aceh"
+    elif menu == "sumaterabarat":
+        judul = "Kondisi Umum Wilayah Sumatera Barat"
+    elif menu == "sumaterautara":
+        judul = "Kondisi Umum Wilayah Sumatera Utara"
+    elif menu == "jambi":
+        judul = "Kondisi Umum Wilayah Jambi"
+    elif menu == "bengkulu":
+        judul = "Kondisi Umum Wilayah Bengkulu"
+    elif menu == "bangkabelitung":
+        judul = "Kondisi Umum Wilayah Bangka Belitung"
+    elif menu == "sumateraselatan":
+        judul = "Kondisi Umum Wilayah Sumatera Selatan"
+    elif menu == "riau":
+        judul = "Kondisi Umum Wilayah Riau"
+    elif menu == "kepulauanriau":
+        judul = "Kondisi Umum Wilayah Kepulauan Riau"
+    elif menu == "lampung":
+        judul = "Kondisi Umum Wilayah Lampung"
+    elif menu == "banten":
+        judul = "Kondisi Umum Wilayah Banten"
+    elif menu == "dkijakarta":
+        judul = "Kondisi Umum Wilayah DKI Jakarta"
+    elif menu == "jawabarat":
+        judul = "Kondisi Umum Wilayah Jawa Barat"
+    elif menu == "jawatengah":
+        judul = "Kondisi Umum Wilayah Jawa Tengah"
+    elif menu == "diy":
+        judul = "Kondisi Umum Wilayah Daerah Istimewa Yogyakarta"
+    elif menu == "bali":
+        judul = "Kondisi Umum Wilayah Bali"
+    elif menu == "jawatimur":
+        judul = "Kondisi Umum Wilayah Jawa Timur"
     else:
         judul = "Kesalahan Memilih Menu"
 
     return judul
+
+
+def cek_content(menu):
+    template = None
+    if menu == "aceh":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/bf53f8e1e7494042b70d1cf739838601"
+    elif menu == "ku":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/f02d00cca5f64450bf426ac457a6579e"
+    elif menu == "sumaterabarat":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/ee0befefe0e4425da5a4f11d69475cc6"
+    elif menu == "sumaterautara":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/b40c48d5e33d4259aaac7bf783b4f11b"
+    elif menu == "jambi":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/b0cb7d450003489bb3beb5b148e91801"
+    elif menu == "bengkulu":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7230f3738de94355ba9e161134e26453/edit"
+    elif menu == "bangkabelitung":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8f2768f275024ce18f459830bdef8c65/edit"
+    elif menu == "sumateraselatan":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/fa9adec2980c49a99f605a45ad691b71/edit"
+    elif menu == "riau":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2a0d677b3c0840fca87948bbfb46900f/edit"
+    elif menu == "kepulauanriau":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/28949063aca549f596732f167f390836/edit"
+    elif menu == "lampung":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8aa01ff1c78b4911835d92a22a57d91a/edit"
+    elif menu == "banten":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/80475af1daaa4a0a8e22a5e415a7ee14/edit"
+    elif menu == "dkijakarta":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7b7384248e904e928845a9a044d751cd/edit"
+    elif menu == "jawabarat":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/942452b008cf46548eabdbc222b2302d/edit"
+    elif menu == "jawatengah":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/cb1ca19e1cd64ce793feca475f7cd4fc/edit"
+    elif menu == "diy":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/853f8a4a830a4eb090b00bd626438429/edit"
+    elif menu == "bali":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/088fb805d40e4eeaba7dfeeda46bc726/edit"
+    elif menu == "jawatimur":
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2b68130db02b4d7d99103383fe138736/edit"
+    else:
+        template = None
+
+    return template
 
 
 def cek_profil_template(menu):
@@ -265,6 +353,40 @@ def cek_profil_template(menu):
         template = "kerangka-logis"
     elif menu == "akp":
         template = "kawasan-prioritas"
+    elif menu == "aceh":
+        template = "index"
+    elif menu == "sumaterabarat":
+        template = "index"
+    elif menu == "sumaterautara":
+        template = "index"
+    elif menu == "jambi":
+        template = "index"
+    elif menu == "bengkulu":
+        template = "index"
+    elif menu == "bangkabelitung":
+        template = "index"
+    elif menu == "sumateraselatan":
+        template = "index"
+    elif menu == "riau":
+        template = "index"
+    elif menu == "kepulauanriau":
+        template = "index"
+    elif menu == "lampung":
+        template = "index"
+    elif menu == "banten":
+        template = "index"
+    elif menu == "dkijakarta":
+        template = "index"
+    elif menu == "jawabarat":
+        template = "index"
+    elif menu == "jawatengah":
+        template = "index"
+    elif menu == "diy":
+        template = "index"
+    elif menu == "bali":
+        template = "index"
+    elif menu == "jawatimur":
+        template = "index"
 
     return template
 
@@ -310,7 +432,7 @@ class LonglistDataView(AjaxDatatableView):
     model = Longlist
     title = 'Longlist'
     initial_order = [["judul_proyek", "asc"], ]
-    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    length_menu = [[10, 50, 100, -1], [10, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
@@ -327,6 +449,8 @@ class LonglistDataView(AjaxDatatableView):
             'choices': True, 'autofilter': True},
         {'name': 'taging_kawasan_prioritas', 'title': 'Taging Kawasan', 'foreign_field': 'taging_kawasan_prioritas__kawasan_prioritas',
             'visible': True, 'choices': True, 'autofilter': True},
+        {'name': 'output_test', 'title': 'Output LFA', 'foreign_field': 'output_test__nama_output',
+            'visible': True, 'choices': True, 'autofilter': True},
         {'name': 'edit', 'title': 'Action', 'placeholder': True,
          'searchable': False, 'orderable': False, },
         {'name': 'lokasi_proyek', 'visible': False},
@@ -339,9 +463,6 @@ class LonglistDataView(AjaxDatatableView):
         {'name': 'indikasi_pendanaan_2022', 'visible': False},
         {'name': 'indikasi_pendanaan_2023', 'visible': False},
         {'name': 'indikasi_pendanaan_2024', 'visible': False},
-        {'name': 'tujuan_lfa', 'visible': False},
-        {'name': 'sasaran_lfa', 'visible': False},
-        {'name': 'output_lfa', 'visible': False},
         {'name': 'keterangan', 'visible': False},
     ]
 
@@ -363,7 +484,7 @@ class EndorsementDataView(AjaxDatatableView):
     title = 'Endorsement'
 
     initial_order = [["judul_proyek", "asc"], ]
-    length_menu = [[20, 50, 100, -1], [20, 50, 100, 'all']]
+    length_menu = [[10, 20, 50, 100, -1], [10, 20, 50, 100, 'all']]
     search_values_separator = ' '
 
     column_defs = [
@@ -397,7 +518,53 @@ class EndorsementDataView(AjaxDatatableView):
             </button>
         """
 
-# Retrieve Endorsement List Data
+# Retrieve Hasil Skoring
+
+
+class HasilSkoringDataView(AjaxDatatableView):
+
+    model = SkoringProyek
+    title = 'Hasil Skoring Proyek'
+
+    initial_order = [["proyek", "asc"], ]
+    length_menu = [[10, 20, 50, 100, -1], [10, 20, 50, 100, 'all']]
+    search_values_separator = ' '
+
+    column_defs = [
+        AjaxDatatableView.render_row_tools_column_def(),
+        {'name': 'id', 'visible': False, 'title': 'No'},
+        {'name': 'proyek', 'visible': True, 'title': 'Judul Proyek',
+            'foreign_field': 'proyek__judul_proyek'},
+        {'name': 'nilai_raw_korelasi_sasaran',
+            'title': 'Pengaruh Sasaran', 'visible': True},
+        {'name': 'nilai_raw_korelasi_output',
+            'title': 'Pengaruh Output', 'visible': True},
+        {'name': 'nilai_raw_MP',
+            'title': 'Nilai MP', 'visible': True},
+        {'name': 'nilai_raw_investasi',
+         'title': 'Nilai Investasi', 'visible': True},
+        {'name': 'total_skoring', 'title': 'Hasil Skoring', 'visible': True},
+        {'name': 'edit', 'title': 'Action', 'placeholder': True,
+         'searchable': False, 'orderable': False}
+
+    ]
+
+    def get_initial_queryset(self, request=None):
+        queryset = self.model.objects.filter(proyek__shortlist=True)
+        return queryset
+
+    def customize_row(self, row, obj):
+        row['edit'] = """
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" 
+            onClick="
+            var id = this.closest('tr').id.substr(4); 
+            location.replace('/forms/skoring/update/'+id);">
+            Edit
+            </button>
+        """
+
+
+# Retrieve Kesepakatan Forum List Data
 
 
 class KesepakatanForumDataView(AjaxDatatableView):
@@ -470,8 +637,6 @@ class KawasanPrioritasDataView(AjaxDatatableView):
         {'name': 'kawasan_prioritas', 'visible': True, 'title': 'Kawasan Prioritas'},
     ]
 
-# Create Single Long List Data
-
 
 @login_required(login_url='login')
 def addSingleLonglist(request):
@@ -503,7 +668,11 @@ def updateLonglist(request, pk):
         form = LonglistForm(request.POST, instance=longlist)
         if form.is_valid():
             form.save()
-            return redirect('/kebdaerah/longlist')
+            messages.success(request, 'Berhasil Mengubah Longlist')
+            return HttpResponseRedirect('/kebdaerah/longlist')
+        else:
+            messages.error(request, 'Gagal Mengubah Longlist')
+            return render(request, 'forms/longlist.html', content)
 
     return render(request, 'forms/longlist.html', content)
 
@@ -519,6 +688,103 @@ def deleteSingleLonglist(request, pk):
     return redirect('/kebdaerah/longlist')
 
 # Download Long List Data CSV Format
+
+# Update Hasil Skoring
+
+
+@login_required(login_url='login')
+def updateHasilSkoring(request, pk):
+    proyek = SkoringProyek.objects.get(id=pk)
+    form = SkoringProyekForm(instance=proyek)
+
+    content = {'form': form,
+               'judul': "Anda Sedang Memperbaharui Hasil Skoring Proyek", 'pk': pk,
+               'proyek': proyek
+               }
+
+    if request.method == 'POST':
+        form = SkoringProyekForm(request.POST, instance=proyek)
+        if form.is_valid():
+            form.save()
+            return redirect('/kebdaerah/prioritas')
+
+    return render(request, 'forms/dpp-update.html', content)
+
+# Create Hasil Kerangka Logis
+
+
+@login_required(login_url='login')
+def addkerangkalogis(request, tipe):
+    content_title = ""
+    class_button_tujuan = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+    class_button_sasaran = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+    class_button_output = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+    a_class_tujuan = ""
+    a_class_sasaran = ""
+    a_class_output = ""
+    form = None
+
+    if tipe == 'tujuan':
+        content_title = "tujuan"
+        class_button_tujuan = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        a_class_tujuan = "disabled"
+        form = Tujuan_LFA_Form()
+        if request.method == 'POST':
+            form = Tujuan_LFA_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Berhasil Menambahkan Tujuan LFA')
+                return HttpResponseRedirect('/forms/add_lfa/tujuan')
+
+    elif tipe == 'sasaran':
+        content_title = "sasaran"
+        class_button_sasaran = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        a_class_sasaran = "disabled"
+        form = Sasaran_LFA_Form()
+        if request.method == 'POST':
+            form = Sasaran_LFA_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Berhasil Menambahkan Sasaran LFA')
+                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+            else:
+                messages.error(request, 'Gagal Menambahkan Sasaran LFA')
+                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+
+    elif tipe == 'output':
+        content_title = "output"
+        class_button_output = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        a_class_output = "disabled"
+        form = Output_LFA_Form()
+        if request.method == 'POST':
+            form = Output_LFA_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Berhasil Menambahkan Output LFA')
+                return HttpResponseRedirect('/forms/add_lfa/output')
+    else:
+        content_title = None
+
+    # content = {
+    #     'content_title' : content_title,
+    #     'b_tujuan':class_button_tujuan,
+    #     'b_sasaran':class_button_sasaran,
+    #     'b_output':class_button_output,
+    #     'a_tujuan':a_class_tujuan,
+    #     'a_sasaran':a_class_sasaran,
+    #     'a_output':a_class_output
+    # }
+
+    return render(request, 'forms/kerangkalogis-add.html', {'content': {
+        'content_title': content_title,
+        'b_tujuan': class_button_tujuan,
+        'b_sasaran': class_button_sasaran,
+        'b_output': class_button_output,
+        'a_tujuan': a_class_tujuan,
+        'a_sasaran': a_class_sasaran,
+        'a_output': a_class_output,
+        'form': form
+    }})
 
 
 def download_longlist_format(request):
