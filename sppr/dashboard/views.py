@@ -312,31 +312,31 @@ def cek_content(menu):
     elif menu == "jambi":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/b0cb7d450003489bb3beb5b148e91801"
     elif menu == "bengkulu":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7230f3738de94355ba9e161134e26453/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7230f3738de94355ba9e161134e26453"
     elif menu == "bangkabelitung":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8f2768f275024ce18f459830bdef8c65/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8f2768f275024ce18f459830bdef8c65"
     elif menu == "sumateraselatan":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/fa9adec2980c49a99f605a45ad691b71/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/fa9adec2980c49a99f605a45ad691b71"
     elif menu == "riau":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2a0d677b3c0840fca87948bbfb46900f/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2a0d677b3c0840fca87948bbfb46900f"
     elif menu == "kepulauanriau":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/28949063aca549f596732f167f390836/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/28949063aca549f596732f167f390836"
     elif menu == "lampung":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8aa01ff1c78b4911835d92a22a57d91a/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/8aa01ff1c78b4911835d92a22a57d91a"
     elif menu == "banten":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/80475af1daaa4a0a8e22a5e415a7ee14/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/80475af1daaa4a0a8e22a5e415a7ee14"
     elif menu == "dkijakarta":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7b7384248e904e928845a9a044d751cd/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/7b7384248e904e928845a9a044d751cd"
     elif menu == "jawabarat":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/942452b008cf46548eabdbc222b2302d/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/942452b008cf46548eabdbc222b2302d"
     elif menu == "jawatengah":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/cb1ca19e1cd64ce793feca475f7cd4fc/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/cb1ca19e1cd64ce793feca475f7cd4fc"
     elif menu == "diy":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/853f8a4a830a4eb090b00bd626438429/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/853f8a4a830a4eb090b00bd626438429"
     elif menu == "bali":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/088fb805d40e4eeaba7dfeeda46bc726/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/088fb805d40e4eeaba7dfeeda46bc726"
     elif menu == "jawatimur":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2b68130db02b4d7d99103383fe138736/edit"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2b68130db02b4d7d99103383fe138736"
     else:
         template = None
 
