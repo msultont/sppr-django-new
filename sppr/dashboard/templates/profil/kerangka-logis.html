@@ -266,36 +266,37 @@
                         </thead>
                         <tbody id="tujuan-data">
                             <button>
-                                <tr class="text-center p-4">
-                                    <td colspan="4"
-                                        class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
-                                        Tujuan 1
-                                        <button
-                                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                                            onclick="toggleModal('sasaran-toggle')">
-                                            <p>+</p>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center p-4" id="sasaran-toggle">
-                                    <td class="border-dashed border-t  bg-green-500 text-black  text-center p-3">
-                                        Meningkatkan Kesejahteraan Masyarakat
-                                    </td>
-                                    <td class="border-dashed border-t  bg-teal-500 text-black  text-center p-3">
-                                        Tingkat Pengangguran Terbuka
-                                    </td>
-                                    <td class="border-dashed border-t  bg-orange-500 text-black  text-center p-3">
+                                {% for tujuan in tujuan.all %}
+                                    <tr class="text-center p-4">
+                                        <td colspan="4"
+                                            class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
+                                            Tujuan {{ forloop.counter }}
+                                            <button
+                                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
+                                                onclick="toggleModal('sasaran-toggle')">
+                                                <p>+</p>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center p-4" id="sasaran-toggle">
+                                        <td class="border-dashed border-t  bg-green-500 text-black  text-center p-3">
+                                            {{ tujuan.nama_tujuan }}
+                                        </td>
+                                        <td class="border-dashed border-t  bg-teal-500 text-black  text-center p-3">
+                                            {{ tujuan.indikator }}
+                                        </td>
+                                        <td class="border-dashed border-t  bg-orange-500 text-black  text-center p-3">
 
-                                        <ol>
-                                            <li>Data BPS</li>
-                                            <li>Data Kab/Kota Dalam Angka</li>
-                                        </ol>
+                                            <ol>
+                                                <li>{{ tujuan.sumber_data }}</li>
+                                            </ol>
 
-                                    </td>
-                                    <td class="border-dashed border-t  bg-blue-500 text-black  text-center p-3">
-                                        Dengan berkurangnya pengangguran akan meningkatkan kesejahteraan masyarakat
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="border-dashed border-t  bg-blue-500 text-black  text-center p-3">
+                                            {{ tujuan.asumsi }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                             </button>
                             <tr>
                         <tbody id="sasaran-data">
@@ -412,65 +413,6 @@
                         </tr>
                         </tbody>
                         </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="text-center p-4">
-                                <td colspan="4"
-                                    class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
-                                    Tujuan 2 <button
-                                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                                        onclick="toggleModal('sasaran-toggle2')">
-                                        <p>+</p>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="text-center" id="sasaran-toggle2">
-                                <td class="border-dashed border-t bg-green-500 text-black  text-center p-3">
-                                    Meningkatkan kualitas lingkungan hidup Provinsi Jawa Barat
-                                </td>
-                                <td class="border-dashed border-t bg-teal-500 text-black   text-center p-3">
-                                    Indeks Kualitas Lingkungan Hidup
-                                </td>
-                                <td class="border-dashed border-t bg-orange-500 text-black   text-center p-3 ">
-                                    <ol>
-                                        <li>Data KLHK</li>
-                                        <li>Data BPS</li>
-                                    </ol>
-                                </td>
-                                <td class="border-dashed border-t bg-blue-500 text-black   text-center p-3">
-                                    Dengan tercapainya peningkatan kualitas lingkungan hidup, diasumsikan kualitas hidup
-                                    penduduk Jawa Barat akan membaik
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="text-center p-4">
-                                <td colspan="4"
-                                    class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
-                                    Tujuan 3 <button
-                                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                                        onclick="toggleModal('sasaran-toggle3')">
-                                        <p>+</p>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="text-center" id="sasaran-toggle3">
-                                <td class="border-dashed border-t bg-green-500 text-black   text-center p-3">
-                                    Meningkatkan laju pertumbuhan ekonomi di Jabar bagian Selatan
-                                </td>
-                                <td class="border-dashed border-t bg-teal-500 text-black   text-center p-3 ">
-                                    Laju pertumbuhan ekonomi Jabar bagian Selatan
-                                </td>
-                                <td class="border-dashed border-t bg-orange-500 text-black   text-center p-3 ">
-                                    <ol>
-                                        <li>Data BPS</li>
-                                    </ol>
-                                </td>
-                                <td class="border-dashed border-t bg-blue-500 text-black   text-center p-3 ">
-                                    Peningkatan laju pertumbuhan ekonomi di Jabar Selatan, akan mengurangi ketimpangan
-                                    pembangunan Jabar bagian Utara dengan Jabar bagian Selatan
-                                </td>
-                            </tr>
                         </tbody>
 
                     </table>

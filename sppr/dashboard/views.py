@@ -81,7 +81,22 @@ def profil(request, menu):
     template = cek_profil_template(menu)
     content = cek_content(menu)
 
-    return render(request, f'profil/{template}.html', {'judul': judul, 'content': content})
+    # LFA entities
+    tujuan = TujuanLFA.objects
+    sasaran = SasaranLFA.objects
+    output = OutputLFA.objects
+
+    return render(
+        request, 
+        f'profil/{template}.html', 
+        {
+            'judul': judul, 
+            'content': content, 
+            'tujuan': tujuan,
+            'sasaran': sasaran,
+            'output': output
+        }
+    )
 
 # Route to Kebutuhan Daerah Page
 
