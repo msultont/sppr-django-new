@@ -82,9 +82,16 @@ def profil(request, menu):
     content = cek_content(menu)
 
     # LFA entities
-    tujuan = TujuanLFA.objects
-    sasaran = SasaranLFA.objects
-    output = OutputLFA.objects
+    pilih_provinsi = ""
+    provinsi = ProvinsiId.objects.all()
+    tujuans = []
+    sasarans = []
+    outputs = []
+
+    # Pilih Provinsi dropdown select option logic
+    if request.method == "POST":
+        pilih_provinsi = int(request.POST.get("pilih_provinsi"))
+        tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
 
     return render(
         request, 
@@ -92,9 +99,11 @@ def profil(request, menu):
         {
             'judul': judul, 
             'content': content, 
-            'tujuan': tujuan,
-            'sasaran': sasaran,
-            'output': output
+            'pilih_provinsi': pilih_provinsi,
+            'provinsi': provinsi,
+            'tujuans': tujuans,
+            'sasarans': sasarans,
+            'outputs': outputs
         }
     )
 
