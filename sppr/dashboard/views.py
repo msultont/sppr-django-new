@@ -1,3 +1,4 @@
+from ast import dump
 from django.shortcuts import render, redirect
 from .models import *
 from django.db.models import Count, query
@@ -13,6 +14,7 @@ import mimetypes
 from django.http.response import HttpResponse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from json import dumps
 
 """
 
@@ -21,6 +23,9 @@ from django.http import HttpResponseRedirect
 """
 # User Login
 
+# FIXME: 1. Fix bug frontend kerangka-logis.html
+
+# TODO: 1. Pasang library baru untuk halaman Isu Strategis
 
 def loginUser(request):
 
@@ -85,13 +90,49 @@ def profil(request, menu):
     pilih_provinsi = ""
     provinsi = ProvinsiId.objects.all()
     tujuans = []
-    sasarans = []
-    outputs = []
+    data = {} # Variable to be used on Javascript
 
     # Pilih Provinsi dropdown select option logic
     if request.method == "POST":
         pilih_provinsi = int(request.POST.get("pilih_provinsi"))
         tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
+        print(pilih_provinsi)
+
+        data['tujuan'] = []
+        data['sasaran'] = []
+        data['output'] = []
+
+        for tujuan in tujuans:
+            data['tujuan'].append({
+                'id' : tujuan.id,
+                'nama_tujuan' : tujuan.nama_tujuan,
+                'indikator' : tujuan.indikator,
+                'sumber_data' : tujuan.sumber_data,
+                'asumsi' : tujuan.asumsi
+            })
+
+            for sasaran in tujuan.sasaranlfa_set.all():
+                data['sasaran'].append({
+                    'tujuan_id': tujuan.id,
+                    'id' : sasaran.id,
+                    'nama_sasaran' : sasaran.nama_sasaran,
+                    'indikator' : sasaran.indikator,
+                    'sumber_data' : sasaran.sumber_data,
+                    'asumsi' : sasaran.asumsi
+                })
+
+                for output in sasaran.outputlfa_set.all():
+                    data['output'].append({
+                        'sasaran_id' : sasaran.id,
+                        'id' : output.id,
+                        'nama_output' : output.nama_output,
+                        'indikator' : output.indikator,
+                        'sumber_data' : output.sumber_data,
+                        'asumsi' : output.asumsi
+
+                    })
+
+    dataJSON = dumps(data)
 
     return render(
         request, 
@@ -102,8 +143,7 @@ def profil(request, menu):
             'pilih_provinsi': pilih_provinsi,
             'provinsi': provinsi,
             'tujuans': tujuans,
-            'sasarans': sasarans,
-            'outputs': outputs
+            "dataJSON": dataJSON
         }
     )
 

@@ -267,13 +267,13 @@
                     Tujuan {{ forloop.counter }}
                     <button
                       class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                      onclick="toggleModal('{{ tujuan }}')"
+                      onclick="toggleModal('{{ tujuan.id }}')"
                     >
                       <p>+</p>
                     </button>
                   </td>
                 </tr>
-                <tr class="text-center p-4" id="{{ tujuan }}">
+                <tr class="text-center p-4" id="{{ tujuan.id }}">
                   <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
                     {{ tujuan.nama_tujuan }}
                   </td>
@@ -286,17 +286,16 @@
                   <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">{{ tujuan.asumsi }}</td>
                 </tr>
               </button>
-              {% comment %}
               <tr>
-                {% for sasaran in sasarans %}
-                <tbody id="{{ sasaran }}">
+                {% for sasaran in tujuan.sasaranlfa_set.all %}
+                <tbody id="{{ sasaran.id }}">
                   <button>
                     <tr class="text-center p-4">
                       <td colspan="4" class="border-dashed border-t bg-gray-500 text-black font-bold text-center p-3">
                         Sasaran {{ forloop.parentloop.counter }}.{{ forloop.counter }}
                       </td>
                     </tr>
-                    <tr class="text-center" id="output-toggle">
+                    <tr class="text-center" id="{{ sasaran.id }}">
                       <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
                         {{ sasaran.nama_sasaran }}
                       </td>
@@ -314,27 +313,30 @@
                     </tr>
                   </button>
                   <tr>
-                    {% for output in outputs %}
-                    <tbody id="{{ output }}">
+                    {% for output in sasaran.outputlfa_set.all %}
+                    <tbody id="{{ output.id }}">
                       <button>
                         <tr class="text-center p-4">
                           <td
                             colspan="4"
                             class="border-dashed border-t bg-gray-400 text-black font-bold text-center p-3"
                           >
-                            Output {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{
-                            forloop.counter }}
+                            Output {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}
                           </td>
                         </tr>
                         <tr class="text-center">
                           <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
-                            {{ output.nama_output }}
-                            <button
-                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                              onclick="toggleModal('modal-id')"
-                            >
-                              <p>Hasil Korelasi</p>
-                            </button>
+                            <p>
+                              {{ output.nama_output }}
+                            </p>
+                            <div>
+                              <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
+                                onclick="toggleModal('modal-id')"
+                              >
+                                <p>Hasil Korelasi</p>
+                              </button>
+                            </div>
                           </td>
                           <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">
                             {{ output.indikator }}
@@ -346,52 +348,6 @@
                             {{ output.asumsi }}
                           </td>
                         </tr>
-                        <tr class="text-center" id="aktivitas-toggle">
-                          <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
-                            Peningkatan Kompetensi lulusan SMK yang sesuai dengan kebutuhan Dunia Usaha dan Industri
-                            (DUDI)
-                            <button
-                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                              onclick="toggleModal('modal-id')"
-                            >
-                              <p>Hasil Korelasi</p>
-                            </button>
-                          </td>
-                          <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">
-                            Jumlah lulusan SMK yang menganggur
-                          </td>
-                          <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
-                            Dokumen Provinsi dalam angka
-                          </td>
-                          <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
-                            1. Adanya minat lulusan SMK untuk bekerja sesuai bidangnya 2. Kompetensi menjadi
-                            pertimbangan utama oleh DUDI untuk lulusan SMK 3. Dengan meningkatnya kompetensi lulusan SMK
-                            yang sesuai dengan kebutuhan DUDI, maka jumlah lulusan SMK yang menganggur akan menurun
-                          </td>
-                        </tr>
-                        <tr class="text-center" id="aktivitas-toggle">
-                          <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
-                            Peningkatan Kompetensi lulusan SMK yang sesuai dengan kebutuhan Dunia Usaha dan Industri
-                            (DUDI)
-                            <button
-                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                              onclick="toggleModal('modal-id')"
-                            >
-                              <p>Hasil Korelasi</p>
-                            </button>
-                          </td>
-                          <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">
-                            Jumlah lulusan SMK yang menganggur
-                          </td>
-                          <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
-                            Dokumen Provinsi dalam angka
-                          </td>
-                          <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
-                            1. Adanya minat lulusan SMK untuk bekerja sesuai bidangnya 2. Kompetensi menjadi
-                            pertimbangan utama oleh DUDI untuk lulusan SMK 3. Dengan meningkatnya kompetensi lulusan SMK
-                            yang sesuai dengan kebutuhan DUDI, maka jumlah lulusan SMK yang menganggur akan menurun
-                          </td>
-                        </tr>
                       </button>
                       <tr></tr>
                     </tbody>
@@ -400,7 +356,7 @@
                 </tbody>
                 {% endfor %}
               </tr>
-              {% endcomment %} {% endfor %}
+              {% endfor %}
             </tbody>
           </table>
 
@@ -419,17 +375,12 @@
 </main>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(() => {
+    let data = JSON.parse("{{ dataJSON|escapejs }}")
+
+    console.log(data)
+
     $("#tujuan-data").show();
-    $("#output-data").hide(100);
-    $("#aktivitas-data").hide(100);
-
-    {% comment %} {% for tujuan in tujuans %}
-      $("#{{ tujuan }}").click(() => {
-
-      })
-    {% endfor %} {% endcomment %}
-
 
     $(".collaptable").aCollapTable({
       // the table is collapased at start
@@ -444,6 +395,32 @@
       // The collapse button ("minus" -)
       minusButton: '<span class="i">-</span>'
     });
+
+    data.tujuan.forEach(tujuan => {
+      $(`#${tujuan.id}`).addClass('hidden');
+      $(`#${tujuan.id}`).click(() => {
+        data.sasaran.forEach(sasaran => {
+          sasaran.tujuan_id === tujuan.id && $(`#${sasaran.id}`).toggle();
+        })
+
+      })
+    });
+
+    data.sasaran.forEach(sasaran => {
+      $(`#${sasaran.id}`).addClass('hidden');
+      $(`#${sasaran.id}`).click(() => {
+        data.output.forEach(output => {
+          output.sasaran_id === sasaran.id && $(`#${output.id}`).toggle();
+        })
+
+      })
+    })
+
+    data.output.forEach(output => {
+      $(`#${output.id}`).addClass('hidden');
+    })
+
+    
   });
 
   function toggleModal(modalID) {
