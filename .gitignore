@@ -5,6 +5,7 @@
 ### NPM Package ###
 node_modules/
 **/node_modules/
+**/package-lock.json
 
 ### VSCODE ###
 .vscode

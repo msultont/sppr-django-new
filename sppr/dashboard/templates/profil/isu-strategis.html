@@ -1,356 +1,361 @@
-{% extends 'parts/main.html' %}
-{% load static %}
-{% block content %}
+{% extends 'parts/main.html' %} {% load static %} {% block content %}
 
 <style>
-    .chart--container {
-        height: 100%;
-        width: 100%;
-        min-height: 530px;
-    }
+  .chart--container {
+    height: 100%;
+    width: 100%;
+    min-height: 530px;
+  }
 
-    .zc-ref {
-        display: none;
-    }
+  .zc-ref {
+    display: none;
+  }
 
-    select {
-        margin: 10px;
-    }
-
-
-    
-
+  select {
+    margin: 10px;
+  }
 </style>
 
 <main>
-    <!-- Content header -->
-    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
-        <h1 class="text-2xl font-semibold">{{judul}}</h1>
-    </div>
+  <!-- Content header -->
+  <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">{{judul}}</h1>
+  </div>
 
-    <!-- Content -->
-    <div class="mt-2">
-
+  <!-- Content -->
+  <div class="mt-2">
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+      <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Main Content header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
+        </div>
         <!-- Main Content -->
-        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
-            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Main Content header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
-                </div>
-                <!-- Main Content -->
 
-                <div class="mt-5 mb-5">
-                    <p class="p-5">Pilih Provinsi</p>
+        <div class="mt-5 mb-5">
+          <p class="p-5">Pilih Provinsi</p>
 
-                    <select name="" id=""
-                        class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                        <option value="Jawa Barat">Jawa Barat</option>
-
-                    </select>
-
-                </div>
-
-                <div class="mt-5 mb-5">
-                    <p class="p-5">Pilih Isu Strategis</p>
-
-                    <select name="" id=""
-                        class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                        <option>
-                            Tidak sesuainya kualifikasi SDM dengan kebutuhan dunia kerja
-                            (mis match)
-                        </option>
-
-                        <option value="">
-                            Masih rendahnya kualitas lingkungan hidup di Provinsi Jawa Barat
-                        </option>
-
-                        <option>
-                            Ketimpangan Jawa Barat bagian selatan dengan bagian utara
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- CHART CONTAINER -->
-                <div id="tree-container">
-                </div>
-
-            </div>
+          <select
+            name=""
+            id=""
+            class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+          >
+            <option value="Jawa Barat">Jawa Barat</option>
+          </select>
         </div>
 
-        <!-- Support Contents -->
-        <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+        <div class="mt-5 mb-5">
+          <p class="p-5">Pilih Isu Strategis</p>
 
+          <select
+            name=""
+            id=""
+            class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+          >
+            <option>Tidak sesuainya kualifikasi SDM dengan kebutuhan dunia kerja (mis match)</option>
+
+            <option value="">Masih rendahnya kualitas lingkungan hidup di Provinsi Jawa Barat</option>
+
+            <option>Ketimpangan Jawa Barat bagian selatan dengan bagian utara</option>
+          </select>
         </div>
 
+        <!-- CHART CONTAINER -->
+        <div id="tree-container"></div>
+      </div>
     </div>
+
+    <!-- Support Contents -->
+    <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3"></div>
+  </div>
 </main>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
-
-    var treeData =
-    {
-        "name": "Belum memadainya  infrastruktur di Jabar bagian Selatan",
-        "fill": "#6D28D9",
-        "children": [
-            {
-                "name": "Belum selesainya pembangunan infrastruktur kereta api",
-                "fill": "#6D5CF6",
-                "children": [
-                    {
-                        "name": "Belum tuntasnya Pembanguna Jalur Ganda Kereta Api di Jabar Selatan",
-                        "fill": "#6D5CF6",
-                    },
-                    {
-                        "name": "Belum tuntasnya Reaktivasi Jaringan Kereta Api di Jabar selatan",
-                        "fill": "#6D5CF6",
-                    }
-                ]
-            },
-            {
-                "name": "Belum selesainya  pembangunan Infrastruktur jalan",
-                "fill": "#6D5CF6",
-                "children": [
-                    {
-                        "name": "Belum tuntasnya pembangunan Jalur Lintas Selatan (JLS)",
-                        "fill": "#6D5CF6",
-                    },
-                    {
-                        "name": "Belum tuntasnya pembangunan jalan tol di Jabar Selatan",
-                        "fill": "#6D5CF6",
-                    }
-                ]
-            },
-            {
-                "name": "Masih terbatasnya infrastruktur TIK",
-                "fill": "#6D5CF6",
-                "children": [
-                    {
-                        "name": "Terbatasnya jaringan internet",
-                        "fill": "#6D5CF6"
-                    }
-                ]
-            }
+  var treeData = {
+    name: "Belum memadainya  infrastruktur di Jabar bagian Selatan",
+    fill: "#6D28D9",
+    children: [
+      {
+        name: "Belum selesainya pembangunan infrastruktur kereta api",
+        fill: "#6D5CF6",
+        children: [
+          {
+            name: "Belum tuntasnya Pembanguna Jalur Ganda Kereta Api di Jabar Selatan",
+            fill: "#6D5CF6"
+          },
+          {
+            name: "Belum tuntasnya Reaktivasi Jaringan Kereta Api di Jabar selatan",
+            fill: "#6D5CF6"
+          }
         ]
-    };
+      },
+      {
+        name: "Belum selesainya  pembangunan Infrastruktur jalan",
+        fill: "#6D5CF6",
+        children: [
+          {
+            name: "Belum tuntasnya pembangunan Jalur Lintas Selatan (JLS)",
+            fill: "#6D5CF6"
+          },
+          {
+            name: "Belum tuntasnya pembangunan jalan tol di Jabar Selatan",
+            fill: "#6D5CF6"
+          }
+        ]
+      },
+      {
+        name: "Masih terbatasnya infrastruktur TIK",
+        fill: "#6D5CF6",
+        children: [
+          {
+            name: "Terbatasnya jaringan internet",
+            fill: "#6D5CF6"
+          }
+        ]
+      }
+    ]
+  };
 
-    // Set the dimensions and margins of the diagram
-    var margin = { top: 20, right: 90, bottom: 30, left: 30 },
-        width = 2500 - margin.left - margin.right,
-        height = 550 - margin.top - margin.bottom;
+  // Set the dimensions and margins of the diagram
+  var margin = { top: 20, right: 90, bottom: 30, left: 30 },
+    width = 2500 - margin.left - margin.right,
+    height = 550 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
-    // appends a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
-    var svg = d3.select("#tree-container").append("svg")
-        .attr("width", width + margin.right + margin.left)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate("
-            + margin.left + "," + margin.top + ")");
+  // append the svg object to the body of the page
+  // appends a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3
+    .select("#tree-container")
+    .append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var i = 0,
-        duration = 750,
-        root;
+  var i = 0,
+    duration = 750,
+    root;
 
-    // declares a tree layout and assigns the size
-    var treemap = d3.tree().size([height, width]);
+  // declares a tree layout and assigns the size
+  var treemap = d3.tree().size([height, width]);
 
-    // Assigns parent, children, height, depth
-    root = d3.hierarchy(treeData, function (d) { return d.children; });
-    root.x0 = height / 2;
-    root.y0 = 0;
+  // Assigns parent, children, height, depth
+  root = d3.hierarchy(treeData, function (d) {
+    return d.children;
+  });
+  root.x0 = height / 2;
+  root.y0 = 0;
 
-    // Collapse after the second level
-    root.children.forEach(collapse);
+  // Collapse after the second level
+  root.children.forEach(collapse);
 
-    update(root);
+  update(root);
 
-    // Collapse the node and all it's children
-    function collapse(d) {
-        if (d.children) {
-            d._children = d.children
-            d._children.forEach(collapse)
-            d.children = null
-        }
+  // Collapse the node and all it's children
+  function collapse(d) {
+    if (d.children) {
+      d._children = d.children;
+      d._children.forEach(collapse);
+      d.children = null;
     }
+  }
 
-    function update(source) {
+  function update(source) {
+    // Assigns the x and y position for the nodes
+    var treeData = treemap(root);
 
-        // Assigns the x and y position for the nodes
-        var treeData = treemap(root);
+    // Compute the new tree layout.
+    var nodes = treeData.descendants(),
+      links = treeData.descendants().slice(1);
 
-        // Compute the new tree layout.
-        var nodes = treeData.descendants(),
-            links = treeData.descendants().slice(1);
+    // Normalize for fixed-depth.
+    nodes.forEach(function (d) {
+      d.y = d.depth * 400;
+    });
 
-        // Normalize for fixed-depth.
-        nodes.forEach(function (d) { d.y = d.depth * 400 });
+    // ****************** Nodes section ***************************
 
-        // ****************** Nodes section ***************************
+    // Update the nodes...
+    var node = svg.selectAll("g.node").data(nodes, function (d) {
+      return d.id || (d.id = ++i);
+    });
 
-        // Update the nodes...
-        var node = svg.selectAll('g.node')
-            .data(nodes, function (d) { return d.id || (d.id = ++i); });
+    // Enter any new modes at the parent's previous position.
+    var nodeEnter = node
+      .enter()
+      .append("g")
+      .attr("class", "node")
+      .attr("transform", function (d) {
+        return "translate(" + source.y0 + "," + source.x0 + ")";
+      })
+      .on("click", click);
 
-        // Enter any new modes at the parent's previous position.
-        var nodeEnter = node.enter().append('g')
-            .attr('class', 'node')
-            .attr("transform", function (d) {
-                return "translate(" + source.y0 + "," + source.x0 + ")";
-            })
-            .on('click', click);
+    var rectHeight = 50,
+      rectWidth = "panjangteks",
+      panjangteks = 380;
 
-        var rectHeight = 50, rectWidth = "panjangteks", panjangteks = 380;
+    // Create Tooltip
 
-        // Create Tooltip
+    var tooltip = d3
+      .select("body")
+      .append("div")
+      .style("width", "relative")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .style("background", "black")
+      .style("padding", "15px")
+      .style("border-radius", "10px")
+      .style("font-size", "12px")
+      .style("color", "white");
 
-        var tooltip = d3.select("body")
-            .append("div")
-            .style("width", "relative")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("visibility", "hidden")
-            .style("background", "black")
-            .style("padding", "15px")
-            .style("border-radius", "10px")
-            .style("font-size", "12px")
-            .style("color", "white")
+    nodeEnter
+      .append("rect")
+      .attr("class", "node")
+      .attr("width", panjangteks)
+      .attr("max-width", panjangteks)
+      .attr("height", rectHeight)
+      .attr("x", -3)
+      .attr("y", (rectHeight / 2) * -1)
+      .attr("rx", "15")
+      .style("fill", function (d) {
+        return d.data.fill;
+      })
+      .on("mouseover", function (d) {
+        tooltip.text("Data: Coba data kalau agak panjang tes coba data panjang lorem ipsum");
+        return tooltip.style("visibility", "visible");
+      })
+      .on("mousemove", function () {
+        return tooltip.style("top", d3.event.pageY - 10 + "px").style("left", d3.event.pageX + 10 + "px");
+      })
+      .on("mouseout", function () {
+        return tooltip.style("visibility", "hidden");
+      });
 
-        nodeEnter.append('rect')
-            .attr('class', 'node')
-            .attr("width", panjangteks)
-            .attr("max-width", panjangteks)
-            .attr("height", rectHeight)
-            .attr("x", -3)
-            .attr("y", (rectHeight / 2) * -1)
-            .attr("rx", "15")
-            .style("fill", function (d) {
-                return d.data.fill;
-            })
-            .on("mouseover", function (d) { tooltip.text("Data: Coba data kalau agak panjang tes coba data panjang lorem ipsum"); return tooltip.style("visibility", "visible"); })
-            .on("mousemove", function () { return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
-            .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
+    // Add labels for the nodes
+    nodeEnter
+      .append("text")
+      .attr("x", function (d) {
+        return 10;
+      })
+      .attr("text-anchor", function (d) {
+        return "start";
+      })
+      .text(function (d) {
+        return d.data.name;
+      })
+      .style("fill", "white")
+      .style("font-size", ".68em")
+      .style("font-weight", "bold")
+      .attr("dy", ".7em")
+      .style("max-width", panjangteks)
+      .style("position", "center");
 
+    // UPDATE
+    var nodeUpdate = nodeEnter.merge(node);
 
-        // Add labels for the nodes
-        nodeEnter.append('text')
-            .attr("x", function (d) {
-                return 10;
-            })
-            .attr("text-anchor", function (d) {
-                return "start";
-            })
-            .text(function (d) { return d.data.name; })
-            .style("fill", "white")
-            .style("font-size", ".68em")
-            .style("font-weight", "bold")
-            .attr("dy", ".7em")
-            .style("max-width", panjangteks)
-            .style("position", "center");
+    // Transition to the proper position for the node
+    nodeUpdate
+      .transition()
+      .duration(duration)
+      .attr("transform", function (d) {
+        return "translate(" + d.y + "," + d.x + ")";
+      });
 
-        // UPDATE
-        var nodeUpdate = nodeEnter.merge(node);
+    // Update the node attributes and style
+    nodeUpdate
+      .select("circle.node")
+      .attr("r", 10)
+      .style("fill", function (d) {
+        return d._children ? "lightsteelblue" : "#fff";
+      })
+      .attr("cursor", "pointer");
 
-        // Transition to the proper position for the node
-        nodeUpdate.transition()
-            .duration(duration)
-            .attr("transform", function (d) {
-                return "translate(" + d.y + "," + d.x + ")";
-            });
+    // Remove any exiting nodes
+    var nodeExit = node
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("transform", function (d) {
+        return "translate(" + source.y + "," + source.x + ")";
+      })
+      .remove();
 
-        // Update the node attributes and style
-        nodeUpdate.select('circle.node')
-            .attr('r', 10)
-            .style("fill", function (d) {
-                return d._children ? "lightsteelblue" : "#fff";
-            })
-            .attr('cursor', 'pointer');
+    // On exit reduce the node circles size to 0
+    nodeExit.select("circle").attr("r", 1e-6);
 
+    // On exit reduce the opacity of text labels
+    nodeExit.select("text").style("fill-opacity", 1e-6);
 
-        // Remove any exiting nodes
-        var nodeExit = node.exit().transition()
-            .duration(duration)
-            .attr("transform", function (d) {
-                return "translate(" + source.y + "," + source.x + ")";
-            })
-            .remove();
+    // ****************** links section ***************************
 
-        // On exit reduce the node circles size to 0
-        nodeExit.select('circle')
-            .attr('r', 1e-6);
+    // Update the links...
+    var link = svg.selectAll("path.link").data(links, function (d) {
+      return d.id;
+    });
 
-        // On exit reduce the opacity of text labels
-        nodeExit.select('text')
-            .style('fill-opacity', 1e-6);
+    // Enter any new links at the parent's previous position.
+    var linkEnter = link
+      .enter()
+      .insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function (d) {
+        var o = { x: source.x0, y: source.y0 };
+        return diagonal(o, o);
+      });
 
-        // ****************** links section ***************************
+    // UPDATE
+    var linkUpdate = linkEnter.merge(link);
 
-        // Update the links...
-        var link = svg.selectAll('path.link')
-            .data(links, function (d) { return d.id; });
+    // Transition back to the parent element position
+    linkUpdate
+      .transition()
+      .duration(duration)
+      .attr("d", function (d) {
+        return diagonal(d, d.parent);
+      });
 
-        // Enter any new links at the parent's previous position.
-        var linkEnter = link.enter().insert('path', "g")
-            .attr("class", "link")
-            .attr('d', function (d) {
-                var o = { x: source.x0, y: source.y0 }
-                return diagonal(o, o)
-            });
+    // Remove any exiting links
+    var linkExit = link
+      .exit()
+      .transition()
+      .duration(duration)
+      .attr("d", function (d) {
+        var o = { x: source.x, y: source.y };
+        return diagonal(o, o);
+      })
+      .remove();
 
-        // UPDATE
-        var linkUpdate = linkEnter.merge(link);
+    // Store the old positions for transition.
+    nodes.forEach(function (d) {
+      d.x0 = d.x;
+      d.y0 = d.y;
+    });
 
-        // Transition back to the parent element position
-        linkUpdate.transition()
-            .duration(duration)
-            .attr('d', function (d) { return diagonal(d, d.parent) });
-
-        // Remove any exiting links
-        var linkExit = link.exit().transition()
-            .duration(duration)
-            .attr('d', function (d) {
-                var o = { x: source.x, y: source.y }
-                return diagonal(o, o)
-            })
-            .remove();
-
-        // Store the old positions for transition.
-        nodes.forEach(function (d) {
-            d.x0 = d.x;
-            d.y0 = d.y;
-        });
-
-        // Creates a curved (diagonal) path from parent to the child nodes
-        function diagonal(s, d) {
-
-            path = `M ${s.y} ${s.x}
+    // Creates a curved (diagonal) path from parent to the child nodes
+    function diagonal(s, d) {
+      path = `M ${s.y} ${s.x}
         C ${(s.y + d.y) / 2} ${s.x},
           ${(s.y + d.y) / 2} ${d.x},
-          ${d.y} ${d.x}`
+          ${d.y} ${d.x}`;
 
-            return path
-        }
-
-        // Toggle children on click.
-        function click(d) {
-            if (d.children) {
-                d._children = d.children;
-                d.children = null;
-            } else {
-                d.children = d._children;
-                d._children = null;
-            }
-            update(d);
-        }
+      return path;
     }
 
+    // Toggle children on click.
+    function click(d) {
+      if (d.children) {
+        d._children = d.children;
+        d.children = null;
+      } else {
+        d.children = d._children;
+        d._children = null;
+      }
+      update(d);
+    }
+  }
 </script>
 
 {% endblock %}
