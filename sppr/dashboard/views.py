@@ -23,8 +23,6 @@ from json import dumps
 """
 # User Login
 
-# FIXME: 1. Fix bug frontend kerangka-logis.html
-
 # TODO: 1. Pasang library baru untuk halaman Isu Strategis
 
 def loginUser(request):
@@ -96,7 +94,6 @@ def profil(request, menu):
     if request.method == "POST":
         pilih_provinsi = int(request.POST.get("pilih_provinsi"))
         tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
-        print(pilih_provinsi)
 
         data['tujuan'] = []
         data['sasaran'] = []
@@ -104,32 +101,22 @@ def profil(request, menu):
 
         for tujuan in tujuans:
             data['tujuan'].append({
-                'id' : tujuan.id,
-                'nama_tujuan' : tujuan.nama_tujuan,
-                'indikator' : tujuan.indikator,
-                'sumber_data' : tujuan.sumber_data,
-                'asumsi' : tujuan.asumsi
+                'id': tujuan.id,
+                'nama_tujuan': tujuan.nama_tujuan
             })
 
             for sasaran in tujuan.sasaranlfa_set.all():
                 data['sasaran'].append({
                     'tujuan_id': tujuan.id,
                     'id' : sasaran.id,
-                    'nama_sasaran' : sasaran.nama_sasaran,
-                    'indikator' : sasaran.indikator,
-                    'sumber_data' : sasaran.sumber_data,
-                    'asumsi' : sasaran.asumsi
+                    'nama_sasaran': sasaran.nama_sasaran
                 })
 
                 for output in sasaran.outputlfa_set.all():
                     data['output'].append({
-                        'sasaran_id' : sasaran.id,
+                        'sasaran_id': sasaran.id,
                         'id' : output.id,
-                        'nama_output' : output.nama_output,
-                        'indikator' : output.indikator,
-                        'sumber_data' : output.sumber_data,
-                        'asumsi' : output.asumsi
-
+                        'nama_output': output.nama_output
                     })
 
     dataJSON = dumps(data)
