@@ -20,20 +20,20 @@
                 <!-- Card header -->
 
                 {% if judul == "BP Batam" %}
-                <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                <iframe width="100%" height="1200px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
                     title="BP Batam"
-                    src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=01fbab505a264e34837cb89423e3806d&extent=103.657,0.8945,104.3299,1.2151">
+                    src="https://geospasial.bappenas.go.id/portal/apps/webappviewer/index.html?id=56f4b9deb07c48e9b29a3dfc140f91ba">
                 </iframe>
 
-                {% include 'parts/BPBatam.html' %}
+                
                 <br>
 
                 {% else %}
-                <iframe width="100%" height="1000px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                <iframe width="100%" height="1200px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
                     title="Proyek Sabang"
-                    src="https://geospasial.bappenas.go.id/portal/home/webmap/viewer.html?webmap=8c51f53a577d4d6fa2de68a67967794b&extent=94.5633,5.3913,95.9091,6.0294">
+                    src="https://geospasial.bappenas.go.id/portal/apps/webappviewer/index.html?id=7e508a92c6a64208a393a298dc824065">
                 </iframe>
-                {% include 'parts/BPSabang.html' %}
+                
                 <br>
 
                 {% endif %}
@@ -48,18 +48,83 @@
             <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
                 <!-- Card header -->
 
+                <canvas id="myChart" width="400" height="400"></canvas>
+
+                
+
 
             </div>
         </div>
+
+
     </div>
 </main>
 
 <script>
 
+
+    //COBA FUNGSI PARSING API MASIH TROUBLE
+
+    var xmlhttp = new XMLHttpRequest();
+    var url = "https://data.covid19.go.id/public/api/prov.json";
+    xmlhttp.open("GET",url, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+        {var data = JSON.parse(this.responseText);
+            //console.log(data)
+            var provinsi = data.list_data.map(function(elem) {
+                return elem.key;
+            });
+            //console.log(provinsi)
+            var kasus = data.list_data.map(function(elem) {
+                return elem.jumlah_kasus;
+            });
+        }
+
+    };
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: provinsi,
+        datasets: [{
+            label: 'Provinsi Apa',
+            data: kasus,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+
     var lineChart = document.getElementById('lineChart');
 
     const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Merah', 'Biru', 'Kuning', 'Hijau', 'Ungu', 'Orange'],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],

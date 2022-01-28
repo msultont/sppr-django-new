@@ -7,6 +7,8 @@ from django.core.validators import FileExtensionValidator
 from mptt.models import MPTTModel, TreeForeignKey
 from decimal import Decimal
 import datetime
+
+
 # Create your models here.
 
 
@@ -94,6 +96,7 @@ class OutputLFA(models.Model):
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
     nilai = models.FloatField(default=0)
+    creation_time = models.DateField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self) -> str:
         try:
@@ -413,6 +416,8 @@ class Longlist(models.Model):
 
     output_test = models.ForeignKey(
         'OutputLFA', on_delete=models.SET_NULL, db_column='output_test', blank=True, null=True)
+    isu_strategis_test = models.ForeignKey(
+        'IsuStrategis', models.DO_NOTHING, db_column='isu_strategis_test', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.judul_proyek

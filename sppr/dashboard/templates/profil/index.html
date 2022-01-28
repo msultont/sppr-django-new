@@ -154,7 +154,7 @@
                 </div>
                 <!-- Chart -->
                 <div class="relative p-4 ">
-                    <canvas id="chartOne"></canvas>
+                    <canvas id="chartOne" data-url="{% url 'provchart' %}"></canvas>
                 </div>
             </div>
 
@@ -199,7 +199,7 @@
                 </div>
                 <!-- Chart -->
                 <div class="relative p-4 ">
-                    <canvas id="chartThree"></canvas>
+                    <canvas id="narikapi"></canvas>
                 </div>
             </div>
             {% endif %}
@@ -213,15 +213,51 @@
 
 <script>
 
+    //Fungsi Narik JSON PAKAI JAVASCRIPT
+
+    var xmlhttp = new XMLHttpRequest();
+    var url ="https://data.covid19.go.id/public/api/prov.json";
+    xmlhttp.open("GET",url, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+        {var data = JSON.parse(this.responseText);
+            //console.log(data)
+            var provinsi = datacoba.list_data.map(function(elem) {
+                return elem.key;
+            });
+            //console.log(provinsi)
+            var kasus = datacoba.list_data.map(function(elem) {
+                return elem.jumlah_kasus;
+            });
+        }
+    };
+
+    var ctx = document.getElementById('narikapi').getContext('2d');
+    var narikapicoba = new Chart(ctx, {
+        type : 'line',
+        datacoba : {
+            labels: provinsi,
+            datasets: [{
+                label: 'Provinsi Apa',
+                data: kasus,
+                backgroundColor: 'transparent',
+                borderColor: 'red',
+                borderWidth: 4
+            }]
+        }
+    });
+
     var ct1 = document.getElementById('chartOne');
     var ct2 = document.getElementById('chartTwo');
     var ct3 = document.getElementById('chartThree');
 
-    const data = {
+
+    const data1 = {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: provinsi,
+            data: kasus,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -238,27 +274,25 @@
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 1,
         }]
+    
     };
 
     var firstChart = new Chart(ct1, {
-        type: 'pie',
+        type: 'line',
         data: data
-    })
+    });
 
     var secondChart = new Chart(ct2, {
         type: 'pie',
         data: data
-    })
+    });
 
     var thirdChart = new Chart(ct3, {
         type: 'pie',
         data: data
-    })
-
-
-        ;
+    });
 </script>
 
-{% endblock %}
+    {% endblock %}

@@ -36,6 +36,9 @@ urlpatterns = [
     path('provchart/', views.chart_prov, name='provchart'),
     # path('data/', views.ItemListView.as_view()),
 
+    # Akses untuk API di Kondisi Umum Wilayah
+    path('apikuw/', views.api_kuw, name='apikuw'),
+
     # Path to Longlist Data View
     path('ajax_datatable/longlist', views.LonglistDataView.as_view(),
          name="longlist"),

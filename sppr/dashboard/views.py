@@ -72,7 +72,16 @@ def index(request):
 
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'dashboard/index.html')
+    total_provinsi = ProvinsiId.objects.count()
+    total_isu_strategis = IsuStrategis.objects.count()
+    total_mp = MajorprojectId.objects.count()
+    total_prioritas_nasional = DataKawasanPrioritas.objects.count()
+    return render(request, 'dashboard/index.html', {
+        'provinsi' : total_provinsi,
+        'mp' : total_mp,
+        'isu_strategis' : total_isu_strategis,
+        'prioritas_nasional' : total_prioritas_nasional,
+    })
 
 # Route to Profil Daerah Page
 
@@ -355,7 +364,7 @@ def cek_content(menu):
     if menu == "aceh":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/bf53f8e1e7494042b70d1cf739838601"
     elif menu == "ku":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/f02d00cca5f64450bf426ac457a6579e"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/60b9db129c4c4f5ab79f4fa8c30b7f9e"
     elif menu == "sumaterabarat":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/ee0befefe0e4425da5a4f11d69475cc6"
     elif menu == "sumaterautara":
@@ -889,6 +898,28 @@ def chart_prov(request):
 
     for row in ro_by_prov:
         labels.append(row["status_usulan__nama_status"])
+        data.append(row['jumlah'])
+
+    data = {
+        'labels': labels,
+        'data': data
+    }
+
+    return JsonResponse(data)
+
+
+# API Kondisi Umum Wilayah
+
+
+def api_kuw(request):
+
+    labels = []
+    data = []
+    ro_by_kl = Longlist.objects.values(
+        'kl_pelaksana__singkatan').annotate(jumlah=Count('judul_proyek'))
+
+    for row in ro_by_kl:
+        labels.append(row['kl_pelaksana__singkatan'])
         data.append(row['jumlah'])
 
     data = {

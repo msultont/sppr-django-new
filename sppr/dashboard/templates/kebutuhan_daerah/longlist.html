@@ -433,7 +433,7 @@
                 </div>
                 <!-- Chart -->
                 <div class="relative p-4">
-                    <canvas id="thirdChart"></canvas>
+                    <canvas id="thirdChart" data-url="{% url 'rochart' %}"></canvas>
                 </div>
             </div>
         </div>
@@ -579,7 +579,7 @@
 
 
     const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Merah', 'Biru', 'Kuning', 'Hijau', 'Ungu', 'Orange'],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
