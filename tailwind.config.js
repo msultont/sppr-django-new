@@ -6,8 +6,8 @@ module.exports = {
   purge: {
     enabled: false, //true for production build
     content: [
-      '../**/templates/*.html',
-      '../**/templates/**/*.html'
+      '**/templates/*.html',
+      '**/templates/**/*.html'
     ]
   },
   theme: {
