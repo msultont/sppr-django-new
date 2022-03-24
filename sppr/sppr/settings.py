@@ -105,7 +105,10 @@ DATABASES = {
         'USER': 'dit_regional1',
         'PASSWORD': 'regionals4tu',
         'HOST': '10.1.178.88',
-        'PORT': '5432'
+        'PORT': '5432',
+        'TEST': {
+            'NAME': 'dit_regional1'
+        }
     }
 }
 
