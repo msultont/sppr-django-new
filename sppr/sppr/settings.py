@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-e*f+x6&47eo7e9wu-lf$=tr#-!y$3@_^1l=nkd$@$d_ed_mu$-
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     '127.0.0.1',
     'https://data.covid19.go.id/public/api/prov.json',]
 CORS_ORIGIN_ALLOW_ALL = True

@@ -1,9 +1,10 @@
 {% extends 'parts/main.html' %} {% load static %} {% block content %}
 <main>
-  <!--Modal-->
+  <!--Modal with Data-->
+  {% for korelasi in output_korelasi %}
   <div
     class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
-    id="modal-id"
+    id="{{ korelasi.skoring.proyek_id }}"
   >
     <div class="relative w-auto my-6 mx-auto max-w-3xl">
       <!--content-->
@@ -28,14 +29,14 @@
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                      <h3 class="font-semibold text-base text-blueGray-700">Page Visits</h3>
+                      <h3 class="font-semibold text-base text-blueGray-700">Judul Proyek</h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                       <button
                         class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         type="button"
                       >
-                        See all
+                        {{ korelasi.judul_proyek }}
                       </button>
                     </div>
                   </div>
@@ -48,22 +49,27 @@
                         <th
                           class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                         >
-                          Page name
+                          ID Proyek
                         </th>
                         <th
                           class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                         >
-                          Visitors
+                          Nilai Raw Korelasi Sasaran
                         </th>
                         <th
                           class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                         >
-                          Unique users
+                          Nilai Raw Korelasi Output
                         </th>
                         <th
                           class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
                         >
-                          Bounce rate
+                          Nilai Raw MP
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Investasi
                         </th>
                       </tr>
                     </thead>
@@ -73,85 +79,19 @@
                         <th
                           class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700"
                         >
-                          /argon/
+                          {{ korelasi.skoring.proyek_id }}
                         </th>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          4,569
+                          {{ korelasi.skoring.nilai_raw_korelasi_sasaran }}
                         </td>
                         <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          340
+                          {{ korelasi.nilai_raw_korelasi_output }}
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                          46,53%
-                        </td>
-                      </tr>
-                      <tr>
-                        <th
-                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700"
-                        >
-                          /argon/index.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          3,985
+                          {{ korelasi.skoring.nilai_raw_MP }}
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          319
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-                          46,53%
-                        </td>
-                      </tr>
-                      <tr>
-                        <th
-                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700"
-                        >
-                          /argon/charts.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          3,513
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          294
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-                          36,49%
-                        </td>
-                      </tr>
-                      <tr>
-                        <th
-                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700"
-                        >
-                          /argon/tables.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          2,050
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          147
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                          50,87%
-                        </td>
-                      </tr>
-                      <tr>
-                        <th
-                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700"
-                        >
-                          /argon/profile.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          1,795
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          190
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                          <i class="fas fa-arrow-down text-red-500 mr-4"></i>
-                          46,53%
+                          {{ korelasi.skoring.nilai_raw_investasi }}
                         </td>
                       </tr>
                     </tbody>
@@ -163,7 +103,7 @@
           <button
             class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
             type="button"
-            onclick="toggleModal('modal-id')"
+            onclick="toggleModal('{{ korelasi.skoring.proyek_id }}')"
           >
             <span>Tutup Tabel</span>
           </button>
@@ -171,7 +111,54 @@
       </div>
     </div>
   </div>
-  <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+  {% endfor %}
+
+  <!--Modal No Data-->
+  <div
+    class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="no-data"
+  >
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <h3 class="text-3xl font-semibold">Hasil Analisis Korelasi</h3>
+        </div>
+        <!--body-->
+        <div class="relative p-6 flex-auto w-auto">
+          <p class="my-4 text-blueGray-500 text-lg leading-relaxed">Keterangan Tabel</p>
+          <!-- component -->
+          <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css" />
+          <link
+            rel="stylesheet"
+            href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+          />
+          <section class="py-1 bg-blueGray-50">
+            <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
+              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                  <div class="flex flex-wrap items-center">
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                      <h3 class="font-semibold text-base text-blueGray-700">Tidak ada nilai Korelasi!</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <button
+            class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
+            type="button"
+            onclick="toggleModal('no-data')"
+          >
+            <span>Tutup Tabel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Content header -->
   <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
@@ -201,6 +188,7 @@
                     onchange="form.submit()"
                     class="left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
                   >
+                    <option value="" selected disabled hidden>Pilih Provinsi</option>
                     {% for provinsi in provinsi %}
                     <option 
                       value={{ provinsi.provinsi_id }}
@@ -261,31 +249,30 @@
             </thead>
             <tbody id="tujuan-data">
               {% for tujuan in tujuans %}
-              <button>
-                <tr class="text-center p-4">
-                  <td colspan="4" class="border-dashed border-t bg-gray-600 text-black font-bold text-center p-3">
-                    Tujuan {{ forloop.counter }}
-                    <button
-                      class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                      onclick="toggleModal('{{ tujuan.id }}')"
-                    >
-                      <p>+</p>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center p-4" id="{{ tujuan.id }}">
-                  <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
-                    {{ tujuan.nama_tujuan }}
-                  </td>
-                  <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">{{ tujuan.indikator }}</td>
-                  <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
-                    <ol>
-                      <li>{{ tujuan.sumber_data }}</li>
-                    </ol>
-                  </td>
-                  <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">{{ tujuan.asumsi }}</td>
-                </tr>
-              </button>
+              <tr class="text-center p-4">
+                <td colspan="4" class="border-dashed border-t bg-gray-600 text-black font-bold text-center p-3">
+                  Tujuan {{ forloop.counter }}
+                  <button
+                    id="tujuan-button"
+                    class="collapse bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
+                    onclick="toggleModal('{{ tujuan.id }}')"
+                  >
+                    <p>+</p>
+                  </button>
+                </td>
+              </tr>
+              <tr class="text-center p-4" id="{{ tujuan.id }}">
+                <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
+                  {{ tujuan.nama_tujuan }}
+                </td>
+                <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">{{ tujuan.indikator }}</td>
+                <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
+                  <ol>
+                    <li>{{ tujuan.sumber_data }}</li>
+                  </ol>
+                </td>
+                <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">{{ tujuan.asumsi }}</td>
+              </tr>
               <tr>
                 {% for sasaran in tujuan.sasaranlfa_set.all %}
                 <tbody id="{{ sasaran.id }}">
@@ -332,7 +319,7 @@
                             <div>
                               <button
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                                onclick="toggleModal('modal-id')"
+                                onclick="toggleModal('{{ output.longlist_set.all.0.id | default:"no-data" }}')"
                               >
                                 <p>Hasil Korelasi</p>
                               </button>
@@ -362,13 +349,6 @@
 
           Terakhir Diedit oleh User 04.30 PM 12/12/2021
         </div>
-
-        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-          <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Hasil Korelasi</h4>
-        </div>
-        <div class="w-full my-4 justify-center items-center content-center">
-          <img src="{% static 'images/ss-korelasi.png' %}" width="75%" class="" />
-        </div>
       </div>
     </div>
   </div>
@@ -378,23 +358,7 @@
   $(document).ready(() => {
     let data = JSON.parse("{{ dataJSON|escapejs }}")
 
-    console.log(data)
-
     $("#tujuan-data").show();
-
-    $(".collaptable").aCollapTable({
-      // the table is collapased at start
-      startCollapsed: true,
-
-      // the plus/minus button will be added like a column
-      addColumn: true,
-
-      // The expand button ("plus" +)
-      plusButton: '<span class="i">+</span>',
-
-      // The collapse button ("minus" -)
-      minusButton: '<span class="i">-</span>'
-    });
 
     data.tujuan.forEach(tujuan => {
       $(`#${tujuan.id}`).addClass('hidden');
@@ -422,6 +386,19 @@
 
     
   });
+  
+  // Collapse or Expand Tujuan Icon Button
+  $("#tujuan-button").on('click', () => {
+    let state = $("#tujuan-button").hasClass("collapse")
+
+    if (state) {
+      $("#tujuan-button").addClass("expand").removeClass("collapse")
+      $("#tujuan-button p").replaceWith("<p>-</p>")
+    } else {
+      $("#tujuan-button").addClass("collapse").removeClass("expand")
+      $("#tujuan-button p").replaceWith("<p>+</p>")
+    }
+  })
 
   function toggleModal(modalID) {
     document.getElementById(modalID).classList.toggle("hidden");

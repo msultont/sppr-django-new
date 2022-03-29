@@ -97,7 +97,8 @@ def profil(request, menu):
     pilih_provinsi = ""
     provinsi = ProvinsiId.objects.all()
     tujuans = []
-    data = {} # Variable to be used on Javascript
+    output_korelasi = []
+    data = {} # Variable to be used for Javascript Template
 
     # Pilih Provinsi dropdown select option logic
     if request.method == "POST":
@@ -128,6 +129,15 @@ def profil(request, menu):
                         'nama_output': output.nama_output
                     })
 
+                    # Load longlist and query SkoringProyek
+                    for longlist in output.longlist_set.all():
+                        skoring = SkoringProyek.objects.get(proyek_id=longlist.id)
+                        output_korelasi.append({
+                            "judul_proyek": longlist.judul_proyek,
+                            "skoring": skoring
+                        })
+
+
     dataJSON = dumps(data)
 
     return render(
@@ -139,6 +149,7 @@ def profil(request, menu):
             'pilih_provinsi': pilih_provinsi,
             'provinsi': provinsi,
             'tujuans': tujuans,
+            'output_korelasi': output_korelasi,
             "dataJSON": dataJSON
         }
     )
