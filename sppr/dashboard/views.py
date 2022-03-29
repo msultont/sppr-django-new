@@ -403,11 +403,11 @@ def cek_content(menu):
     elif menu == "jawatengah":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/cb1ca19e1cd64ce793feca475f7cd4fc"
     elif menu == "diy":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/853f8a4a830a4eb090b00bd626438429"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2b68130db02b4d7d99103383fe138736"
     elif menu == "bali":
         template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/088fb805d40e4eeaba7dfeeda46bc726"
     elif menu == "jawatimur":
-        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/2b68130db02b4d7d99103383fe138736"
+        template = "https://geospasial.bappenas.go.id/portal/apps/storymaps/stories/853f8a4a830a4eb090b00bd626438429"
     else:
         template = None
 
