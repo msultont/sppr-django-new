@@ -140,10 +140,51 @@
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                      <h3 class="font-semibold text-base text-blueGray-700">Tidak ada nilai Korelasi!</h3>
+                      <h3 class="font-semibold text-base text-blueGray-700">Judul Proyek</h3>
+                    </div>
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                      <button
+                        class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                      />
                     </div>
                   </div>
                 </div>
+
+                <div class="block w-full overflow-x-auto">
+                  <table class="items-center bg-transparent w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          ID Proyek
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Korelasi Sasaran
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Korelasi Output
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw MP
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Investasi
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody />
+                  </table>
+                </div
               </div>
             </div>
           </section>
@@ -253,7 +294,7 @@
                 <td colspan="4" class="border-dashed border-t bg-gray-600 text-black font-bold text-center p-3">
                   Tujuan {{ forloop.counter }}
                   <button
-                    id="tujuan-button"
+                    id="button-{{ tujuan.id }}"
                     class="collapse bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
                     onclick="toggleModal('{{ tujuan.id }}')"
                   >
@@ -368,6 +409,18 @@
         })
 
       })
+      $(`#button-${tujuan.id}`).click(() => {
+        // Collapse or Expand Tujuan Icon Button
+        let state = $(`#button-${tujuan.id}`).hasClass("collapse")
+
+        if (state) {
+          $(`#button-${tujuan.id}`).addClass("expand").removeClass("collapse")
+          $(`#button-${tujuan.id} p`).replaceWith("<p>-</p>")
+        } else {
+          $(`#button-${tujuan.id}`).addClass("collapse").removeClass("expand")
+          $(`#button-${tujuan.id} p`).replaceWith("<p>+</p>")
+        }
+      })
     });
 
     data.sasaran.forEach(sasaran => {
@@ -387,19 +440,6 @@
     
   });
   
-  // Collapse or Expand Tujuan Icon Button
-  $("#tujuan-button").on('click', () => {
-    let state = $("#tujuan-button").hasClass("collapse")
-
-    if (state) {
-      $("#tujuan-button").addClass("expand").removeClass("collapse")
-      $("#tujuan-button p").replaceWith("<p>-</p>")
-    } else {
-      $("#tujuan-button").addClass("collapse").removeClass("expand")
-      $("#tujuan-button p").replaceWith("<p>+</p>")
-    }
-  })
-
   function toggleModal(modalID) {
     document.getElementById(modalID).classList.toggle("hidden");
     document.getElementById(modalID + "-backdrop").classList.toggle("hidden");

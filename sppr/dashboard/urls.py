@@ -15,10 +15,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
 
     # Akses untuk ke Menu Profil Daerah
-    path('profil/<str:menu>', views.profil, name='profil'),
-
-    # Akses untuk ke Menu Profil Daerah Aceh
-    path('profil/<str:menu>', views.profil, name='profil'),
+    path('profil/<str:menu>/', views.profil, name='profil'),
 
     # Akses untuk ke Menu Kebutuhan Daerah
     path('kebdaerah/<str:menu>', views.kebdaerah, name='kebdaerah'),
@@ -68,16 +65,19 @@ urlpatterns = [
     path('forms/longlist/delete/<int:pk>',
          views.deleteSingleLonglist, name="deleteSingleLonglist"),
 
+    # Path to CRUD Isu Strategis
+    path('forms/isu_strategis/add',
+         views.addIsuStrategis, name='addIsu'),
+
     # Path to CRUD Skoring
     path('forms/skoring/update/<int:pk>',
          views.updateHasilSkoring, name="updateSkoring"),
-
-    # Path to download excel longlist data format
-    path('download/format/longlist/',
-         views.download_longlist_format, name="downloadLonglist"),
 
     # Path to CRUD LFA
     path('forms/add_lfa/<str:tipe>',
          views.addkerangkalogis, name='addLfa'),
 
+    # Path to download excel longlist data format
+    path('download/format/longlist/',
+         views.download_longlist_format, name="downloadLonglist"),
 ]

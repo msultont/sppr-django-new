@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import CsvLongList, DataKawasanPrioritas, IsuStrategis, Longlist, OutputLFA, SasaranLFA, SkoringProyek, TujuanLFA
+from .models import *
 from mptt.admin import MPTTModelAdmin
-from mptt.admin import DraggableMPTTAdmin
 
 # Register your models here.
 
@@ -36,11 +35,5 @@ admin.site.register(SkoringProyek, SkoringProyek_Admin)
 admin.site.register(TujuanLFA, TujuanLFA_Admin)
 admin.site.register(SasaranLFA, SasaranLFA_Admin)
 admin.site.register(OutputLFA, OutputLFA_Admin)
-admin.site.register(
-    IsuStrategis,
-    DraggableMPTTAdmin,
-    list_display=(
-        'tree_actions',
-        'indented_title',
-    ),
-)
+admin.site.register(NewIsuStrategis, MPTTModelAdmin)
+admin.site.register(IsuStrategis, MPTTModelAdmin)

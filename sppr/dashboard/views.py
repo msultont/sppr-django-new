@@ -1,10 +1,9 @@
-from ast import dump
 from django.shortcuts import render, redirect
 from .models import *
-from django.db.models import Count, query
+from django.db.models import Count 
 from django.http import JsonResponse
 from ajax_datatable.views import AjaxDatatableView
-from .forms import CsvModelForm, LonglistForm, Output_LFA_Form, Sasaran_LFA_Form, SkoringProyekForm, Tujuan_LFA_Form
+from .forms import CsvModelForm, LonglistForm, Output_LFA_Form, Sasaran_LFA_Form, SkoringProyekForm, Tujuan_LFA_Form, IsuStrategisForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import csv
@@ -22,8 +21,6 @@ from json import dumps
 
 """
 # User Login
-
-# TODO: 1. Pasang library baru untuk halaman Isu Strategis
 
 def loginUser(request):
 
@@ -88,55 +85,74 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def profil(request, menu):
-
     judul = cek_profil(menu)
     template = cek_profil_template(menu)
     content = cek_content(menu)
 
-    # LFA entities
-    pilih_provinsi = ""
+    # Isu strategis & LFA entities
+    pilih_provinsi = 0
+    pilih_isu_strategis = 0
     provinsi = ProvinsiId.objects.all()
     tujuans = []
+    isu_strategis = []
     output_korelasi = []
     data = {} # Variable to be used for Javascript Template
 
-    # Pilih Provinsi dropdown select option logic
     if request.method == "POST":
-        pilih_provinsi = int(request.POST.get("pilih_provinsi"))
-        tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
 
-        data['tujuan'] = []
-        data['sasaran'] = []
-        data['output'] = []
+        if 'pilih_provinsi' in request.POST:
+            # Pilih Provinsi dropdown select option logic
+            pilih_provinsi = request.POST.get("pilih_provinsi", 0)
+        else:
+            # Pilih Isu Strategis dropdown select option logic
+            response = request.POST.get("pilih_isu_strategis", "")
 
-        for tujuan in tujuans:
-            data['tujuan'].append({
-                'id': tujuan.id,
-                'nama_tujuan': tujuan.nama_tujuan
-            })
+            pilih_provinsi = response.split("-")[0]
+            pilih_isu_strategis = response.split("-")[1]
 
-            for sasaran in tujuan.sasaranlfa_set.all():
-                data['sasaran'].append({
-                    'tujuan_id': tujuan.id,
-                    'id' : sasaran.id,
-                    'nama_sasaran': sasaran.nama_sasaran
+        # Convert String into Integer
+        pilih_provinsi = int(pilih_provinsi)
+        pilih_isu_strategis = int(pilih_isu_strategis)
+
+        # Data Structure logic for Halaman Analisa Kerangka Logis
+        if menu == "akl":
+            tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
+
+            data['tujuan'] = []
+            data['sasaran'] = []
+            data['output'] = []
+
+            for tujuan in tujuans:
+                data['tujuan'].append({
+                    'id': tujuan.id,
+                    'nama_tujuan': tujuan.nama_tujuan
                 })
 
-                for output in sasaran.outputlfa_set.all():
-                    data['output'].append({
-                        'sasaran_id': sasaran.id,
-                        'id' : output.id,
-                        'nama_output': output.nama_output
+                for sasaran in tujuan.sasaranlfa_set.all():
+                    data['sasaran'].append({
+                        'tujuan_id': tujuan.id,
+                        'id' : sasaran.id,
+                        'nama_sasaran': sasaran.nama_sasaran
                     })
 
-                    # Load longlist and query SkoringProyek
-                    for longlist in output.longlist_set.all():
-                        skoring = SkoringProyek.objects.get(proyek_id=longlist.id)
-                        output_korelasi.append({
-                            "judul_proyek": longlist.judul_proyek,
-                            "skoring": skoring
+                    for output in sasaran.outputlfa_set.all():
+                        data['output'].append({
+                            'sasaran_id': sasaran.id,
+                            'id' : output.id,
+                            'nama_output': output.nama_output
                         })
 
+                        # Load longlist and query SkoringProyek
+                        for longlist in output.longlist_set.all():
+                            skoring = SkoringProyek.objects.get(proyek_id=longlist.id)
+                            output_korelasi.append({
+                                "judul_proyek": longlist.judul_proyek,
+                                "skoring": skoring
+                            })
+
+        # Data Structure logic for Halaman Permasalahan Isu Strategis
+        if menu == "pis":
+            isu_strategis = IsuStrategis.objects.all().filter(provinsi_id=pilih_provinsi)
 
     dataJSON = dumps(data)
 
@@ -147,7 +163,9 @@ def profil(request, menu):
             'judul': judul, 
             'content': content, 
             'pilih_provinsi': pilih_provinsi,
+            'pilih_isu_strategis': pilih_isu_strategis,
             'provinsi': provinsi,
+            'isu_strategis': isu_strategis,
             'tujuans': tujuans,
             'output_korelasi': output_korelasi,
             "dataJSON": dataJSON
@@ -708,6 +726,8 @@ class KawasanPrioritasDataView(AjaxDatatableView):
         {'name': 'kawasan_prioritas', 'visible': True, 'title': 'Kawasan Prioritas'},
     ]
 
+# Create Single Long List Data
+
 
 @login_required(login_url='login')
 def addSingleLonglist(request):
@@ -780,6 +800,17 @@ def updateHasilSkoring(request, pk):
             return redirect('/kebdaerah/prioritas')
 
     return render(request, 'forms/dpp-update.html', content)
+
+# Create Isu Strategis
+
+@login_required(login_url='login')
+def addIsuStrategis(request):
+
+    form = IsuStrategisForm()
+
+    return render(request, 'forms/isu-strategis.html', {'content': {
+        'form': form
+    }})
 
 # Create Hasil Kerangka Logis
 
