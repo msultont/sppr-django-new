@@ -85,14 +85,15 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def profil(request, menu):
+    # Page entities
     judul = cek_profil(menu)
     template = cek_profil_template(menu)
     content = cek_content(menu)
 
     # Isu strategis & LFA entities
+    provinsi = ProvinsiId.objects.all()
     pilih_provinsi = 0
     pilih_isu_strategis = 0
-    provinsi = ProvinsiId.objects.all()
     tujuans = []
     isu_strategis = []
     output_korelasi = []
@@ -152,7 +153,31 @@ def profil(request, menu):
 
         # Data Structure logic for Halaman Permasalahan Isu Strategis
         if menu == "pis":
-            isu_strategis = IsuStrategis.objects.all().filter(provinsi_id=pilih_provinsi)
+            isu_strategis = NewIsuStrategis.objects.all().filter(provinsi_id=pilih_provinsi, level=0)
+
+            if pilih_isu_strategis != 0: # Pilih Isu Strategis dropdown selected
+                head = NewIsuStrategis.objects.get(id=pilih_isu_strategis)
+
+                data = {
+                    'name': head.nama_isu, 
+                    'fill': '#260df0', 
+                    'children': [{
+                        'name': children_lvl_1.nama_isu,
+                        'fill': '#301bdd',
+                        'children': [{
+                            'name': children_lvl_2.nama_isu,
+                            'fill': '#4a3ace',
+                            'children': [{
+                                'name': children_lvl_3.nama_isu,
+                                'fill': '#7467dd',
+                                'children': [{
+                                    'name': children_lvl_4.nama_isu,
+                                    'fill': '#cbc5f8'
+                                } for children_lvl_4 in children_lvl_3.get_children()]
+                            } for children_lvl_3 in children_lvl_2.get_children()]
+                        } for children_lvl_2 in children_lvl_1.get_children()]
+                    } for children_lvl_1 in head.get_children()] 
+                }
 
     dataJSON = dumps(data)
 

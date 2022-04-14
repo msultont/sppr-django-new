@@ -87,7 +87,7 @@
         </div>
 
         <!-- CHART CONTAINER -->
-        <div id="tree-container"></div>
+        <div class="overflow-auto" id="tree-container"></div>
       </div>
     </div>
 
@@ -98,55 +98,14 @@
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
-  var treeData = {
-    name: "Belum memadainya  infrastruktur di Jabar bagian Selatan",
-    fill: "#6D28D9",
-    children: [
-      {
-        name: "Belum selesainya pembangunan infrastruktur kereta api",
-        fill: "#6D5CF6",
-        children: [
-          {
-            name: "Belum tuntasnya Pembanguna Jalur Ganda Kereta Api di Jabar Selatan",
-            fill: "#6D5CF6"
-          },
-          {
-            name: "Belum tuntasnya Reaktivasi Jaringan Kereta Api di Jabar selatan",
-            fill: "#6D5CF6"
-          }
-        ]
-      },
-      {
-        name: "Belum selesainya  pembangunan Infrastruktur jalan",
-        fill: "#6D5CF6",
-        children: [
-          {
-            name: "Belum tuntasnya pembangunan Jalur Lintas Selatan (JLS)",
-            fill: "#6D5CF6"
-          },
-          {
-            name: "Belum tuntasnya pembangunan jalan tol di Jabar Selatan",
-            fill: "#6D5CF6"
-          }
-        ]
-      },
-      {
-        name: "Masih terbatasnya infrastruktur TIK",
-        fill: "#6D5CF6",
-        children: [
-          {
-            name: "Terbatasnya jaringan internet",
-            fill: "#6D5CF6"
-          }
-        ]
-      }
-    ]
-  };
+  let data = JSON.parse("{{ dataJSON|escapejs }}")
+
+  var treeData = data;
 
   // Set the dimensions and margins of the diagram
   var margin = { top: 20, right: 90, bottom: 30, left: 30 },
-    width = 2500 - margin.left - margin.right,
-    height = 550 - margin.top - margin.bottom;
+    width = 1500 - margin.left - margin.right,
+    height = 1050 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   // appends a 'group' element to 'svg'
