@@ -267,22 +267,22 @@
             <thead>
               <tr class="text-center break-all">
                 <th
-                  class="w-1/4 bg-green-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs"
+                  class="w-1/4 bg-green-700 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
                 >
-                  Hirarki logis
+                  Hierarki logis
                 </th>
                 <th
-                  class="w-1/4 bg-teal-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs"
+                  class="w-1/4 bg-teal-700 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
                 >
                   Indikator
                 </th>
                 <th
-                  class="w-1/4 sticky top-0 border-b bg-orange-500 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs"
+                  class="w-1/4 sticky top-0 border-b bg-orange-600 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
                 >
                   Sumber Data
                 </th>
                 <th
-                  class="w-1/4 bg-blue-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs"
+                  class="w-1/4 bg-blue-700 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
                 >
                   Asumsi
                 </th>
@@ -291,7 +291,7 @@
             <tbody id="tujuan-data">
               {% for tujuan in tujuans %}
               <tr class="text-center p-4">
-                <td colspan="4" class="border-dashed border-t bg-gray-600 text-black font-bold text-center p-3">
+                <td colspan="4" class="border-dashed border-t bg-gray-600 text-white font-bold text-center p-3">
                   Tujuan {{ forloop.counter }}
                   <button
                     id="button-{{ tujuan.id }}"
@@ -303,39 +303,39 @@
                 </td>
               </tr>
               <tr class="text-center p-4" id="{{ tujuan.id }}">
-                <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
+                <td class="border-dashed border-t bg-green-700 text-white text-center p-3">
                   {{ tujuan.nama_tujuan }}
                 </td>
-                <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">{{ tujuan.indikator }}</td>
-                <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
+                <td class="border-dashed border-t bg-teal-700 text-white text-center p-3">{{ tujuan.indikator }}</td>
+                <td class="border-dashed border-t bg-orange-600 text-white text-center p-3">
                   <ol>
                     <li>{{ tujuan.sumber_data }}</li>
                   </ol>
                 </td>
-                <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">{{ tujuan.asumsi }}</td>
+                <td class="border-dashed border-t bg-blue-700 text-white text-center p-3">{{ tujuan.asumsi }}</td>
               </tr>
               <tr>
                 {% for sasaran in tujuan.sasaranlfa_set.all %}
                 <tbody id="{{ sasaran.id }}">
                   <button>
                     <tr class="text-center p-4">
-                      <td colspan="4" class="border-dashed border-t bg-gray-500 text-black font-bold text-center p-3">
+                      <td colspan="4" class="border-dashed border-t bg-gray-500 text-white font-bold text-center p-3">
                         Sasaran {{ forloop.parentloop.counter }}.{{ forloop.counter }}
                       </td>
                     </tr>
                     <tr class="text-center" id="{{ sasaran.id }}">
-                      <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
+                      <td class="border-dashed border-t bg-green-700 text-white text-center p-3">
                         {{ sasaran.nama_sasaran }}
                       </td>
-                      <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">
+                      <td class="border-dashed border-t bg-teal-700 text-white text-center p-3">
                         {{ sasaran.indikator }}
                       </td>
-                      <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
+                      <td class="border-dashed border-t bg-orange-600 text-white text-center p-3">
                         <ol>
                           <li>{{sasaran.sumber_data }}</li>
                         </ol>
                       </td>
-                      <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
+                      <td class="border-dashed border-t bg-blue-700 text-white text-center p-3">
                         {{ sasaran.asumsi }}
                       </td>
                     </tr>
@@ -347,13 +347,13 @@
                         <tr class="text-center p-4">
                           <td
                             colspan="4"
-                            class="border-dashed border-t bg-gray-400 text-black font-bold text-center p-3"
+                            class="border-dashed border-t bg-gray-400 text-white font-bold text-center p-3"
                           >
                             Output {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}
                           </td>
                         </tr>
                         <tr class="text-center">
-                          <td class="border-dashed border-t bg-green-500 text-black text-center p-3">
+                          <td class="border-dashed border-t bg-green-700 text-white text-center p-3">
                             <p>
                               {{ output.nama_output }}
                             </p>
@@ -366,13 +366,13 @@
                               </button>
                             </div>
                           </td>
-                          <td class="border-dashed border-t bg-teal-500 text-black text-center p-3">
+                          <td class="border-dashed border-t bg-teal-700 text-white text-center p-3">
                             {{ output.indikator }}
                           </td>
-                          <td class="border-dashed border-t bg-orange-500 text-black text-center p-3">
+                          <td class="border-dashed border-t bg-orange-600 text-white text-center p-3">
                             {{ output.sumber_data }}
                           </td>
-                          <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
+                          <td class="border-dashed border-t bg-blue-700 text-white text-center p-3">
                             {{ output.asumsi }}
                           </td>
                         </tr>
