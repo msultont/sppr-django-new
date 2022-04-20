@@ -74,7 +74,9 @@ class TujuanLFA(models.Model):
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
-    nilai = models.FloatField(default=0)
+    baseline = models.TextField(max_length=500, blank=True, null=True)
+    tahun_anggaran = models.IntegerField(choices=year_choices(), default=2019)
+    target = models.FloatField(default=0)
 
     def __str__(self) -> str:
         return f'{self.provinsi} - {self.nama_tujuan}'
@@ -87,7 +89,9 @@ class SasaranLFA(models.Model):
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
-    nilai = models.FloatField(default=0)
+    target = models.FloatField(default=0)
+    baseline = models.TextField(max_length=500, blank=True, null=True)
+    tahun_anggaran = models.IntegerField(choices=year_choices(), default=2019)
     pengaruh_sasaran_tujuan = models.FloatField(default=0)
 
     def __str__(self) -> str:
@@ -110,7 +114,9 @@ class OutputLFA(models.Model):
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
-    nilai = models.FloatField(default=0)
+    baseline = models.TextField(max_length=500, blank=True, null=True)
+    tahun_anggaran = models.IntegerField(choices=year_choices(), default=2019)
+    target = models.FloatField(default=0)
     creation_time = models.DateField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self) -> str:

@@ -6,17 +6,17 @@ from mptt.admin import MPTTModelAdmin
 
 
 class TujuanLFA_Admin(admin.ModelAdmin):
-    list_display = ["nama_tujuan", "provinsi", "tahun", "indikator", "nilai"]
+    list_display = ["nama_tujuan", "provinsi", "tahun", "indikator", "target"]
 
 
 class SasaranLFA_Admin(admin.ModelAdmin):
     list_display = ["nama_sasaran", "tujuan", "indikator",
-                    "nilai", "pengaruh_sasaran_tujuan"]
+                    "target", "pengaruh_sasaran_tujuan"]
 
 
 class OutputLFA_Admin(admin.ModelAdmin):
     list_display = ["nama_output", "sasaran", "indikator",
-                    "nilai", "pengaruh_output_sasaran"]
+                    "target", "pengaruh_output_sasaran"]
 
 
 class Longlist_Admin(admin.ModelAdmin):
