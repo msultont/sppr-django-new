@@ -873,7 +873,7 @@ def addkerangkalogis(request, tipe):
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Berhasil Menambahkan Tujuan LFA')
-                return HttpResponseRedirect('/forms/add_lfa/tujuan')
+                return HttpResponseRedirect('/forms/add_lfa/sasaran')
             else:
                 messages.error(request, 'Gagal Menambahkan Tujuan LFA')
                 return HttpResponseRedirect('/forms/add_lfa/tujuan')
@@ -889,7 +889,7 @@ def addkerangkalogis(request, tipe):
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Berhasil Menambahkan Sasaran LFA')
-                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+                return HttpResponseRedirect('/forms/add_lfa/output')
             else:
                 messages.error(request, 'Gagal Menambahkan Sasaran LFA')
                 return HttpResponseRedirect('/forms/add_lfa/sasaran')
@@ -905,6 +905,9 @@ def addkerangkalogis(request, tipe):
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Berhasil Menambahkan Output LFA')
+                return HttpResponseRedirect('/forms/add_lfa/tujuan')
+            else:
+                messages.error(request, 'Gagal Menambahkan Output LFA')
                 return HttpResponseRedirect('/forms/add_lfa/output')
     else:
         content_title = None
