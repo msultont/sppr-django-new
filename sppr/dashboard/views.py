@@ -1,3 +1,4 @@
+from typing import List
 from django.shortcuts import render, redirect
 from .models import *
 from django.db.models import Count 
@@ -833,6 +834,16 @@ def addIsuStrategis(request):
 
     form = IsuStrategisForm()
 
+    if request.method == 'POST':
+        form = IsuStrategisForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Berhasil Menambahkan Isu Strategis Baru!')
+            return HttpResponseRedirect('/forms/isu_strategis/add')
+        else:
+            messages.error(request, 'Gagal Menambahkan Isu Strategis')
+            return HttpResponseRedirect('/forms/isu_strategis/add')
+
     return render(request, 'forms/isu-strategis.html', {'content': {
         'form': form
     }})
@@ -850,6 +861,7 @@ def addkerangkalogis(request, tipe):
     a_class_sasaran = ""
     a_class_output = ""
     form = None
+    provinsi = []
 
     if tipe == 'tujuan':
         content_title = "tujuan"
@@ -862,12 +874,16 @@ def addkerangkalogis(request, tipe):
                 form.save()
                 messages.success(request, 'Berhasil Menambahkan Tujuan LFA')
                 return HttpResponseRedirect('/forms/add_lfa/tujuan')
+            else:
+                messages.error(request, 'Gagal Menambahkan Tujuan LFA')
+                return HttpResponseRedirect('/forms/add_lfa/tujuan')
 
     elif tipe == 'sasaran':
         content_title = "sasaran"
         class_button_sasaran = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_sasaran = "disabled"
         form = Sasaran_LFA_Form()
+        provinsi = ProvinsiId.objects.all()
         if request.method == 'POST':
             form = Sasaran_LFA_Form(request.POST)
             if form.is_valid():
@@ -883,6 +899,7 @@ def addkerangkalogis(request, tipe):
         class_button_output = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_output = "disabled"
         form = Output_LFA_Form()
+        provinsi = ProvinsiId.objects.all()
         if request.method == 'POST':
             form = Output_LFA_Form(request.POST)
             if form.is_valid():
@@ -892,16 +909,6 @@ def addkerangkalogis(request, tipe):
     else:
         content_title = None
 
-    # content = {
-    #     'content_title' : content_title,
-    #     'b_tujuan':class_button_tujuan,
-    #     'b_sasaran':class_button_sasaran,
-    #     'b_output':class_button_output,
-    #     'a_tujuan':a_class_tujuan,
-    #     'a_sasaran':a_class_sasaran,
-    #     'a_output':a_class_output
-    # }
-
     return render(request, 'forms/kerangkalogis-add.html', {'content': {
         'content_title': content_title,
         'b_tujuan': class_button_tujuan,
@@ -910,7 +917,8 @@ def addkerangkalogis(request, tipe):
         'a_tujuan': a_class_tujuan,
         'a_sasaran': a_class_sasaran,
         'a_output': a_class_output,
-        'form': form
+        'form': form,
+        'provinsi': provinsi
     }})
 
 
@@ -995,6 +1003,31 @@ def api_kuw(request):
     }
 
     return JsonResponse(data)
+
+
+# Data API Tujuan LFA
+
+
+def AjaxTujuanLFA(request):
+    provinsi_id = request.GET.get('provinsi_id')
+    tujuan = list(TujuanLFA.objects.filter(provinsi_id=provinsi_id).values())
+    return JsonResponse({"data": tujuan, "message": "Success"})
+
+
+# Data API Sasaran LFA
+
+
+def AjaxSasaranLFA(request):
+    tujuan_id = request.GET.get('tujuan_id')
+    sasaran = list(SasaranLFA.objects.filter(tujuan_id=tujuan_id).values())
+    return JsonResponse({"data": sasaran, "message": "Success"})
+
+
+# Data API Output LFA
+
+
+def AjaxOutputLFA(request):
+    return JsonResponse("test_data_output_lfa")
 
 
 ############################

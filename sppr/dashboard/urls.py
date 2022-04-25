@@ -36,6 +36,15 @@ urlpatterns = [
     # Akses untuk API di Kondisi Umum Wilayah
     path('apikuw/', views.api_kuw, name='apikuw'),
 
+    # Akses Data API Tujuan LFa
+    path('ajax/tujuan-lfa', views.AjaxTujuanLFA, name='ajax-tujuan-lfa'),
+
+    # Akses Data API Sasaran LFa
+    path('ajax/sasaran-lfa', views.AjaxSasaranLFA, name='ajax-sasaran-lfa'),
+
+    # Akses Data API Output LFa
+    path('ajax/output-lfa', views.AjaxOutputLFA, name='ajax-output-lfa'),
+
     # Path to Longlist Data View
     path('ajax_datatable/longlist', views.LonglistDataView.as_view(),
          name="longlist"),

@@ -81,7 +81,7 @@
 
     <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-        Silahkan Isi Provinsi
+        Provinsi
       </label>
       <div class="relative w-3/4">
         {{content.form.provinsi}}
@@ -95,7 +95,7 @@
 
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-        Silahkan Isi Tahun
+        Tahun
       </label>
       <div class="relative w-3/4">
         {{content.form.tahun}}
@@ -109,19 +109,24 @@
 
     <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        Silahkan Isi Tujuan
+        Isi Tujuan
       </label>
       {{content.form.nama_tujuan}}
-      <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+    </div>
+
+    <div class="w-full px-2 mb-6  md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Indikator
+      </label>
+      {{content.form.indikator}}
     </div>
 
     <div class="flex flex-wrap -px-3 mb-6 mt-5">
       <div class="w-1/4 px-2 mb-6  md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-          Indikator
+          Baseline
         </label>
-        {{content.form.indikator}}
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+        {{content.form.baseline}}
       </div>
       <div class="w-1/4 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -134,7 +139,6 @@
           Sumber Data
         </label>
         {{content.form.sumber_data}}
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
       </div>
       <div class="w-1/4 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -159,20 +163,43 @@
 {% elif content.content_title == 'sasaran' %}
 <!-- HALAMAN PENGISIAN SASARAN -->
 
-<form class="w-full max-w-4xl l px-5 m-5" method="POST">
+<form id="form" class="w-full max-w-4xl l px-5 m-5" method="POST" data-tujuan-url="{% url 'ajax-tujuan-lfa' %}">
 
   {% csrf_token %}
 
   <div class="flex flex-wrap -mx-3 mb-2">
 
-    <div class="flex flex-wrap -px-3 mb-6 mt-5">
-
-    </div>
     <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-        Silahkan Isi Tujuan
+        Provinsi
       </label>
       <div class="relative w-3/4">
+        <select
+          id="provinsi"
+          name="provinsi"
+          onchange="handleProvinsiSelect(value)"
+          class="left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+        >
+          <option value="" selected disabled hidden>Pilih Provinsi</option>
+          {% for provinsi in content.provinsi %}
+          <option value={{ provinsi.provinsi_id }}>
+            {{ provinsi.nama_provinsi }}
+          </option>
+          {% endfor %}
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Isi Tujuan
+      </label>
+      <div class="relative w-4/4">
         {{content.form.tujuan}}
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -184,19 +211,24 @@
 
     <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        Silahkan Isi Sasaran
+        Isi Sasaran
       </label>
       {{content.form.nama_sasaran}}
-      <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+    </div>
+
+    <div class="w-full px-2 mb-6  md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Indikator
+      </label>
+      {{content.form.indikator}}
     </div>
 
     <div class="flex flex-wrap -px-3 mb-6 mt-5">
       <div class="w-1/4 px-2 mb-6  md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-          Indikator
+          Baseline
         </label>
-        {{content.form.indikator}}
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+        {{content.form.baseline}}
       </div>
       <div class="w-1/4 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -209,7 +241,6 @@
           Sumber Data
         </label>
         {{content.form.sumber_data}}
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
       </div>
       <div class="w-1/4 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -234,44 +265,94 @@
 {% elif content.content_title == 'output' %}
 <!-- HALAMAN PENGISIAN OUTPUT -->
 
-<form class="w-full max-w-4xl l px-5 m-5" method="POST">
+<form id="form" class="w-full max-w-4xl l px-5 m-5" method="POST" data-tujuan-url="{% url 'ajax-tujuan-lfa' %}" data-sasaran-url="{% url 'ajax-sasaran-lfa' %}">
 
   {% csrf_token %}
 
-  <div class="flex flex-wrap -mx-3 mb-2">
-
+  <div class="flex flex-wrap -mx-3 mb-2" style="width: 125%;">
     <div class="flex flex-wrap -px-3 mb-6 mt-5">
-
-    </div>
-    <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-        Silahkan Isi Sasaran
-      </label>
-      <div class="relative w-3/4">
-        {{content.form.sasaran}}
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-          </svg>
+      <div class="w-1/3 md:w-1/3 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+          Provinsi
+        </label>
+        <div class="relative w-auto">
+          <select
+            id="provinsi"
+            name="provinsi"
+            onchange="handleProvinsiSelect(value)"
+            class="whitespace-pre-wrap left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+          >
+            <option value="" selected disabled hidden>Pilih Provinsi</option>
+            {% for provinsi in content.provinsi %}
+            <option value={{ provinsi.provinsi_id }}>
+              {{ provinsi.nama_provinsi }}
+            </option>
+            {% endfor %}
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+  
+      <div class="w-1/3 md:w-1/3 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+          Isi Tujuan
+        </label>
+        <div class="relative w-auto">
+          <select
+            id="tujuan"
+            name="tujuan"
+            onchange="handleTujuanSelect(value)"
+            class="whitespace-pre-wrap left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+          >
+            <option value="" selected disabled hidden>---------</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+  
+      <div class="w-1/3 md:w-1/3 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+          Isi Sasaran
+        </label>
+        <div class="relative w-auto">
+          {{content.form.sasaran}}
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-        Silahkan Isi Output
+        Isi Output
       </label>
       {{content.form.nama_output}}
-      <p class="text-red-500 text-xs italic">Silahkan Isi Tujuan Disini</p>
+    </div>
+
+    <div class="w-full px-2 mb-6  md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Indikator
+      </label>
+      {{content.form.indikator}}
     </div>
 
     <div class="flex flex-wrap -px-3 mb-6 mt-5">
       <div class="w-1/4 px-2 mb-6  md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-          Indikator
+          Baseline
         </label>
-        {{content.form.indikator}}
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
+        {{content.form.baseline}}
       </div>
       <div class="w-1/4 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -284,7 +365,6 @@
           Sumber Data
         </label>
         {{content.form.sumber_data}}
-        <p class="text-red-500 text-xs italic">Please fill out this field.</p>
       </div>
       <div class="w-1/4 px-2">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
@@ -314,13 +394,56 @@
   </style>
 
   <script>
-
+    // Message confirmation timeout after submit form
     setTimeout(function () {
-      if ($('#msg').length > 0) {
-        $('#msg').remove();
-      }
+      $('#msg').remove();
     }, 3000)
 
+    function handleSubmitOnError(element) {
+      console.log(`this is touched`)
+    }
+
+    function handleProvinsiSelect(provinsi_id) {
+      let url_tujuan = $("#form").attr("data-tujuan-url")
+
+      $.ajax({
+        url: url_tujuan,
+        data: {
+          provinsi_id: provinsi_id
+        },
+        success: ({ data }) => {
+          let html_lists = `<option value="" selected="">Pilih Tujuan</option>`
+
+          data.forEach(item => {
+            html_lists += `<option value="${item.id}">${item.nama_tujuan}</option>`
+          })
+
+          $("[name='tujuan']").html(html_lists)
+        }
+      })
+    }
+
+    function handleTujuanSelect(tujuan_id) {
+      let url_tujuan = $("#form").attr("data-sasaran-url")
+
+      $.ajax({
+        url: url_tujuan,
+        data: {
+          tujuan_id: tujuan_id
+        },
+        success: ({ data }) => {
+          let html_lists = `<option value="" selected="">Pilih Sasaran</option>`
+
+          data.forEach(item => {
+            html_lists += `<option value="${item.id}">${item.nama_sasaran}</option>`
+          })
+
+          console.log(html_lists)
+
+          $("[name='sasaran']").html(html_lists)
+        }
+      })
+    }
   </script>
 
   {% endblock %}
