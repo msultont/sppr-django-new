@@ -5,6 +5,18 @@
   <h1 class="text-2xl font-semibold">Menambahkan Isu Strategis</h1>
 </div>
 
+{% if messages %}
+<div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+  <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+  </div>
+  <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+    {% for message in messages %}
+    <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 <!-- Content form body -->
 <form class="w-full max-w-4xl l px-5 m-5" method="POST">
   {% csrf_token %}
@@ -66,5 +78,12 @@
     </button> -->
   </div>
 </form>
+
+<script>
+  // Message confirmation timeout after submit form
+  setTimeout(function () {
+    $('#msg').remove();
+  }, 3000)
+</script>
 
 {% endblock %}
