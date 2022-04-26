@@ -865,7 +865,7 @@ def addkerangkalogis(request, tipe):
 
     if tipe == 'tujuan':
         content_title = "tujuan"
-        class_button_tujuan = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        class_button_tujuan = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_tujuan = "disabled"
         form = Tujuan_LFA_Form()
         if request.method == 'POST':
@@ -880,7 +880,7 @@ def addkerangkalogis(request, tipe):
 
     elif tipe == 'sasaran':
         content_title = "sasaran"
-        class_button_sasaran = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        class_button_sasaran = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_sasaran = "disabled"
         form = Sasaran_LFA_Form()
         provinsi = ProvinsiId.objects.all()
@@ -896,7 +896,7 @@ def addkerangkalogis(request, tipe):
 
     elif tipe == 'output':
         content_title = "output"
-        class_button_output = "bg-blue-800 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
+        class_button_output = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_output = "disabled"
         form = Output_LFA_Form()
         provinsi = ProvinsiId.objects.all()
