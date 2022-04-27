@@ -43,6 +43,7 @@ class NewIsuStrategis(MPTTModel):
     tahun = models.IntegerField(choices=year_choices(), default=2019)
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')
+    data_pendukung = models.TextField(max_length=500, blank=True, null=True)
 
     class MPTTMeta:
         order_insertion_by = ['nama_isu']
@@ -77,6 +78,8 @@ class TujuanLFA(models.Model):
     baseline = models.FloatField(default=0, blank=True, null=True)
     tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
     target = models.FloatField(default=0, blank=True, null=True)
+    unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.provinsi} - {self.nama_tujuan}'
@@ -93,6 +96,8 @@ class SasaranLFA(models.Model):
     baseline = models.FloatField(default=0, blank=True, null=True)
     tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
     pengaruh_sasaran_tujuan = models.FloatField(default=0, blank=True, null=True)
+    unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
         try:
@@ -118,6 +123,8 @@ class OutputLFA(models.Model):
     tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
     target = models.FloatField(default=0, blank=True, null=True)
     creation_time = models.DateField(auto_now_add=True, blank=True, null=True)
+    unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
         try:
