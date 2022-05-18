@@ -93,8 +93,8 @@ def profil(request, menu):
 
     # Isu strategis & LFA entities
     provinsi = ProvinsiId.objects.all()
-    pilih_provinsi = 0
-    pilih_isu_strategis = 0
+    pilih_provinsi = int(request.GET.get('pilih_provinsi', 0))
+    pilih_isu_strategis = int(request.GET.get('pilih_isu_strategis', 0))
     tujuans = []
     isu_strategis = []
     output_korelasi = []
@@ -116,69 +116,69 @@ def profil(request, menu):
         pilih_provinsi = int(pilih_provinsi)
         pilih_isu_strategis = int(pilih_isu_strategis)
 
-        # Data Structure logic for Halaman Analisa Kerangka Logis
-        if menu == "akl":
-            tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
+    # Data Structure logic for Halaman Analisa Kerangka Logis
+    if menu == "akl":
+        tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
 
-            data['tujuan'] = []
-            data['sasaran'] = []
-            data['output'] = []
+        data['tujuan'] = []
+        data['sasaran'] = []
+        data['output'] = []
 
-            for tujuan in tujuans:
-                data['tujuan'].append({
-                    'id': tujuan.id,
-                    'nama_tujuan': tujuan.nama_tujuan
+        for tujuan in tujuans:
+            data['tujuan'].append({
+                'id': tujuan.id,
+                'nama_tujuan': tujuan.nama_tujuan
+            })
+
+            for sasaran in tujuan.sasaranlfa_set.all():
+                data['sasaran'].append({
+                    'tujuan_id': tujuan.id,
+                    'id' : sasaran.id,
+                    'nama_sasaran': sasaran.nama_sasaran
                 })
 
-                for sasaran in tujuan.sasaranlfa_set.all():
-                    data['sasaran'].append({
-                        'tujuan_id': tujuan.id,
-                        'id' : sasaran.id,
-                        'nama_sasaran': sasaran.nama_sasaran
+                for output in sasaran.outputlfa_set.all():
+                    data['output'].append({
+                        'sasaran_id': sasaran.id,
+                        'id' : output.id,
+                        'nama_output': output.nama_output
                     })
 
-                    for output in sasaran.outputlfa_set.all():
-                        data['output'].append({
-                            'sasaran_id': sasaran.id,
-                            'id' : output.id,
-                            'nama_output': output.nama_output
+                    # Load longlist and query SkoringProyek
+                    for longlist in output.longlist_set.all():
+                        skoring = SkoringProyek.objects.get(proyek_id=longlist.id)
+                        output_korelasi.append({
+                            "judul_proyek": longlist.judul_proyek,
+                            "skoring": skoring
                         })
 
-                        # Load longlist and query SkoringProyek
-                        for longlist in output.longlist_set.all():
-                            skoring = SkoringProyek.objects.get(proyek_id=longlist.id)
-                            output_korelasi.append({
-                                "judul_proyek": longlist.judul_proyek,
-                                "skoring": skoring
-                            })
+    # Data Structure logic for Halaman Permasalahan Isu Strategis
+    if menu == "pis" or menu == "pis_diagram":
+        isu_strategis = NewIsuStrategis.objects.all().filter(provinsi_id=pilih_provinsi, level=0)
 
-        # Data Structure logic for Halaman Permasalahan Isu Strategis
-        if menu == "pis":
-            isu_strategis = NewIsuStrategis.objects.all().filter(provinsi_id=pilih_provinsi, level=0)
+        if pilih_isu_strategis != 0: # Pilih Isu Strategis dropdown selected
+            head = NewIsuStrategis.objects.get(id=pilih_isu_strategis)
 
-            if pilih_isu_strategis != 0: # Pilih Isu Strategis dropdown selected
-                head = NewIsuStrategis.objects.get(id=pilih_isu_strategis)
-
-                data = {
-                    'name': head.nama_isu, 
-                    'fill': '#260df0', 
+            data = {
+                'name': head.nama_isu, 
+            'fill': '#260df0', 
+                'children': [{
+                    'name': children_lvl_1.nama_isu,
+                    'fill': '#301bdd',
                     'children': [{
-                        'name': children_lvl_1.nama_isu,
-                        'fill': '#301bdd',
+                        'name': children_lvl_2.nama_isu,
+                        'fill': '#4a3ace',
                         'children': [{
-                            'name': children_lvl_2.nama_isu,
-                            'fill': '#4a3ace',
+                            'name': children_lvl_3.nama_isu,
+                            'fill': '#7467dd',
                             'children': [{
-                                'name': children_lvl_3.nama_isu,
-                                'fill': '#7467dd',
-                                'children': [{
-                                    'name': children_lvl_4.nama_isu,
-                                    'fill': '#cbc5f8'
-                                } for children_lvl_4 in children_lvl_3.get_children()]
-                            } for children_lvl_3 in children_lvl_2.get_children()]
-                        } for children_lvl_2 in children_lvl_1.get_children()]
-                    } for children_lvl_1 in head.get_children()] 
-                }
+                                'name': children_lvl_4.nama_isu,
+                                'fill': '#cbc5f8'
+                            } for children_lvl_4 in children_lvl_3.get_children()]
+                        } for children_lvl_3 in children_lvl_2.get_children()]
+                    } for children_lvl_2 in children_lvl_1.get_children()]
+                } for children_lvl_1 in head.get_children()] 
+            }
 
     dataJSON = dumps(data)
 
@@ -464,6 +464,8 @@ def cek_profil_template(menu):
         template = "index"
     elif menu == "pis":
         template = "isu-strategis"
+    elif menu == "pis_diagram":
+        template = "isu-strategis-diagram"
     elif menu == "akl":
         template = "kerangka-logis"
     elif menu == "akp":
