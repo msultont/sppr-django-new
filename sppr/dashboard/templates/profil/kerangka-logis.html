@@ -310,10 +310,14 @@
               <tr class="text-center p-4">
                 <td colspan="7" class="border-dashed border-t bg-gray-600 text-white font-bold text-center p-3">
                   Tujuan {{ forloop.counter }}
+                  <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
                   <button
                     id="button-{{ tujuan.id }}"
-                    class="collapse bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
+                    class="tooltip tooltip-open tooltip-right collapse bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
                     onclick="toggleModal('{{ tujuan.id }}')"
+                    data-tip="Klik Untuk Membuka dan Menutup Sasaran!"
                   >
                     <p>+</p>
                   </button>
@@ -335,7 +339,7 @@
                     <li>{{ tujuan.sumber_data }}</li>
                   </ol>
                 </td>
-                <td class="border-dashed border-t bg-green-700 text-white text-center p-3">{{ tujuan.baseline }}</td>
+                <td class="animate-bounce-low border-dashed border-t bg-green-700 text-white text-center p-3">{{ tujuan.baseline }}</td>
                 <td class="border-dashed border-t bg-gray-700 text-white text-center p-3">{{ tujuan.target }}</td>
                 <td class="border-dashed border-t bg-gray-800 text-white text-center p-3">{{ tujuan.tahun_anggaran }}</td>
                 <td class="border-dashed border-t bg-blue-700 text-white text-center p-3">{{ tujuan.asumsi }}</td>

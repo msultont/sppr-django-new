@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "build:tailwind": "postcss ./sppr/assets/css/tailwind.css -o ./sppr/assets/css/tailwind_output.css && cleancss -o ./sppr/static/css/tailwind_output.min.css ./sppr/assets/css/tailwind_output.css",
+    "build:tailwind": "postcss ./sppr/assets/css/tailwind.css -o ./sppr/assets/css/tailwind_output.css && cat ./sppr/assets/css/tailwind_output.css ./sppr/assets/css/style.css | cleancss -o ./sppr/static/css/tailwind_output.min.css",
     "build:webpack": "webpack --mode development --watch"
   },
   "keywords": [],

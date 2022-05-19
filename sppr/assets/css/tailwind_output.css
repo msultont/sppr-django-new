@@ -2209,6 +2209,21 @@ html {
 .btn.glass:focus-visible {
   outline: 2px solid 0 0 2px currentColor;
 }
+.btn-link {
+  border-color: transparent;
+  background-color: transparent;
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity));
+}
+.btn-link:hover, .btn-link.btn-active {
+  border-color: transparent;
+  background-color: transparent;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
+}
+.btn-link:focus-visible {
+  outline: 2px solid 0 0 2px currentColor;
+}
 .btn-disabled, .btn-disabled:hover, .btn[disabled], .btn[disabled]:hover {
   --tw-border-opacity: 0;
   background-color: hsl(var(--n) / var(--tw-bg-opacity));
@@ -2372,6 +2387,9 @@ body[dir="rtl"] .checkbox:checked,
 .collapse-open :where(.collapse-content), .collapse:focus:not(.collapse-close) :where(.collapse-content), .collapse:not(.collapse-close) :where(input[type="checkbox"]:checked ~ .collapse-content) {
   padding-bottom: 1rem;
   transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.btn-link {
+  outline: 2px solid currentColor;
 }
 .dropdown.dropdown-open .dropdown-content, .dropdown.dropdown-hover:hover .dropdown-content, .dropdown:focus .dropdown-content, .dropdown:focus-within .dropdown-content {
   --tw-scale-x: 1;
@@ -2779,6 +2797,10 @@ body[dir="rtl"] .checkbox:checked,
   left: calc(var(--tooltip-tail-offset) + 1px);
   right: auto;
   bottom: auto;
+}
+.tooltip-info {
+  --tooltip-color: hsla(var(--in));
+  --tooltip-text-color: hsl(var(--inc));
 }
 .avatar.online:before {
   content: "";
@@ -3303,6 +3325,38 @@ body[dir="rtl"] .checkbox:checked,
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@-webkit-keyframes bounce_low {
+
+  0%, 100% {
+    transform: translateY(-5%);
+    -webkit-animation-timing-function: cubic-bezier(0.6, 0, .75, .75);
+            animation-timing-function: cubic-bezier(0.6, 0, .75, .75);
+  }
+
+  50% {
+    transform: translateY(0);
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+@keyframes bounce_low {
+
+  0%, 100% {
+    transform: translateY(-5%);
+    -webkit-animation-timing-function: cubic-bezier(0.6, 0, .75, .75);
+            animation-timing-function: cubic-bezier(0.6, 0, .75, .75);
+  }
+
+  50% {
+    transform: translateY(0);
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+.animate-bounce-low {
+  -webkit-animation: bounce_low 1s infinite;
+          animation: bounce_low 1s infinite;
 }
 .cursor-pointer {
   cursor: pointer;
