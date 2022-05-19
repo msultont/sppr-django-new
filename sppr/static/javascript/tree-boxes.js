@@ -269,7 +269,8 @@ function treeBoxes(treeData) {
       .attr("d", function (d) {
         var o = { x: source.x0, y: source.y0 };
         return diagonal(o, o);
-      });
+      })
+      .on('click', clickLink);
 
     // UPDATE
     var linkUpdate = linkEnter.merge(link);
@@ -307,6 +308,10 @@ function treeBoxes(treeData) {
         ${d.y} ${d.x}`;
 
       return path;
+    }
+
+    function clickLink(d) {
+      window.location.href.split("/")[4] === "pis_diagram" && centerNode(d);
     }
 
     // Toggle children on click.

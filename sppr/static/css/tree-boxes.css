@@ -51,7 +51,7 @@ svg .rect {
   stroke-width: 5px;
 }
 
-.node {
+.node, .link {
   cursor: pointer;
 }
 
