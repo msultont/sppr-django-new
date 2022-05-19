@@ -348,14 +348,15 @@
                     <tr class="text-center p-4">
                       <td colspan="7" class="border-dashed border-t bg-gray-500 text-white font-bold text-center p-3">
                         Sasaran {{ forloop.parentloop.counter }}.{{ forloop.counter }}
-
+                        {% if sasaran.outputlfa_set.all|length != 0 %}
                         <button
-                        id="button-{{ sasaran.id }}"
-                        class="collapse bg-gray-600 hover:bg-gray-800 text-white font-bold m-1 p-1 rounded-l"
-                        onclick="toggleModal('{{ sasaran.id }}')"
-                      >
-                        <p>+</p>
-                      </button>
+                          id="button-{{ sasaran.id }}"
+                          class="collapse bg-gray-600 hover:bg-gray-800 text-white font-bold m-1 p-1 rounded-l"
+                          onclick="toggleModal('{{ sasaran.id }}')"
+                        >
+                          <p>+</p>
+                        </button>
+                        {% endif %}
                       </td>
                     </tr>
                     <tr class="text-center" id="{{ sasaran.id }}">
