@@ -27,6 +27,23 @@ class ProvinsiId(models.Model):
     def __str__(self) -> str:
         return self.nama_provinsi
 
+class UnitsatuanID(models.Model):
+    # Field name made lowercase.
+    unitsatuan_id = models.IntegerField(
+        db_column='Unitsatuan_ID', primary_key=True)
+    # Field name made lowercase. Field renamed to remove unsuitable characters.
+    nama_satuan = models.TextField(
+        db_column='Nama_Satuan', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Unitsatuan_ID'
+    
+    def __str__(self) -> str:
+        return self.nama_satuan
+    
+    
+
 
 def year_choices():
     return [(r, r) for r in range(2019, datetime.date.today().year + 5)]
@@ -78,7 +95,11 @@ class TujuanLFA(models.Model):
     baseline = models.FloatField(default=0, blank=True, null=True)
     tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
     target = models.FloatField(default=0, blank=True, null=True)
+    unitsatuanbaseline = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_baseline_tujuan')
     unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unitsatuantarget = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_target_tujuan')
     unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
@@ -96,7 +117,11 @@ class SasaranLFA(models.Model):
     baseline = models.FloatField(default=0, blank=True, null=True)
     tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
     pengaruh_sasaran_tujuan = models.FloatField(default=0, blank=True, null=True)
+    unitsatuanbaseline = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_baseline_sasaran')
     unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unitsatuantarget = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_target_sasaran')
     unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
@@ -123,7 +148,11 @@ class OutputLFA(models.Model):
     tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
     target = models.FloatField(default=0, blank=True, null=True)
     creation_time = models.DateField(auto_now_add=True, blank=True, null=True)
+    unitsatuanbaseline = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_baseline_output')
     unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unitsatuantarget = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_target_output')
     unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
