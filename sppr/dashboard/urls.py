@@ -86,7 +86,10 @@ urlpatterns = [
 
     # Path to CRUD LFA
     path('forms/add_lfa/<str:tipe>',
-         views.addkerangkalogis, name='addLfa'),
+         views.analisakerangkalogis, name='addLfa'),
+
+    path('forms/edit_lfa/<str:tipe>',
+         views.analisakerangkalogis, name='editLfa'),
 
     # Path to download excel longlist data format
     path('download/format/longlist/',

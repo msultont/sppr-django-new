@@ -35,6 +35,9 @@ class Output_LFA_Form(ModelForm):
                 self.fields['sasaran'].queryset = SasaranLFA.objects.filter(tujuan_id=tujuan_id)
             except (ValueError, TypeError):
                 pass
+        elif self.instance.pk:
+            super(Output_LFA_Form, self).__init__(data=self.data or None, instance=self.instance)
+            self.fields['sasaran'].queryset = SasaranLFA.objects.filter(tujuan_id=self.instance.sasaran.tujuan_id)
 
 class Sasaran_LFA_Form(ModelForm):
 
@@ -68,7 +71,8 @@ class Sasaran_LFA_Form(ModelForm):
             except (ValueError, TypeError):
                 pass
         elif self.instance.pk:
-            self.fields['tujuan'].queryset = self.instance.tujuan.all.order_by('nama_tujuan')
+            super(Sasaran_LFA_Form, self).__init__(data=self.data or None, instance=self.instance)
+            self.fields['tujuan'].queryset = TujuanLFA.objects.filter(provinsi_id=self.instance.tujuan.provinsi_id)
 
 class Tujuan_LFA_Form(ModelForm):
 

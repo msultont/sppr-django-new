@@ -850,11 +850,11 @@ def addIsuStrategis(request):
         'form': form
     }})
 
-# Create Hasil Kerangka Logis
+# CRUD Hasil Kerangka Logis
 
 
 @login_required(login_url='login')
-def addkerangkalogis(request, tipe):
+def analisakerangkalogis(request, tipe):
     content_title = ""
     class_button_tujuan = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
     class_button_sasaran = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
@@ -864,57 +864,65 @@ def addkerangkalogis(request, tipe):
     a_class_output = ""
     form = None
     provinsi = []
+    page_mode = request.path.split("/")[2]
+    tujuan_id = int(request.GET.get("tujuan_id", 0))
+    sasaran_id = int(request.GET.get("sasaran_id", 0))
+    output_id = int(request.GET.get("output_id", 0))
+    tujuan_instance = TujuanLFA.objects.get(pk=tujuan_id) if tujuan_id != 0 else None
+    sasaran_instance = SasaranLFA.objects.get(pk=sasaran_id) if sasaran_id != 0 else None
+    output_instance = OutputLFA.objects.get(pk=output_id) if output_id != 0 else None
 
     if tipe == 'tujuan':
         content_title = "tujuan"
         class_button_tujuan = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_tujuan = "disabled"
-        form = Tujuan_LFA_Form()
+        form = Tujuan_LFA_Form() if request.path.split("/")[1] == "add_lfa" else Tujuan_LFA_Form(instance=tujuan_instance)
         if request.method == 'POST':
-            form = Tujuan_LFA_Form(request.POST)
+            form = Tujuan_LFA_Form(request.POST or None, instance=tujuan_instance)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Berhasil Menambahkan Tujuan LFA')
-                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+                messages.success(request, 'Berhasil Menambahkan/Mengubah Tujuan LFA') 
             else:
-                messages.error(request, 'Gagal Menambahkan Tujuan LFA')
-                return HttpResponseRedirect('/forms/add_lfa/tujuan')
+                messages.error(request, 'Gagal Menambahkan/Mengubah Tujuan LFA') 
+
+            return HttpResponseRedirect('/forms/add_lfa/sasaran') if (page_mode == "add_lfa") else HttpResponseRedirect(f'/profil/akl/?pilih_provinsi={tujuan_instance.provinsi_id}')
 
     elif tipe == 'sasaran':
         content_title = "sasaran"
         class_button_sasaran = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_sasaran = "disabled"
-        form = Sasaran_LFA_Form()
+        form = Sasaran_LFA_Form() if request.path.split("/")[1] == "add_lfa" else Sasaran_LFA_Form(instance=sasaran_instance)
         provinsi = ProvinsiId.objects.all()
         if request.method == 'POST':
-            form = Sasaran_LFA_Form(request.POST)
+            form = Sasaran_LFA_Form(request.POST or None, instance=sasaran_instance)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Berhasil Menambahkan Sasaran LFA')
-                return HttpResponseRedirect('/forms/add_lfa/output')
+                messages.success(request, 'Berhasil Menambahkan/Mengubah Sasaran LFA')
             else:
-                messages.error(request, 'Gagal Menambahkan Sasaran LFA')
-                return HttpResponseRedirect('/forms/add_lfa/sasaran')
+                messages.error(request, 'Gagal Menambahkan/Mengubah Sasaran LFA')
+
+            return HttpResponseRedirect('/forms/add_lfa/output') if (page_mode == "add_lfa") else HttpResponseRedirect(f'/profil/akl/?pilih_provinsi={sasaran_instance.tujuan.provinsi_id}')
 
     elif tipe == 'output':
         content_title = "output"
         class_button_output = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
         a_class_output = "disabled"
-        form = Output_LFA_Form()
+        form = Output_LFA_Form() if request.path.split("/")[1] == "add_lfa" else Output_LFA_Form(instance=output_instance)
         provinsi = ProvinsiId.objects.all()
         if request.method == 'POST':
-            form = Output_LFA_Form(request.POST)
+            form = Output_LFA_Form(request.POST or None, instance=output_instance)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Berhasil Menambahkan Output LFA')
-                return HttpResponseRedirect('/forms/add_lfa/tujuan')
+                messages.success(request, 'Berhasil Menambahkan/Mengubah Output LFA')
             else:
-                messages.error(request, 'Gagal Menambahkan Output LFA')
-                return HttpResponseRedirect('/forms/add_lfa/output')
+                messages.error(request, 'Gagal Menambahkan/Mengubah Output LFA')
+
+            return HttpResponseRedirect('/forms/add_lfa/tujuan') if (page_mode == "add_lfa") else HttpResponseRedirect(f'/profil/akl/?pilih_provinsi={output_instance.sasaran.tujuan.provinsi_id}')
     else:
         content_title = None
 
     return render(request, 'forms/kerangkalogis-add.html', {'content': {
+        'page_url': page_mode,
         'content_title': content_title,
         'b_tujuan': class_button_tujuan,
         'b_sasaran': class_button_sasaran,
