@@ -45,8 +45,8 @@
 
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
   <!--Card 1-->
-  <a href="{% url 'addLfa' 'tujuan' %}" class="{{content.a_tujuan}}">
-    <div class="{{content.b_tujuan}}">
+  <a href="{% url 'addLfa' 'tujuan' %}" class="{% if content.content_title != None and content.content_title == 'tujuan' %}disabled{% endif %}">
+    <div class="{% if content.content_title == 'tujuan' %}bg-purple-700 {% else %} bg-purple-500 {% endif %} hover:bg-purple-700 rounded overflow-hidden shadow-lg">
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2 text-center text-white">
           <p>Tujuan</p>
@@ -56,8 +56,8 @@
   </a>
 
   <!--Card 2-->
-  <a href="{% url 'addLfa' 'sasaran' %}" class="{{content.a_sasaran}}">
-    <div class="{{content.b_sasaran}}">
+  <a href="{% url 'addLfa' 'sasaran' %}" class="{% if content.content_title != None and content.content_title == 'sasaran' %}disabled{% endif %}">
+    <div class="{% if content.content_title == 'sasaran' %}bg-purple-700 {% else %} bg-purple-500 {% endif %} hover:bg-purple-700 rounded overflow-hidden shadow-lg">
 
       <div class="px-2 py-4">
         <div class="font-bold text-xl mb-2 text-center text-white">
@@ -69,8 +69,8 @@
 
 
   <!--Card 3-->
-  <a href="{% url 'addLfa' 'output' %}" class="{{content.a_output}}">
-    <div class="{{content.b_output}}">
+  <a href="{% url 'addLfa' 'output' %}" class="{% if content.content_title != None and content.content_title == 'output' %}disabled{% endif %} ">
+    <div class="{% if content.content_title == 'output' %}bg-purple-700 {% else %} bg-purple-500 {% endif %} hover:bg-purple-700 rounded overflow-hidden shadow-lg">
 
       <div class="px-2 py-4">
         <div class="font-bold text-xl mb-2 text-center text-white">
@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <button class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+    <button class="rounded-2xl bg-purple-500 float-right hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
       onclick="">
       {% if content.page_url == "add_lfa" %}
       <p>Simpan</p>
@@ -241,10 +241,11 @@
       </label>
       <div class="relative w-3/4">
         <select
+          required
           id="provinsi"
           name="provinsi"
           onchange="handleProvinsiSelect(value)"
-          class="left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+          class="left block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-red-500'"
         >
           <option value="" selected disabled hidden>Pilih Provinsi</option>
           {% for provinsi in content.provinsi %}
@@ -369,7 +370,7 @@
       </div>
     </div>
 
-    <button class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+    <button class="rounded-2xl bg-purple-500 float-right hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
       onclick="">
       {% if content.page_url == "add_lfa" %}
       <p>Simpan</p>
@@ -401,10 +402,11 @@
         </label>
         <div class="relative w-auto">
           <select
+            required
             id="provinsi"
             name="provinsi"
             onchange="handleProvinsiSelect(value)"
-            class="whitespace-pre-wrap left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+            class="whitespace-pre-wrap left block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-red-500'"
           >
             <option value="" selected disabled hidden>Pilih Provinsi</option>
             {% for provinsi in content.provinsi %}
@@ -430,9 +432,10 @@
         <div class="relative w-auto">
           <select
           id="tujuan"
+            required
             name="tujuan"
             onchange="handleTujuanSelect(value)"
-            class="whitespace-pre-wrap left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+            class="whitespace-pre-wrap left block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-red-500'"
             >
             <option value="" selected disabled hidden>---------</option>
           </select>
@@ -558,7 +561,7 @@
       </div>
     </div>
 
-    <button class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2" onclick="">
+    <button class="rounded-2xl bg-purple-500 float-right hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2" onclick="">
       {% if content.page_url == "add_lfa" %}
       <p>Simpan</p>
       {% else %}
@@ -631,6 +634,28 @@
           $("[name='sasaran']").html(html_lists)
         }
       })
+
+    }
+
+    function handleUnitSatuan(e) {
+      if (e.value === '110') {
+        if (e.id === 'usb_select') {
+          $("#usb_text").removeAttr("disabled")
+        }
+  
+        if (e.id === 'ust_select') {
+          $("#ust_text").removeAttr("disabled")
+        }
+      } else {
+        if (e.id === 'usb_select') {
+          $("#usb_text").attr("disabled", true).val("")
+        }
+  
+        if (e.id === 'ust_select') {
+          $("#ust_text").attr("disabled", true).val("")
+        }
+
+      }
     }
   </script>
 

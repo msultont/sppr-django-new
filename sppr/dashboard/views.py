@@ -90,10 +90,13 @@ def profil(request, menu):
     judul = cek_profil(menu)
     template = cek_profil_template(menu)
     content = cek_content(menu)
+    tahun = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
     # Isu strategis & LFA entities
     provinsi = ProvinsiId.objects.all()
-    pilih_provinsi = int(request.GET.get('pilih_provinsi', 0))
+    request_get = request.GET.get('options', "0-0")
+    pilih_provinsi = int(request_get.split("-")[0])
+    pilih_tahun = int(request_get.split("-")[1])
     pilih_isu_strategis = int(request.GET.get('pilih_isu_strategis', 0))
     tujuans = []
     isu_strategis = []
@@ -118,7 +121,12 @@ def profil(request, menu):
 
     # Data Structure logic for Halaman Analisa Kerangka Logis
     if menu == "akl":
-        tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
+        if (pilih_provinsi != 0 and pilih_tahun != 0):
+            tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi, tahun=pilih_tahun)
+        elif (pilih_tahun != 0):
+            tujuans = TujuanLFA.objects.all().filter(tahun=pilih_tahun)
+        else:
+            tujuans = TujuanLFA.objects.all().filter(provinsi_id=pilih_provinsi)
 
         data['tujuan'] = []
         data['sasaran'] = []
@@ -188,7 +196,9 @@ def profil(request, menu):
         {
             'judul': judul, 
             'content': content, 
+            'tahun': tahun,
             'pilih_provinsi': pilih_provinsi,
+            'pilih_tahun': pilih_tahun,
             'pilih_isu_strategis': pilih_isu_strategis,
             'provinsi': provinsi,
             'isu_strategis': isu_strategis,
@@ -856,12 +866,6 @@ def addIsuStrategis(request):
 @login_required(login_url='login')
 def analisakerangkalogis(request, tipe):
     content_title = ""
-    class_button_tujuan = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
-    class_button_sasaran = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
-    class_button_output = "bg-blue-400 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
-    a_class_tujuan = ""
-    a_class_sasaran = ""
-    a_class_output = ""
     form = None
     provinsi = []
     page_mode = request.path.split("/")[2]
@@ -874,8 +878,6 @@ def analisakerangkalogis(request, tipe):
 
     if tipe == 'tujuan':
         content_title = "tujuan"
-        class_button_tujuan = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
-        a_class_tujuan = "disabled"
         form = Tujuan_LFA_Form() if request.path.split("/")[1] == "add_lfa" else Tujuan_LFA_Form(instance=tujuan_instance)
         if request.method == 'POST':
             form = Tujuan_LFA_Form(request.POST or None, instance=tujuan_instance)
@@ -889,8 +891,6 @@ def analisakerangkalogis(request, tipe):
 
     elif tipe == 'sasaran':
         content_title = "sasaran"
-        class_button_sasaran = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
-        a_class_sasaran = "disabled"
         form = Sasaran_LFA_Form() if request.path.split("/")[1] == "add_lfa" else Sasaran_LFA_Form(instance=sasaran_instance)
         provinsi = ProvinsiId.objects.all()
         if request.method == 'POST':
@@ -905,8 +905,6 @@ def analisakerangkalogis(request, tipe):
 
     elif tipe == 'output':
         content_title = "output"
-        class_button_output = "bg-blue-700 hover:bg-blue-600 rounded overflow-hidden shadow-lg"
-        a_class_output = "disabled"
         form = Output_LFA_Form() if request.path.split("/")[1] == "add_lfa" else Output_LFA_Form(instance=output_instance)
         provinsi = ProvinsiId.objects.all()
         if request.method == 'POST':
@@ -924,12 +922,6 @@ def analisakerangkalogis(request, tipe):
     return render(request, 'forms/kerangkalogis-add.html', {'content': {
         'page_url': page_mode,
         'content_title': content_title,
-        'b_tujuan': class_button_tujuan,
-        'b_sasaran': class_button_sasaran,
-        'b_output': class_button_output,
-        'a_tujuan': a_class_tujuan,
-        'a_sasaran': a_class_sasaran,
-        'a_output': a_class_output,
         'form': form,
         'provinsi': provinsi
     }})

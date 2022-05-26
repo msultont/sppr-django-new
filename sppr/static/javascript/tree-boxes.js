@@ -1,4 +1,46 @@
 function treeBoxes(treeData) {
+  // right click node context menu
+  var menu = [
+    {
+      title: "Buat Child Isu Baru",
+      action: function (elm, d, i) {
+        console.log("Rename node");
+        $("#RenameNodeName").val(d.name);
+        rename_node_modal_active = true;
+        node_to_rename = d;
+        $("#RenameNodeName").focus();
+        $("#RenameNodeModal").foundation("reveal", "open");
+      }
+    },
+    {
+      title: "Edit Isu",
+      action: function (elm, d, i) {
+        console.log("Delete node");
+        delete_node(d);
+      }
+    },
+    {
+      title: "Hapus Isu",
+      action: function (elm, d, i) {
+        console.log("Create child node");
+        create_node_parent = d;
+        create_node_modal_active = true;
+        $("#CreateNodeModal").foundation("reveal", "open");
+        $("#CreateNodeName").focus();
+      }
+    },
+    {
+      title: "Lihat Data Pendukung Isu",
+      action: function (elm, d, i) {
+        console.log("Create child node");
+        create_node_parent = d;
+        create_node_modal_active = true;
+        $("#CreateNodeModal").foundation("reveal", "open");
+        $("#CreateNodeName").focus();
+      }
+    }
+  ];
+
   // Calculate total nodes, max label length
   var totalNodes = 0;
   var maxLabelLength = 0;
@@ -50,11 +92,11 @@ function treeBoxes(treeData) {
   root.children !== "undefined" ?? root.children.forEach(collapse);
 
   update(root);
-  window.location.href.split("/")[4] === "pis" && smallScaleDiagram()
+  window.location.href.split("/")[4] === "pis" && smallScaleDiagram();
   window.location.href.split("/")[4] === "pis_diagram" && centerNode(root);
 
   function smallScaleDiagram() {
-    svgGroup.attr("transform", d3.zoomIdentity.translate(430, 250).scale(0.22))
+    svgGroup.attr("transform", d3.zoomIdentity.translate(132.217, 22.55).scale(0.308));
   }
 
   // A recursive helper function for performing some setup by walking through all nodes
@@ -124,7 +166,8 @@ function treeBoxes(treeData) {
       }
     };
     childCount(0, root);
-    var newHeight = d3.max(levelWidth) * 250; // 25 pixels per line
+    console.log(totalNodes);
+    var newHeight = d3.max(levelWidth) * (totalNodes <= 20 ? 390 : 250); // 25 pixels per line
 
     treemap = d3.tree().size([newHeight, width]);
 
@@ -137,7 +180,7 @@ function treeBoxes(treeData) {
 
     // Normalize for fixed-depth.
     nodes.forEach(function (d) {
-      d.y = d.depth * (maxLabelLength * 10); //maxLabelLength * 10px
+      d.y = d.depth * (maxLabelLength * (totalNodes <= 20 ? 15 : 10)); //maxLabelLength * 10px
     });
 
     // ****************** Nodes section ***************************
@@ -157,7 +200,7 @@ function treeBoxes(treeData) {
       })
       .on("click", click);
 
-    var rectHeight = 50,
+    var rectHeight = 150,
       rectWidth = "panjangteks",
       panjangteks = 380;
 
@@ -199,24 +242,28 @@ function treeBoxes(treeData) {
         return tooltip.style("visibility", "hidden");
       });
 
+    // Add a context menu
+    node.on('contextmenu', d3.contextMenu(menu));
+
     // Add labels for the nodes
     nodeEnter
       .append("text")
       .attr("x", function (d) {
-        return 10;
+        return 180;
       })
       .attr("text-anchor", function (d) {
-        return "start";
+        return "middle";
       })
       .text(function (d) {
         return d.data.name;
       })
       .style("fill", "white")
-      .style("font-size", "1em")
+      .style("font-size", "1.1em")
       .style("font-weight", "bold")
-      .attr("dy", ".7em")
+      .attr("dy", ".9em")
       .style("max-width", panjangteks)
-      .style("position", "center");
+      .style("text-align", "center")
+      .call(wrap, 320);
 
     // UPDATE
     var nodeUpdate = nodeEnter.merge(node);
@@ -270,7 +317,7 @@ function treeBoxes(treeData) {
         var o = { x: source.x0, y: source.y0 };
         return diagonal(o, o);
       })
-      .on('click', clickLink);
+      .on("click", clickLink);
 
     // UPDATE
     var linkUpdate = linkEnter.merge(link);
@@ -299,6 +346,41 @@ function treeBoxes(treeData) {
       d.x0 = d.x;
       d.y0 = d.y;
     });
+
+    function wrap(text, width) {
+      text.each(function () {
+        var text = d3.select(this),
+          words = text.text().split(/\s+/).reverse(),
+          word,
+          line = [],
+          lineNumber = 0,
+          lineHeight = 1.1, // ems
+          x = text.attr("x"),
+          y = text.attr("y"),
+          dy = 0, //parseFloat(text.attr("dy")),
+          tspan = text
+            .text(null)
+            .append("tspan")
+            .attr("x", x)
+            .attr("y", y)
+            .attr("dy", dy + "em");
+        while ((word = words.pop())) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text
+              .append("tspan")
+              .attr("x", x)
+              .attr("y", y)
+              .attr("dy", ++lineNumber * lineHeight + dy + "em")
+              .text(word);
+          }
+        }
+      });
+    }
 
     // Creates a curved (diagonal) path from parent to the child nodes
     function diagonal(s, d) {

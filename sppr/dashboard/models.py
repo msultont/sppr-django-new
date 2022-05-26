@@ -54,9 +54,9 @@ def current_year():
 
 
 class NewIsuStrategis(MPTTModel):
-    nama_isu = models.CharField(max_length=400, blank=True, null=True, default='')
+    nama_isu = models.CharField(max_length=400, blank=False, null=False)
     provinsi = models.ForeignKey(
-        ProvinsiId, on_delete=models.SET_NULL, db_column='provinsi', blank=True, null=True)
+        ProvinsiId, on_delete=models.SET_NULL, db_column='provinsi', blank=False, null=True)
     tahun = models.IntegerField(choices=year_choices(), default=2019)
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')

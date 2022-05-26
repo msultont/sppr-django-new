@@ -11,7 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'css/tree-boxes.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/tailwind_output.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/daisyui.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/tree-boxes.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/d3-context-menu.min.css' %}" type="text/css" />
     
   </head>
   <body>
@@ -24,7 +27,8 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://d3js.org/d3.v5.min.js" type="text/javascript"></script>
-    <script src="{% static 'javascript/tree-boxes.js' %}?version=2.2.2" type="text/javascript"></script>
+    <script src="{% static 'javascript/tree-boxes.js' %}" type="text/javascript"></script>
+    <script src="{% static 'javascript/d3-context-menu.js' %}" type="text/javascript"></script>
     <script>
       let data = JSON.parse("{{ dataJSON|escapejs }}");
       var treeData = data;

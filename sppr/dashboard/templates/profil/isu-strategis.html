@@ -41,7 +41,7 @@
               id="pilih_provinsi"
               name="pilih_provinsi"
               onchange="form.submit()"
-              class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+              class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-purple-500 focus:bg-white focus:border-gray-500'"
             >
               <option value="" selected disabled hidden>Pilih Provinsi</option>
               {% for provinsi in provinsi %}
@@ -63,7 +63,7 @@
               id="pilih_isu_strategis"
               name="pilih_isu_strategis"
               onchange="form.submit()"
-              class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'"
+              class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-purple-500 focus:bg-white focus:border-gray-500'"
             >
               <option value="" selected disabled hidden>Pilih Isu Strategis</option>
               {% for isu in isu_strategis %}
@@ -79,7 +79,7 @@
         </form>
 
         <div class="mt-5 mb-5 ml-3">
-          <button class="bg-blue-500 float-left hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5" onclick="">
+          <button class="bg-purple-500 float-left hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5" onclick="">
             <a href="{% url 'addIsu' %}">
               <p>Tambah Isu Baru</p>
             </a>
