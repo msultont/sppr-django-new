@@ -418,6 +418,14 @@ def cek_profil(menu):
         judul = "Kondisi Umum Wilayah Bali"
     elif menu == "jawatimur":
         judul = "Kondisi Umum Wilayah Jawa Timur"
+    elif menu == "sumatera1":
+        judul = "Kondisi Umum Wilayah Sumatera I"
+    elif menu == "sumatera2":
+        judul = "Kondisi Umum Wilayah Sumatera II"
+    elif menu == "jawa1":
+        judul = "Kondisi Umum Wilayah Jawa I"
+    elif menu == "jawa2":
+        judul = "Kondisi Umum Wilayah Jawa II"
     else:
         judul = "Kesalahan Memilih Menu"
 
@@ -514,6 +522,14 @@ def cek_profil_template(menu):
         template = "index"
     elif menu == "jawatimur":
         template = "index"
+    elif menu == "sumatera1":
+        template = "sum1"
+    elif menu == "sumatera2":
+        template = "sum2"
+    elif menu == "jawa1":
+        template = "jawa1"
+    elif menu == "jawa2":
+        template = "jawa2"
 
     return template
 

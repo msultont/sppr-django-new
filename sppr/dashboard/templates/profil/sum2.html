@@ -1,0 +1,298 @@
+{% extends 'parts/main.html' %}
+{% block content %}
+<main>
+    <!-- Content header -->
+    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+        <h1 class="text-2xl font-semibold">{{judul}}</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="mt-2">
+
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+            <!-- Map Area -->
+            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Card header -->
+
+                <nav class="flex items-center justify-between flex-wrap bg-purple-600 p-6">
+                    <div class="flex items-center flex-shrink-0 text-white mr-6">
+                        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
+                        </svg>
+                        <span class="font-semibold text-xl tracking-tight">Profil Daerah Regional I</span>
+                    </div>
+                    <div class="block lg:hidden">
+                        <button
+                            class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <title>Menu</title>
+                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+                        <div class="text-sm lg:flex-grow">
+                            <a href="{% url 'profil' 'aceh' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Aceh
+                            </a>
+                            <a href="{% url 'profil' 'sumaterautara' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Sumatera Utara
+                            </a>
+                            <a href="{% url 'profil' 'sumaterabarat' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Sumatera Barat
+                            </a>
+                            <a href="{% url 'profil' 'jambi' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Jambi
+                            </a>
+                            <a href="{% url 'profil' 'riau' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Riau
+                            </a>
+                            <a href="{% url 'profil' 'kepulauanriau' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Kep. Riau
+                            </a>
+                            <a href="{% url 'profil' 'bengkulu' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Bengkulu
+                            </a>
+                            <a href="{% url 'profil' 'sumateraselatan' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Sumatera Selatan
+                            </a>
+                            <a href="{% url 'profil' 'bangkabelitung' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Bangka Belitung
+                            </a>
+                            <a href="{% url 'profil' 'lampung' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Lampung
+                            </a>
+                            <a href="{% url 'profil' 'banten' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Banten
+                            </a>
+                            <a href="{% url 'profil' 'dkijakarta' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                DKI Jakarta
+                            </a>
+                            <a href="{% url 'profil' 'jawabarat' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Jawa Barat
+                            </a>
+                            <a href="{% url 'profil' 'jawatengah' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Jawa Tengah
+                            </a>
+                            <a href="{% url 'profil' 'diy' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Daerah Istimewa Yogyakarta
+                            </a>
+                            <a href="{% url 'profil' 'jawatimur' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Jawa Timur
+                            </a>
+                            <a href="{% url 'profil' 'bali' %}"
+                                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                                Bali
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Profilling</h4>
+                    <div class="flex items-center">
+                        <button class="relative focus:outline-none" x-cloak
+                            @click="isOn = !isOn; $parent.updateDoughnutChart(isOn)">
+                            <div
+                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                            </div>
+                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <br>
+
+                {% if content %}
+                <iframe width="100%" height="800px" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"
+                    title="Sumaterautara" src="{{content}}">
+                </iframe>
+
+                {% else %}
+
+                <div class="rounded-lg m-5 bg-gray-200 h-32 grid content-center">
+                    <p class="m-5 font-bold text-red-500">Pilih provinsi untuk menampilkan profil daerah yang dituju
+                    </p>
+                </div>
+
+
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- Two grid columns -->
+        <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+
+            {% if content %}
+            <div class="col-span-1 bg-white rounded-md dark:bg-darker">
+                <!-- Card header -->
+                <div class="p-4 border-b dark:border-primary">
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Tingkat Pengangguran Terbuka</h4>
+                </div>
+                <!-- Chart -->
+                <div class="relative p-4 ">
+                    <canvas id="chartOne" data-url="{% url 'provchart' %}"></canvas>
+                </div>
+            </div>
+
+            <!-- Line chart card -->
+            <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Card header -->
+                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Indeks Kemanusiaan</h4>
+                    <div class="flex items-center">
+                        <button class="relative focus:outline-none" x-cloak
+                            @click="isOn = !isOn; $parent.updateLineChart()">
+                            <div
+                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                            </div>
+                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <div class="relative p-4 ">
+                    <canvas id="chartTwo"></canvas>
+                </div>
+            </div>
+
+            <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Card header -->
+                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Indeks Lingkungan Hidup</h4>
+                    <div class="flex items-center">
+                        <button class="relative focus:outline-none" x-cloak
+                            @click="isOn = !isOn; $parent.updateLineChart()">
+                            <div
+                                class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+                            </div>
+                            <div class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <div class="relative p-4 ">
+                    <canvas id="narikapi"></canvas>
+                </div>
+            </div>
+            {% endif %}
+            <!-- Active users chart -->
+
+        </div>
+
+    </div>
+</main>
+
+
+<script>
+
+    //Fungsi Narik JSON PAKAI JAVASCRIPT
+
+    var xmlhttp = new XMLHttpRequest();
+    var url ="https://data.covid19.go.id/public/api/prov.json";
+    xmlhttp.open("GET",url, true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200)
+        {var data = JSON.parse(this.responseText);
+            //console.log(data)
+            var provinsi = datacoba.list_data.map(function(elem) {
+                return elem.key;
+            });
+            //console.log(provinsi)
+            var kasus = datacoba.list_data.map(function(elem) {
+                return elem.jumlah_kasus;
+            });
+        }
+    };
+
+    var ctx = document.getElementById('narikapi').getContext('2d');
+    var narikapicoba = new Chart(ctx, {
+        type : 'line',
+        datacoba : {
+            labels: provinsi,
+            datasets: [{
+                label: 'Provinsi Apa',
+                data: kasus,
+                backgroundColor: 'transparent',
+                borderColor: 'red',
+                borderWidth: 4
+            }]
+        }
+    });
+
+    var ct1 = document.getElementById('chartOne');
+    var ct2 = document.getElementById('chartTwo');
+    var ct3 = document.getElementById('chartThree');
+
+
+    const data1 = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: provinsi,
+            data: kasus,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+        }]
+    
+    };
+
+    var firstChart = new Chart(ct1, {
+        type: 'line',
+        data: data
+    });
+
+    var secondChart = new Chart(ct2, {
+        type: 'pie',
+        data: data
+    });
+
+    var thirdChart = new Chart(ct3, {
+        type: 'pie',
+        data: data
+    });
+</script>
+
+    {% endblock %}

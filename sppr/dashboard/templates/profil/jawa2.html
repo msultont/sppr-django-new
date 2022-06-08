@@ -1,0 +1,168 @@
+{% extends 'parts/main.html' %}
+{% block content %}
+<main>
+    <!-- Content header -->
+    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+        <h1 class="text-2xl font-semibold">{{judul}}</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="mt-2">
+
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+            <!-- Map Area -->
+            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Card header -->
+
+                <nav class="flex items-center justify-between flex-wrap bg-purple-600 p-6">
+                    <div class="flex items-center flex-shrink-0 text-white mr-6">
+                        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
+                        </svg>
+                        <span class="font-semibold text-xl tracking-tight">Profil Daerah Regional I</span>
+                    </div>
+                    <div class="block lg:hidden">
+                        <button
+                            class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <title>Menu</title>
+                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                           <!-- Main Content -->
+        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Main Content header -->
+                <div class="flex items-center justify-between p-4">
+                    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+                        <div class="w-full text-center pb-8">
+                        </div>
+                        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://c1.wallpaperflare.com/preview/745/651/763/sawarna-banten-green-view.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Jawa Tengah</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Provinsi Jawa Tengah menyumbang PDB Nasional sebesar 9,01 % atau sekitar Rp 965.629 Miliyar di tahun 2020. Angka ini menjadikan Jawa Tengah sebagai penyumbang PDRB tertinggi ke-empat setelah DKI Jakarta, Jawa Timur, dan Jawa Barat. Sejak tahun 2010-2019, tren pertumbuhan ekonomi Jawa Tengah menurun tapi masih dalam kategori stabil yaitu di kisaran 5 – 6,5%. 
+                                        Perekonomian Jawa Tengah mengalami penurunan hingga mencapai -2,65% (y-o-y), 
+                                        turun dari tahun sebelumnya yaitu 5,4%. 
+                                        Penyebab utama dari penurunan ini adalah pemberlakuan kebijakan pembatasan kegiatan 
+                                        skala nasional sehingga kegiatan ekonomi menjadi terhenti selama pandemi Covid-19.
+                                        
+                                        </h4>
+
+                                    <a href="/profil/jawatengah" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.pexels.com/photos/2116715/pexels-photo-2116715.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Daerah Istimewa Yogyakarta</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Provinsi D.I. Yogyakarya berkontribusi terhadap PDB Nasional sebesar 0,95 % atau sekitar Rp 101.679 Miliyar di tahun 2020. Secara umum, D.I. Yogyakarta merupakan provinsi yang menyumbang PDB Nasional terendah di Jawa-Bali. Sejak tahun 2010-2019, tren pertumbuhan ekonomi D.I. Yogyakarta secara konsisten semakin naik dan stabil pada kisaran 4-6%. Pada tahun 2019, laju pertumbuhan provinsi ini mencapai 6,59% dan merupakan pencapaian tertinggi sepanjang deckade terakhir hingga turun drastis di tahun 2020 sebesar 2,69 (y-o-y). 
+                                        Penyebab utama dari penurunan ini adalah pemberlakuan kebijakan pembatasan 
+                                        kegiatan skala nasional sehingga kegiatan ekonomi menjadi terhenti selama pandemi Covid-19.
+                                    </h4>
+
+                                    <a href="/profil/diy" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://i.pinimg.com/originals/f5/17/f3/f517f3ba95cc33b488d0deab6f37a5cb.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Jawa Timur</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Provinsi Jawa Timur berkontribusi terhadap PDB Nasional sebesar 15,02 % atau sekitar Rp 1.610.419 Miliyar di tahun 2020. Angka ini menjadikan Jawa Timur sebagai penyumbang PDRB tertinggi kedua setelah DKI Jakarta. 
+                                        Sejak tahun 2010-2019, tren pertumbuhan ekonomi Jawa Timur menurun tapi masih dalam kategori stabil yaitu di kisaran 5 – 6,5%. 
+                                        Perekonomian Jawa Timur mengalami penurunan hingga mencapai -2,39% (y-o-y), 
+                                        turun dari tahun sebelumnya yaitu 5,57%. Penyebab utama dari penurunan ini adalah 
+                                        pemberlakuan kebijakan pembatasan kegiatan skala nasional sehingga kegiatan ekonomi 
+                                        menjadi terhenti selama pandemi Covid-19. </h4>
+
+                                    <a href="/profil/jawatimur" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://i.pinimg.com/originals/f5/17/f3/f517f3ba95cc33b488d0deab6f37a5cb.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Bali</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Provinsi Bali berkontribusi terhadap PDB Nasional 
+                                        sebesar 1,38 % atau sekitar Rp 147.549 Miliyar di tahun 2020. 
+                                        Sejak tahun 2010-2019, tren pertumbuhan ekonomi Bali sangat dinamis dan 
+                                        perubahannya fluktuatif berada di kisaran 5 – 7%. 
+                                        Perekonomian Bali mengalami penurunan hingga mencapai -9,31% (y-o-y), 
+                                        turun dari tahun sebelumnya yaitu 5,6%. Penyebab utama dari penurunan ini 
+                                        adalah pemberlakuan kebijakan pembatasan kegiatan skala nasional sehingga 
+                                        kegiatan ekonomi menjadi terhenti selama pandemi Covid-19. Salah satu pemicu 
+                                        aktivitas ekonomi di Bali ada sektor pariwisata dan selama pandemic, sektor inilah 
+                                        yang paling signifikan dampak penurunannya.</h4>
+
+                                    <a href="/profil/bali" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+
+                </nav>
+
+                <!-- Chart -->
+                <br>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+    {% endblock %}
