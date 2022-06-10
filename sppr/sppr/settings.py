@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'dev.regional1.bappenas.go.id'
     'https://data.covid19.go.id/public/api/prov.json',]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -157,6 +158,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.join(os.path.dirname(BASE_DIR)), 'media')
+STATIC_ROOT = os.path.join(os.path.join(os.path.dirname(BASE_DIR)), 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
