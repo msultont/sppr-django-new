@@ -25,6 +25,7 @@ urlpatterns = [
     # Akses untuk ke Menu Kajian Kewilayahan
     path('kajian/', views.kajian_wilayah, name="kawil"),
 
+     # Akses untuk ke Monev Spasial
     path('monev_spasial/', views.monev_spasial, name="monev_spasial"),
 
     # Akses untuk ke menu proyek mitra KL
