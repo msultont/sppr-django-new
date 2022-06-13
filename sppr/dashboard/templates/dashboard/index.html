@@ -399,13 +399,13 @@
       </iframe>
     </div>
     <!-- Two grid columns -->
-    <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+    <div class="grid grid-cols-3 px-4 py-4 space-y-0 lg:gap-8 lg:space-y-2 lg:grid-cols-3">
       <!-- Active users chart -->
       <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
         <!-- Card header -->
         <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-          <h4 class="text-lg font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
-            API dari Simrenas & TRPB</h4>
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            PDRB & LPE</h4>
           <div class="flex items-center">
             <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
               <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
@@ -418,13 +418,34 @@
           </div>
         </div>
         <!-- Chart -->
-        <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+        <canvas id="myChart1" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            Rasio Gini</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart2" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+        
       </div>
       <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
         <!-- Card header -->
         <div class="flex items-center justify-between p-4 border-b dark:border-primary">
           <h4 class="text-lg font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
-            API dari Simrenas & TRPB</h4>
+            Tingkat Penduduk Miskin</h4>
           <div class="flex items-center">
             <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
               <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
@@ -437,7 +458,45 @@
           </div>
         </div>
         <!-- Chart -->
-        <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+        <canvas id="myChart3" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            Indeks Pembangunan Manusia</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart4" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            Indeks Kualitas Lingkungan Hidup</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart5" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
       </div>
     </div>
 
@@ -705,9 +764,151 @@
     }
   });
 
-  var ctx = document.getElementById('myChart');
+  
+
+  var ctx = document.getElementById('myChart1');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart2');
   var myChart = new Chart(ctx, {
     type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart3');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart4');
+  var myChart = new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart5');
+  var myChart = new Chart(ctx, {
+    type: 'radar',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
