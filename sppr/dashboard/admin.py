@@ -1,23 +1,22 @@
 from django.contrib import admin
-from .models import CsvLongList, DataKawasanPrioritas, IsuStrategis, Longlist, OutputLFA, SasaranLFA, SkoringProyek, TujuanLFA
+from .models import *
 from mptt.admin import MPTTModelAdmin
-from mptt.admin import DraggableMPTTAdmin
 
 # Register your models here.
 
 
 class TujuanLFA_Admin(admin.ModelAdmin):
-    list_display = ["nama_tujuan", "provinsi", "tahun", "indikator", "nilai"]
+    list_display = ["nama_tujuan", "provinsi", "tahun", "indikator", "target"]
 
 
 class SasaranLFA_Admin(admin.ModelAdmin):
     list_display = ["nama_sasaran", "tujuan", "indikator",
-                    "nilai", "pengaruh_sasaran_tujuan"]
+                    "target", "pengaruh_sasaran_tujuan"]
 
 
 class OutputLFA_Admin(admin.ModelAdmin):
     list_display = ["nama_output", "sasaran", "indikator",
-                    "nilai", "pengaruh_output_sasaran"]
+                    "target", "pengaruh_output_sasaran"]
 
 
 class Longlist_Admin(admin.ModelAdmin):
@@ -36,11 +35,5 @@ admin.site.register(SkoringProyek, SkoringProyek_Admin)
 admin.site.register(TujuanLFA, TujuanLFA_Admin)
 admin.site.register(SasaranLFA, SasaranLFA_Admin)
 admin.site.register(OutputLFA, OutputLFA_Admin)
-admin.site.register(
-    IsuStrategis,
-    DraggableMPTTAdmin,
-    list_display=(
-        'tree_actions',
-        'indented_title',
-    ),
-)
+admin.site.register(NewIsuStrategis, MPTTModelAdmin)
+admin.site.register(IsuStrategis, MPTTModelAdmin)

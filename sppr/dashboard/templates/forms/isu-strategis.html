@@ -1,0 +1,98 @@
+{% extends 'parts/main.html' %} {% load widget_tweaks %} {% block content %}
+
+<!-- Content header -->
+<div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+  <h1 class="text-2xl font-semibold">
+    {% if page_mode == "create" %}
+    Menambahkan Isu Strategis
+    {% else %}
+    Mengubah Isu Strategis
+    {% endif %}
+  </h1>
+</div>
+
+{% if messages %}
+<div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+  <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+  </div>
+  <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+    {% for message in messages %}
+    <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<!-- Content form body -->
+<form class="w-full max-w-4xl l px-5 m-5" method="POST">
+  {% csrf_token %}
+
+  <div class="flex flex-wrap -mx-3 mb-2">
+    <div class="w-1/2 md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Silahkan Isi Provinsi
+      </label>
+      <div class="relative w-3/4">
+        {{content.form.provinsi}}
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+        Silahkan Isi Tahun
+      </label>
+      <div class="relative w-3/4">
+        {{content.form.tahun}}
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Isu Strategis Baru
+      </label>
+      {{content.form.nama_isu}}
+      <p class="text-red-500 text-xs italic">Silahkan Isi Isu Strategis Disini</p>
+    </div>
+
+    <div class="w-full md:w-full px-3 mb-6 mt-5 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        Data Pendukung
+      </label>
+      {{content.form.data_pendukung}}
+    </div>
+
+    <button
+      class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick=""
+    >
+      {% if page_mode == "create" %}
+      <p>Simpan</p>
+      {% else %}
+      <p>Ubah</p>
+      {% endif %}
+    </button>
+    <!-- <button class="rounded-2xl bg-gray-500 float-right hover:bg-gray-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
+      onclick="">
+      <p>Kembali</p>
+    </button> -->
+  </div>
+</form>
+
+<script>
+  // Message confirmation timeout after submit form
+  setTimeout(function () {
+    $('#msg').remove();
+  }, 3000)
+</script>
+
+{% endblock %}

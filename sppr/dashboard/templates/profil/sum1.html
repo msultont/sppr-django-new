@@ -1,0 +1,187 @@
+{% extends 'parts/main.html' %}
+{% block content %}
+<main>
+    <!-- Content header -->
+    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+        <h1 class="text-2xl font-semibold">{{judul}}</h1>
+    </div>
+
+    <!-- Content -->
+    <div class="mt-2">
+
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+            <!-- Map Area -->
+            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Card header -->
+
+                <nav class="flex items-center justify-between flex-wrap bg-purple-600 p-6">
+                    <div class="flex items-center flex-shrink-0 text-white mr-6">
+                        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
+                        </svg>
+                        <span class="font-semibold text-xl tracking-tight">Profil Daerah Regional I</span>
+                    </div>
+                    <div class="block lg:hidden">
+                        <button
+                            class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <title>Menu</title>
+                                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                            </svg>
+                        </button>
+                    </div>
+                    
+                           <!-- Main Content -->
+        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+                <!-- Main Content header -->
+                <div class="flex items-center justify-between p-4">
+                    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+                        <div class="w-full text-center pb-8">
+                        </div>
+                        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://images.wallpapersden.com/image/download/indonesia-pekanbaru_bGdnZW2UmZqaraWkpJRobWllrWdma2U.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Aceh</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">PDRB Aceh berada di peringkat 19 dari 34 provinsi di Indonesia dengan menyumbang 1,23% terhadap PDB Nasional di tahun 2020. Persentase ini ini senilai dengan Rp 131.585 Miliyar. Berdasarkan data, nilai PDRB Aceh selalu berada di bawah rata-rata nasional dengan nilai pertumbuhan antara 3-4% dengan tren menaik. 
+                                        Perekonomian Aceh kembali mengalami penurunan mencapai -0,37% (y-o-y) di tahun 2020, 
+                                        dimana perolehan di tahun sebelumnya adalah 4,14%. 
+                                        Penyebab hal ini diduga kuat akibat dari kebijakan untuk pembatasan aktivitas sosial sebagai 
+                                        penanggulangan pancemi Covid-19.
+                                        
+                                        </h4>
+
+                                    <a href="/profil/aceh" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal('modal-id')">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://free4kwallpapers.com/uploads/originals/2019/10/03/pangalengan-bandung-regency-indonesia-wallpaper1.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Sumatera Utara</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Secara nasional, PDRB Sumatera Utara menyumbang 4,98% di tahun 2020. Ini menjadikan Sumatera Utara sebagai provinsi dengan urutan ke-5 secara nasional. 
+                                        Nilai ini juga menunjukan provinsi ini merupakan yang terbaik dalam PDRB di Pulau Sumatera. 
+                                        Berdasarkan data tahun 2020, total PDRB Sumatera Utara mencapai Rp 533.746 Miliar. 
+                                        Laju pertumbuhan ekonomi Sumatera Utara di tahun 2020 masih berada di titi deficit, 
+                                        yaitu -1,07% (y-o-y). Seperti halnya daerah lain yang ada di Indonesia, 
+                                        Sumatera Utara juga mengalami dampak atas pandemi yang menyebabkan adanya pembatasan 
+                                        aktivitas yang berujung pada menurunnya pertumbuhan ekonomi.
+                                    </h4>
+
+                                    <a href="/profil/sumaterautara" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://www.bantennews.co.id/wp-content/uploads/2019/07/20190714_081035.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Sumatera Barat</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Di tahun 2020, PDRB Sumatera Barat menyumbang 1,58% terhadap PDB Nasional, atau setara dengan Rp 169.458 Miliar. 
+                                        Angka ini menjadikan Sumatera Barat berada di perungkat 13 skala nasional. LPE Sumatera Barat selalu berada di atas angka rata-rata nasional pada rentang wangku 2010 hingga 2017. Di tahun 2018 dan 2019 terjadi penurunan sehingga berada di bawah rataan nasional. 
+                                        Baru kemudian di tahun 2020 kembali di atas dengan angka -1,6% (y-o-y), 
+                                        dimana tahun sebelumnya adalah 5,01%. Penyebab hal ini diduga kuat akibat dari 
+                                        kebijakan untuk pembatasan aktivitas sosial sebagai penanggulangan pancemi Covid-19.</h4>
+
+                                    <a href="/profil/sumaterabarat" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://kabarpriangan.com/konten/uploads/2018/06/screenshot_2018-06-13-15-52-54-239_cn293183283.png"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Riau</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-base">Pada tahun 2020, Provinsi Riau menyumbangkan 4,57% terhadap PDB nasional dan berada di peringkat 6. 
+                                        Riau menempati posisi kedua di Pulau Sumatera. Hal ini mengukuhkan Riau sebagai salah satu provinsi yang memiliki peran penting terhadap ekonomi nasional. Nilai PDRB Riau di tahun 2020 mencapai Rp 490.024 Miliyar. 
+                                        Seperti daerah lain yang ada di Indonesia, laju pertumbuhan ekonomi Riau di tahun 2020 juga masih berada di angka minus yaitu -1,12% (y-o-y). Hal ini sebagai akibat dari pembatasan aktivitas di masa pandemi. 
+                                        Laju pertumbuhan Riau selalu berada di bawah rataan LPE nasional, hanya di tahun 2020 ini berada di atas rataan nasional yaitu -2,07%.
+                                        </h4>
+
+                                    <a href="/profil/riau" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-lg">
+                                <div class="flex items-center space-x-6 mb-4">
+                                    <img class="h-28 w-28 object-cover object-center rounded-full"
+                                        src="https://asset.kompas.com/crops/DYzvsBLSN7R5XTKnBEyP39NLWfY=/94x0:937x562/750x500/data/photo/2020/02/21/5e50030b70b64.jpg"
+                                        alt="photo">
+                                    <div>
+                                        <p class="text-xl text-gray-700 font-bold mb-1">Provinsi Kepulauan Riau</p>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 leading-loose font-normal text-justify">Pada tahun 2020, PDRB Kepulauan Riau menduduki peringkat ke-12 PDRB tertinggi dengan kontribusi sebesar 1,63% terhadap PDB nasional atau setara dengan Rp 174.977 Miliar. 
+                                        Pada kurun waktu 2016 hingga 2020, Laju Pertumbuhan Ekonomi (LPE) Kepulauan Riau konsisten berada di bawah angka rata-rata Nasional. 
+                                        Saat ini, LPE Kepulauan Riau berada di angka -3,80% (y-o-y) di bawah angka nasional -2,07%. 
+                                        Kepulauan Riau juga menjadi provinsi dengan LPE terendah dari 10 provinsi di Pulau Sumatera.</h4>
+
+                                    <a href="/profil/kepulauanriau" target="blank"><button
+                                        class="bg-blue-400 text-white rounded-md mt-5 mb-5 p-2 w-auto pl-3 pr-3 hover:bg-blue-600"
+                                        onclick="toggleModal">
+                                        Lihat Selengkapnya
+                                    </button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                </nav>
+
+                <!-- Chart -->
+                <br>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+    {% endblock %}

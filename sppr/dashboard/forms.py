@@ -1,8 +1,6 @@
 from django import forms
-from django.db import models
-from django.db.models import fields
-from django.forms import ModelForm, widgets
-from .models import CsvLongList, Longlist, OutputLFA, SasaranLFA, SkoringProyek, TujuanLFA
+from django.forms import ModelForm
+from .models import CsvLongList, Longlist, OutputLFA, SasaranLFA, SkoringProyek, TujuanLFA, ProvinsiId, NewIsuStrategis
 
 # Create form for Manipulate Longlist
 
@@ -14,16 +12,32 @@ class Output_LFA_Form(ModelForm):
         fields = '__all__'
 
         widgets = {
-
-            'nama_output': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Silahkan Isi Tujuan Disini'}),
-            'sasaran': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
-            'indikator': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Isi disini'}),
-            'sumber_data': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Isi disini'}),
-            'asumsi': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Isi disini'}),
-            'nilai': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Isi disini'})
-
+            'nama_output': forms.TextInput(attrs={'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 focus:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'WAJIB DIISI'}),
+            'sasaran': forms.Select(attrs={'class': 'whitespace-pre-wrap block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-red-500'}),
+            'indikator': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'whitespace-pre-wrap appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Indikator1, Indikator2, Indikator3, ...', 'rows': '1'}),
+            'sumber_data': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'whitespace-pre-wrap appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Sumber data1, Sumber data2, Sumber data3, ...', 'rows': '1'}),
+            'asumsi': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Asumsi1, Asumsi2, Asumsi3, ...', 'rows': '1'}),
+            'target': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'baseline': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'unitsatuanbaseline': forms.Select(attrs={'id': 'usb_select', 'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'onchange': 'handleUnitSatuan(this)'}),
+            'unit_satuan_baseline': forms.TextInput(attrs={'id': 'usb_text', 'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'disabled': 'disabled'}),
+            'unitsatuantarget': forms.Select(attrs={'id': 'ust_select', 'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'onchange': 'handleUnitSatuan(this)'}),
+            'unit_satuan_target': forms.TextInput(attrs={'id': 'ust_text', 'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'disabled': 'disabled'})
         }
 
+    def __init__(self, *args, **kwargs):
+        super(Output_LFA_Form, self).__init__(*args, **kwargs)
+        self.fields['sasaran'].queryset = SasaranLFA.objects.none()
+
+        if 'tujuan' in self.data:
+            try:
+                tujuan_id = int(self.data.get('tujuan'))
+                self.fields['sasaran'].queryset = SasaranLFA.objects.filter(tujuan_id=tujuan_id)
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            super(Output_LFA_Form, self).__init__(data=self.data or None, instance=self.instance)
+            self.fields['sasaran'].queryset = SasaranLFA.objects.filter(tujuan_id=self.instance.sasaran.tujuan_id)
 
 class Sasaran_LFA_Form(ModelForm):
 
@@ -32,16 +46,33 @@ class Sasaran_LFA_Form(ModelForm):
         fields = '__all__'
 
         widgets = {
-
-            'nama_sasaran': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Silahkan Isi Tujuan Disini'}),
-            'tujuan': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
-            'indikator': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Isi disini'}),
-            'sumber_data': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Isi disini'}),
-            'asumsi': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Isi disini'}),
-            'nilai': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Isi disini'})
-
+            'nama_sasaran': forms.TextInput(attrs={'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 focus:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'WAJIB DIISI'}),
+            'tujuan': forms.Select(attrs={'class': 'whitespace-pre-wrap block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-red-500'}),
+            'indikator': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Indikator1, Indikator2, Indikator3, ...', 'rows': '1'}),
+            'sumber_data': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'whitespace-pre-wrap appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Sumber data1, Sumber data2, Sumber data3, ...', 'rows': '1'}),
+            'asumsi': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'whitespace-pre-wrap appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Asumsi1, Asumsi2, Asumsi3, ...', 'rows': '1'}),
+            'target': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'baseline': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'tahun_anggaran': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'unitsatuanbaseline': forms.Select(attrs={'id': 'usb_select', 'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'onchange': 'handleUnitSatuan(this)'}),
+            'unit_satuan_baseline': forms.TextInput(attrs={'id': 'usb_text', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'disabled': 'disabled'}),
+            'unitsatuantarget': forms.Select(attrs={'id': 'ust_select', 'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'onchange': 'handleUnitSatuan(this)'}),
+            'unit_satuan_target': forms.TextInput(attrs={'id': 'ust_text', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'disabled': 'disabled'})
         }
 
+    def __init__(self, *args, **kwargs):
+        super(Sasaran_LFA_Form, self).__init__(*args, **kwargs)
+        self.fields['tujuan'].queryset = TujuanLFA.objects.none()
+
+        if 'provinsi' in self.data:
+            try:
+                provinsi_id = int(self.data.get('provinsi'))
+                self.fields['tujuan'].queryset = TujuanLFA.objects.filter(provinsi_id=provinsi_id)
+            except (ValueError, TypeError):
+                pass
+        elif self.instance.pk:
+            super(Sasaran_LFA_Form, self).__init__(data=self.data or None, instance=self.instance)
+            self.fields['tujuan'].queryset = TujuanLFA.objects.filter(provinsi_id=self.instance.tujuan.provinsi_id)
 
 class Tujuan_LFA_Form(ModelForm):
 
@@ -50,17 +81,35 @@ class Tujuan_LFA_Form(ModelForm):
         fields = '__all__'
 
         widgets = {
-
-            'nama_tujuan': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Silahkan Isi Tujuan Disini'}),
-            'provinsi': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'nama_tujuan': forms.TextInput(attrs={'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 focus:border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'WAJIB DIISI'}),
+            'provinsi': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-red-500 focus:border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white', 'placeholder': 'WAJIB DIISI'}),
             'tahun': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
-            'indikator': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Isi disini'}),
-            'sumber_data': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'Isi disini'}),
-            'asumsi': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Isi disini'}),
-            'nilai': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Isi disini'})
-
+            'indikator': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'rows': '1', 'placeholder': 'Indikator1, Indikator2, Indikator3, ...'}),
+            'sumber_data': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'whitespace-pre-wrap appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Sumber data1, Sumber data2, Sumber data3, ...', 'rows': '1'}),
+            'asumsi': forms.Textarea(attrs={'style': 'text-transform: capitalize', 'class': 'whitespace-pre-wrap appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'placeholder': 'Asumsi1, Asumsi2, Asumsi3, ...', 'rows': '1'}),
+            'target': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'baseline': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'tahun_anggaran': forms.NumberInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'unitsatuanbaseline': forms.Select(attrs={'id': 'usb_select', 'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'onchange': 'handleUnitSatuan(this)'}),
+            'unit_satuan_baseline': forms.TextInput(attrs={'id': 'usb_text', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'disabled': 'disabled'}),
+            'unitsatuantarget': forms.Select(attrs={'id': 'ust_select', 'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'onchange': 'handleUnitSatuan(this)'}),
+            'unit_satuan_target': forms.TextInput(attrs={'id': 'ust_text', 'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500', 'disabled': 'disabled'})
         }
 
+
+class IsuStrategisForm(ModelForm):
+
+    class Meta:
+        model = NewIsuStrategis
+        fields = '__all__'
+
+        widgets = {
+            'provinsi': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white'}),
+            'parent': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-red-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white'}),
+            'tahun': forms.Select(attrs={'class': 'block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'}),
+            'nama_isu': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white', 'placeholder': 'WAJIB DIISI'}),
+            'data_pendukung': forms.TextInput(attrs={'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'})
+        }
 
 class LonglistForm(ModelForm):
 

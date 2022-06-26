@@ -108,7 +108,7 @@
               Isu Strategis
             </h6>
           </div>
-          <span class="text-4xl font-semibold text-white">200</span>
+          <span class="text-4xl font-semibold text-white">{{isu_strategis}}</span>
         </div>
       </div>
 
@@ -176,7 +176,7 @@
               Prioritas Nasional
             </h6>
           </div>
-          <span class="text-4xl font-semibold text-white">200</span>
+          <span class="text-4xl font-semibold text-white">{{prioritas_nasional}}</span>
         </div>
       </div>
 
@@ -267,7 +267,7 @@
               Major Project
             </h6>
           </div>
-          <span class="text-4xl font-semibold text-white">200</span>
+          <span class="text-4xl font-semibold text-white">{{mp}}</span>
         </div>
       </div>
 
@@ -373,7 +373,7 @@
               Provinsi
             </h6>
           </div>
-          <span class="text-4xl font-semibold text-white">200</span>
+          <span class="text-4xl font-semibold text-white">{{provinsi}}</span>
         </div>
       </div>
 
@@ -399,13 +399,13 @@
       </iframe>
     </div>
     <!-- Two grid columns -->
-    <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
+    <div class="grid grid-cols-3 px-4 py-4 space-y-0 lg:gap-8 lg:space-y-2 lg:grid-cols-3">
       <!-- Active users chart -->
       <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
         <!-- Card header -->
         <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-          <h4 class="text-lg font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
-            API dari Simrenas & TRPB</h4>
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            PDRB & LPE</h4>
           <div class="flex items-center">
             <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
               <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
@@ -418,13 +418,34 @@
           </div>
         </div>
         <!-- Chart -->
-        <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+        <canvas id="myChart1" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            Rasio Gini</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart2" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+        
       </div>
       <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
         <!-- Card header -->
         <div class="flex items-center justify-between p-4 border-b dark:border-primary">
           <h4 class="text-lg font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
-            API dari Simrenas & TRPB</h4>
+            Tingkat Penduduk Miskin</h4>
           <div class="flex items-center">
             <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
               <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
@@ -437,7 +458,45 @@
           </div>
         </div>
         <!-- Chart -->
-        <canvas id="myChart" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+        <canvas id="myChart3" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            Indeks Pembangunan Manusia</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart4" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
+      </div>
+      <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Card header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg text-center font-semibold header-content bg-clip-text bg-gradient-to-br from-purple-600 to-purple-400">
+            Indeks Kualitas Lingkungan Hidup</h4>
+          <div class="flex items-center">
+            <button class="relative focus:outline-none" x-cloak @click="isOn = !isOn; $parent.updateLineChart()">
+              <div class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-darker">
+              </div>
+              <div
+                class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform scale-110 rounded-full shadow-sm"
+                :class="{ 'translate-x-0  bg-white dark:bg-primary-100': !isOn, 'translate-x-6 bg-primary-light dark:bg-primary': isOn }">
+              </div>
+            </button>
+          </div>
+        </div>
+        <!-- Chart -->
+        <canvas id="myChart5" data-url="{% url 'rochart' %}" width="400" height="400"></canvas>
       </div>
     </div>
 
@@ -445,7 +504,7 @@
     <div class="container mx-3">
       <div class="flex flex-wrap -mx-1">
         <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+          <a href="/profil/sumatera1" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
             <div class="relative pb-48 overflow-hidden">
               <img class="absolute inset-0 h-full w-full object-cover"
                 src="data:image/jpeg;base64,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"
@@ -455,8 +514,8 @@
               <span
                 class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
               <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Sumatera I</h2>
-              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
-                non metus auctor fringilla.</p>
+              <p class="text-sm">Wilayah Sumatera I merupakan wilayah yang terdiri dari 5 Provinsi 
+                mencakup Aceh, Sumatera Barat, Sumatera Utara, Riau, Kepulauan Riau</p>
               <div class="mt-3 flex items-center">
                 <span class="text-sm font-semibold">Lihat Selengkapnya</span>
               </div>
@@ -498,7 +557,7 @@
           </a>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+          <a href="/profil/sumatera2" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
             <div class="relative pb-48 overflow-hidden">
               <img class="absolute inset-0 h-full w-full object-cover"
                 src="data:image/jpeg;base64,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"
@@ -508,8 +567,8 @@
               <span
                 class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
               <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Sumatera II</h2>
-              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
-                non metus auctor fringilla.</p>
+              <p class="text-sm">Wilayah Sumatera II merupakan wilayah yang terdiri dari 5 Provinsi 
+                mencakup Jambi, Sumatera Selatan, Bangka Belitung, Lampung, dan Bengkulu </p>
               <div class="mt-3 flex items-center">
                 <span class="text-sm font-semibold">Lihat Selengkapnya</span>
               </div>
@@ -551,7 +610,7 @@
           </a>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+          <a href="/profil/jawa1" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
             <div class="relative pb-48 overflow-hidden">
               <img class="absolute inset-0 h-full w-full object-cover"
                 src="https://cdn1-production-images-kly.akamaized.net/8y0B8M7IMA_YOjkfrEnG2pe529g=/640x640/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/1096309/original/041101500_1451368462-Tidak-Liburan-Ke-Luar-Kota-Ide-Staycation-Dan-Liburan-Di-Jakarta-Ini-Akan-Sangat-Membantu-Kalian.jpg"
@@ -561,8 +620,12 @@
               <span
                 class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
               <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Jawa I</h2>
-              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
-                non metus auctor fringilla.</p>
+              <p class="text-sm">Wilayah Jawa I merupakan wilayah yang terdiri dari 3 Provinsi 
+                mencakup Banten, DKI Jakarta, dan Jawa Barat
+              
+                <br>
+                <br>
+                <br></p>
               <div class="mt-3 flex items-center">
                 <span class="text-sm font-semibold">Lihat Selengkapnya</span>
               </div>
@@ -604,7 +667,7 @@
           </a>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
-          <a href="" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+          <a href="/profil/jawa2" class="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
             <div class="relative pb-48 overflow-hidden">
               <img class="absolute inset-0 h-full w-full object-cover"
                 src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2021/05/03112735/Tempat-Tinggal-Terbaik-di-Bali.jpg"
@@ -614,8 +677,8 @@
               <span
                 class="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">Highlight</span>
               <h2 class="mt-2 mb-2  font-bold">Rangkuman Profil Daerah - Jawa II Bali</h2>
-              <p class="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla
-                non metus auctor fringilla.</p>
+              <p class="text-sm">Wilayah Jawa II merupakan wilayah yang terdiri dari 4 Provinsi 
+                mencakup Jawa Tengah, Daerah Istimewa Yogyakarta, Jawa Timur, dan Bali</p>
               <div class="mt-3 flex items-center">
                 <span class="text-sm font-semibold">Lihat Selengkapnya</span>
               </div>
@@ -705,9 +768,151 @@
     }
   });
 
-  var ctx = document.getElementById('myChart');
+  
+
+  var ctx = document.getElementById('myChart1');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart2');
   var myChart = new Chart(ctx, {
     type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart3');
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart4');
+  var myChart = new Chart(ctx, {
+    type: 'polarArea',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  var ctx = document.getElementById('myChart5');
+  var myChart = new Chart(ctx, {
+    type: 'radar',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{

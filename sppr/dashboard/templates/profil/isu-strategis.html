@@ -1,355 +1,257 @@
-{% extends 'parts/main.html' %}
-{% load static %}
-{% block content %}
+{% extends 'parts/main.html' %} {% load static %} {% block content %}
 
 <style>
-    .chart--container {
-        height: 100%;
-        width: 100%;
-        min-height: 530px;
-    }
+  .chart--container {
+    height: 100%;
+    width: 100%;
+    min-height: 530px;
+  }
 
-    .zc-ref {
-        display: none;
-    }
+  .zc-ref {
+    display: none;
+  }
 
-    select {
-        margin: 10px;
-    }
-
-
-    
-
+  select {
+    margin: 10px;
+  }
 </style>
 
 <main>
-    <!-- Content header -->
-    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
-        <h1 class="text-2xl font-semibold">{{judul}}</h1>
+  {% if messages %}
+  {% for message in messages %}
+  <!--Message dialog for success-->
+  {% if message.level == 25  %}
+  <div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
     </div>
+    <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+      <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    </div>
+  </div>
+  <!--Message dialog for error-->
+  {% elif message.level == 40  %}
+  <div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+    </div>
+    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+      <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
 
-    <!-- Content -->
-    <div class="mt-2">
+  <!--Modal No Data-->
+  <div
+    class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="no-data"
+  >
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <h3 class="text-3xl font-semibold">Detail Data Pendukung</h3>
+        </div>
+        <!--body-->
+        <div class="relative p-6 flex-auto w-auto">
+          <p class="my-4 text-blueGray-500 text-lg leading-relaxed">Keterangan Gambar</p>
+          <!-- component -->
+          <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css" />
+          <link
+            rel="stylesheet"
+            href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+          />
+          <section class="py-1 bg-blueGray-50">
+            <img src="{% static 'images/ss-korelasi.png' %}" alt="dummy image" srcset="">
+          </section>
+          <p class="my-4 text-blueGray-500 text-lg leading-relaxed">Keterangan Kalimat</p>
+          <!-- component -->
+          <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css" />
+          <link
+            rel="stylesheet"
+            href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+          />
+          <section class="p-5 py-1 bg-blueGray-50 text-justify">
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+          </section>
+          <button
+            class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
+            type="button"
+            onclick="toggleModal('no-data')"
+          >
+            <span>Tutup Tabel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!--Modal Delete Isu Strategis Confirmation-->
+  <div class="modal" id="modal-delete-confirmation">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg" id="modal-delete-title">Konfirmasi Penghapusan</h3>
+      <p class="py-4" id="modal-delete-message">Apakah Anda yakin untuk menghapus data tujuan!</p>
+      <div class="modal-action">
+        <a href="#" class="btn btn-outline">Batal</a>
+        <a href="#" class="btn btn-error" id="modal-delete-yes">Hapus</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content header -->
+  <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">{{judul}}</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="mt-2">
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+      <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Main Content header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
+        </div>
         <!-- Main Content -->
-        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
-            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Main Content header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Map Area</h4>
-                </div>
-                <!-- Main Content -->
 
-                <div class="mt-5 mb-5">
-                    <p class="p-5">Pilih Provinsi</p>
+        <form method="GET" action="{% url 'profil' 'pis' %}?pilih_provinsi={{ pilih_provinsi }}&pilih_isu_strategis={{ pilih_isu_strategis }}">
+          <div class="mt-5 mb-5">
+            <p class="p-5">Pilih Provinsi</p>
+            <select
+              id="pilih_provinsi"
+              name="options"
+              onchange="form.submit()"
+              class="relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-purple-500 focus:bg-white focus:border-gray-500'"
+            >
+              <option value="" selected disabled hidden>Pilih Provinsi</option>
+              {% for provinsi in provinsi %}
+              <option 
+                value="{{ provinsi.provinsi_id }}-{{ pilih_isu_strategis }}"
+                {% if provinsi.provinsi_id == pilih_provinsi %}selected{% endif %}
+              >
+                {{ provinsi.nama_provinsi }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </form>
+        <form method="GET" action="{% url 'profil' 'pis' %}?pilih_provinsi={{ pilih_provinsi }}&pilih_isu_strategis={{ pilih_isu_strategis }}">
+          <div class="mt-5 mb-5">
+            <p class="p-5">Pilih Isu Strategis</p>
+            <select
+              id="pilih_isu_strategis"
+              name="options"
+              onchange="form.submit()"
+              class="whitespace-pre-wrap relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-purple-500 focus:bg-white focus:border-gray-500'"
+            >
+              <option value="" selected disabled hidden>Pilih Isu Strategis</option>
+              {% for isu in isu_strategis %}
+              <option 
+                value="{{ pilih_provinsi }}-{{ isu.id }}"
+                {% if isu.id == pilih_isu_strategis %}selected{% endif %}
+              >
+                {{ isu.nama_isu }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </form>
 
-                    <select name="" id=""
-                        class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                        <option value="Jawa Barat">Jawa Barat</option>
-
-                    </select>
-
-                </div>
-
-                <div class="mt-5 mb-5">
-                    <p class="p-5">Pilih Isu Strategis</p>
-
-                    <select name="" id=""
-                        class=" relative block appearance-none w-1/4 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                        <option>
-                            Tidak sesuainya kualifikasi SDM dengan kebutuhan dunia kerja
-                            (mis match)
-                        </option>
-
-                        <option value="">
-                            Masih rendahnya kualitas lingkungan hidup di Provinsi Jawa Barat
-                        </option>
-
-                        <option>
-                            Ketimpangan Jawa Barat bagian selatan dengan bagian utara
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- CHART CONTAINER -->
-                <div id="tree-container">
-                </div>
-
-            </div>
+        <div class="mt-5 mb-5 ml-3">
+          <button class="bg-purple-500 float-left hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5" onclick="">
+            <a href="{% url 'addIsu' %}">
+              <p>Tambah Isu Baru</p>
+            </a>
+          </button>
         </div>
 
-        <!-- Support Contents -->
-        <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3">
-
-        </div>
-
+        <!-- CHART CONTAINER -->
+        <div id="tree-container"></div>
+      </div>
     </div>
+
+    <!-- Support Contents -->
+    <div class="grid grid-cols-3 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-3"></div>
+  </div>
 </main>
 
-<script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
+  let data = JSON.parse("{{ dataJSON|escapejs }}")
+  var treeData = data
 
-    var treeData =
-    {
-        "name": "Belum memadainya  infrastruktur di Jabar bagian Selatan",
-        "fill": "#6D28D9",
-        "children": [
-            {
-                "name": "Belum selesainya pembangunan infrastruktur kereta api",
-                "fill": "#6D5CF6",
-                "children": [
-                    {
-                        "name": "Belum tuntasnya Pembanguna Jalur Ganda Kereta Api di Jabar Selatan",
-                        "fill": "#6D5CF6",
-                    },
-                    {
-                        "name": "Belum tuntasnya Reaktivasi Jaringan Kereta Api di Jabar selatan",
-                        "fill": "#6D5CF6",
-                    }
-                ]
-            },
-            {
-                "name": "Belum selesainya  pembangunan Infrastruktur jalan",
-                "fill": "#6D5CF6",
-                "children": [
-                    {
-                        "name": "Belum tuntasnya pembangunan Jalur Lintas Selatan (JLS)",
-                        "fill": "#6D5CF6",
-                    },
-                    {
-                        "name": "Belum tuntasnya pembangunan jalan tol di Jabar Selatan",
-                        "fill": "#6D5CF6",
-                    }
-                ]
-            },
-            {
-                "name": "Masih terbatasnya infrastruktur TIK",
-                "fill": "#6D5CF6",
-                "children": [
-                    {
-                        "name": "Terbatasnya jaringan internet",
-                        "fill": "#6D5CF6"
-                    }
-                ]
-            }
-        ]
-    };
+  var button = Object.keys(treeData).length !== 0 && d3
+    .select("#tree-container")
+    .append("button")
+    .attr("class", "btn btn-link float-left font-bold py-2 px-4 mt-5 ml-3")
+    .attr("id", "button-tree-container")
+    .style("width", 200)
+    .style("height", 100)
+    .style("color", "gray")
+    .append("a")
+    .attr("href", "{% url 'profil' 'pis_diagram' %}?options={{ pilih_provinsi }}-{{ pilih_isu_strategis }}")
+    .attr("target", "_blank")
+    .append("p")
+    .text("Lihat Diagram")
+    .append("i")
+    .attr("class", "fa-solid fa-arrow-up-right-from-square");
 
-    // Set the dimensions and margins of the diagram
-    var margin = { top: 20, right: 90, bottom: 30, left: 30 },
-        width = 2500 - margin.left - margin.right,
-        height = 550 - margin.top - margin.bottom;
+  // Message confirmation timeout after submit form
+  setTimeout(function () {
+    $('#msg').remove();
+  }, 3000)
 
-    // append the svg object to the body of the page
-    // appends a 'group' element to 'svg'
-    // moves the 'group' element to the top left margin
-    var svg = d3.select("#tree-container").append("svg")
-        .attr("width", width + margin.right + margin.left)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate("
-            + margin.left + "," + margin.top + ")");
-
-    var i = 0,
-        duration = 750,
-        root;
-
-    // declares a tree layout and assigns the size
-    var treemap = d3.tree().size([height, width]);
-
-    // Assigns parent, children, height, depth
-    root = d3.hierarchy(treeData, function (d) { return d.children; });
-    root.x0 = height / 2;
-    root.y0 = 0;
-
-    // Collapse after the second level
-    root.children.forEach(collapse);
-
-    update(root);
-
-    // Collapse the node and all it's children
-    function collapse(d) {
-        if (d.children) {
-            d._children = d.children
-            d._children.forEach(collapse)
-            d.children = null
-        }
-    }
-
-    function update(source) {
-
-        // Assigns the x and y position for the nodes
-        var treeData = treemap(root);
-
-        // Compute the new tree layout.
-        var nodes = treeData.descendants(),
-            links = treeData.descendants().slice(1);
-
-        // Normalize for fixed-depth.
-        nodes.forEach(function (d) { d.y = d.depth * 400 });
-
-        // ****************** Nodes section ***************************
-
-        // Update the nodes...
-        var node = svg.selectAll('g.node')
-            .data(nodes, function (d) { return d.id || (d.id = ++i); });
-
-        // Enter any new modes at the parent's previous position.
-        var nodeEnter = node.enter().append('g')
-            .attr('class', 'node')
-            .attr("transform", function (d) {
-                return "translate(" + source.y0 + "," + source.x0 + ")";
-            })
-            .on('click', click);
-
-        var rectHeight = 50, rectWidth = "panjangteks", panjangteks = 380;
-
-        // Create Tooltip
-
-        var tooltip = d3.select("body")
-            .append("div")
-            .style("width", "relative")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("visibility", "hidden")
-            .style("background", "black")
-            .style("padding", "15px")
-            .style("border-radius", "10px")
-            .style("font-size", "12px")
-            .style("color", "white")
-
-        nodeEnter.append('rect')
-            .attr('class', 'node')
-            .attr("width", panjangteks)
-            .attr("max-width", panjangteks)
-            .attr("height", rectHeight)
-            .attr("x", -3)
-            .attr("y", (rectHeight / 2) * -1)
-            .attr("rx", "15")
-            .style("fill", function (d) {
-                return d.data.fill;
-            })
-            .on("mouseover", function (d) { tooltip.text("Data: Coba data kalau agak panjang tes coba data panjang lorem ipsum"); return tooltip.style("visibility", "visible"); })
-            .on("mousemove", function () { return tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px"); })
-            .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
-
-
-        // Add labels for the nodes
-        nodeEnter.append('text')
-            .attr("x", function (d) {
-                return 10;
-            })
-            .attr("text-anchor", function (d) {
-                return "start";
-            })
-            .text(function (d) { return d.data.name; })
-            .style("fill", "white")
-            .style("font-size", ".68em")
-            .style("font-weight", "bold")
-            .attr("dy", ".7em")
-            .style("max-width", panjangteks)
-            .style("position", "center");
-
-        // UPDATE
-        var nodeUpdate = nodeEnter.merge(node);
-
-        // Transition to the proper position for the node
-        nodeUpdate.transition()
-            .duration(duration)
-            .attr("transform", function (d) {
-                return "translate(" + d.y + "," + d.x + ")";
-            });
-
-        // Update the node attributes and style
-        nodeUpdate.select('circle.node')
-            .attr('r', 10)
-            .style("fill", function (d) {
-                return d._children ? "lightsteelblue" : "#fff";
-            })
-            .attr('cursor', 'pointer');
-
-
-        // Remove any exiting nodes
-        var nodeExit = node.exit().transition()
-            .duration(duration)
-            .attr("transform", function (d) {
-                return "translate(" + source.y + "," + source.x + ")";
-            })
-            .remove();
-
-        // On exit reduce the node circles size to 0
-        nodeExit.select('circle')
-            .attr('r', 1e-6);
-
-        // On exit reduce the opacity of text labels
-        nodeExit.select('text')
-            .style('fill-opacity', 1e-6);
-
-        // ****************** links section ***************************
-
-        // Update the links...
-        var link = svg.selectAll('path.link')
-            .data(links, function (d) { return d.id; });
-
-        // Enter any new links at the parent's previous position.
-        var linkEnter = link.enter().insert('path', "g")
-            .attr("class", "link")
-            .attr('d', function (d) {
-                var o = { x: source.x0, y: source.y0 }
-                return diagonal(o, o)
-            });
-
-        // UPDATE
-        var linkUpdate = linkEnter.merge(link);
-
-        // Transition back to the parent element position
-        linkUpdate.transition()
-            .duration(duration)
-            .attr('d', function (d) { return diagonal(d, d.parent) });
-
-        // Remove any exiting links
-        var linkExit = link.exit().transition()
-            .duration(duration)
-            .attr('d', function (d) {
-                var o = { x: source.x, y: source.y }
-                return diagonal(o, o)
-            })
-            .remove();
-
-        // Store the old positions for transition.
-        nodes.forEach(function (d) {
-            d.x0 = d.x;
-            d.y0 = d.y;
-        });
-
-        // Creates a curved (diagonal) path from parent to the child nodes
-        function diagonal(s, d) {
-
-            path = `M ${s.y} ${s.x}
-        C ${(s.y + d.y) / 2} ${s.x},
-          ${(s.y + d.y) / 2} ${d.x},
-          ${d.y} ${d.x}`
-
-            return path
-        }
-
-        // Toggle children on click.
-        function click(d) {
-            if (d.children) {
-                d._children = d.children;
-                d.children = null;
-            } else {
-                d.children = d._children;
-                d._children = null;
-            }
-            update(d);
-        }
-    }
+  function toggleModal(modalID) {
+    $(`#${modalID}`).toggleClass("hidden")
+  }
+  function createNodeChildForm(d) {
+    let node = d
+    return `
+      <form action="{% url 'addIsu' %}" method="post">
+        {% csrf_token %}
+        <input 
+          hidden
+          id="parent"
+          name="parent"
+          type="text" 
+          value="${node.parent.data.id}"
+        />
+        <input 
+          hidden
+          id="provinsi"
+          name="provinsi"
+          type="text" 
+          value="${node.parent.data.provinsi_id}" 
+        />
+        <input 
+          hidden
+          id="tahun"
+          name="tahun"
+          type="text" 
+          value="2019"
+        />
+        <input 
+          hidden
+          id="data_pendukung"
+          name="data_pendukung"
+          type="text" 
+          value=""
+        />
+        <input 
+          required
+          id="add-child-isu"
+          name="nama_isu"
+          type="text" 
+          value="Masukkan Isu Baru" 
+          style="width: 350px;"
+        />
+        <input type="submit" hidden />
+      </form>
+    `
+  }
+  treeBoxes(treeData)
 
 </script>
 

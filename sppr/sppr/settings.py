@@ -26,12 +26,32 @@ SECRET_KEY = 'django-insecure-e*f+x6&47eo7e9wu-lf$=tr#-!y$3@_^1l=nkd$@$d_ed_mu$-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'dev.regional1.bappenas.go.id'
+    'https://data.covid19.go.id/public/api/prov.json',]
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['127.0.0.1',
+    'https://data.covid19.go.id/public/api/prov.json',]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    '127.0.0.1',
+    'https://data.covid19.go.id/public/api/prov.json',
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'proj.middlewares.CsrfExemptSessionAuthentication',
+    ),
+}
+
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'dashboard.apps.DashboardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,12 +67,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'sppr.urls'
 
@@ -85,7 +107,10 @@ DATABASES = {
         'USER': 'dit_regional1',
         'PASSWORD': 'regionals4tu',
         'HOST': '10.1.178.88',
-        'PORT': '5432'
+        'PORT': '5432',
+        'TEST': {
+            'NAME': 'dit_regional1'
+        }
     }
 }
 
@@ -122,7 +147,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -134,6 +158,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.join(os.path.dirname(BASE_DIR)), 'media')
+STATIC_ROOT = os.path.join(os.path.join(os.path.dirname(BASE_DIR)), 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

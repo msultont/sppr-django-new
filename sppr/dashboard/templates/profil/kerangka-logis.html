@@ -1,570 +1,657 @@
-{% extends 'parts/main.html' %}
-{% load static %}
-{% block content %}
+{% extends 'parts/main.html' %} {% load static %} {% load filter_tags %} {% block content %}
 <main>
+  {% if messages %}
+  {% for message in messages %}
+  <!--Message dialog for success-->
+  {% if message.level == 25  %}
+  <div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+    </div>
+    <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+      <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    </div>
+  </div>
+  <!--Message dialog for error-->
+  {% elif message.level == 40  %}
+  <div class="mt-10 mb-5 ml-20 mr-20" role="alert" id="msg">
+    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+    </div>
+    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+      <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
 
-    <!--Modal-->
-    <div class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
-        id="modal-id">
-        <div class="relative w-auto my-6 mx-auto max-w-3xl">
-            <!--content-->
-            <div
-                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <!--header-->
-                <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <h3 class="text-3xl font-semibold">
-                        Hasil Analisis Korelasi
-                    </h3>
-
-                </div>
-                <!--body-->
-                <div class="relative p-6 flex-auto w-auto">
-                    <p class="my-4 text-blueGray-500 text-lg leading-relaxed">
-                        Keterangan Tabel
-                    </p>
-                    <!-- component -->
-                    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
-                    <link rel="stylesheet"
-                        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-
-
-                    <section class="py-1 bg-blueGray-50">
-                        <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
-                            <div
-                                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                                <div class="rounded-t mb-0 px-4 py-3 border-0">
-                                    <div class="flex flex-wrap items-center">
-                                        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                                            <h3 class="font-semibold text-base text-blueGray-700">Page Visits</h3>
-                                        </div>
-                                        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                                            <button
-                                                class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                type="button">See all</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="block w-full overflow-x-auto">
-                                    <table class="items-center bg-transparent w-full border-collapse ">
-                                        <thead>
-                                            <tr>
-                                                <th
-                                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                    Page name
-                                                </th>
-                                                <th
-                                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                    Visitors
-                                                </th>
-                                                <th
-                                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                    Unique users
-                                                </th>
-                                                <th
-                                                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                    Bounce rate
-                                                </th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <tr>
-                                                <th
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                                                    /argon/
-                                                </th>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                                    4,569
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    340
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                                                    46,53%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                                    /argon/index.html
-                                                </th>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    3,985
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    319
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-                                                    46,53%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                                    /argon/charts.html
-                                                </th>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    3,513
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    294
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    <i class="fas fa-arrow-down text-orange-500 mr-4"></i>
-                                                    36,49%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                                    /argon/tables.html
-                                                </th>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    2,050
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    147
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    <i class="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                                                    50,87%
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700">
-                                                    /argon/profile.html
-                                                </th>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    1,795
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    190
-                                                </td>
-                                                <td
-                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    <i class="fas fa-arrow-down text-red-500 mr-4"></i>
-                                                    46,53%
-                                                </td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <button
-                        class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
-                        type="button" onclick="toggleModal('modal-id')">
-
-                        <span>Tutup Tabel</span>
-                    </button>
-                </div>
-
-            </div>
+  <!--Modal Output Korelasi with Data-->
+  {% for korelasi in output_korelasi %}
+  <div
+    class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="{{ korelasi.skoring.proyek_id }}"
+  >
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <h3 class="text-3xl font-semibold">Hasil Analisis Korelasi</h3>
         </div>
-    </div>
-    <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-id-backdrop"></div>
+        <!--body-->
+        <div class="relative p-6 flex-auto w-auto">
+          <p class="my-4 text-blueGray-500 text-lg leading-relaxed">Keterangan Tabel</p>
+          <!-- component -->
+          <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css" />
+          <link
+            rel="stylesheet"
+            href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+          />
 
-
-    <!-- Content header -->
-    <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
-        <h1 class="text-2xl font-semibold">{{judul}}</h1>
-    </div>
-
-    <!-- Content -->
-    <div class="mt-2">
-
-        <!-- Main Content -->
-        <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
-            <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
-                <!-- Main Content header -->
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Provinsi</h4>
-                </div>
-                <!-- Main Content -->
-                <div class="w-full my-4">
-
-                    <div class="mt-5 mb-5">
-
-                        <table class="text-left table-fixed w-1/3 bg-white table-striped">
-                            <th class="static">
-                                <p class="p-5">Pilih Provinsi</p>
-
-                                <select name="" id=""
-                                    class=" left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                                    <option value="Jawa Barat">Aceh</option>
-
-                                </select>
-
-                            </th>
-                            <th class="static">
-                                <p class="p-5">Pilih Tahun</p>
-
-                                <select name="" id=""
-                                    class=" center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'">
-
-                                    <option value="Jawa Barat">2020-2024</option>
-
-                                </select>
-                            </th>
-                        </table>
-
-                        <button class="bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5"
-                            onclick="">
-                            <a href="{% url 'addLfa' ' ' %}">
-                                <p>Tambahkan Data</p>
-                            </a>
-                        </button>
-
+          <section class="py-1 bg-blueGray-50">
+            <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
+              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                  <div class="flex flex-wrap items-center">
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                      <h3 class="font-semibold text-base text-blueGray-700">Judul Proyek</h3>
                     </div>
-
-
-
-                    <br>
-
-                    <table class="border-separate table-fixed w-full bg-white table-striped">
-                        <thead>
-                            <tr class="text-center break-all">
-                                <th
-                                    class="w-1/4 bg-green-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs">
-                                    Hirarki logis
-                                </th>
-                                <th
-                                    class="w-1/4 bg-teal-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs">
-                                    Indikator
-                                </th>
-                                <th
-                                    class="w-1/4 sticky top-0 border-b bg-orange-500 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs">
-                                    Sumber Data
-                                </th>
-                                <th
-                                    class="w-1/4 bg-blue-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-gray-800 font-bold tracking-wider uppercase text-xs">
-                                    Asumsi
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody id="tujuan-data">
-                            <button>
-                                <tr class="text-center p-4">
-                                    <td colspan="4"
-                                        class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
-                                        Tujuan 1
-                                        <button
-                                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                                            onclick="toggleModal('sasaran-toggle')">
-                                            <p>+</p>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center p-4" id="sasaran-toggle">
-                                    <td class="border-dashed border-t  bg-green-500 text-black  text-center p-3">
-                                        Meningkatkan Kesejahteraan Masyarakat
-                                    </td>
-                                    <td class="border-dashed border-t  bg-teal-500 text-black  text-center p-3">
-                                        Tingkat Pengangguran Terbuka
-                                    </td>
-                                    <td class="border-dashed border-t  bg-orange-500 text-black  text-center p-3">
-
-                                        <ol>
-                                            <li>Data BPS</li>
-                                            <li>Data Kab/Kota Dalam Angka</li>
-                                        </ol>
-
-                                    </td>
-                                    <td class="border-dashed border-t  bg-blue-500 text-black  text-center p-3">
-                                        Dengan berkurangnya pengangguran akan meningkatkan kesejahteraan masyarakat
-                                    </td>
-                                </tr>
-                            </button>
-                            <tr>
-                        <tbody id="sasaran-data">
-                            <button>
-                                <tr class="text-center p-4">
-                                    <td colspan="4"
-                                        class="border-dashed border-t bg-gray-500 text-black font-bold  text-center p-3">
-                                        Sasaran 1.1
-                                    </td>
-                                </tr>
-                                <tr class="text-center" id="output-toggle">
-                                    <td class="border-dashed border-t bg-green-500 text-black  text-center p-3">
-                                        Tersedianya SDM kompeten yang sesuai kebutuhan dunia usaha dan industri (link
-                                        and match)
-                                    </td>
-                                    <td class="border-dashed border-t bg-teal-500 text-black  text-center p-3 ">
-                                        Jumlah angkatan kerja yang terserap di dunia usaha dan industri (DUDI)
-                                    </td>
-                                    <td class="border-dashed border-t bg-orange-500 text-black  text-center p-3 ">
-                                        Data BPS, Bappeda Provinsi Jawa Barat
-
-                                    </td>
-                                    <td class="border-dashed border-t bg-blue-500 text-black  text-center p-3 ">
-                                        Dengan tersedianya SDM kompeten yang sesuai dengan kebutuhan dunia kerja, maka
-                                        akan mengurangi tingkat pengangguran terbuka
-                                    </td>
-                                </tr>
-                            </button>
-                            <tr>
-                        <tbody id="output-data">
-                            <button>
-                                <tr class="text-center p-4">
-                                    <td colspan="4"
-                                        class="border-dashed border-t bg-gray-400 text-black font-bold  text-center p-3">
-                                        Output 1.1.1
-                                    </td>
-                                </tr>
-                                <tr class="text-center" id="aktivitas-toggle">
-                                    <td class="border-dashed border-t bg-green-500 text-black  text-center p-3">
-                                        Peningkatan Kompetensi lulusan SMK yang sesuai dengan kebutuhan Dunia Usaha dan
-                                        Industri (DUDI)
-                                        <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                                            onclick="toggleModal('modal-id')">
-                                            <p>Hasil Korelasi</p>
-                                        </button>
-                                    </td>
-                                    <td class="border-dashed border-t bg-teal-500 text-black  text-center p-3">
-                                        Jumlah lulusan SMK yang menganggur
-                                    </td>
-                                    <td class="border-dashed border-t bg-orange-500 text-black  text-center p-3">
-                                        Dokumen Provinsi dalam angka
-                                    </td>
-                                    <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
-                                        1. Adanya minat lulusan SMK untuk bekerja sesuai bidangnya
-                                        2. Kompetensi menjadi pertimbangan utama oleh DUDI untuk lulusan SMK
-                                        3. Dengan meningkatnya kompetensi lulusan SMK yang sesuai dengan kebutuhan DUDI,
-                                        maka jumlah lulusan SMK yang menganggur akan menurun
-
-                                    </td>
-                                </tr>
-                                <tr class="text-center" id="aktivitas-toggle">
-                                    <td class="border-dashed border-t bg-green-500 text-black  text-center p-3">
-                                        Peningkatan Kompetensi lulusan SMK yang sesuai dengan kebutuhan Dunia Usaha dan
-                                        Industri (DUDI)
-                                        <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                                            onclick="toggleModal('modal-id')">
-                                            <p>Hasil Korelasi</p>
-                                        </button>
-                                    </td>
-                                    <td class="border-dashed border-t bg-teal-500 text-black  text-center p-3">
-                                        Jumlah lulusan SMK yang menganggur
-                                    </td>
-                                    <td class="border-dashed border-t bg-orange-500 text-black  text-center p-3">
-                                        Dokumen Provinsi dalam angka
-                                    </td>
-                                    <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
-                                        1. Adanya minat lulusan SMK untuk bekerja sesuai bidangnya
-                                        2. Kompetensi menjadi pertimbangan utama oleh DUDI untuk lulusan SMK
-                                        3. Dengan meningkatnya kompetensi lulusan SMK yang sesuai dengan kebutuhan DUDI,
-                                        maka jumlah lulusan SMK yang menganggur akan menurun
-
-                                    </td>
-                                </tr>
-                                <tr class="text-center" id="aktivitas-toggle">
-                                    <td class="border-dashed border-t bg-green-500 text-black  text-center p-3">
-                                        Peningkatan Kompetensi lulusan SMK yang sesuai dengan kebutuhan Dunia Usaha dan
-                                        Industri (DUDI)
-                                        <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
-                                            onclick="toggleModal('modal-id')">
-                                            <p>Hasil Korelasi</p>
-                                        </button>
-                                    </td>
-                                    <td class="border-dashed border-t bg-teal-500 text-black  text-center p-3">
-                                        Jumlah lulusan SMK yang menganggur
-                                    </td>
-                                    <td class="border-dashed border-t bg-orange-500 text-black  text-center p-3">
-                                        Dokumen Provinsi dalam angka
-                                    </td>
-                                    <td class="border-dashed border-t bg-blue-500 text-black text-center p-3">
-                                        1. Adanya minat lulusan SMK untuk bekerja sesuai bidangnya
-                                        2. Kompetensi menjadi pertimbangan utama oleh DUDI untuk lulusan SMK
-                                        3. Dengan meningkatnya kompetensi lulusan SMK yang sesuai dengan kebutuhan DUDI,
-                                        maka jumlah lulusan SMK yang menganggur akan menurun
-
-                                    </td>
-                                </tr>
-                            </button>
-                            <tr>
-                            </tr>
-                        </tbody>
-                        </tr>
-                        </tbody>
-                        </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="text-center p-4">
-                                <td colspan="4"
-                                    class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
-                                    Tujuan 2 <button
-                                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                                        onclick="toggleModal('sasaran-toggle2')">
-                                        <p>+</p>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="text-center" id="sasaran-toggle2">
-                                <td class="border-dashed border-t bg-green-500 text-black  text-center p-3">
-                                    Meningkatkan kualitas lingkungan hidup Provinsi Jawa Barat
-                                </td>
-                                <td class="border-dashed border-t bg-teal-500 text-black   text-center p-3">
-                                    Indeks Kualitas Lingkungan Hidup
-                                </td>
-                                <td class="border-dashed border-t bg-orange-500 text-black   text-center p-3 ">
-                                    <ol>
-                                        <li>Data KLHK</li>
-                                        <li>Data BPS</li>
-                                    </ol>
-                                </td>
-                                <td class="border-dashed border-t bg-blue-500 text-black   text-center p-3">
-                                    Dengan tercapainya peningkatan kualitas lingkungan hidup, diasumsikan kualitas hidup
-                                    penduduk Jawa Barat akan membaik
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="text-center p-4">
-                                <td colspan="4"
-                                    class="border-dashed border-t  bg-gray-600 text-black font-bold  text-center p-3">
-                                    Tujuan 3 <button
-                                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
-                                        onclick="toggleModal('sasaran-toggle3')">
-                                        <p>+</p>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr class="text-center" id="sasaran-toggle3">
-                                <td class="border-dashed border-t bg-green-500 text-black   text-center p-3">
-                                    Meningkatkan laju pertumbuhan ekonomi di Jabar bagian Selatan
-                                </td>
-                                <td class="border-dashed border-t bg-teal-500 text-black   text-center p-3 ">
-                                    Laju pertumbuhan ekonomi Jabar bagian Selatan
-                                </td>
-                                <td class="border-dashed border-t bg-orange-500 text-black   text-center p-3 ">
-                                    <ol>
-                                        <li>Data BPS</li>
-                                    </ol>
-                                </td>
-                                <td class="border-dashed border-t bg-blue-500 text-black   text-center p-3 ">
-                                    Peningkatan laju pertumbuhan ekonomi di Jabar Selatan, akan mengurangi ketimpangan
-                                    pembangunan Jabar bagian Utara dengan Jabar bagian Selatan
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-                    Terakhir Diedit oleh User 04.30 PM 12/12/2021
-
-
-
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                      <button
+                        class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                      >
+                        {{ korelasi.judul_proyek }}
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
-                <div class="flex items-center justify-between p-4 border-b dark:border-primary">
-                    <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Hasil Korelasi</h4>
-                </div>
-                <div class="w-full my-4 justify-center items-center content-center">
+                <div class="block w-full overflow-x-auto">
+                  <table class="items-center bg-transparent w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          ID Proyek
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Korelasi Sasaran
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Korelasi Output
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw MP
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Investasi
+                        </th>
+                      </tr>
+                    </thead>
 
-                    <img src="{% static 'images/ss-korelasi.png' %}" width="75%" class="">
-
+                    <tbody>
+                      <tr>
+                        <th
+                          class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700"
+                        >
+                          {{ korelasi.skoring.proyek_id }}
+                        </th>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {{ korelasi.skoring.nilai_raw_korelasi_sasaran }}
+                        </td>
+                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {{ korelasi.nilai_raw_korelasi_output }}
+                        </td>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {{ korelasi.skoring.nilai_raw_MP }}
+                        </td>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                          {{ korelasi.skoring.nilai_raw_investasi }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
+          </section>
+          <button
+            class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
+            type="button"
+            onclick="toggleModal('{{ korelasi.skoring.proyek_id }}')"
+          >
+            <span>Tutup Tabel</span>
+          </button>
         </div>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+
+  <!--Modal Output Korelasi No Data-->
+  <div
+    class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center"
+    id="no-data"
+  >
+    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+      <!--content-->
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <!--header-->
+        <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <h3 class="text-3xl font-semibold">Hasil Analisis Korelasi</h3>
+        </div>
+        <!--body-->
+        <div class="relative p-6 flex-auto w-auto">
+          <p class="my-4 text-blueGray-500 text-lg leading-relaxed">Keterangan Tabel</p>
+          <!-- component -->
+          <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css" />
+          <link
+            rel="stylesheet"
+            href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+          />
+          <section class="py-1 bg-blueGray-50">
+            <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
+              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                  <div class="flex flex-wrap items-center">
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                      <h3 class="font-semibold text-base text-blueGray-700">Judul Proyek</h3>
+                    </div>
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                      <button
+                        class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="block w-full overflow-x-auto">
+                  <table class="items-center bg-transparent w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          ID Proyek
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Korelasi Sasaran
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Korelasi Output
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw MP
+                        </th>
+                        <th
+                          class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+                        >
+                          Nilai Raw Investasi
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+          <button
+            class="text-sm bg-gray-300 hover:bg-blue-500 hover:text-white text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ease-linear transition-all duration-150"
+            type="button"
+            onclick="toggleModal('no-data')"
+          >
+            <span>Tutup Tabel</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal Delete LFA Confirmation-->
+  <div class="modal" id="modal-delete-confirmation">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg" id="modal-delete-title">Konfirmasi Penghapusan</h3>
+      <p class="py-4" id="modal-delete-message">Apakah Anda yakin untuk menghapus data tujuan!</p>
+      <div class="modal-action">
+        <a href="#" class="btn btn-outline">Batal</a>
+        <a href="#" class="btn btn-error" id="modal-delete-yes">Hapus</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Content header -->
+  <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+    <h1 class="text-2xl font-semibold">{{judul}}</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="mt-2">
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 p-4 space-y-8 lg:gap-8 lg:space-y-0 lg:grid-cols-1">
+      <div class="bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
+        <!-- Main Content header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-primary">
+          <h4 class="text-lg font-semibold text-gray-500 dark:text-light">Provinsi</h4>
+        </div>
+        <!-- Main Content -->
+        <div class="w-full my-4">
+          <div class="mt-5 mb-5">
+            <table class="text-left table-fixed w-1/3 bg-white table-striped">
+              <th class="static">
+                <p class="p-5">Pilih Provinsi</p>
+                <form method="GET" action="{% url 'profil' 'akl' %}?pilih_provinsi={{ pilih_provinsi }}&pilih_tahun={{ pilih_tahun }}">
+                  <select
+                    id="pilih_provinsi"
+                    name="options"
+                    onchange="form.submit()"
+                    class="left block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-purple-500 focus:bg-white focus:border-gray-500'"
+                  >
+                    <option value="" selected disabled hidden>Pilih Provinsi</option>
+                    {% for provinsi in provinsi %}
+                    <option 
+                      value="{{ provinsi.provinsi_id }}-{{ pilih_tahun }}"
+                      {% if provinsi.provinsi_id == pilih_provinsi %}selected{% endif %}
+                    >
+                      {{ provinsi.nama_provinsi }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </form>
+              </th>
+              <th class="static">
+                <p class="p-5">Pilih Tahun</p>
+                <form method="GET" action="{% url 'profil' 'akl' %}?pilih_provinsi={{ pilih_provinsi }}&pilih_tahun={{ pilih_tahun }}">
+                  <select
+                    id="pilih_tahun"
+                    name="options"
+                    onchange="form.submit()"
+                    class="center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-purple-500 focus:bg-white focus:border-gray-500'"
+                  >
+                    <option value="" selected disabled hidden>Pilih Tahun</option> 
+                    {% for e in tahun %}
+                    <option 
+                      value="{{ pilih_provinsi }}-{{ e }}"
+                      {% if e == pilih_tahun %}selected{% endif %}
+                    >
+                      {{ e }}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </form>
+              </th>
+            </table>
+
+            <button class="bg-purple-500 float-right hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5" onclick="">
+              <a href="{% url 'addLfa' ' ' %}">
+                <p>Tambahkan Data</p>
+              </a>
+            </button>
+          </div>
+
+          <br />
+
+
+          <table class="border-separate table-fixed w-full bg-white table-striped">
+            <thead>
+              <tr class="relative z-10 text-center break-all">
+                <th
+                  class="w-1/4 bg-gray-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+                >
+                  Hierarki logis
+                </th>
+                <th
+                  class="w-1/4 bg-gray-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+                >
+                  Indikator
+                </th>
+                <th
+                  class="w-1/4 sticky top-0 border-b bg-gray-500 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+                >
+                  Sumber Data
+                </th>
+                <th
+                id="header-baseline"
+                class="hidden w-1/4 bg-gray-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+                > 
+               <div id="cobamodal">Baseline</div>
+              </th>
+              <th
+              id="header-target"
+              class="hidden w-1/4 bg-gray-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+            >
+              Target
+            </th>
+            <th
+            class="w-1/4 bg-gray-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+          >
+            Tahun Anggaran
+          </th>
+          <th
+            class="w-1/4 bg-gray-500 sticky top-0 border-b border-gray-200 px-6 py-5 text-white font-bold tracking-wider uppercase text-xs"
+          >
+            Asumsi
+          </th>
+              </tr>
+            </thead>
+            {% for tujuan in tujuans %}
+            <tbody id="tujuan-data">
+              <tr class="text-center p-4">
+                <td colspan="7" class="border-dashed border-t bg-purple-500 text-white font-bold text-center p-3">
+                  Tujuan {{ forloop.counter }}
+                  <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l" onclick="handleDeleteButton('tujuan_{{ tujuan }}_{{ tujuan.id }}')">
+                    <a href="#modal-delete-confirmation">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                  </button>
+                  <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l">
+                    <a href="{% url 'editLfa' 'tujuan' %}?tujuan_id={{ tujuan.id }}">
+                      <i class="fa-solid fa-pencil"></i>
+                    </a>
+                  </button>
+                  <button
+                    id="button-{{ tujuan.id }}"
+                    class="tooltip tooltip-open tooltip-right collapse bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l"
+                    onclick="toggleModal('{{ tujuan.id }}')"
+                    data-tip="Klik Animasi Dibawah Untuk Membuka dan Menutup Sasaran!"
+                  >
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr class="text-center p-4" id="{{ tujuan.id }}">
+                <td class="border-dashed border-t bg-purple-500 text-white text-center p-3">
+                  {{ tujuan.nama_tujuan }}
+                </td>
+                <td class="border-dashed border-t bg-purple-500 text-white text-center p-3">
+                  <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                    {% for item in tujuan.indikator|StringToList %}
+                    <li style="overflow-wrap: break-word;">{{ item }}</li> 
+                    {% endfor %}
+                  </ul>
+                </td>
+                <td class="border-dashed border-t bg-purple-500 text-white text-center p-3">
+                  <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                    {% for item in tujuan.sumber_data|StringToList %}
+                    <li style="overflow-wrap: break-word;">{{ item|IsURL|safe }}</li> 
+                    {% endfor %}
+                  </ul>
+                </td>
+                <td class="animate-bounce-low border-dashed border-t bg-purple-500 text-white text-center p-3">{{ tujuan.baseline }}</td>
+                <td class="border-dashed border-t bg-purple-500 text-white text-center p-3">{{ tujuan.target }}</td>
+                <td class="border-dashed border-t bg-purple-500 text-white text-center p-3">{{ tujuan.tahun_anggaran }}</td>
+                <td class="border-dashed border-t bg-purple-500 text-white text-center p-3"><ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                    {% for item in tujuan.asumsi|StringToList %}
+                    <li style="overflow-wrap: break-word;">{{ item }}</li> 
+                    {% endfor %}
+                  </ul></td>
+              </tr>
+              <tr>
+                {% for sasaran in tujuan.sasaranlfa_set.all %}
+                <tbody id="{{ sasaran.id }}">
+                  <button>
+                    <tr class="text-center p-4">
+                      <td colspan="7" class="border-dashed border-t bg-purple-400 text-white font-bold text-center p-3">
+                        Sasaran {{ forloop.parentloop.counter }}.{{ forloop.counter }}
+                        <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold m-1 p-1 rounded-l" onclick="handleDeleteButton('sasaran_{{ sasaran }}_{{ sasaran.id }}')">
+                          <a href="#modal-delete-confirmation">
+                            <i class="fa-solid fa-trash-can"></i>
+                          </a>
+                        </button>
+                        <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold m-1 p-1 rounded-l">
+                          <a href="{% url 'editLfa' 'sasaran' %}?sasaran_id={{ sasaran.id }}">
+                            <i class="fa-solid fa-pencil"></i>
+                          </a>
+                        </button>
+                        {% if sasaran.outputlfa_set.all|length != 0 %}
+                        <button
+                          id="button-{{ sasaran.id }}"
+                          class="collapse bg-gray-600 hover:bg-gray-800 text-white font-bold m-1 p-1 rounded-l"
+                          onclick="toggleModal('{{ sasaran.id }}')"
+                        >
+                          <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    <tr class="text-center" id="{{ sasaran.id }}">
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">
+                        {{ sasaran.nama_sasaran }}
+                      </td>
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">
+                        <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                          {% for item in sasaran.indikator|StringToList %}
+                          <li style="overflow-wrap: break-word;">{{ item }}</li> 
+                          {% endfor %}
+                        </ul>
+                      </td>
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">
+                        <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                          {% for item in sasaran.sumber_data|StringToList %}
+                          <li style="overflow-wrap: break-word;">{{ item|IsURL|safe }}</li> 
+                          {% endfor %}
+                        </ul>
+                      </td>
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">{{ sasaran.baseline }}</td>
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">{{ sasaran.target }}</td>
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">{{ sasaran.tahun_anggaran }}</td>
+                      <td class="border-dashed border-t bg-purple-400 text-white text-center p-3">
+                        <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                          {% for item in sasaran.asumsi|StringToList %}
+                          <li style="overflow-wrap: break-word;">{{ item }}</li> 
+                          {% endfor %}
+                        </ul>
+                    </tr>
+                  </button>
+                  <tr>
+                    {% for output in sasaran.outputlfa_set.all %}
+                    <tbody id="{{ output.id }}">
+                      <button>
+                        <tr class="text-center p-4">
+                          <td
+                            colspan="7"
+                            class="border-dashed border-t bg-purple-300 text-gray-800 font-bold text-center p-3"
+                          >
+                            Output {{ forloop.parentloop.parentloop.counter }}.{{ forloop.parentloop.counter }}.{{ forloop.counter }}
+                            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l" onclick="handleDeleteButton('output_{{ output }}_{{ output.id }}')">
+                              <a href="#modal-delete-confirmation">
+                                <i class="fa-solid fa-trash-can"></i>
+                              </a>
+                            </button>
+                            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold m-1 p-1 rounded-l">
+                              <a href="{% url 'editLfa' 'output' %}?output_id={{ output.id }}">
+                                <i class="fa-solid fa-pencil"></i>
+                              </a>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr class="text-center">
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">
+                            <p>
+                              {{ output.nama_output }}
+                            </p>
+                            <div>
+                              <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
+                                onclick="toggleModal('{{ output.longlist_set.all.0.id | default:"no-data" }}')"
+                              >
+                                <p>Hasil Korelasi</p>
+                              </button>
+                            </div>
+                          </td>
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">
+                            <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                              {% for item in output.indikator|StringToList %}
+                              <li style="overflow-wrap: break-word;">{{ item }}</li> 
+                              {% endfor %}
+                            </ul>
+                          </td>
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">
+                            <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                              {% for item in output.sumber_data|StringToList %}
+                              <li style="overflow-wrap: break-word;">{{ item|IsURL|safe }}</li> 
+                              {% endfor %}
+                            </ul>
+                          </td>
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">{{ output.baseline }}</td>
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">{{ output.target }}</td>
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">{{ output.tahun_anggaran }}</td>
+                          <td class="border-dashed border-t bg-purple-300 text-gray-800 text-center p-3">
+                            <ul style="list-style-type: circle; text-align: left; margin-left: 20px;">
+                              {% for item in output.asumsi|StringToList %}
+                              <li style="overflow-wrap: break-word;">{{ item }}</li> 
+                              {% endfor %}
+                            </ul>
+                        </tr>
+                      </button>
+                      <tr></tr>
+                    </tbody>
+                    {% endfor %}
+                  </tr>
+                </tbody>
+                {% endfor %}
+              </tr>
+            </tbody>
+            {% endfor %}
+          </table>
+
+          Terakhir Diedit oleh User 04.30 PM 12/12/2022
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
-
+<style>
+  .collapse {
+    display: inline;
+  }
+</style>
 
 <script>
+  $(document).ready(() => {
+    let data = JSON.parse("{{ dataJSON|escapejs }}")
 
-    $(document).ready(function () {
+    $("#tujuan-data").show();
 
-        $("#tujuan-data").show();
-        $("#sasaran-data").hide(100);
-        $("#output-data").hide(100);
-        $("#aktivitas-data").hide(100);
-
-
-        $("#tujuan-toggle").click(() => {
-            $("#tujuan-data").toggle();
-            $("#sasaran-data").hide();
+    data.tujuan.forEach(tujuan => {
+      $(`#${tujuan.id}`).addClass('hidden');
+      $(`#${tujuan.id}`).click(() => {
+        data.sasaran.forEach(sasaran => {
+          sasaran.tujuan_id === tujuan.id && $(`#${sasaran.id}`).toggle();
         })
 
-        $("#sasaran-toggle2").click(() => {
-            $("#sasaran-data").toggle();
-            $("#output-data").hide();
-            $("#aktivitas-data").hide();
-        })
+      })
+      $(`#button-${tujuan.id}`).click(() => {
+        // Collapse or Expand Tujuan Icon Button
+        let state = $(`#button-${tujuan.id}`).hasClass("collapse")
 
-        $("#sasaran-toggle3").click(() => {
-            $("#sasaran-data").toggle();
-            $("#output-data").hide();
-            $("#aktivitas-data").hide();
-        })
-
-        $("#sasaran-toggle").click(() => {
-            $("#sasaran-data").toggle(500);
-            $("#output-data").hide(500);
-            $("#aktivitas-data").hide(500);
-        })
-
-        $("#output-toggle").click(() => {
-            $("#output-data").toggle();
-            $("#aktivitas-data").hide();
-        })
-
-        $("#aktivitas-toggle").click(() => {
-            $("#aktivitas-data").toggle();
-        })
-
-        $('.collaptable').aCollapTable({
-
-            // the table is collapased at start
-            startCollapsed: true,
-
-            // the plus/minus button will be added like a column
-            addColumn: true,
-
-            // The expand button ("plus" +)
-            plusButton: '<span class="i">+</span>',
-
-            // The collapse button ("minus" -)
-            minusButton: '<span class="i">-</span>'
-
-        });
-
-
+        if (state) {
+          $(`#button-${tujuan.id}`).addClass("expand").removeClass("collapse")
+          $(`#button-${tujuan.id} i`).replaceWith(`<i class="fa-solid fa-arrow-up"></i>`)
+        } else {
+          $(`#button-${tujuan.id}`).addClass("collapse").removeClass("expand")
+          $(`#button-${tujuan.id} i`).replaceWith(`<i class="fa-solid fa-arrow-down"></i>`)
+        }
+      })
     });
 
-    function toggleModal(modalID) {
-        document.getElementById(modalID).classList.toggle("hidden");
-        document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
-        document.getElementById(modalID).classList.toggle("flex");
-        document.getElementById(modalID + "-backdrop").classList.toggle("flex");
+    data.sasaran.forEach(sasaran => {
+      $(`#${sasaran.id}`).addClass('hidden');
+      $(`#${sasaran.id}`).click(() => {
+        data.output.forEach(output => {
+          output.sasaran_id === sasaran.id && $(`#${output.id}`).toggle();
+        })
+
+      })
+
+      $(`#button-${sasaran.id}`).click(() => {
+        // Collapse or Expand Tujuan Icon Button
+        let state = $(`#button-${sasaran.id}`).hasClass("collapse")
+
+        if (state) {
+          $(`#button-${sasaran.id}`).addClass("expand").removeClass("collapse")
+          $(`#button-${sasaran.id} i`).replaceWith(`<i class="fa-solid fa-arrow-up"></i>`)
+        } else {
+          $(`#button-${sasaran.id}`).addClass("collapse").removeClass("expand")
+          $(`#button-${sasaran.id} i`).replaceWith(`<i class="fa-solid fa-arrow-down"></i>`)
+        }
+      })
+    })
+
+    data.output.forEach(output => {
+      $(`#${output.id}`).addClass('hidden');
+    })
+
+    // Message confirmation timeout after submit form
+    setTimeout(function () {
+      $('#msg').remove();
+    }, 3000)
+    
+  });
+
+  function handleDeleteButton(value) {
+    let lfaType = value.split("_")[0]
+    let dataObject = value.split("_")[1]
+    let dataId = value.split("_")[2]
+
+    $(`#modal-delete-title`).replaceWith(`
+      <h3 class="font-bold text-lg" id="modal-delete-title">
+        Konfirmasi Penghapusan ${lfaType} ID (${dataId})
+      </h3>
+    `)
+
+    $(`#modal-delete-message`).replaceWith(`
+      <p class="py-4" id="modal-delete-message">
+        Apakah Anda yakin untuk menghapus data <br /> <b>${dataObject}!</b>
+      </p>
+    `)
+  
+    $(`#modal-delete-yes`).replaceWith(`
+      ${
+        lfaType === 'tujuan' ? `<a href="{% url 'deleteLfa' 'tujuan' %}?tujuan_id=${dataId}&provinsi_id={{ pilih_provinsi }}&tahun={{ pilih_tahun }}" class="btn btn-error" id="modal-delete-yes">Hapus</a>` : 
+        lfaType === 'sasaran' ? `<a href="{% url 'deleteLfa' 'sasaran' %}?sasaran_id=${dataId}&provinsi_id={{ pilih_provinsi }}&tahun={{ pilih_tahun }}" class="btn btn-error" id="modal-delete-yes">Hapus</a>` : 
+        `<a href="{% url 'deleteLfa' 'output' %}?output_id=${dataId}&provinsi_id={{ pilih_provinsi }}&tahun={{ pilih_tahun }}" class="btn btn-error" id="modal-delete-yes">Hapus</a>`
+      }
+    `)
+  }
+  
+  function toggleModal(modalID) {
+    let buttonParentID = $(`#${modalID}`).parent().eq(0).attr("id") // This gets id attribute of + button ID
+    let isHidden = $(`#header-baseline`).hasClass("hidden")
+    let initialHiddenRows = $('table > #tujuan-data').length
+    
+    $(`#${modalID}`).toggleClass("hidden")
+
+    // Initial toggle header column for Baseline & Target
+    if (buttonParentID === "tujuan-data" && isHidden) {
+      $(`#header-baseline`).toggleClass("hidden")
+      $(`#header-target`).toggleClass("hidden")
     }
 
-
+    // Toggle hidden header column for Baseline & Target after all rows collapsed
+    if (initialHiddenRows === $('table > #tujuan-data > .hidden').length) {
+      $(`#header-baseline`).toggleClass("hidden")
+      $(`#header-target`).toggleClass("hidden")
+    }
+    
+  }
 </script>
 
 {% endblock %}

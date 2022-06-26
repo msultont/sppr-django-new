@@ -1,6 +1,8 @@
 from os import name
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 
@@ -15,10 +17,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
 
     # Akses untuk ke Menu Profil Daerah
-    path('profil/<str:menu>', views.profil, name='profil'),
-
-    # Akses untuk ke Menu Profil Daerah Aceh
-    path('profil/<str:menu>', views.profil, name='profil'),
+    path('profil/<str:menu>/', views.profil, name='profil'),
 
     # Akses untuk ke Menu Kebutuhan Daerah
     path('kebdaerah/<str:menu>', views.kebdaerah, name='kebdaerah'),
@@ -26,6 +25,7 @@ urlpatterns = [
     # Akses untuk ke Menu Kajian Kewilayahan
     path('kajian/', views.kajian_wilayah, name="kawil"),
 
+     # Akses untuk ke Monev Spasial
     path('monev_spasial/', views.monev_spasial, name="monev_spasial"),
 
     # Akses untuk ke menu proyek mitra KL
@@ -35,6 +35,18 @@ urlpatterns = [
 
     path('provchart/', views.chart_prov, name='provchart'),
     # path('data/', views.ItemListView.as_view()),
+
+    # Akses untuk API di Kondisi Umum Wilayah
+    path('apikuw/', views.api_kuw, name='apikuw'),
+
+    # Akses Data API Tujuan LFa
+    path('ajax/tujuan-lfa', views.AjaxTujuanLFA, name='ajax-tujuan-lfa'),
+
+    # Akses Data API Sasaran LFa
+    path('ajax/sasaran-lfa', views.AjaxSasaranLFA, name='ajax-sasaran-lfa'),
+
+    # Akses Data API Output LFa
+    path('ajax/output-lfa', views.AjaxOutputLFA, name='ajax-output-lfa'),
 
     # Path to Longlist Data View
     path('ajax_datatable/longlist', views.LonglistDataView.as_view(),
@@ -65,16 +77,28 @@ urlpatterns = [
     path('forms/longlist/delete/<int:pk>',
          views.deleteSingleLonglist, name="deleteSingleLonglist"),
 
+    # Path to CRUD Isu Strategis
+    path('forms/isu_strategis/add',
+         views.addIsuStrategis, name='addIsu'),
+    path('forms/isu_strategis/edit',
+         views.editIsuStrategis, name='editIsu'),
+    path('forms/isu_strategis/delete/<int:isu_id>',
+         views.deleteIsuStrategis, name='deleteIsu'),
+
     # Path to CRUD Skoring
     path('forms/skoring/update/<int:pk>',
          views.updateHasilSkoring, name="updateSkoring"),
 
+    # Path to CRUD LFA
+    path('forms/add_lfa/<str:tipe>',
+         views.analisakerangkalogis, name='addLfa'),
+
+    path('forms/edit_lfa/<str:tipe>',
+         views.analisakerangkalogis, name='editLfa'),
+
+    path('forms/delete_lfa/<str:tipe>', views.deleteanalisakerangkalogis, name='deleteLfa'),
+
     # Path to download excel longlist data format
     path('download/format/longlist/',
          views.download_longlist_format, name="downloadLonglist"),
-
-    # Path to CRUD LFA
-    path('forms/add_lfa/<str:tipe>',
-         views.addkerangkalogis, name='addLfa'),
-
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

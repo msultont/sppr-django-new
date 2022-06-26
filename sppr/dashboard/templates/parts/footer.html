@@ -1,4 +1,7 @@
 <footer class="flex items-center justify-between p-4 bg-white border-t dark:bg-darker dark:border-primary-darker">
-    <div>Bappenas Direktorat Regional 1 &copy; 2021</div>
-
+  <div>Bappenas Direktorat Regional 1 &copy; <span id="copyright-year">This is just placeholder</span></div>
 </footer>
+
+<script>
+  $("#copyright-year").replaceWith(new Date().getFullYear());
+</script>

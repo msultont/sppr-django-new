@@ -7,6 +7,8 @@ from django.core.validators import FileExtensionValidator
 from mptt.models import MPTTModel, TreeForeignKey
 from decimal import Decimal
 import datetime
+
+
 # Create your models here.
 
 
@@ -25,6 +27,23 @@ class ProvinsiId(models.Model):
     def __str__(self) -> str:
         return self.nama_provinsi
 
+class UnitsatuanID(models.Model):
+    # Field name made lowercase.
+    unitsatuan_id = models.IntegerField(
+        db_column='Unitsatuan_ID', primary_key=True)
+    # Field name made lowercase. Field renamed to remove unsuitable characters.
+    nama_satuan = models.TextField(
+        db_column='Nama_Satuan', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Unitsatuan_ID'
+    
+    def __str__(self) -> str:
+        return self.nama_satuan
+    
+    
+
 
 def year_choices():
     return [(r, r) for r in range(2019, datetime.date.today().year + 5)]
@@ -34,8 +53,24 @@ def current_year():
     return datetime.date.today().year
 
 
+class NewIsuStrategis(MPTTModel):
+    nama_isu = models.CharField(max_length=400, blank=False, null=False, default='')
+    provinsi = models.ForeignKey(
+        ProvinsiId, on_delete=models.SET_NULL, db_column='provinsi', blank=False, null=True)
+    tahun = models.IntegerField(choices=year_choices(), default=2019)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE,
+                            null=True, blank=True, related_name='children')
+    data_pendukung = models.TextField(max_length=500, blank=True, null=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['nama_isu']
+
+    def __str__(self) -> str:
+        return f'{self.provinsi} - {self.nama_isu}'
+
+
 class IsuStrategis(MPTTModel):
-    nama_isu = models.CharField(max_length=400, blank=True, null=True)
+    nama_isu = models.CharField(max_length=400, blank=True, null=True, default='')
     provinsi = models.ForeignKey(
         ProvinsiId, on_delete=models.SET_NULL, db_column='provinsi', blank=True, null=True)
     tahun = models.IntegerField(choices=year_choices(), default=2019)
@@ -50,14 +85,22 @@ class IsuStrategis(MPTTModel):
 
 
 class TujuanLFA(models.Model):
-    nama_tujuan = models.TextField(blank=False, null=False)
+    nama_tujuan = models.TextField(blank=False, null=False, default='')
     provinsi = models.ForeignKey(
-        "ProvinsiId", on_delete=models.SET_NULL, blank=True, null=True)
+        "ProvinsiId", on_delete=models.SET_NULL, blank=False, null=True)
     tahun = models.IntegerField(choices=year_choices(), default=2019)
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
-    nilai = models.FloatField(default=0)
+    baseline = models.FloatField(default=0, blank=True, null=True)
+    tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
+    target = models.FloatField(default=0, blank=True, null=True)
+    unitsatuanbaseline = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_baseline_tujuan')
+    unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unitsatuantarget = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_target_tujuan')
+    unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
         return f'{self.provinsi} - {self.nama_tujuan}'
@@ -65,13 +108,21 @@ class TujuanLFA(models.Model):
 
 class SasaranLFA(models.Model):
     tujuan = models.ForeignKey(
-        'TujuanLFA', on_delete=models.SET_NULL, blank=True, null=True)
+        'TujuanLFA', on_delete=models.CASCADE, blank=False, null=False, default='')
     nama_sasaran = models.TextField(blank=False, null=False)
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
-    nilai = models.FloatField(default=0)
-    pengaruh_sasaran_tujuan = models.FloatField(default=0)
+    target = models.FloatField(default=0, blank=True, null=True)
+    baseline = models.FloatField(default=0, blank=True, null=True)
+    tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
+    pengaruh_sasaran_tujuan = models.FloatField(default=0, blank=True, null=True)
+    unitsatuanbaseline = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_baseline_sasaran')
+    unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unitsatuantarget = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_target_sasaran')
+    unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
         try:
@@ -88,12 +139,21 @@ class SasaranLFA(models.Model):
 
 class OutputLFA(models.Model):
     sasaran = models.ForeignKey(
-        'SasaranLFA', on_delete=models.SET_NULL, blank=True, null=True)
+        'SasaranLFA', on_delete=models.CASCADE, blank=False, null=False, default='')
     nama_output = models.TextField(blank=False, null=False)
     indikator = models.TextField(max_length=500, blank=True, null=True)
     sumber_data = models.TextField(max_length=500, blank=True, null=True)
     asumsi = models.TextField(max_length=500, blank=True, null=True)
-    nilai = models.FloatField(default=0)
+    baseline = models.FloatField(default=0, blank=True, null=True)
+    tahun_anggaran = models.FloatField(default=0, blank=True, null=True)
+    target = models.FloatField(default=0, blank=True, null=True)
+    creation_time = models.DateField(auto_now_add=True, blank=True, null=True)
+    unitsatuanbaseline = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_baseline_output')
+    unit_satuan_baseline = models.TextField(max_length=500, blank=True, null=True)
+    unitsatuantarget = models.ForeignKey(
+        "UnitsatuanID", on_delete=models.SET_NULL, blank=True, null=True, related_name='unitsatuan_target_output')
+    unit_satuan_target = models.TextField(max_length=500, blank=True, null=True)
 
     def __str__(self) -> str:
         try:
@@ -413,6 +473,8 @@ class Longlist(models.Model):
 
     output_test = models.ForeignKey(
         'OutputLFA', on_delete=models.SET_NULL, db_column='output_test', blank=True, null=True)
+    isu_strategis_test = models.ForeignKey(
+        'IsuStrategis', models.DO_NOTHING, db_column='isu_strategis_test', blank=True, null=True)
 
     def __str__(self) -> str:
         return self.judul_proyek
