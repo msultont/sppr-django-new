@@ -946,7 +946,7 @@ def addIsuStrategis(request):
 
     if request.method == 'POST':
         form = IsuStrategisForm(request.POST)
-        isu_id = request.META.get('HTTP_REFERER').split("-")[1]
+        isu_id = request.META.get('HTTP_REFERER').split("-")[1] if page_referer != "isu_strategis" else 0
         provinsi_id = request.POST.get('provinsi', 0)
         nama_isu = request.POST.get('nama_isu', "")
         if form.is_valid():
@@ -1008,6 +1008,21 @@ def editIsuStrategis(request):
         'form': form,
         'page_mode': page_mode
     }})
+
+# Delete Isu Strategis
+
+
+@login_required(login_url='login')
+def deleteIsuStrategis(request, isu_id):
+    page_referer = request.META.get('HTTP_REFERER').split("/")[4]
+    isu_instance = NewIsuStrategis.objects.get(pk=isu_id)
+    provinsi_id = isu_instance.provinsi_id
+    head_id = isu_instance.get_ancestors()[0].id if isu_instance.get_ancestors().__len__() != 0 else 0
+    isu_instance.delete()
+    messages.success(request, 'Berhasil Menghapus Isu Strategis') 
+    if page_referer == "pis_diagram":
+        return HttpResponseRedirect(f'/profil/pis_diagram/?options={provinsi_id}-{head_id}')
+    return HttpResponseRedirect(f'/profil/pis/?options={provinsi_id}-{head_id}')
 
 # CRUD Hasil Kerangka Logis
 
