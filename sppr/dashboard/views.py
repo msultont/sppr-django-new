@@ -103,22 +103,6 @@ def profil(request, menu):
     output_korelasi = []
     data = {} # Variable to be used for Javascript Template
 
-    if request.method == "POST":
-
-        if 'pilih_provinsi' in request.POST:
-            # Pilih Provinsi dropdown select option logic
-            pilih_provinsi = request.POST.get("pilih_provinsi", 0)
-        else:
-            # Pilih Isu Strategis dropdown select option logic
-            response = request.POST.get("pilih_isu_strategis", "")
-
-            pilih_provinsi = response.split("-")[0]
-            pilih_isu_strategis = response.split("-")[1]
-
-        # Convert String into Integer
-        pilih_provinsi = int(pilih_provinsi)
-        pilih_isu_strategis = int(pilih_isu_strategis)
-
     # Data Structure logic for Halaman Analisa Kerangka Logis
     if menu == "akl":
         if (pilih_provinsi != 0 and pilih_tahun != 0):
