@@ -987,12 +987,12 @@ def editIsuStrategis(request):
 
     if request.method == 'POST':
         modify_post = request.POST.copy()
-        modify_post['parent'] = isu_instance.parent.id
+        modify_post['parent'] = isu_instance.parent.id if isu_instance.parent != None else None
         request.POST = modify_post
         form = IsuStrategisForm(request.POST, instance=isu_instance)
         if form.is_valid():
             form.save()
-            head_id = isu_instance.get_ancestors()[0].id
+            head_id = isu_instance.get_ancestors()[0].id if isu_instance.parent != None else isu_instance.id
             messages.success(request, 'Berhasil Mengubah Isu Strategis!')
             if page_referer == "pis_diagram":
                 return HttpResponseRedirect(f'/profil/pis_diagram?options={provinsi_id}-{head_id}')
