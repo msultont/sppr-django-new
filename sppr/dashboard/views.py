@@ -235,6 +235,7 @@ def kebdaerah(request, menu):
     if menu == "longlist":
         dataView = "longlist"
         chartDataView = "longlistChartView"
+        provinsi_id = request.GET.get('provinsi_id')
         form = CsvModelForm(request.POST or None, request.FILES or None)
 
         try:
@@ -326,7 +327,7 @@ def kebdaerah(request, menu):
             content['status_upload'] = f'Terdapat Kesalahan Dalam Mengunggah Data. Cek Kembali Format Data.'
             return redirect('/kebdaerah/longlist', content)
 
-        content = {'form': form}
+        content = {'form': form, 'provinsi_id': provinsi_id}
         sub_menu = "longlist"
 
     elif menu == "prioritas":
@@ -677,6 +678,15 @@ class LonglistDataView(AjaxDatatableView):
         {'name': 'indikasi_pendanaan_2024', 'visible': False},
         {'name': 'keterangan', 'visible': False},
     ]
+
+    def get_initial_queryset(self, request=None):
+        queryset = super().get_initial_queryset(request)
+        # This block check if province lists are selected prior to Longlist page from Hasil LFA page 
+        try:
+            queryset = queryset.filter(provinsi=request.POST.get("provinsi_id"))
+        except:
+            pass
+        return queryset
 
     def customize_row(self, row, obj):
         row['edit'] = """
