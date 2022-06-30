@@ -154,27 +154,32 @@ def profil(request, menu):
             data = {
                 'id': head.id,
                 'provinsi_id': head.provinsi_id,
-                'name': head.nama_isu, 
-                'fill': '#260df0', 
+                'name': head.nama_isu,
+                'data_pendukung': head.data_pendukung,
+                'fill': '#260df0',
                 'children': [{
                     'provinsi_id': head.provinsi_id,
                     'id': children_lvl_1.id,
                     'name': children_lvl_1.nama_isu,
+                    'data_pendukung': children_lvl_1.data_pendukung,
                     'fill': '#301bdd',
                     'children': [{
                         'provinsi_id': head.provinsi_id,
                         'id': children_lvl_2.id,
                         'name': children_lvl_2.nama_isu,
+                        'data_pendukung': children_lvl_2.data_pendukung,
                         'fill': '#4a3ace',
                         'children': [{
                             'provinsi_id': head.provinsi_id,
                             'id': children_lvl_3.id,
                             'name': children_lvl_3.nama_isu,
+                            'data_pendukung': children_lvl_3.data_pendukung,
                             'fill': '#7467dd',
                             'children': [{
                                 'provinsi_id': head.provinsi_id,
                                 'id': children_lvl_4.id,
                                 'name': children_lvl_4.nama_isu,
+                                'data_pendukung': children_lvl_4.data_pendukung,
                                 'fill': '#cbc5f8',
                                 'children': []
                             } for children_lvl_4 in children_lvl_3.get_children()]
