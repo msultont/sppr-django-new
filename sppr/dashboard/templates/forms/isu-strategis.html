@@ -3,7 +3,7 @@
 <!-- Content header -->
 <div class="flex items-center justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
   <h1 class="text-2xl font-semibold">
-    {% if page_mode == "create" %}
+    {% if content.page_mode == "create" %}
     Menambahkan Isu Strategis
     {% else %}
     Mengubah Isu Strategis
@@ -75,7 +75,7 @@
       class="rounded-2xl bg-blue-500 float-right hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 mb-5 ml-2"
       onclick=""
     >
-      {% if page_mode == "create" %}
+      {% if content.page_mode == "create" %}
       <p>Simpan</p>
       {% else %}
       <p>Ubah</p>
