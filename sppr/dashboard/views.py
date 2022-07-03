@@ -103,22 +103,6 @@ def profil(request, menu):
     output_korelasi = []
     data = {} # Variable to be used for Javascript Template
 
-    if request.method == "POST":
-
-        if 'pilih_provinsi' in request.POST:
-            # Pilih Provinsi dropdown select option logic
-            pilih_provinsi = request.POST.get("pilih_provinsi", 0)
-        else:
-            # Pilih Isu Strategis dropdown select option logic
-            response = request.POST.get("pilih_isu_strategis", "")
-
-            pilih_provinsi = response.split("-")[0]
-            pilih_isu_strategis = response.split("-")[1]
-
-        # Convert String into Integer
-        pilih_provinsi = int(pilih_provinsi)
-        pilih_isu_strategis = int(pilih_isu_strategis)
-
     # Data Structure logic for Halaman Analisa Kerangka Logis
     if menu == "akl":
         if (pilih_provinsi != 0 and pilih_tahun != 0):
@@ -170,27 +154,32 @@ def profil(request, menu):
             data = {
                 'id': head.id,
                 'provinsi_id': head.provinsi_id,
-                'name': head.nama_isu, 
-                'fill': '#260df0', 
+                'name': head.nama_isu,
+                'data_pendukung': head.data_pendukung,
+                'fill': '#260df0',
                 'children': [{
                     'provinsi_id': head.provinsi_id,
                     'id': children_lvl_1.id,
                     'name': children_lvl_1.nama_isu,
+                    'data_pendukung': children_lvl_1.data_pendukung,
                     'fill': '#301bdd',
                     'children': [{
                         'provinsi_id': head.provinsi_id,
                         'id': children_lvl_2.id,
                         'name': children_lvl_2.nama_isu,
+                        'data_pendukung': children_lvl_2.data_pendukung,
                         'fill': '#4a3ace',
                         'children': [{
                             'provinsi_id': head.provinsi_id,
                             'id': children_lvl_3.id,
                             'name': children_lvl_3.nama_isu,
+                            'data_pendukung': children_lvl_3.data_pendukung,
                             'fill': '#7467dd',
                             'children': [{
                                 'provinsi_id': head.provinsi_id,
                                 'id': children_lvl_4.id,
                                 'name': children_lvl_4.nama_isu,
+                                'data_pendukung': children_lvl_4.data_pendukung,
                                 'fill': '#cbc5f8',
                                 'children': []
                             } for children_lvl_4 in children_lvl_3.get_children()]
@@ -997,12 +986,12 @@ def editIsuStrategis(request):
 
     if request.method == 'POST':
         modify_post = request.POST.copy()
-        modify_post['parent'] = isu_instance.parent.id
+        modify_post['parent'] = isu_instance.parent.id if isu_instance.parent != None else None
         request.POST = modify_post
         form = IsuStrategisForm(request.POST, instance=isu_instance)
         if form.is_valid():
             form.save()
-            head_id = isu_instance.get_ancestors()[0].id
+            head_id = isu_instance.get_ancestors()[0].id if isu_instance.parent != None else isu_instance.id
             messages.success(request, 'Berhasil Mengubah Isu Strategis!')
             if page_referer == "pis_diagram":
                 return HttpResponseRedirect(f'/profil/pis_diagram?options={provinsi_id}-{head_id}')
