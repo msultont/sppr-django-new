@@ -838,7 +838,6 @@ async function fetchdata(id){
       const url = `https://api.bappenas.go.id/bus/api/domain/datarenbang/getdata?sumber=BPS&iddata=${id}`;
       const response = await fetch(url, { 
         method: "GET",
-        mode: "no-cors",
         headers : {
             Authorization: `a52a8e80a48d4d12d012806a7e3b78587e7e006177586ada1ec2e868665f5b762fff9b61081ff109b7e2b4801cdbc8fc18b65760ff7c64d943e7343bdc6e959b`
           },
