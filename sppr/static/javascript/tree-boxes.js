@@ -299,7 +299,7 @@ function treeBoxes(treeData) {
         return d.data.fill;
       })
       .on("mouseover", function (d) {
-        tooltip.text("Data: Coba data kalau agak panjang tes coba data panjang lorem ipsum");
+        tooltip.text(`${d.data.data_pendukung || "Belum ada data pendukung"}`);
         return tooltip.style("visibility", "visible");
       })
       .on("mousemove", function () {

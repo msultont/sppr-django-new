@@ -38,6 +38,15 @@ d3.contextMenu = function (menu, openCallback) {
 				}
 				return html;
 			})
+			.attr('class', function(d, elm) {
+				const id = d.title.split(" ")[0]
+				const depth = data.depth
+				switch (id) {
+					case "Buat":
+						if (depth === 4) return "disabled"
+						return ""
+				}
+			})
 			.on('click', function(d, i) {
 				d.action(elm, data, index);
 				d3.select('.d3-context-menu').style('display', 'none');

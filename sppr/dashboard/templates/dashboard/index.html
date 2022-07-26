@@ -515,9 +515,11 @@
         </div>
         
         <div class="flex justify-center  p-2 gap-4">
+
           <a href="#myChart1a" class="btn btn-xs px-1">1</a> 
           <a href="#myChart1b" class="btn btn-xs px-1">2</a> 
           <a href="#myChart1c" class="btn btn-xs px-1">3</a> 
+
           
         </div>
         
@@ -546,6 +548,7 @@
           </div>
         </div>
         <!-- Chart -->
+
         <div class="carousel w-full">
           <div class="carousel-item relative w-full">
            <canvas id="myChart3a"  data-url="{% url 'rochart' %}" width="400" height="300" ></canvas>
@@ -572,6 +575,7 @@
           <a href="#myChart3c" class="btn btn-xs px-1">3</a> 
           
         </div>
+
       </div>
       <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
         <!-- Card header -->
@@ -590,6 +594,7 @@
           </div>
         </div>
         <!-- Chart -->
+
         <div class="carousel w-full">
           <div class="carousel-item relative w-full">
            <canvas id="myChart4a"  data-url="{% url 'rochart' %}" width="400" height="300" ></canvas>
@@ -615,6 +620,7 @@
           <a href="#myChart4b" class="btn btn-xs px-1">2</a> 
           <a href="#myChart4c" class="btn btn-xs px-1">3</a> 
           
+
         </div>
       </div>
       <div class="col-span-1 bg-white rounded-md dark:bg-darker" x-data="{ isOn: false }">
@@ -634,6 +640,7 @@
           </div>
         </div>
         <!-- Chart -->
+
         <div class="carousel w-full">
           <div class="carousel-item relative w-full">
            <canvas id="myChart5a"  data-url="{% url 'rochart' %}" width="400" height="300" ></canvas>
@@ -658,6 +665,7 @@
           <a href="#myChart5a" class="btn btn-xs px-1">1</a> 
           <a href="#myChart5b" class="btn btn-xs px-1">2</a> 
           <a href="#myChart5c" class="btn btn-xs px-1">3</a> 
+
           
         </div>
       </div>
@@ -952,6 +960,7 @@ async function fetchdata(id){
   var ctx = document.getElementById('myChart1a');
   var mixedChart = new Chart(ctx, {
     type: 'bar',
+
     data: {
       labels:  ['2016', '2017', '2018', '2019', '2020', '2021'],
       datasets: [{
@@ -1143,7 +1152,14 @@ async function fetchdata(id){
           'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
-      }]
+      },{
+            label: 'Line Dataset',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 4,
+
+            // Changes this dataset to become a line
+            type: 'line'
+        }]
     },
     options: {
       scales: {
@@ -1153,6 +1169,7 @@ async function fetchdata(id){
       }
     }
   });
+
 
   var ctx = document.getElementById('myChart2c');
   var myChart = new Chart(ctx, {
@@ -1202,7 +1219,7 @@ async function fetchdata(id){
   var mixedChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels:  ['2016', '2017', '2018', '2019', '2020', '2021'],
       datasets: [{
         label: 'Bar Dataset',
         data: [12, 19, 3, 5, 2, 3],
@@ -1231,6 +1248,7 @@ async function fetchdata(id){
             // Changes this dataset to become a line
             type: 'line'
         }]
+
     },
     options: {
       scales: {
@@ -1240,12 +1258,14 @@ async function fetchdata(id){
       }
     }
   });
+
 
   var ctx = document.getElementById('myChart3b');
   var mixedChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
       datasets: [{
         label: 'Bar Dataset',
         data: [12, 19, 3, 5, 2, 3],
@@ -1283,11 +1303,13 @@ async function fetchdata(id){
       }
     }
   });
+
   var ctx = document.getElementById('myChart3c');
   var mixedChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
       datasets: [{
         label: 'Bar Dataset',
         data: [12, 19, 3, 5, 2, 3],
@@ -1330,9 +1352,11 @@ async function fetchdata(id){
   
 
 
+
  
   var ctx = document.getElementById('myChart4a');
   var mixedChart = new Chart(ctx, {
+
     type: 'line',
     data: {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -1373,6 +1397,7 @@ async function fetchdata(id){
       }
     }
   });
+
   var ctx = document.getElementById('myChart4b');
   var mixedChart = new Chart(ctx, {
     type: 'line',
@@ -1415,6 +1440,7 @@ async function fetchdata(id){
       }
     }
   });
+
   var ctx = document.getElementById('myChart4c');
   var mixedChart = new Chart(ctx, {
     type: 'line',

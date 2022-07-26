@@ -129,7 +129,11 @@
               <option value="" selected disabled hidden>Pilih Provinsi</option>
               {% for provinsi in provinsi %}
               <option 
+                {% if provinsi.provinsi_id != pilih_provinsi %}
+                value="{{ provinsi.provinsi_id }}-0"
+                {% else %}
                 value="{{ provinsi.provinsi_id }}-{{ pilih_isu_strategis }}"
+                {% endif %}
                 {% if provinsi.provinsi_id == pilih_provinsi %}selected{% endif %}
               >
                 {{ provinsi.nama_provinsi }}

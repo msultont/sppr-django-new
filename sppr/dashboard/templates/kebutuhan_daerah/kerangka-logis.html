@@ -263,7 +263,13 @@
             </table>
 
             <button class="bg-purple-500 float-right hover:bg-purple-700 text-white font-bold py-2 px-4 mt-5" onclick="">
-              <a href="{% url 'kebdaerah' 'longlist'%}">
+              <a
+                {% if pilih_provinsi == 0 %}
+                href="{% url 'kebdaerah' 'longlist'%}"
+                {% else %}
+                href="{% url 'kebdaerah' 'longlist'%}?provinsi_id={{ pilih_provinsi }}"
+                {% endif %} 
+              >
                 <p>Tambahkan Data</p>
               </a>
             </button>

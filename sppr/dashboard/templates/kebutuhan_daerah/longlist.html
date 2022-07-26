@@ -443,6 +443,7 @@
 
 <script type="text/javascript">
     var dataURL = "{{dataView}}";
+    var provinsiId = "{{provinsi_id}}"
 </script>
 
 <script>
@@ -470,6 +471,7 @@
             }, {
             // extra_data
             // ...
+            provinsi_id: () => provinsiId,
         },
 
         );
