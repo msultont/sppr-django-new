@@ -3,8 +3,7 @@
 import os
 import sys
 
-# TODO: 1. bikin .gitignore
-# TODO: 2. cari design pattern untuk foldering structure
+# TODO: 1. cari design pattern untuk foldering structure
 
 def main():
     """Run administrative tasks."""
