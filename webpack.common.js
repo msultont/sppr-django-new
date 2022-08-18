@@ -1,12 +1,10 @@
 const Path = require('path');
+const Webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
     app: Path.resolve(__dirname, './assets/js/app.js'),
-    vendor: Path.resolve(__dirname, './assets/js/vendor.js')
   },
   output: {
     path: Path.join(__dirname, './static/'),
@@ -15,18 +13,24 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: false,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+        },
+        jquery: {
+          test: /[\\/]node_modules[\\/](jquery)[\\/]/,
+          name: 'jquery', 
+        },
+      },
     },
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    // * NOTE: USE THIS WHEN U WANT TO COPY THE BUILD FILE TO STATIC LOCATION ON THE SERVER
-    // new CopyWebpackPlugin({
-    //   patterns: [{ from: Path.resolve(__dirname, './static'), to: 'public' }],
-    // }),
-    new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, './templates/index.html'),
+    new Webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
     }),
+    new CleanWebpackPlugin(),
   ],
   resolve: {
     alias: {
@@ -39,6 +43,13 @@ module.exports = {
         test: /\.mjs$/,
         include: /node_modules/,
         type: 'javascript/auto',
+      },
+      {
+        test: require.resolve("jquery"),
+        loader: "expose-loader",
+        options: {
+          exposes: ["$", "jQuery"],
+        },
       },
       {
         test: /\.html$/i,
