@@ -1,4 +1,4 @@
-import '../styles/tailwind.scss';
+import '../styles/main.scss';
 import Alpine from 'alpinejs';
 import $ from "jquery";
 
