@@ -6,9 +6,6 @@
 node_modules/
 **/node_modules/
 
-### VSCODE ###
-.vscode
-
 ### Django ###
 **/*.log
 **/*.pot
