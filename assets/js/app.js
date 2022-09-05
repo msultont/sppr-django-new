@@ -1,8 +1,8 @@
 import '../styles/main.scss';
 import Alpine from 'alpinejs';
-import $ from "jquery";
+import $ from 'jquery';
 
-import LandingScript from "./landing";
+import landingScript from './landing';
 
 window.Alpine = Alpine;
 window.jQuery = $;
@@ -12,7 +12,7 @@ $(document).ready(() => {
   console.log(`this script is running on app.js`);
 });
 
-LandingScript();
+landingScript();
 
 Alpine.start();
 
