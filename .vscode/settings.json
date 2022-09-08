@@ -1,8 +1,8 @@
 {
-  "[html]": {
+  "[django-html]": {
     "editor.tabSize": 2
   },
-  "[django-html]": {
+  "[html]": {
     "editor.tabSize": 2
   },
   "[javascript]": {
@@ -90,4 +90,9 @@
     "postcss": "css"
   },
   "sync.gist": "af2c86c9a076f54af040d7c2071fbda4",
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules",
+    "**/site-packages",
+    "**/static"
+  ]
 }
