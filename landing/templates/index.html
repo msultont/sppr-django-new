@@ -293,22 +293,18 @@
     </div>
   </div>
 </footer>
->>>>>>> Stashed changes
 
 <div>
-  <p>
-    this is template
-  </p>
+  <p>this is template</p>
 </div>
 <div>
   <div class="tooltip tooltip-open tooltip-primary" data-tip="primary">
     <button class="btn btn-primary">Button</button>
-  <div>
-</div>
+    <div></div>
 
-<div class="flex justify-center">
-  <div
-      x-data="{
+    <div class="flex justify-center">
+      <div
+        x-data="{
           open: false,
           toggle() {
               if (this.open) {
@@ -327,65 +323,78 @@
               focusAfter && focusAfter.focus()
           }
       }"
-      x-on:keydown.escape.prevent.stop="close($refs.button)"
-      x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
-      x-id="['dropdown-button']"
-      class="relative"
-  >
-      <!-- Button -->
-      <button
+        x-on:keydown.escape.prevent.stop="close($refs.button)"
+        x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+        x-id="['dropdown-button']"
+        class="relative"
+      >
+        <!-- Button -->
+        <button
           x-ref="button"
           x-on:click="toggle()"
           :aria-expanded="open"
           :aria-controls="$id('dropdown-button')"
           type="button"
           class="rounded-md bg-white px-5 py-2.5 shadow"
-      >
+        >
           <span>Actions</span>
           <span aria-hidden="true">&darr;</span>
-      </button>
+        </button>
 
-      <!-- Panel -->
-      <div
+        <!-- Panel -->
+        <div
           x-ref="panel"
           x-show="open"
           x-transition.origin.top.left
           x-on:click.outside="close($refs.button)"
           :id="$id('dropdown-button')"
-          style="display: none;"
+          style="display: none"
           class="absolute left-0 mt-2 w-40 overflow-hidden rounded bg-white shadow-md"
-      >
+        >
           <div>
-              <a href="#" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500" >
-                  Add task above
-              </a>
+            <a
+              href="#"
+              class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+            >
+              Add task above
+            </a>
 
-              <a href="#" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500" >
-                  Add task below
-              </a>
+            <a
+              href="#"
+              class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+            >
+              Add task below
+            </a>
           </div>
 
           <div class="border-t border-gray-200">
-              <a href="#" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500" >
-                  Edit task
-              </a>
+            <a
+              href="#"
+              class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+            >
+              Edit task
+            </a>
 
-              <a href="#" disabled class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                  Delete task
-              </a>
+            <a
+              href="#"
+              disabled
+              class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+            >
+              Delete task
+            </a>
           </div>
+        </div>
       </div>
+    </div>
+
+    {% endblock content %} {% block custom_script %}
+
+    <script>
+      $(document).ready(() => {
+        console.log(`this script is running on HTML`);
+      });
+    </script>
+
+    {% endblock custom_script %}
   </div>
 </div>
-
-{% endblock content %}
-
-{% block custom_script %}
-
-<script>
-  $(document).ready(() => {
-    console.log(`this script is running on HTML`);
-  });
-</script>
-
-{% endblock custom_script %}
