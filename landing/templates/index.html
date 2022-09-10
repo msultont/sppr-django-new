@@ -1,97 +1,58 @@
-{% extends 'base.html' %}
-{% block content %} 
+{% extends 'base.html' %} {% block content %}
 
-<div>
-  <p>
-    this is template
-  </p>
-</div>
-<div>
-  <div class="tooltip tooltip-open tooltip-primary" data-tip="primary">
-    <button class="btn btn-primary">Button</button>
-  <div>
-</div>
 
-<div class="flex justify-center">
-  <div
-      x-data="{
-          open: false,
-          toggle() {
-              if (this.open) {
-                  return this.close()
-              }
-
-              this.$refs.button.focus()
-
-              this.open = true
-          },
-          close(focusAfter) {
-              if (! this.open) return
-
-              this.open = false
-
-              focusAfter && focusAfter.focus()
-          }
-      }"
-      x-on:keydown.escape.prevent.stop="close($refs.button)"
-      x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
-      x-id="['dropdown-button']"
-      class="relative"
-  >
-      <!-- Button -->
-      <button
-          x-ref="button"
-          x-on:click="toggle()"
-          :aria-expanded="open"
-          :aria-controls="$id('dropdown-button')"
-          type="button"
-          class="rounded-md bg-white px-5 py-2.5 shadow"
-      >
-          <span>Actions</span>
-          <span aria-hidden="true">&darr;</span>
-      </button>
-
-      <!-- Panel -->
-      <div
-          x-ref="panel"
-          x-show="open"
-          x-transition.origin.top.left
-          x-on:click.outside="close($refs.button)"
-          :id="$id('dropdown-button')"
-          style="display: none;"
-          class="absolute left-0 mt-2 w-40 overflow-hidden rounded bg-white shadow-md"
-      >
-          <div>
-              <a href="#" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500" >
-                  Add task above
-              </a>
-
-              <a href="#" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500" >
-                  Add task below
-              </a>
-          </div>
-
-          <div class="border-t border-gray-200">
-              <a href="#" class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500" >
-                  Edit task
-              </a>
-
-              <a href="#" disabled class="block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 disabled:text-gray-500">
-                  Delete task
-              </a>
-          </div>
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse justify-center items-center">
+      <div class="text-center lg:text-left p-10 justify-center items-center space-y-8 px-8 ">
+       
+        <h1 class="text-5xl font-bold text-center">Sistem Respons Usulan Pemerintah Daerah Terintegrasi</h1>
+        <p class="font-bold text-center">
+          Direktorat Regional 1<br>Kedeputian Bidang Pengembangan Regional<br>Kementrian PPN/Bappenas
+        </p>
       </div>
+      <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white">
+        <div class="card-body">
+             <li>
+    <a href="./index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+    </a>
+  </li>
+          <ul class="menu menu-horizontal bg-white rounded items-center justify-center">
+  <li class="text-black"><a href="">SPPR</a></li>
+  <li class="bg-base-200"><a href="">S-RUPDT</a></li>
+ 
+</ul>
+          <div class="form-control ">
+            <label class="label">
+              <span class="label-text text-black">Email</span>
+            </label>
+            <input type="text" placeholder="email" class="input input-bordered bg-white" />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text text-black">Password</span>
+            </label>
+            <input type="text" placeholder="password" class="input input-bordered bg-white" />
+            <label class="label">
+              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+            </label>
+          </div>
+          <div class="form-control mt-6 flex w-full justify-items-center justify-center items-center">
+            <a href="srupdt.html"><button class="btn btn-primary">Login</button></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {% endblock content %} {% block custom_script %}
+
+    <script>
+      $(document).ready(() => {
+        console.log(`this script is running on HTML`);
+      });
+    </script>
+
+    {% endblock custom_script %}
   </div>
 </div>
-
-{% endblock content %}
-
-{% block custom_script %}
-
-<script>
-  $(document).ready(() => {
-    console.log(`this script is running on HTML`);
-  });
-</script>
-
-{% endblock custom_script %}
