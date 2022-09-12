@@ -1,8 +1,8 @@
-import '../styles/main.scss';
-import Alpine from 'alpinejs';
-import $ from 'jquery';
+import "../styles/main.scss";
+import Alpine from "alpinejs";
+import $ from "jquery";
 
-import landingScript from './landing';
+import landingScript from "./landing";
 
 window.Alpine = Alpine;
 window.jQuery = $;
@@ -16,4 +16,4 @@ landingScript();
 
 Alpine.start();
 
-console.log('APP: webpack starterkit');
+console.log("APP: webpack starterkit");

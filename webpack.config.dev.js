@@ -1,60 +1,59 @@
-const Path = require('path');
-const Webpack = require('webpack');
-const {merge} = require('webpack-merge');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const StylelintPlugin = require('stylelint-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Path = require("path");
+const Webpack = require("webpack");
+const { merge } = require("webpack-merge");
+const ESLintPlugin = require("eslint-webpack-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-
-const common = require('./webpack.common.js');
+const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
-  target: 'web',
-  mode: 'development',
-  devtool: 'inline-cheap-source-map',
+  target: "web",
+  mode: "development",
+  devtool: "inline-cheap-source-map",
   output: {
-    chunkFilename: 'js/[name].chunk.js',
+    chunkFilename: "js/[name].chunk.js",
   },
   devServer: {
     client: {
-      logging: 'error',
+      logging: "error",
     },
     inline: true,
     hot: true,
   },
   plugins: [
     new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      "process.env.NODE_ENV": JSON.stringify("development"),
     }),
     new ESLintPlugin({
-      extensions: 'js',
+      extensions: "js",
       emitWarning: true,
-      files: Path.resolve(__dirname, './assets'),
+      files: Path.resolve(__dirname, "./assets"),
     }),
     new StylelintPlugin({
-      files: Path.join('assets', '**/*.s?(a|c)ss'),
+      files: Path.join("assets", "**/*.s?(a|c)ss"),
     }),
-    new MiniCssExtractPlugin({filename: 'css/app.css'}),
+    new MiniCssExtractPlugin({ filename: "css/app.css" }),
   ],
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: Path.resolve(__dirname, './assets'),
-        loader: 'babel-loader',
+        include: Path.resolve(__dirname, "./assets"),
+        loader: "babel-loader",
       },
       {
         test: /\.s?css$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
-          'postcss-loader',
-          'sass-loader',
+          "postcss-loader",
+          "sass-loader",
         ],
       },
     ],
