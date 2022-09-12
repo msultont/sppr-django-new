@@ -1,8 +1,8 @@
 {
-  "[html]": {
+  "[django-html]": {
     "editor.tabSize": 2
   },
-  "[django-html]": {
+  "[html]": {
     "editor.tabSize": 2
   },
   "[javascript]": {
@@ -89,5 +89,12 @@
     "django-html": "html",
     "postcss": "css"
   },
+  "eslint.alwaysShowStatus": true,
+  "files.autoSave": "onFocusChange",
   "sync.gist": "af2c86c9a076f54af040d7c2071fbda4",
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules",
+    "**/site-packages",
+    "**/static"
+  ]
 }

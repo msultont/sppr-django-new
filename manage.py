@@ -3,8 +3,6 @@
 import os
 import sys
 
-# TODO: 1. cari design pattern untuk foldering structure
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sppr.settings')

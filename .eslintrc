@@ -5,7 +5,8 @@
   ],
   "extends": [
     "eslint:recommended",
-    "google"
+    "google",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "browser": true,

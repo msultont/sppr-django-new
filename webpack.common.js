@@ -1,40 +1,40 @@
-const Path = require('path');
-const Webpack = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Path = require("path");
+const Webpack = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: Path.resolve(__dirname, './assets/js/app.js'),
+    app: Path.resolve(__dirname, "./assets/js/app.js"),
   },
   output: {
-    path: Path.join(__dirname, './static/'),
-    filename: 'js/[name].js',
+    path: Path.join(__dirname, "./static/"),
+    filename: "js/[name].js",
   },
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: "all",
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+          name: "vendors",
         },
         jquery: {
           test: /[\\/]node_modules[\\/](jquery)[\\/]/,
-          name: 'jquery', 
+          name: "jquery",
         },
       },
     },
   },
   plugins: [
     new Webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
+      $: "jquery",
+      jQuery: "jquery",
     }),
     new CleanWebpackPlugin(),
   ],
   resolve: {
     alias: {
-      '~': Path.resolve(__dirname, './assets'),
+      "~": Path.resolve(__dirname, "./assets"),
     },
   },
   module: {
@@ -42,7 +42,7 @@ module.exports = {
       {
         test: /\.mjs$/,
         include: /node_modules/,
-        type: 'javascript/auto',
+        type: "javascript/auto",
       },
       {
         test: require.resolve("jquery"),
@@ -53,11 +53,11 @@ module.exports = {
       },
       {
         test: /\.html$/i,
-        loader: 'html-loader',
+        loader: "html-loader",
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
-        type: 'asset'
+        type: "asset/resource",
       },
     ],
   },
