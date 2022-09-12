@@ -1,6 +1,7 @@
 const Path = require("path");
 const Webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -29,6 +30,14 @@ module.exports = {
     new Webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: Path.join(__dirname, "assets/images"),
+          to: Path.join(__dirname, "static/images"),
+        },
+      ],
     }),
     new CleanWebpackPlugin(),
   ],
