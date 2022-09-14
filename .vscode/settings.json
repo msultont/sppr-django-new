@@ -9,7 +9,9 @@
     "editor.tabSize": 2
   },
   "[python]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120
   },
   "[typescript]": {
     "editor.tabSize": 4
@@ -91,6 +93,9 @@
   },
   "eslint.alwaysShowStatus": true,
   "files.autoSave": "onFocusChange",
+  "python.linting.pycodestyleEnabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pycodestyleArgs": ["--max-line-length=120"],
   "sync.gist": "af2c86c9a076f54af040d7c2071fbda4",
   "todo-tree.filtering.excludeGlobs": [
     "**/node_modules",
