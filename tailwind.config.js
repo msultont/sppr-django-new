@@ -2,7 +2,10 @@ module.exports = {
   mode: "jit",
   content: [
     "./templates/**/*.{html, js}",
-    "./landing/templates/**/*.{html, js}",
+    "./app_landing/templates/**/*.{html, js}",
+    "./app_login/templates/**/*.{html, js}",
+    "./app_sppr/templates/**/*.{html, js}",
+    "./app_srupdt/templates/**/*.{html, js}",
   ],
   theme: {
     extend: {
