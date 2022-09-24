@@ -101,5 +101,6 @@
     "**/node_modules",
     "**/site-packages",
     "**/static"
-  ]
+  ],
+  "python.linting.enabled": true
 }
