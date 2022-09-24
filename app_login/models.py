@@ -1,33 +1,102 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
-class AuthUser(models.Model):
-    password = models.CharField(max_length=128)
-    last_login = models.DateTimeField(blank=True, null=True)
-    is_superuser = models.BooleanField()
-    username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=150)
-    last_name = models.CharField(max_length=150)
-    email = models.CharField(max_length=254)
-    is_staff = models.BooleanField()
-    is_active = models.BooleanField()
-    date_joined = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user'
+#   * Custom Authentication Model
 
 
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
+ROLE_CHOICE = (
+    ('developer', 'Developer'),
+    ('director', 'Director'),
+    ('secretary', 'Secretary'),
+    ('coordinator', 'Coordinator'),
+    ('pic', 'PIC'),
+)
 
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
+APP_CHOICE = (
+    ('sppr', 'SPPR'),
+    ('srupdt', 'SRUPDT'),
+)
+
+
+PIC_CHOICE = (
+    ('aceh', 'Aceh'),
+    ('riau', 'Riau'),
+    ('bengkulu', 'Bengkulu'),
+    ('jawa Timur', 'Jawa Timur'),
+    ('jambi', 'Jambi'),
+    ('lampung', 'Lampung'),
+    ('sumatera-selatan', 'Sumatera Selatan'),
+    ('sumatera-barat', 'Sumatera Barat'),
+    ('sumatera-utara', 'Sumatera Utara'),
+    ('dki-jakarta', 'DKI Jakarta'),
+    ('jawa-tengah', 'Jawa Tengah'),
+    ('kepulauan-riau', 'Kepulauan Riau'),
+    ('banten', 'Banten'),
+    ('di-yogyakarta', 'DI Yogyakarta'),
+    ('bangka-belitung', 'Bangka Belitung'),
+    ('jawa-barat', 'Jawa Barat'),
+    ('bali', 'Bali'),
+)
+
+
+DAYS_OF_WEEK = (
+    ('monday', 'Monday'),
+    ('tuesday', 'Tuesday'),
+    ('wednesday', 'Wednesday'),
+    ('thursday', 'Thursday'),
+    ('friday', 'Friday'),
+    ('saturday', 'Saturday'),
+    ('sunday', 'Sunday'),
+)
+
+
+class User(AbstractUser):
+
+    role = models.CharField(max_length=15, choices=ROLE_CHOICE)
+    app_access = models.ForeignKey('Apps', on_delete=models.SET_NULL, null=True, blank=True, related_name="apps")
+
+    @property
+    def is_developer(self):
+        if getattr(self, 'role') == 'developer':
+            return True
+        return False
+
+    @property
+    def is_director(self):
+        if getattr(self, 'role') == 'director':
+            return True
+        return False
+
+    @property
+    def is_secretary(self):
+        if getattr(self, 'role') == 'secretary':
+            return True
+        return False
+
+    @property
+    def is_coordinator(self):
+        if getattr(self, 'role') == 'coordinator':
+            return True
+        return False
+
+    @property
+    def is_pic(self):
+        if getattr(self, 'role') == 'pic':
+            return True
+        return False
+
+    # @property
+    # def has_access_sppr(self):
+    #     if hasattr(self, 'sppr')
+
+    def __str__(self) -> str:
+        return self.email
+
+
+class Apps(models.Model):
+
+    name = models.CharField(max_length=7, choices=APP_CHOICE)
+    user = models.ManyToManyField('User')
+
+    def __str__(self) -> str:
+        return self.name
