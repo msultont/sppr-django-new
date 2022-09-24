@@ -8,6 +8,7 @@ def login(request):
     form = LoginForm()
 
     if request.method == 'POST':
+        # TODO 1: Implementasikan request.method agar menerima value pilihan dari template 
         email = request.POST['email']
         password = request.POST['password']
 
@@ -15,6 +16,8 @@ def login(request):
 
         if user is not None:
             auth_login(request, user)
+
+            # TODO 2: Implementasikan redirect() berdasarkan pilihan SPPR atau SRUPDT. Jika SPPR, redirect('dashboard-sppr'). Jika SRUPDT, redirect('dashboard-srupdt)
             # return redirect('dashboard')
 
         print(request.POST)
