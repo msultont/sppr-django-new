@@ -22,25 +22,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# fixme: change this hardcode to variable environment
-SECRET_KEY = 'django-insecure-cj_6=m3p4t(sl(awinx%dv!4qz-9+7ylqhbc$1r=0fn4go$*n3'
+secret_key = os.environ.get("SPPR_SECRET")
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.34', '127.0.0.1', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'login.apps.LoginConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app_login.apps.LoginConfig',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +88,15 @@ DATABASES = {
     'default': d,
 }
 
+# Custom Auth
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'app_login.authentication.EmailAuthBackend',
+]
+
+AUTH_USER_MODEL = "app_login.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
