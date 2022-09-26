@@ -2,30 +2,33 @@
 
 <!DOCTYPE html>
 <html lang="en" data-theme="bumblebee">
-<head>
-  <title>Direktorat Regional I</title>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
-</head>
-<body>
-  <!-- Main content -->
-  {% block content %} {% endblock %}
+  <head>
+    <title>Direktorat Regional I</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
+  </head>
+  <body>
+    <!-- Main content -->
+    {% block content %} {% endblock %}
 
-  <!-- Script content -->
-  <script src="{% static 'js/vendors.js' %}" type="text/javascript"></script>
-  <script src="{% static 'js/app.js' %}" type="text/javascript"></script>
-  {% block custom_script %} {% endblock %}
-</body>
+    <!-- Script content -->
+    <script src="{% static 'js/vendors.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/app.js' %}" type="text/javascript"></script>
+    {% block custom_script %} {% endblock %}
+  </body>
 </html>
