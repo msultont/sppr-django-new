@@ -108,6 +108,7 @@
       _login_btn.className = "btn btn-primary"
       _login_btn.style.color = "white";
       document.getElementById("login_form").replaceChild(_login_btn, document.getElementById("btn-login"));
+      document.getElementById("judul-halaman").innerHTML = 'Sistem Pengendalian Perencanaan Regional 1';
     } else {
       var _state_btn1 = create_state_btn("SPPR", 'white', function(){state_changer('sppr');}, "btn-1");
       document.getElementById("state_btn_sppr").replaceChild(_state_btn1, document.getElementById("btn-1"));
@@ -117,6 +118,7 @@
       _login_btn.className = "btn btn-primary";
       _login_btn.style.color = "white";
       document.getElementById("login_form").replaceChild(_login_btn, document.getElementById("btn-login"));
+      document.getElementById("judul-halaman").innerHTML = 'Sistem Respons Usulan Pemerintah Daerah Terintegrasi';
     }
   }
 </script>
