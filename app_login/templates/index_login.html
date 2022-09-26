@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="hero min-h-screen bg-base-200" id="background-test">
   <div
@@ -76,17 +76,49 @@
             <button class="btn btn-primary" type="submit">Login</button>
           </div>
         </form>
+
       </div>
     </div>
+
   </div>
 </div>
 
 {% endblock content %} {% block custom_script %}
 
 <script>
-  $(document).ready(() => {
-    console.log(`this script is running on HTML login page`);
-  });
+  $(document).ready(() => {});
+
+  {% comment %} create custom button {% endcomment %}
+  function create_state_btn (_text, _bg_color, _onclick, _id) {
+    var _result = document.createElement("button");
+    _result.style.backgroundColor = _bg_color;
+    _result.onclick = _onclick;
+    _result.innerText = _text;
+    _result.id = _id;
+    return _result;
+  }
+  
+  function state_changer(_state) {
+    if (_state=='sppr') {
+      var _state_btn1 = create_state_btn("SPPR", '#A78BFA', function(){state_changer('sppr');}, "btn-1");
+      document.getElementById("state_btn_sppr").replaceChild(_state_btn1, document.getElementById("btn-1"));
+      var _state_btn2 = create_state_btn("S-RUPDT", 'white', function(){state_changer('srupdt');}, "btn-2");
+      document.getElementById("state_btn_s-rupdt").replaceChild(_state_btn2, document.getElementById("btn-2"));
+      var _login_btn = create_state_btn("Login", '#4506CB', function(){console.log('masuk sppr');}, "btn-login");
+      _login_btn.className = "btn btn-primary"
+      _login_btn.style.color = "white";
+      document.getElementById("login_form").replaceChild(_login_btn, document.getElementById("btn-login"));
+    } else {
+      var _state_btn1 = create_state_btn("SPPR", 'white', function(){state_changer('sppr');}, "btn-1");
+      document.getElementById("state_btn_sppr").replaceChild(_state_btn1, document.getElementById("btn-1"));
+      var _state_btn2 = create_state_btn("S-RUPDT", '#A78BFA', function(){login('srupdt');}, "btn-2");
+      document.getElementById("state_btn_s-rupdt").replaceChild(_state_btn2, document.getElementById("btn-2"));
+      var _login_btn = create_state_btn("Login", '#4506CB', function(){console.log('masuk srupdt');}, "btn-login");
+      _login_btn.className = "btn btn-primary";
+      _login_btn.style.color = "white";
+      document.getElementById("login_form").replaceChild(_login_btn, document.getElementById("btn-login"));
+    }
+  }
 </script>
 
 {% endblock custom_script %}
