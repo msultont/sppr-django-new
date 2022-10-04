@@ -7,9 +7,15 @@
     <div
       class="text-center lg:text-left p-10 justify-center items-center space-y-8 px-8"
     >
-      <h1 class="text-5xl font-bold text-center">
+      {% if state == "sppr" %}
+      <h1 class="text-5xl font-bold text-center" id= "judul-halaman">
+        Sistem Pengendalian Perencanaan Regional 1
+      </h1>
+      {% else %}
+      <h1 class="text-5xl font-bold text-center" id= "judul-halaman">
         Sistem Respons Usulan Pemerintah Daerah Terintegrasi
       </h1>
+      {% endif %}
       <p class="font-bold text-center">
         Direktorat Regional 1<br />Kedeputian Bidang Pengembangan Regional<br />Kementrian
         PPN/Bappenas
@@ -17,64 +23,85 @@
     </div>
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-white">
       <div class="card-body">
-        <li>
-          <a href={% url 'landing' %} />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
-        </li>
+
+        {% comment %} <li>
+          <a href={% url 'landing' %}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+          <a/>
+        </li> {% endcomment %}
+
+        <ul class="menu menu-horizontal bg-white rounded items-center justify-center w-full" id='card'
+        >
+          <li class="text-black " id="state_btn_sppr"
+          > 
+            {% if state == "sppr" %}
+            <button id='btn-1' style="background-color: #A78BFA">
+              <a href={% url 'login' 'sppr' %}>SPPR</a>
+            </button>
+            {% else %}
+            <button id='btn-1'>
+              <a href={% url 'login' 'sppr' %}>SPPR</a>
+            </button>
+            {% endif %}
+          </li>
+          <li class="text-black" id="state_btn_s-rupdt"
+          > 
+            {% if state == "sppr" %}
+            <button id='btn-2'>
+              <a href={% url 'login' 'srupdt' %}>S-RUPDT</a>
+            </button>
+            {% else %}
+            <button id='btn-2' style="background-color: #A78BFA">
+              <a href={% url 'login' 'srupdt' %}>S-RUPDT</a>
+            </button>
+            {% endif %}
+          </li>
+        </ul>
+
         <form method="post">
           {% csrf_token %}
           <!--
             TODO: Implementasikan button pilihan SPPR dan SRUPDT agar dapat mengirimkan valuenya masing-masing ketika submit ke views
           -->
-          <ul
-            class="menu menu-horizontal bg-white rounded items-center justify-center"
-          >
-            <li class="text-black">
-              <a>
-                <input type="button" name="opt" value="SPPR" />
-              </a>
-            </li>
-            <li class="bg-base-200">
-              <a>
-                <input type="button" name="opt" value="S-RUPDT" />
-              </a>
-            </li>
-          </ul>
-          <div class="form-control">
+
+          <div class="form-control ">
             <label class="label">
               <span class="label-text text-black">Email</span>
             </label>
             {{ login_form.email }}
           </div>
+
           <div class="form-control">
             <label class="label">
               <span class="label-text text-black">Password</span>
             </label>
             {{ login_form.password }}
+
             <label class="label">
               <a href="#" class="label-text-alt link link-hover"
                 >Forgot password?</a
               >
             </label>
           </div>
-          <div
-            class="form-control mt-6 flex w-full justify-items-center justify-center items-center"
+
+          <div class="form-control mt-6 flex w-full justify-items-center justify-center items-center"
           >
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-primary" style="background-color: #A78BFA" type="submit">Login</button>
           </div>
+
         </form>
 
       </div>
@@ -87,40 +114,6 @@
 
 <script>
   $(document).ready(() => {});
-
-  {% comment %} create custom button {% endcomment %}
-  function create_state_btn (_text, _bg_color, _onclick, _id) {
-    var _result = document.createElement("button");
-    _result.style.backgroundColor = _bg_color;
-    _result.onclick = _onclick;
-    _result.innerText = _text;
-    _result.id = _id;
-    return _result;
-  }
-  
-  function state_changer(_state) {
-    if (_state=='sppr') {
-      var _state_btn1 = create_state_btn("SPPR", '#A78BFA', function(){state_changer('sppr');}, "btn-1");
-      document.getElementById("state_btn_sppr").replaceChild(_state_btn1, document.getElementById("btn-1"));
-      var _state_btn2 = create_state_btn("S-RUPDT", 'white', function(){state_changer('srupdt');}, "btn-2");
-      document.getElementById("state_btn_s-rupdt").replaceChild(_state_btn2, document.getElementById("btn-2"));
-      var _login_btn = create_state_btn("Login", '#4506CB', function(){console.log('masuk sppr');}, "btn-login");
-      _login_btn.className = "btn btn-primary"
-      _login_btn.style.color = "white";
-      document.getElementById("login_form").replaceChild(_login_btn, document.getElementById("btn-login"));
-      document.getElementById("judul-halaman").innerHTML = 'Sistem Pengendalian Perencanaan Regional 1';
-    } else {
-      var _state_btn1 = create_state_btn("SPPR", 'white', function(){state_changer('sppr');}, "btn-1");
-      document.getElementById("state_btn_sppr").replaceChild(_state_btn1, document.getElementById("btn-1"));
-      var _state_btn2 = create_state_btn("S-RUPDT", '#A78BFA', function(){login('srupdt');}, "btn-2");
-      document.getElementById("state_btn_s-rupdt").replaceChild(_state_btn2, document.getElementById("btn-2"));
-      var _login_btn = create_state_btn("Login", '#4506CB', function(){console.log('masuk srupdt');}, "btn-login");
-      _login_btn.className = "btn btn-primary";
-      _login_btn.style.color = "white";
-      document.getElementById("login_form").replaceChild(_login_btn, document.getElementById("btn-login"));
-      document.getElementById("judul-halaman").innerHTML = 'Sistem Respons Usulan Pemerintah Daerah Terintegrasi';
-    }
-  }
 </script>
 
 {% endblock custom_script %}
