@@ -52,8 +52,13 @@ DAYS_OF_WEEK = (
 
 class User(AbstractUser):
 
-    role = models.CharField(max_length=15, choices=ROLE_CHOICE)
-    app_access = models.ForeignKey('Apps', on_delete=models.SET_NULL, null=True, blank=True, related_name="apps")
+    # pic_provinsi = models.CharField(choices=PIC_CHOICE, max_length=50)
+    role = models.ForeignKey('Role', verbose_name="Role", related_name="Role", on_delete=models.SET_NULL, null=True)
+    login_status = models.BooleanField(default=False, editable=False)
+
+    @property
+    def get_user_login_status(self):
+        return self.login_status
 
     @property
     def is_developer(self):
@@ -89,14 +94,34 @@ class User(AbstractUser):
     # def has_access_sppr(self):
     #     if hasattr(self, 'sppr')
 
+    # def save( self, force_insert: bool = ..., force_update: bool = ...,
+    #           using: Optional[str] = ..., update_fields: Optional[Iterable[str]] = ...) -> None:
+    #     return super().save(force_insert, force_update, using, update_fields)
+
+    def get_absolute_url(self):
+        return reverse("model_detail", kwargs={"pk": self.pk})
+
     def __str__(self) -> str:
-        return self.email
+        return '%s | %s' % (self.email, self.username)
+
+class Role(models.Model):
+
+    name = models.CharField(max_length=15, choices=ROLE_CHOICE)
+    app_access = models.ManyToManyField("App", verbose_name='App(s) Access', related_name='AppAccess')
 
 
-class Apps(models.Model):
+class App(models.Model):
 
     name = models.CharField(max_length=7, choices=APP_CHOICE)
-    user = models.ManyToManyField('User')
+    list_menu = models.ManyToManyField('Menu', related_name='Menu')
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Menu(models.Model):
+
+    name = models.CharField(choices=MENU_CHOICE, max_length=30)
 
     def __str__(self) -> str:
         return self.name
