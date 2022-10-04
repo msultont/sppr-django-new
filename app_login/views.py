@@ -13,16 +13,13 @@ def login(request, _state='sppr'):
         password = request.POST['password']
         app_pilihan = _state
 
-        # user = authenticate(request, username=email, password=password)
+        user = authenticate(request, username=email, password=password)
 
-        # if user is not None:
-        #     auth_login(request, user)
+        if user is not None:
+            auth_login(request, user)
 
         # TODO 2: Implementasikan redirect() berdasarkan pilihan SPPR atau SRUPDT. Jika SPPR, redirect('dashboard-sppr'). Jika SRUPDT, redirect('dashboard-srupdt)
-        if app_pilihan == 'sppr':
-            return redirect('index_sppr')
-        else:
-            return redirect('index_srupdt')
+            # return redirect('dashboard')
 
         print(request.POST)
 
