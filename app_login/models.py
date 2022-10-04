@@ -38,6 +38,11 @@ PIC_CHOICE = (
     ('bali', 'Bali'),
 )
 
+MENU_CHOICE = (
+    ('kajian-kewilayahan', 'Kajian Kewilayahan'),
+    ('situs-rajawali', 'Situs Rajawali'),
+)
+
 
 DAYS_OF_WEEK = (
     ('monday', 'Monday'),
