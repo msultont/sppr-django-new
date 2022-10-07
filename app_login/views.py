@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 
 
-def login(request, _state='sppr'):
+def login(request, stateargs='sppr'):
 
     form = LoginForm()
 
@@ -11,22 +11,24 @@ def login(request, _state='sppr'):
         # TODO 1: Implementasikan request.method agar menerima value pilihan dari template 
         email = request.POST['email']
         password = request.POST['password']
-        app_pilihan = _state
-
+        state = request.POST['state']
+        # print(request.POST)
         # user = authenticate(request, username=email, password=password)
 
         # if user is not None:
         #     auth_login(request, user)
 
         # TODO 2: Implementasikan redirect() berdasarkan pilihan SPPR atau SRUPDT. Jika SPPR, redirect('dashboard-sppr'). Jika SRUPDT, redirect('dashboard-srupdt)
-        if app_pilihan == 'sppr':
+        if state == 'sppr':
             return redirect('index_sppr')
-        else:
+        elif state == 'srupdt':
             return redirect('index_srupdt')
-
-        print(request.POST)
-
-    return render(request, "index_login.html", {'login_form': form, 'state': _state})
+        elif state == 'sipasti':
+            return redirect('index_sipasti')
+        else:
+            return
+        
+    return render(request, "index_login.html", {'login_form': form, 'state': stateargs})
 
 
 def logout(request):
