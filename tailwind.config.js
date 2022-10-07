@@ -6,6 +6,7 @@ module.exports = {
     "./app_login/templates/**/*.{html, js}",
     "./app_sppr/templates/**/*.{html, js}",
     "./app_srupdt/templates/**/*.{html, js}",
+    "./app_sipasti/templates/**/*.{html, js}",
   ],
   theme: {
     extend: {
