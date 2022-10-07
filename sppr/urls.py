@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/login/', include('app_login.urls')),
     path('app/sppr/', include('app_sppr.urls')),
     path('app/srupdt/', include('app_srupdt.urls')),
+    path('app/sipasti/', include('app_sipasti.urls')),
 ]
 
 if settings.DEBUG:
