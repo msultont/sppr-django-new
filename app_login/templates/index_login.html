@@ -11,9 +11,13 @@
       <h1 class="text-5xl font-bold text-center" id= "judul-halaman">
         Sistem Pengendalian Perencanaan Regional 1
       </h1>
-      {% else %}
+      {% elif state == "srupdt" %}
       <h1 class="text-5xl font-bold text-center" id= "judul-halaman">
         Sistem Respons Usulan Pemerintah Daerah Terintegrasi
+      </h1>
+      {% else %}
+      <h1 class="text-5xl font-bold text-center" id= "judul-halaman">
+        Sistem Portal Basis Data dan Album Tematik
       </h1>
       {% endif %}
       <p class="font-bold text-center">
@@ -59,13 +63,25 @@
           </li>
           <li class="text-black" id="state_btn_s-rupdt"
           > 
-            {% if state == "sppr" %}
-            <button id='btn-2'>
+            {% if state == "srupdt" %}
+            <button id='btn-2' style="background-color: #A78BFA">
               <a href={% url 'login' 'srupdt' %}>S-RUPDT</a>
             </button>
             {% else %}
-            <button id='btn-2' style="background-color: #A78BFA">
+            <button id='btn-2'>
               <a href={% url 'login' 'srupdt' %}>S-RUPDT</a>
+            </button>
+            {% endif %}
+          </li>
+          <li class="text-black" id="state_btn_s-rupdt"
+          > 
+            {% if state == "sipasti" %}
+            <button id='btn-3' style="background-color: #A78BFA">
+              <a href={% url 'login' 'sipasti' %}>SIPASTI</a>
+            </button>
+            {% else %}
+            <button id='btn-3'>
+              <a href={% url 'login' 'sipasti' %}>SIPASTI</a>
             </button>
             {% endif %}
           </li>
@@ -96,6 +112,8 @@
               >
             </label>
           </div>
+
+          <div class="form-control hidden"><input type="hidden" name="state" value={{ state }}></div>
 
           <div class="form-control mt-6 flex w-full justify-items-center justify-center items-center"
           >
